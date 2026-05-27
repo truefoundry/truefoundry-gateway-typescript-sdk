@@ -1,0 +1,9 @@
+# Files Fern's TypeScript generator should leave alone on every regen.
+# Mirror the pattern from truefoundry/truefoundry-typescript-sdk: list
+# hand-written wrappers, helpers, CI overrides, etc.
+#
+# Example (uncomment & adjust once the SDK has real custom code):
+# src/index.ts
+# src/CustomClient.ts
+# src/api/resources/_WrappedClients.ts
+# .github/workflows/ci.yml
