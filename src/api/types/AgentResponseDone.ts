@@ -3,6 +3,6 @@
 import type * as TruefoundryGateway from "../index.js";
 
 export type AgentResponseDone =
-    | TruefoundryGateway.AgentResponseDoneZero
-    | TruefoundryGateway.AgentResponseDoneCancellationReason
+    | TruefoundryGateway.AgentResponseDoneCompleted
+    | TruefoundryGateway.AgentResponseDoneCancelled
     | TruefoundryGateway.AgentResponseDoneError;

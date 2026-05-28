@@ -94,8 +94,8 @@ Instantiate and use the client with the following:
 import { TruefoundryGatewayClient } from "truefoundry-gateway-sdk";
 
 const client = new TruefoundryGatewayClient({ token: "YOUR_TOKEN" });
-const response = await client.agent.responses.create({
-    agent_name: "agent_name"
+const response = await client.agents.responses.create({
+    model: "model"
 });
 for await (const item of response) {
     console.log(item);
@@ -136,7 +136,7 @@ will be thrown.
 import { TruefoundryGatewayError } from "truefoundry-gateway-sdk";
 
 try {
-    await client.agent.responses.create(...);
+    await client.agents.responses.create(...);
 } catch (err) {
     if (err instanceof TruefoundryGatewayError) {
         console.log(err.statusCode);
@@ -156,8 +156,8 @@ The SDK uses async iterators, so you can consume the responses using a `for awai
 import { TruefoundryGatewayClient } from "truefoundry-gateway-sdk";
 
 const client = new TruefoundryGatewayClient({ token: "YOUR_TOKEN" });
-const response = await client.agent.responses.create({
-    agent_name: "agent_name"
+const response = await client.agents.responses.create({
+    model: "model"
 });
 for await (const item of response) {
     console.log(item);
@@ -171,9 +171,9 @@ for await (const item of response) {
 This SDK supports direct imports of subpackage clients, which allows JavaScript bundlers to tree-shake and include only the imported subpackage code. This results in much smaller bundle sizes.
 
 ```typescript
-import { AgentClient } from 'truefoundry-gateway-sdk/agent';
+import { AgentsClient } from 'truefoundry-gateway-sdk/agents';
 
-const client = new AgentClient({...});
+const client = new AgentsClient({...});
 ```
 
 ### Additional Headers
@@ -190,7 +190,7 @@ const client = new TruefoundryGatewayClient({
     }
 });
 
-const response = await client.agent.responses.create(..., {
+const response = await client.agents.responses.create(..., {
     headers: {
         'X-Custom-Header': 'custom value'
     }
@@ -202,7 +202,7 @@ const response = await client.agent.responses.create(..., {
 If you would like to send additional query string parameters as part of the request, use the `queryParams` request option.
 
 ```typescript
-const response = await client.agent.responses.create(..., {
+const response = await client.agents.responses.create(..., {
     queryParams: {
         'customQueryParamKey': 'custom query param value'
     }
@@ -232,7 +232,7 @@ Which status codes are retried depends on the `retryStatusCodes` generator confi
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.agent.responses.create(..., {
+const response = await client.agents.responses.create(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -242,7 +242,7 @@ const response = await client.agent.responses.create(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.agent.responses.create(..., {
+const response = await client.agents.responses.create(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -253,7 +253,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.agent.responses.create(..., {
+const response = await client.agents.responses.create(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request
@@ -265,7 +265,7 @@ The SDK provides access to raw response data, including headers, through the `.w
 The `.withRawResponse()` method returns a promise that results to an object with a `data` and a `rawResponse` property.
 
 ```typescript
-const { data, rawResponse } = await client.agent.responses.create(...).withRawResponse();
+const { data, rawResponse } = await client.agents.responses.create(...).withRawResponse();
 
 console.log(data);
 console.log(rawResponse.headers['X-My-Header']);
