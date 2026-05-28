@@ -14,5 +14,4 @@ export type AgentResponseStreamingOutputEvent =
     | TruefoundryGateway.AgentApprovalRequired
     | TruefoundryGateway.AgentToolResponseRequired
     | TruefoundryGateway.AgentResponseCreated
-    | TruefoundryGateway.AgentResponseDone
-    | TruefoundryGateway.AgentResponseError;
+    | TruefoundryGateway.AgentResponseDone;

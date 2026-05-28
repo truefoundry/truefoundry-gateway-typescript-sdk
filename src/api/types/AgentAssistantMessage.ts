@@ -2,17 +2,9 @@
 
 import type * as TruefoundryGateway from "../index.js";
 
-export interface AgentAssistantMessage {
-    role: "assistant";
-    audio?: TruefoundryGateway.AgentAssistantMessageAudio | undefined;
-    content?: TruefoundryGateway.AgentAssistantMessageContent | undefined;
-    function_call?: TruefoundryGateway.AgentAssistantMessageFunctionCall | undefined;
-    name?: string | undefined;
-    refusal?: string | undefined;
-    thinking_blocks?: TruefoundryGateway.AgentAssistantMessageThinkingBlocksItem[] | undefined;
+export interface AgentAssistantMessage extends TruefoundryGateway.AgentEnrichedAssistantMessage {
     type: "agent.message";
     execution_id: string;
-    tool_calls?: TruefoundryGateway.AgentEnrichedToolCall[] | undefined;
     finish_reason?: TruefoundryGateway.AgentFinishReason | undefined;
     created_at?: number | undefined;
 }

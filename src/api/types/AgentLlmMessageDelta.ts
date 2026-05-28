@@ -2,16 +2,9 @@
 
 import type * as TruefoundryGateway from "../index.js";
 
-export interface AgentLlmMessageDelta {
-    role?: "assistant" | undefined;
+export interface AgentLlmMessageDelta extends TruefoundryGateway.AgentExtendedDelta {
     type: "agent.message";
     execution_id: string;
     created_at?: string | undefined;
     finish_reason?: TruefoundryGateway.AgentFinishReason | undefined;
-    content?: string | undefined;
-    refusal?: string | undefined;
-    function_call?: TruefoundryGateway.AgentExtendedDeltaFunctionCall | undefined;
-    tool_calls?: TruefoundryGateway.AgentExtendedDeltaToolCall[] | undefined;
-    thinking_blocks?: TruefoundryGateway.AgentExtendedDeltaThinkingBlocksItem[] | undefined;
-    reasoning_content?: string | undefined;
 }

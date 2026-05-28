@@ -5,7 +5,7 @@ import * as errors from "../../errors/index.js";
 import type * as TruefoundryGateway from "../index.js";
 
 export class UnauthorizedError extends errors.TruefoundryGatewayError {
-    constructor(body: TruefoundryGateway.AgentErrorResponse, rawResponse?: core.RawResponse) {
+    constructor(body: TruefoundryGateway.RequestErrorResponse, rawResponse?: core.RawResponse) {
         super({
             message: "UnauthorizedError",
             statusCode: 401,

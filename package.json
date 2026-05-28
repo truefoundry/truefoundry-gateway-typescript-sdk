@@ -22,27 +22,27 @@
             },
             "default": "./dist/cjs/index.js"
         },
-        "./agent": {
+        "./agents": {
             "import": {
-                "types": "./dist/esm/api/resources/agent/exports.d.mts",
-                "default": "./dist/esm/api/resources/agent/exports.mjs"
+                "types": "./dist/esm/api/resources/agents/exports.d.mts",
+                "default": "./dist/esm/api/resources/agents/exports.mjs"
             },
             "require": {
-                "types": "./dist/cjs/api/resources/agent/exports.d.ts",
-                "default": "./dist/cjs/api/resources/agent/exports.js"
+                "types": "./dist/cjs/api/resources/agents/exports.d.ts",
+                "default": "./dist/cjs/api/resources/agents/exports.js"
             },
-            "default": "./dist/cjs/api/resources/agent/exports.js"
+            "default": "./dist/cjs/api/resources/agents/exports.js"
         },
-        "./agent/responses": {
+        "./agents/responses": {
             "import": {
-                "types": "./dist/esm/api/resources/agent/resources/responses/exports.d.mts",
-                "default": "./dist/esm/api/resources/agent/resources/responses/exports.mjs"
+                "types": "./dist/esm/api/resources/agents/resources/responses/exports.d.mts",
+                "default": "./dist/esm/api/resources/agents/resources/responses/exports.mjs"
             },
             "require": {
-                "types": "./dist/cjs/api/resources/agent/resources/responses/exports.d.ts",
-                "default": "./dist/cjs/api/resources/agent/resources/responses/exports.js"
+                "types": "./dist/cjs/api/resources/agents/resources/responses/exports.d.ts",
+                "default": "./dist/cjs/api/resources/agents/resources/responses/exports.js"
             },
-            "default": "./dist/cjs/api/resources/agent/resources/responses/exports.js"
+            "default": "./dist/cjs/api/resources/agents/resources/responses/exports.js"
         },
         "./package.json": "./package.json"
     },
