@@ -1,9 +1,8 @@
-# Files Fern's TypeScript generator should leave alone on every regen.
-# Mirror the pattern from truefoundry/truefoundry-typescript-sdk: list
-# hand-written wrappers, helpers, CI overrides, etc.
-#
-# Example (uncomment & adjust once the SDK has real custom code):
-# src/index.ts
-# src/CustomClient.ts
-# src/api/resources/_WrappedClients.ts
-# .github/workflows/ci.yml
+# Paths Fern's TypeScript generator must leave alone on every regen. Hand-
+# written helpers, their tests, and the top-level src/index.ts (which re-
+# exports both Fern-generated symbols and helpers) live under stable paths so
+# users can import them across releases without Fern overwriting them.
+src/helpers/
+src/index.ts
+tests/mergeAssistantMessage.test.ts
+.github/workflows/ci.yml
