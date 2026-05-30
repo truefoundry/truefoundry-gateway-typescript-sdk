@@ -1,6 +1,6 @@
 # Reference
 ## Agents Responses
-<details><summary><code>client.agents.responses.<a href="/src/api/resources/agents/resources/responses/client/Client.ts">create</a>({ ...params }) -> core.Stream&lt;TruefoundryGateway.AgentResponseStreamingOutputEvent&gt;</code></summary>
+<details><summary><code>client.agents.responses.<a href="/src/api/resources/agents/resources/responses/client/Client.ts">create</a>({ ...params }) -> core.Stream&lt;TrueFoundryGateway.AgentResponseStreamingOutputEvent&gt;</code></summary>
 <dl>
 <dd>
 
@@ -48,7 +48,7 @@ for await (const item of response) {
 <dl>
 <dd>
 
-**request:** `TruefoundryGateway.AgentResponsesBody` 
+**request:** `TrueFoundryGateway.AgentResponsesBody` 
     
 </dd>
 </dl>
@@ -68,7 +68,7 @@ for await (const item of response) {
 </dl>
 </details>
 
-<details><summary><code>client.agents.responses.<a href="/src/api/resources/agents/resources/responses/client/Client.ts">cancel</a>({ ...params }) -> TruefoundryGateway.ResponsesCancelResponse</code></summary>
+<details><summary><code>client.agents.responses.<a href="/src/api/resources/agents/resources/responses/client/Client.ts">cancel</a>({ ...params }) -> TrueFoundryGateway.ResponsesCancelResponse</code></summary>
 <dl>
 <dd>
 
@@ -113,7 +113,7 @@ await client.agents.responses.cancel({
 <dl>
 <dd>
 
-**request:** `TruefoundryGateway.agents.ResponsesCancelRequest` 
+**request:** `TrueFoundryGateway.agents.ResponsesCancelRequest` 
     
 </dd>
 </dl>

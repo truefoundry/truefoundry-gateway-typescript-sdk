@@ -24,7 +24,7 @@ export class BearerAuthProvider implements core.AuthProvider {
     } = {}): Promise<core.AuthRequest> {
         const apiKey = (await core.Supplier.get(this.options[TOKEN_PARAM])) ?? process.env?.[ENV_TOKEN];
         if (apiKey == null) {
-            throw new errors.TruefoundryGatewayError({
+            throw new errors.TrueFoundryGatewayError({
                 message: BearerAuthProvider.AUTH_CONFIG_ERROR_MESSAGE,
             });
         }

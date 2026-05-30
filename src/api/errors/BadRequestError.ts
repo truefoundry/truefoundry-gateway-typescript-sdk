@@ -2,10 +2,10 @@
 
 import type * as core from "../../core/index.js";
 import * as errors from "../../errors/index.js";
-import type * as TruefoundryGateway from "../index.js";
+import type * as TrueFoundryGateway from "../index.js";
 
-export class BadRequestError extends errors.TruefoundryGatewayError {
-    constructor(body: TruefoundryGateway.RequestErrorResponse, rawResponse?: core.RawResponse) {
+export class BadRequestError extends errors.TrueFoundryGatewayError {
+    constructor(body: TrueFoundryGateway.RequestErrorResponse, rawResponse?: core.RawResponse) {
         super({
             message: "BadRequestError",
             statusCode: 400,

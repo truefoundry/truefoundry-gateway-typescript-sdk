@@ -6,7 +6,7 @@ import { mergeHeaders } from "../../../../../../core/headers.js";
 import * as core from "../../../../../../core/index.js";
 import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../errors/index.js";
-import * as TruefoundryGateway from "../../../../../index.js";
+import * as TrueFoundryGateway from "../../../../../index.js";
 
 export declare namespace ResponsesClient {
     export type Options = BaseClientOptions;
@@ -25,16 +25,16 @@ export class ResponsesClient {
      * Execute an agent in stateful mode (responses are stored server-side by default). Use Named (`agent_name`) or Inline (`model`) input. Continue a conversation with `previous_response_id`. Responds with a Server-Sent Events stream of `AgentResponseStreamingOutputEvent` objects.
      */
     public create(
-        request: TruefoundryGateway.AgentResponsesBody,
+        request: TrueFoundryGateway.AgentResponsesBody,
         requestOptions?: ResponsesClient.RequestOptions,
-    ): core.HttpResponsePromise<core.Stream<TruefoundryGateway.AgentResponseStreamingOutputEvent>> {
+    ): core.HttpResponsePromise<core.Stream<TrueFoundryGateway.AgentResponseStreamingOutputEvent>> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
-        request: TruefoundryGateway.AgentResponsesBody,
+        request: TrueFoundryGateway.AgentResponsesBody,
         requestOptions?: ResponsesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<core.Stream<TruefoundryGateway.AgentResponseStreamingOutputEvent>>> {
+    ): Promise<core.WithRawResponse<core.Stream<TrueFoundryGateway.AgentResponseStreamingOutputEvent>>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -77,37 +77,37 @@ export class ResponsesClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
-                    throw new TruefoundryGateway.BadRequestError(
-                        _response.error.body as TruefoundryGateway.RequestErrorResponse,
+                    throw new TrueFoundryGateway.BadRequestError(
+                        _response.error.body as TrueFoundryGateway.RequestErrorResponse,
                         _response.rawResponse,
                     );
                 case 401:
-                    throw new TruefoundryGateway.UnauthorizedError(
-                        _response.error.body as TruefoundryGateway.RequestErrorResponse,
+                    throw new TrueFoundryGateway.UnauthorizedError(
+                        _response.error.body as TrueFoundryGateway.RequestErrorResponse,
                         _response.rawResponse,
                     );
                 case 403:
-                    throw new TruefoundryGateway.ForbiddenError(
-                        _response.error.body as TruefoundryGateway.RequestErrorResponse,
+                    throw new TrueFoundryGateway.ForbiddenError(
+                        _response.error.body as TrueFoundryGateway.RequestErrorResponse,
                         _response.rawResponse,
                     );
                 case 404:
-                    throw new TruefoundryGateway.NotFoundError(
-                        _response.error.body as TruefoundryGateway.RequestErrorResponse,
+                    throw new TrueFoundryGateway.NotFoundError(
+                        _response.error.body as TrueFoundryGateway.RequestErrorResponse,
                         _response.rawResponse,
                     );
                 case 412:
-                    throw new TruefoundryGateway.PreconditionFailedError(
+                    throw new TrueFoundryGateway.PreconditionFailedError(
                         _response.error.body as unknown,
                         _response.rawResponse,
                     );
                 case 500:
-                    throw new TruefoundryGateway.InternalServerError(
-                        _response.error.body as TruefoundryGateway.RequestErrorResponse,
+                    throw new TrueFoundryGateway.InternalServerError(
+                        _response.error.body as TrueFoundryGateway.RequestErrorResponse,
                         _response.rawResponse,
                     );
                 default:
-                    throw new errors.TruefoundryGatewayError({
+                    throw new errors.TrueFoundryGatewayError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                         rawResponse: _response.rawResponse,
@@ -121,11 +121,11 @@ export class ResponsesClient {
     /**
      * Cancel a running agent response. Requires the `response_id` returned from a prior stateful `/responses` call.
      *
-     * @param {TruefoundryGateway.agents.ResponsesCancelRequest} request
+     * @param {TrueFoundryGateway.agents.ResponsesCancelRequest} request
      * @param {ResponsesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link TruefoundryGateway.PreconditionFailedError}
-     * @throws {@link TruefoundryGateway.FailedDependencyError}
+     * @throws {@link TrueFoundryGateway.PreconditionFailedError}
+     * @throws {@link TrueFoundryGateway.FailedDependencyError}
      *
      * @example
      *     await client.agents.responses.cancel({
@@ -133,16 +133,16 @@ export class ResponsesClient {
      *     })
      */
     public cancel(
-        request: TruefoundryGateway.agents.ResponsesCancelRequest,
+        request: TrueFoundryGateway.agents.ResponsesCancelRequest,
         requestOptions?: ResponsesClient.RequestOptions,
-    ): core.HttpResponsePromise<TruefoundryGateway.agents.ResponsesCancelResponse> {
+    ): core.HttpResponsePromise<TrueFoundryGateway.agents.ResponsesCancelResponse> {
         return core.HttpResponsePromise.fromPromise(this.__cancel(request, requestOptions));
     }
 
     private async __cancel(
-        request: TruefoundryGateway.agents.ResponsesCancelRequest,
+        request: TrueFoundryGateway.agents.ResponsesCancelRequest,
         requestOptions?: ResponsesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<TruefoundryGateway.agents.ResponsesCancelResponse>> {
+    ): Promise<core.WithRawResponse<TrueFoundryGateway.agents.ResponsesCancelResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -169,7 +169,7 @@ export class ResponsesClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as TruefoundryGateway.agents.ResponsesCancelResponse,
+                data: _response.body as TrueFoundryGateway.agents.ResponsesCancelResponse,
                 rawResponse: _response.rawResponse,
             };
         }
@@ -177,17 +177,17 @@ export class ResponsesClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 412:
-                    throw new TruefoundryGateway.PreconditionFailedError(
+                    throw new TrueFoundryGateway.PreconditionFailedError(
                         _response.error.body as unknown,
                         _response.rawResponse,
                     );
                 case 424:
-                    throw new TruefoundryGateway.FailedDependencyError(
+                    throw new TrueFoundryGateway.FailedDependencyError(
                         _response.error.body as unknown,
                         _response.rawResponse,
                     );
                 default:
-                    throw new errors.TruefoundryGatewayError({
+                    throw new errors.TrueFoundryGatewayError({
                         statusCode: _response.error.statusCode,
                         body: _response.error.body,
                         rawResponse: _response.rawResponse,

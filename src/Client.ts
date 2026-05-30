@@ -5,17 +5,17 @@ import type { BaseClientOptions, BaseRequestOptions } from "./BaseClient.js";
 import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "./BaseClient.js";
 import * as core from "./core/index.js";
 
-export declare namespace TruefoundryGatewayClient {
+export declare namespace TrueFoundryGatewayClient {
     export type Options = BaseClientOptions;
 
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
-export class TruefoundryGatewayClient {
-    protected readonly _options: NormalizedClientOptionsWithAuth<TruefoundryGatewayClient.Options>;
+export class TrueFoundryGatewayClient {
+    protected readonly _options: NormalizedClientOptionsWithAuth<TrueFoundryGatewayClient.Options>;
     protected _agents: AgentsClient | undefined;
 
-    constructor(options: TruefoundryGatewayClient.Options) {
+    constructor(options: TrueFoundryGatewayClient.Options) {
         this._options = normalizeClientOptionsWithAuth(options);
     }
 

@@ -12,7 +12,7 @@
         "includeApiReference": true,
         "inlineFileProperties": true,
         "inlinePathParameters": true,
-        "namespaceExport": "TruefoundryGateway",
+        "namespaceExport": "TrueFoundryGateway",
         "noSerdeLayer": true,
         "omitUndefined": true,
         "retainOriginalCasing": true,
@@ -20,7 +20,7 @@
         "streamType": "web",
         "useDefaultRequestParameterValues": true
     },
-    "originGitCommit": "da1644b63249be4314b668f691926cb69d6487f1",
+    "originGitCommit": "7c73678acc9bd7a208e6f64661f8709b619bb774",
     "originGitCommitIsDirty": false,
     "invokedBy": "ci",
     "requestedVersion": "0.0.0",

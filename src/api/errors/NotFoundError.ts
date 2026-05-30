@@ -2,10 +2,10 @@
 
 import type * as core from "../../core/index.js";
 import * as errors from "../../errors/index.js";
-import type * as TruefoundryGateway from "../index.js";
+import type * as TrueFoundryGateway from "../index.js";
 
-export class NotFoundError extends errors.TruefoundryGatewayError {
-    constructor(body: TruefoundryGateway.RequestErrorResponse, rawResponse?: core.RawResponse) {
+export class NotFoundError extends errors.TrueFoundryGatewayError {
+    constructor(body: TrueFoundryGateway.RequestErrorResponse, rawResponse?: core.RawResponse) {
         super({
             message: "NotFoundError",
             statusCode: 404,

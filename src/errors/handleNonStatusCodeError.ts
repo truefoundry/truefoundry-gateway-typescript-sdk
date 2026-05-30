@@ -11,28 +11,28 @@ export function handleNonStatusCodeError(
 ): never {
     switch (error.reason) {
         case "non-json":
-            throw new errors.TruefoundryGatewayError({
+            throw new errors.TrueFoundryGatewayError({
                 statusCode: error.statusCode,
                 body: error.rawBody,
                 rawResponse: rawResponse,
             });
         case "body-is-null":
-            throw new errors.TruefoundryGatewayError({
+            throw new errors.TrueFoundryGatewayError({
                 statusCode: error.statusCode,
                 rawResponse: rawResponse,
             });
         case "timeout":
-            throw new errors.TruefoundryGatewayTimeoutError(`Timeout exceeded when calling ${method} ${path}.`, {
+            throw new errors.TrueFoundryGatewayTimeoutError(`Timeout exceeded when calling ${method} ${path}.`, {
                 cause: error.cause,
             });
         case "unknown":
-            throw new errors.TruefoundryGatewayError({
+            throw new errors.TrueFoundryGatewayError({
                 message: error.errorMessage,
                 rawResponse: rawResponse,
                 cause: error.cause,
             });
         default:
-            throw new errors.TruefoundryGatewayError({
+            throw new errors.TrueFoundryGatewayError({
                 message: "Unknown error",
                 rawResponse: rawResponse,
             });

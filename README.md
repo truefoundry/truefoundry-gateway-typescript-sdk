@@ -91,9 +91,9 @@ A full reference for this library is available [here](https://github.com/truefou
 Instantiate and use the client with the following:
 
 ```typescript
-import { TruefoundryGatewayClient } from "truefoundry-gateway-sdk";
+import { TrueFoundryGatewayClient } from "truefoundry-gateway-sdk";
 
-const client = new TruefoundryGatewayClient({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
+const client = new TrueFoundryGatewayClient({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
 const response = await client.agents.responses.create({
     model: "model"
 });
@@ -120,9 +120,9 @@ The SDK exports all request and response types as TypeScript interfaces. Simply 
 following namespace:
 
 ```typescript
-import { TruefoundryGateway } from "truefoundry-gateway-sdk";
+import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
-const request: TruefoundryGateway.ResponsesCancelRequest = {
+const request: TrueFoundryGateway.ResponsesCancelRequest = {
     ...
 };
 ```
@@ -133,12 +133,12 @@ When the API returns a non-success status code (4xx or 5xx response), a subclass
 will be thrown.
 
 ```typescript
-import { TruefoundryGatewayError } from "truefoundry-gateway-sdk";
+import { TrueFoundryGatewayError } from "truefoundry-gateway-sdk";
 
 try {
     await client.agents.responses.create(...);
 } catch (err) {
-    if (err instanceof TruefoundryGatewayError) {
+    if (err instanceof TrueFoundryGatewayError) {
         console.log(err.statusCode);
         console.log(err.message);
         console.log(err.body);
@@ -153,9 +153,9 @@ Some endpoints return streaming responses instead of returning the full response
 The SDK uses async iterators, so you can consume the responses using a `for await...of` loop.
 
 ```typescript
-import { TruefoundryGatewayClient } from "truefoundry-gateway-sdk";
+import { TrueFoundryGatewayClient } from "truefoundry-gateway-sdk";
 
-const client = new TruefoundryGatewayClient({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
+const client = new TrueFoundryGatewayClient({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
 const response = await client.agents.responses.create({
     model: "model"
 });
@@ -181,9 +181,9 @@ const client = new AgentsClient({...});
 If you would like to send additional headers as part of the request, use the `headers` request option.
 
 ```typescript
-import { TruefoundryGatewayClient } from "truefoundry-gateway-sdk";
+import { TrueFoundryGatewayClient } from "truefoundry-gateway-sdk";
 
-const client = new TruefoundryGatewayClient({
+const client = new TrueFoundryGatewayClient({
     ...
     headers: {
         'X-Custom-Header': 'custom value'
@@ -276,9 +276,9 @@ console.log(rawResponse.headers['X-My-Header']);
 The SDK supports logging. You can configure the logger by passing in a `logging` object to the client options.
 
 ```typescript
-import { TruefoundryGatewayClient, logging } from "truefoundry-gateway-sdk";
+import { TrueFoundryGatewayClient, logging } from "truefoundry-gateway-sdk";
 
-const client = new TruefoundryGatewayClient({
+const client = new TrueFoundryGatewayClient({
     ...
     logging: {
         level: logging.LogLevel.Debug, // defaults to logging.LogLevel.Info
@@ -360,9 +360,9 @@ The SDK provides a way for you to customize the underlying HTTP client / Fetch f
 unsupported environment, this provides a way for you to break glass and ensure the SDK works.
 
 ```typescript
-import { TruefoundryGatewayClient } from "truefoundry-gateway-sdk";
+import { TrueFoundryGatewayClient } from "truefoundry-gateway-sdk";
 
-const client = new TruefoundryGatewayClient({
+const client = new TrueFoundryGatewayClient({
     ...
     fetcher: // provide your implementation here
 });

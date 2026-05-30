@@ -1,2 +1,2 @@
-export { TruefoundryGatewayError } from "./TruefoundryGatewayError.js";
-export { TruefoundryGatewayTimeoutError } from "./TruefoundryGatewayTimeoutError.js";
+export { TrueFoundryGatewayError } from "./TrueFoundryGatewayError.js";
+export { TrueFoundryGatewayTimeoutError } from "./TrueFoundryGatewayTimeoutError.js";
