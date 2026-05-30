@@ -3,5 +3,5 @@
 import type * as TruefoundryGateway from "../index.js";
 
 export type AgentApprovalDecision =
-    | TruefoundryGateway.AgentApprovalDecisionZero
-    | TruefoundryGateway.AgentApprovalDecisionReason;
+    | TruefoundryGateway.AgentApprovalDecisionAllow
+    | TruefoundryGateway.AgentApprovalDecisionDeny;

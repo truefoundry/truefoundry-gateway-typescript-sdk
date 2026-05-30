@@ -2,6 +2,6 @@
 
 import type * as TruefoundryGateway from "../index.js";
 
-export type AgentResponsesStatefulInput =
+export type AgentResponsesInput =
     | TruefoundryGateway.AgentInputUserMessage[]
     | TruefoundryGateway.AgentApprovalOrToolResponseMessage[];

@@ -15,5 +15,5 @@ export interface AgentResponsesInlineAgent {
     variables?: Record<string, string> | undefined;
     /** ID of a prior stored response. Pass to continue a stateful conversation. */
     previous_response_id?: string | undefined;
-    input?: TruefoundryGateway.AgentResponsesStatefulInput | undefined;
+    input?: TruefoundryGateway.AgentResponsesInput | undefined;
 }

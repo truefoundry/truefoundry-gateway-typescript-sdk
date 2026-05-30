@@ -4,4 +4,4 @@ import type * as TruefoundryGateway from "../index.js";
 
 export type AgentResponsesBody =
     | TruefoundryGateway.AgentResponsesInlineAgent
-    | TruefoundryGateway.AgentResponsesNamedAgent;
+    | TruefoundryGateway.AgentResponsesSavedAgent;
