@@ -4,7 +4,6 @@ import type { BaseClientOptions, BaseRequestOptions } from "../../../../../../Ba
 import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "../../../../../../BaseClient.js";
 import { mergeHeaders } from "../../../../../../core/headers.js";
 import * as core from "../../../../../../core/index.js";
-import * as environments from "../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../errors/index.js";
 import * as TruefoundryGateway from "../../../../../index.js";
@@ -18,7 +17,7 @@ export declare namespace ResponsesClient {
 export class ResponsesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<ResponsesClient.Options>;
 
-    constructor(options: ResponsesClient.Options = {}) {
+    constructor(options: ResponsesClient.Options) {
         this._options = normalizeClientOptionsWithAuth(options);
     }
 
@@ -45,8 +44,7 @@ export class ResponsesClient {
         const _response = await (this._options.fetcher ?? core.fetcher)<ReadableStream>({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.TruefoundryGatewayEnvironment.Default,
+                    (await core.Supplier.get(this._options.environment)),
                 "agent/responses",
             ),
             method: "POST",
@@ -154,8 +152,7 @@ export class ResponsesClient {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.TruefoundryGatewayEnvironment.Default,
+                    (await core.Supplier.get(this._options.environment)),
                 "agent/responses/cancel",
             ),
             method: "POST",

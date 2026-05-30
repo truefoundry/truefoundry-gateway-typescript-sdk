@@ -93,7 +93,7 @@ Instantiate and use the client with the following:
 ```typescript
 import { TruefoundryGatewayClient } from "truefoundry-gateway-sdk";
 
-const client = new TruefoundryGatewayClient({ token: "YOUR_TOKEN" });
+const client = new TruefoundryGatewayClient({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
 const response = await client.agents.responses.create({
     model: "model"
 });
@@ -155,7 +155,7 @@ The SDK uses async iterators, so you can consume the responses using a `for awai
 ```typescript
 import { TruefoundryGatewayClient } from "truefoundry-gateway-sdk";
 
-const client = new TruefoundryGatewayClient({ token: "YOUR_TOKEN" });
+const client = new TruefoundryGatewayClient({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
 const response = await client.agents.responses.create({
     model: "model"
 });

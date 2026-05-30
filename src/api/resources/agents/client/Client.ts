@@ -12,7 +12,7 @@ export class AgentsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<AgentsClient.Options>;
     protected _responses: ResponsesClient | undefined;
 
-    constructor(options: AgentsClient.Options = {}) {
+    constructor(options: AgentsClient.Options) {
         this._options = normalizeClientOptionsWithAuth(options);
     }
 

@@ -15,7 +15,7 @@ export class TruefoundryGatewayClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<TruefoundryGatewayClient.Options>;
     protected _agents: AgentsClient | undefined;
 
-    constructor(options: TruefoundryGatewayClient.Options = {}) {
+    constructor(options: TruefoundryGatewayClient.Options) {
         this._options = normalizeClientOptionsWithAuth(options);
     }
 

@@ -7,7 +7,7 @@ import { mockServerPool } from "../../mock-server/MockServerPool";
 describe("ResponsesClient", () => {
     test("create (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new TruefoundryGatewayClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const client = new TruefoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { model: "model" };
         const rawResponseBody =
             'event: \ndata: {"content":"content","refusal":"refusal","role":"developer","function_call":{"name":"name","arguments":"arguments"},"tool_calls":[{"index":1,"id":"id","type":"function","tool_info":{"mcp_server_id":"mcp_server_id","mcp_server_name":"mcp_server_name","original_tool_name":"original_tool_name"},"provider_specific_fields":{"key":"value"}}],"thinking_blocks":[{"type":"thinking","thinking":"thinking","signature":"signature"}],"reasoning_content":"reasoning_content","type":"agent.message","execution_id":"execution_id","created_at":"created_at","finish_reason":"stop"}\n\n';
@@ -70,7 +70,7 @@ describe("ResponsesClient", () => {
 
     test("create (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new TruefoundryGatewayClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const client = new TruefoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { model: "model" };
         const rawResponseBody = { error: { message: "message" } };
 
@@ -92,7 +92,7 @@ describe("ResponsesClient", () => {
 
     test("create (3)", async () => {
         const server = mockServerPool.createServer();
-        const client = new TruefoundryGatewayClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const client = new TruefoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { model: "model" };
         const rawResponseBody = { error: { message: "message" } };
 
@@ -114,7 +114,7 @@ describe("ResponsesClient", () => {
 
     test("create (4)", async () => {
         const server = mockServerPool.createServer();
-        const client = new TruefoundryGatewayClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const client = new TruefoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { model: "model" };
         const rawResponseBody = { error: { message: "message" } };
 
@@ -136,7 +136,7 @@ describe("ResponsesClient", () => {
 
     test("create (5)", async () => {
         const server = mockServerPool.createServer();
-        const client = new TruefoundryGatewayClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const client = new TruefoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { model: "model" };
         const rawResponseBody = { error: { message: "message" } };
 
@@ -158,7 +158,7 @@ describe("ResponsesClient", () => {
 
     test("create (6)", async () => {
         const server = mockServerPool.createServer();
-        const client = new TruefoundryGatewayClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const client = new TruefoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { model: "model" };
         const rawResponseBody = { key: "value" };
 
@@ -180,7 +180,7 @@ describe("ResponsesClient", () => {
 
     test("create (7)", async () => {
         const server = mockServerPool.createServer();
-        const client = new TruefoundryGatewayClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const client = new TruefoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { model: "model" };
         const rawResponseBody = { error: { message: "message" } };
 
@@ -202,7 +202,7 @@ describe("ResponsesClient", () => {
 
     test("cancel (1)", async () => {
         const server = mockServerPool.createServer();
-        const client = new TruefoundryGatewayClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const client = new TruefoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { response_id: "response_id" };
         const rawResponseBody = {};
 
@@ -223,7 +223,7 @@ describe("ResponsesClient", () => {
 
     test("cancel (2)", async () => {
         const server = mockServerPool.createServer();
-        const client = new TruefoundryGatewayClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const client = new TruefoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { response_id: "x" };
         const rawResponseBody = { key: "value" };
 
@@ -245,7 +245,7 @@ describe("ResponsesClient", () => {
 
     test("cancel (3)", async () => {
         const server = mockServerPool.createServer();
-        const client = new TruefoundryGatewayClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const client = new TruefoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { response_id: "x" };
         const rawResponseBody = { key: "value" };
 
