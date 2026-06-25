@@ -3,20 +3,20 @@ import type { TrueFoundryGatewayClient } from "../Client.js";
 
 export class AgentSession implements TrueFoundryGateway.Session {
     readonly id: string;
-    readonly agent_name: string;
+    readonly agentName: string;
     readonly title?: string;
-    readonly created_by_subject: TrueFoundryGateway.SessionSubject;
-    readonly created_at: string;
-    readonly updated_at: string;
+    readonly createdBySubject: TrueFoundryGateway.SessionSubject;
+    readonly createdAt: string;
+    readonly updatedAt: string;
     readonly #client: TrueFoundryGatewayClient;
 
     constructor(session: TrueFoundryGateway.Session, client: TrueFoundryGatewayClient) {
         this.id = session.id;
-        this.agent_name = session.agent_name;
+        this.agentName = session.agentName;
         this.title = session.title;
-        this.created_by_subject = session.created_by_subject;
-        this.created_at = session.created_at;
-        this.updated_at = session.updated_at;
+        this.createdBySubject = session.createdBySubject;
+        this.createdAt = session.createdAt;
+        this.updatedAt = session.updatedAt;
         this.#client = client;
     }
 }
