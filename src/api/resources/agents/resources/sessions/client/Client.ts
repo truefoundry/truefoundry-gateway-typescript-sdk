@@ -109,16 +109,58 @@ export class SessionsClient {
                 if (_response.error.reason === "status-code") {
                     switch (_response.error.statusCode) {
                         case 400:
-                            throw new TrueFoundryGateway.BadRequestError(_response.error.body, _response.rawResponse);
+                            throw new TrueFoundryGateway.BadRequestError(
+                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                                    unrecognizedObjectKeys: "passthrough",
+                                    allowUnrecognizedUnionMembers: true,
+                                    allowUnrecognizedEnumValues: true,
+                                    skipValidation: true,
+                                    breadcrumbsPrefix: ["response"],
+                                }),
+                                _response.rawResponse,
+                            );
                         case 401:
-                            throw new TrueFoundryGateway.UnauthorizedError(_response.error.body, _response.rawResponse);
+                            throw new TrueFoundryGateway.UnauthorizedError(
+                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                                    unrecognizedObjectKeys: "passthrough",
+                                    allowUnrecognizedUnionMembers: true,
+                                    allowUnrecognizedEnumValues: true,
+                                    skipValidation: true,
+                                    breadcrumbsPrefix: ["response"],
+                                }),
+                                _response.rawResponse,
+                            );
                         case 403:
-                            throw new TrueFoundryGateway.ForbiddenError(_response.error.body, _response.rawResponse);
+                            throw new TrueFoundryGateway.ForbiddenError(
+                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                                    unrecognizedObjectKeys: "passthrough",
+                                    allowUnrecognizedUnionMembers: true,
+                                    allowUnrecognizedEnumValues: true,
+                                    skipValidation: true,
+                                    breadcrumbsPrefix: ["response"],
+                                }),
+                                _response.rawResponse,
+                            );
                         case 404:
-                            throw new TrueFoundryGateway.NotFoundError(_response.error.body, _response.rawResponse);
+                            throw new TrueFoundryGateway.NotFoundError(
+                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                                    unrecognizedObjectKeys: "passthrough",
+                                    allowUnrecognizedUnionMembers: true,
+                                    allowUnrecognizedEnumValues: true,
+                                    skipValidation: true,
+                                    breadcrumbsPrefix: ["response"],
+                                }),
+                                _response.rawResponse,
+                            );
                         case 422:
                             throw new TrueFoundryGateway.UnprocessableEntityError(
-                                _response.error.body,
+                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                                    unrecognizedObjectKeys: "passthrough",
+                                    allowUnrecognizedUnionMembers: true,
+                                    allowUnrecognizedEnumValues: true,
+                                    skipValidation: true,
+                                    breadcrumbsPrefix: ["response"],
+                                }),
                                 _response.rawResponse,
                             );
                         default:
@@ -220,17 +262,71 @@ export class SessionsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
-                    throw new TrueFoundryGateway.BadRequestError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.BadRequestError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 case 401:
-                    throw new TrueFoundryGateway.UnauthorizedError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.UnauthorizedError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 case 403:
-                    throw new TrueFoundryGateway.ForbiddenError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.ForbiddenError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 case 404:
-                    throw new TrueFoundryGateway.NotFoundError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.NotFoundError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 case 409:
-                    throw new TrueFoundryGateway.ConflictError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.ConflictError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 case 422:
-                    throw new TrueFoundryGateway.UnprocessableEntityError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.UnprocessableEntityError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.TrueFoundryGatewayError({
                         statusCode: _response.error.statusCode,
@@ -304,11 +400,38 @@ export class SessionsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 401:
-                    throw new TrueFoundryGateway.UnauthorizedError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.UnauthorizedError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 case 403:
-                    throw new TrueFoundryGateway.ForbiddenError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.ForbiddenError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 case 404:
-                    throw new TrueFoundryGateway.NotFoundError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.NotFoundError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.TrueFoundryGatewayError({
                         statusCode: _response.error.statusCode,
@@ -399,13 +522,49 @@ export class SessionsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
-                    throw new TrueFoundryGateway.BadRequestError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.BadRequestError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 case 404:
-                    throw new TrueFoundryGateway.NotFoundError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.NotFoundError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 case 412:
-                    throw new TrueFoundryGateway.PreconditionFailedError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.PreconditionFailedError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 case 424:
-                    throw new TrueFoundryGateway.FailedDependencyError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.FailedDependencyError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.TrueFoundryGatewayError({
                         statusCode: _response.error.statusCode,
@@ -493,9 +652,27 @@ export class SessionsClient {
                 if (_response.error.reason === "status-code") {
                     switch (_response.error.statusCode) {
                         case 400:
-                            throw new TrueFoundryGateway.BadRequestError(_response.error.body, _response.rawResponse);
+                            throw new TrueFoundryGateway.BadRequestError(
+                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                                    unrecognizedObjectKeys: "passthrough",
+                                    allowUnrecognizedUnionMembers: true,
+                                    allowUnrecognizedEnumValues: true,
+                                    skipValidation: true,
+                                    breadcrumbsPrefix: ["response"],
+                                }),
+                                _response.rawResponse,
+                            );
                         case 404:
-                            throw new TrueFoundryGateway.NotFoundError(_response.error.body, _response.rawResponse);
+                            throw new TrueFoundryGateway.NotFoundError(
+                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                                    unrecognizedObjectKeys: "passthrough",
+                                    allowUnrecognizedUnionMembers: true,
+                                    allowUnrecognizedEnumValues: true,
+                                    skipValidation: true,
+                                    breadcrumbsPrefix: ["response"],
+                                }),
+                                _response.rawResponse,
+                            );
                         default:
                             throw new errors.TrueFoundryGatewayError({
                                 statusCode: _response.error.statusCode,
@@ -534,7 +711,7 @@ export class SessionsClient {
         sessionId: string,
         request: TrueFoundryGateway.agents.CreateTurnRequest = {},
         requestOptions?: SessionsClient.RequestOptions,
-    ): core.HttpResponsePromise<core.Stream<TrueFoundryGateway.TurnStreamingOutputEvent>> {
+    ): core.HttpResponsePromise<core.Stream<TrueFoundryGateway.TurnStreamingEvent>> {
         return core.HttpResponsePromise.fromPromise(this.__createTurn(sessionId, request, requestOptions));
     }
 
@@ -542,7 +719,7 @@ export class SessionsClient {
         sessionId: string,
         request: TrueFoundryGateway.agents.CreateTurnRequest = {},
         requestOptions?: SessionsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<core.Stream<TrueFoundryGateway.TurnStreamingOutputEvent>>> {
+    ): Promise<core.WithRawResponse<core.Stream<TrueFoundryGateway.TurnStreamingEvent>>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -578,7 +755,7 @@ export class SessionsClient {
                 data: new core.Stream({
                     stream: _response.body,
                     parse: async (data) => {
-                        return serializers.TurnStreamingOutputEvent.parseOrThrow(data, {
+                        return serializers.TurnStreamingEvent.parseOrThrow(data, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -598,11 +775,38 @@ export class SessionsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
-                    throw new TrueFoundryGateway.BadRequestError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.BadRequestError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 case 403:
-                    throw new TrueFoundryGateway.ForbiddenError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.ForbiddenError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 case 404:
-                    throw new TrueFoundryGateway.NotFoundError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.NotFoundError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.TrueFoundryGatewayError({
                         statusCode: _response.error.statusCode,
@@ -683,9 +887,27 @@ export class SessionsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
-                    throw new TrueFoundryGateway.BadRequestError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.BadRequestError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 case 404:
-                    throw new TrueFoundryGateway.NotFoundError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.NotFoundError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.TrueFoundryGatewayError({
                         statusCode: _response.error.statusCode,
@@ -711,7 +933,7 @@ export class SessionsClient {
         turnId: string,
         request: TrueFoundryGateway.agents.SubscribeTurnRequest = {},
         requestOptions?: SessionsClient.RequestOptions,
-    ): core.HttpResponsePromise<core.Stream<TrueFoundryGateway.TurnStreamingOutputEvent>> {
+    ): core.HttpResponsePromise<core.Stream<TrueFoundryGateway.TurnStreamingEvent>> {
         return core.HttpResponsePromise.fromPromise(this.__subscribeToTurn(sessionId, turnId, request, requestOptions));
     }
 
@@ -720,7 +942,7 @@ export class SessionsClient {
         turnId: string,
         request: TrueFoundryGateway.agents.SubscribeTurnRequest = {},
         requestOptions?: SessionsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<core.Stream<TrueFoundryGateway.TurnStreamingOutputEvent>>> {
+    ): Promise<core.WithRawResponse<core.Stream<TrueFoundryGateway.TurnStreamingEvent>>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -756,7 +978,7 @@ export class SessionsClient {
                 data: new core.Stream({
                     stream: _response.body,
                     parse: async (data) => {
-                        return serializers.TurnStreamingOutputEvent.parseOrThrow(data, {
+                        return serializers.TurnStreamingEvent.parseOrThrow(data, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -776,13 +998,49 @@ export class SessionsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
-                    throw new TrueFoundryGateway.BadRequestError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.BadRequestError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 case 404:
-                    throw new TrueFoundryGateway.NotFoundError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.NotFoundError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 case 412:
-                    throw new TrueFoundryGateway.PreconditionFailedError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.PreconditionFailedError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 case 504:
-                    throw new TrueFoundryGateway.GatewayTimeoutError(_response.error.body, _response.rawResponse);
+                    throw new TrueFoundryGateway.GatewayTimeoutError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.TrueFoundryGatewayError({
                         statusCode: _response.error.statusCode,
@@ -824,9 +1082,7 @@ export class SessionsClient {
         turnId: string,
         request: TrueFoundryGateway.agents.SessionsListTurnEventsRequest = {},
         requestOptions?: SessionsClient.RequestOptions,
-    ): Promise<
-        core.Page<TrueFoundryGateway.TurnOutputEvent, TrueFoundryGateway.agents.SessionsListTurnEventsResponse>
-    > {
+    ): Promise<core.Page<TrueFoundryGateway.TurnEvent, TrueFoundryGateway.agents.SessionsListTurnEventsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (
                 request: TrueFoundryGateway.agents.SessionsListTurnEventsRequest,
@@ -885,12 +1141,36 @@ export class SessionsClient {
                 if (_response.error.reason === "status-code") {
                     switch (_response.error.statusCode) {
                         case 400:
-                            throw new TrueFoundryGateway.BadRequestError(_response.error.body, _response.rawResponse);
+                            throw new TrueFoundryGateway.BadRequestError(
+                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                                    unrecognizedObjectKeys: "passthrough",
+                                    allowUnrecognizedUnionMembers: true,
+                                    allowUnrecognizedEnumValues: true,
+                                    skipValidation: true,
+                                    breadcrumbsPrefix: ["response"],
+                                }),
+                                _response.rawResponse,
+                            );
                         case 404:
-                            throw new TrueFoundryGateway.NotFoundError(_response.error.body, _response.rawResponse);
+                            throw new TrueFoundryGateway.NotFoundError(
+                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                                    unrecognizedObjectKeys: "passthrough",
+                                    allowUnrecognizedUnionMembers: true,
+                                    allowUnrecognizedEnumValues: true,
+                                    skipValidation: true,
+                                    breadcrumbsPrefix: ["response"],
+                                }),
+                                _response.rawResponse,
+                            );
                         case 412:
                             throw new TrueFoundryGateway.PreconditionFailedError(
-                                _response.error.body,
+                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                                    unrecognizedObjectKeys: "passthrough",
+                                    allowUnrecognizedUnionMembers: true,
+                                    allowUnrecognizedEnumValues: true,
+                                    skipValidation: true,
+                                    breadcrumbsPrefix: ["response"],
+                                }),
                                 _response.rawResponse,
                             );
                         default:
@@ -910,10 +1190,7 @@ export class SessionsClient {
             },
         );
         const dataWithRawResponse = await list(request).withRawResponse();
-        return new core.Page<
-            TrueFoundryGateway.TurnOutputEvent,
-            TrueFoundryGateway.agents.SessionsListTurnEventsResponse
-        >({
+        return new core.Page<TrueFoundryGateway.TurnEvent, TrueFoundryGateway.agents.SessionsListTurnEventsResponse>({
             response: dataWithRawResponse.data,
             rawResponse: dataWithRawResponse.rawResponse,
             hasNextPage: (response) =>

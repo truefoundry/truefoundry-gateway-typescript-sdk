@@ -7,7 +7,7 @@ export interface DraftSession {
     agentSpec: TrueFoundryGateway.DraftSessionAgentSpec;
     agentName?: string;
     title?: string;
-    createdBySubject: TrueFoundryGateway.SessionSubject;
+    createdBySubject: TrueFoundryGateway.Subject;
     createdAt: string;
     updatedAt: string;
 }

@@ -76,7 +76,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -95,7 +95,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -114,7 +114,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -133,7 +133,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -179,10 +179,6 @@ describe("DraftSessionsClient", () => {
                     subject_id: "subject_id",
                     subject_type: "subject_type",
                     subject_slug: "subject_slug",
-                    subject_display_name: "subject_display_name",
-                    subject_pat_name: "subject_pat_name",
-                    subject_controller_name: "subject_controller_name",
-                    subject_external_identity_slug: "subject_external_identity_slug",
                 },
                 created_at: "created_at",
                 updated_at: "updated_at",
@@ -250,10 +246,6 @@ describe("DraftSessionsClient", () => {
                     subjectId: "subject_id",
                     subjectType: "subject_type",
                     subjectSlug: "subject_slug",
-                    subjectDisplayName: "subject_display_name",
-                    subjectPatName: "subject_pat_name",
-                    subjectControllerName: "subject_controller_name",
-                    subjectExternalIdentitySlug: "subject_external_identity_slug",
                 },
                 createdAt: "created_at",
                 updatedAt: "updated_at",
@@ -265,7 +257,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { agent_spec: { model: { name: "x" } } };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -291,7 +283,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { agent_spec: { model: { name: "x" } } };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -317,7 +309,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { agent_spec: { model: { name: "x" } } };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -343,7 +335,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { agent_spec: { model: { name: "x" } } };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -369,7 +361,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { agent_spec: { model: { name: "x" } } };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -422,10 +414,6 @@ describe("DraftSessionsClient", () => {
                     subject_id: "subject_id",
                     subject_type: "subject_type",
                     subject_slug: "subject_slug",
-                    subject_display_name: "subject_display_name",
-                    subject_pat_name: "subject_pat_name",
-                    subject_controller_name: "subject_controller_name",
-                    subject_external_identity_slug: "subject_external_identity_slug",
                 },
                 created_at: "created_at",
                 updated_at: "updated_at",
@@ -486,10 +474,6 @@ describe("DraftSessionsClient", () => {
                     subjectId: "subject_id",
                     subjectType: "subject_type",
                     subjectSlug: "subject_slug",
-                    subjectDisplayName: "subject_display_name",
-                    subjectPatName: "subject_pat_name",
-                    subjectControllerName: "subject_controller_name",
-                    subjectExternalIdentitySlug: "subject_external_identity_slug",
                 },
                 createdAt: "created_at",
                 updatedAt: "updated_at",
@@ -501,7 +485,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -520,7 +504,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -566,10 +550,6 @@ describe("DraftSessionsClient", () => {
                     subject_id: "subject_id",
                     subject_type: "subject_type",
                     subject_slug: "subject_slug",
-                    subject_display_name: "subject_display_name",
-                    subject_pat_name: "subject_pat_name",
-                    subject_controller_name: "subject_controller_name",
-                    subject_external_identity_slug: "subject_external_identity_slug",
                 },
                 created_at: "created_at",
                 updated_at: "updated_at",
@@ -631,10 +611,6 @@ describe("DraftSessionsClient", () => {
                     subjectId: "subject_id",
                     subjectType: "subject_type",
                     subjectSlug: "subject_slug",
-                    subjectDisplayName: "subject_display_name",
-                    subjectPatName: "subject_pat_name",
-                    subjectControllerName: "subject_controller_name",
-                    subjectExternalIdentitySlug: "subject_external_identity_slug",
                 },
                 createdAt: "created_at",
                 updatedAt: "updated_at",
@@ -646,7 +622,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -666,7 +642,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -686,7 +662,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -706,7 +682,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()

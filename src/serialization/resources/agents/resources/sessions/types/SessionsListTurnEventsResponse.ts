@@ -3,20 +3,20 @@
 import type * as TrueFoundryGateway from "../../../../../../api/index.js";
 import * as core from "../../../../../../core/index.js";
 import type * as serializers from "../../../../../index.js";
-import { EventsTokenPagination } from "../../../../../types/EventsTokenPagination.js";
-import { TurnOutputEvent } from "../../../../../types/TurnOutputEvent.js";
+import { TokenPagination } from "../../../../../types/TokenPagination.js";
+import { TurnEvent } from "../../../../../types/TurnEvent.js";
 
 export const SessionsListTurnEventsResponse: core.serialization.ObjectSchema<
     serializers.agents.SessionsListTurnEventsResponse.Raw,
     TrueFoundryGateway.agents.SessionsListTurnEventsResponse
 > = core.serialization.object({
-    data: core.serialization.list(TurnOutputEvent),
-    pagination: EventsTokenPagination,
+    data: core.serialization.list(TurnEvent),
+    pagination: TokenPagination,
 });
 
 export declare namespace SessionsListTurnEventsResponse {
     export interface Raw {
-        data: TurnOutputEvent.Raw[];
-        pagination: EventsTokenPagination.Raw;
+        data: TurnEvent.Raw[];
+        pagination: TokenPagination.Raw;
     }
 }

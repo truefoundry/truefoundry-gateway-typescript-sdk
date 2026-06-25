@@ -70,7 +70,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -91,7 +91,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -112,7 +112,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -133,7 +133,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -154,7 +154,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -184,10 +184,6 @@ describe("SessionsClient", () => {
                     subject_id: "subject_id",
                     subject_type: "subject_type",
                     subject_slug: "subject_slug",
-                    subject_display_name: "subject_display_name",
-                    subject_pat_name: "subject_pat_name",
-                    subject_controller_name: "subject_controller_name",
-                    subject_external_identity_slug: "subject_external_identity_slug",
                 },
                 created_at: "created_at",
                 updated_at: "updated_at",
@@ -215,10 +211,6 @@ describe("SessionsClient", () => {
                     subjectId: "subject_id",
                     subjectType: "subject_type",
                     subjectSlug: "subject_slug",
-                    subjectDisplayName: "subject_display_name",
-                    subjectPatName: "subject_pat_name",
-                    subjectControllerName: "subject_controller_name",
-                    subjectExternalIdentitySlug: "subject_external_identity_slug",
                 },
                 createdAt: "created_at",
                 updatedAt: "updated_at",
@@ -230,7 +222,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { agent_name: "x" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -252,7 +244,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { agent_name: "x" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -274,7 +266,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { agent_name: "x" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -296,7 +288,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { agent_name: "x" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -318,7 +310,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { agent_name: "x" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -340,7 +332,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { agent_name: "x" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -371,10 +363,6 @@ describe("SessionsClient", () => {
                     subject_id: "subject_id",
                     subject_type: "subject_type",
                     subject_slug: "subject_slug",
-                    subject_display_name: "subject_display_name",
-                    subject_pat_name: "subject_pat_name",
-                    subject_controller_name: "subject_controller_name",
-                    subject_external_identity_slug: "subject_external_identity_slug",
                 },
                 created_at: "created_at",
                 updated_at: "updated_at",
@@ -399,10 +387,6 @@ describe("SessionsClient", () => {
                     subjectId: "subject_id",
                     subjectType: "subject_type",
                     subjectSlug: "subject_slug",
-                    subjectDisplayName: "subject_display_name",
-                    subjectPatName: "subject_pat_name",
-                    subjectControllerName: "subject_controller_name",
-                    subjectExternalIdentitySlug: "subject_external_identity_slug",
                 },
                 createdAt: "created_at",
                 updatedAt: "updated_at",
@@ -414,7 +398,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -433,7 +417,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -452,7 +436,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -490,7 +474,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -510,7 +494,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -530,7 +514,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -550,7 +534,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -575,12 +559,11 @@ describe("SessionsClient", () => {
                 {
                     id: "id",
                     session_id: "session_id",
-                    first_turn_id: "first_turn_id",
                     previous_turn_id: "previous_turn_id",
-                    state: { status: "running" },
                     input: [{ type: "user.message", content: "content" }],
+                    state: { status: "running" },
+                    created_by_subject: { subject_id: "subject_id", subject_type: "subject_type" },
                     created_at: "created_at",
-                    updated_at: "updated_at",
                 },
             ],
             pagination: { next_page_token: "next_page_token", previous_page_token: "previous_page_token", limit: 1 },
@@ -599,19 +582,21 @@ describe("SessionsClient", () => {
                 {
                     id: "id",
                     sessionId: "session_id",
-                    firstTurnId: "first_turn_id",
                     previousTurnId: "previous_turn_id",
-                    state: {
-                        status: "running",
-                    },
                     input: [
                         {
                             type: "user.message",
                             content: "content",
                         },
                     ],
+                    state: {
+                        status: "running",
+                    },
+                    createdBySubject: {
+                        subjectId: "subject_id",
+                        subjectType: "subject_type",
+                    },
                     createdAt: "created_at",
-                    updatedAt: "updated_at",
                 },
             ],
             pagination: {
@@ -635,7 +620,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -654,7 +639,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -674,7 +659,7 @@ describe("SessionsClient", () => {
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody =
-            'event: \ndata: {"audio":{"id":"id"},"content":[{"mcp_server_id":"mcp_server_id","mcp_server_name":"mcp_server_name","session_id":"session_id"}],"function_call":{"name":"name","arguments":"arguments"},"name":"name","refusal":"refusal","thinking_blocks":[{"type":"thinking","thinking":"thinking","signature":"signature"}],"tool_calls":[{"id":"id","source_event_id":"source_event_id"}],"type":"turn.created","id":"id","thread_id":"thread_id","finish_reason":"stop","created_at":"created_at","usage":{"input_tokens":1,"output_tokens":1,"cache_read_tokens":1,"cache_write_tokens":1,"input_tokens_breakdown":{"harness":1,"skills":1,"instructions":1,"tool_definitions":1,"messages":1}},"reasoning_content":"reasoning_content","tool_call_id":"tool_call_id","agent_info":{"type":"dynamic","name":"name","input":"input","model":"model"},"parent":{"thread_id":"thread_id","tool_call_id":"tool_call_id"},"title":"title","reason":"compaction","context":[{"role":"user","content":"content"}],"current_context_usage":{"completion_tokens":1,"prompt_tokens":1,"total_tokens":1,"completion_tokens_details":{"reasoning_tokens":1},"prompt_tokens_details":{"cached_tokens":1},"cache_read_input_tokens":1,"cache_creation_input_tokens":1},"compaction_llm_usage":{"completion_tokens":1,"prompt_tokens":1,"total_tokens":1,"completion_tokens_details":{"reasoning_tokens":1},"prompt_tokens_details":{"cached_tokens":1},"cache_read_input_tokens":1,"cache_creation_input_tokens":1},"servers":[{"mcp_server_id":"mcp_server_id","mcp_server_name":"mcp_server_name","auth_url":"auth_url","thread_ids":["thread_ids"]}],"sandbox_id":"sandbox_id","turn_id":"turn_id","previous_turn_id":"previous_turn_id","created_by":{"subject_id":"subject_id","subject_slug":"subject_slug","subject_type":"subject_type","tenant_name":"tenant_name"},"sequence_number":1}\n\n';
+            'event: \ndata: {"audio":{"id":"id"},"content":[{"mcp_server_id":"mcp_server_id","mcp_server_name":"mcp_server_name","session_id":"session_id"}],"function_call":{"name":"name","arguments":"arguments"},"name":"name","refusal":"refusal","thinking_blocks":[{"type":"thinking","thinking":"thinking","signature":"signature"}],"tool_calls":[{"id":"id","source_event_id":"source_event_id"}],"type":"turn.done","id":"id","thread_id":"thread_id","finish_reason":"stop","created_at":"created_at","usage":{"input_tokens":1,"output_tokens":1,"cache_read_tokens":1,"cache_write_tokens":1,"input_tokens_breakdown":{"harness":1,"skills":1,"instructions":1,"tool_definitions":1,"messages":1}},"reasoning_content":"reasoning_content","tool_call_id":"tool_call_id","agent_info":{"type":"dynamic","name":"name","input":"input","model":"model"},"parent":{"thread_id":"thread_id","tool_call_id":"tool_call_id"},"title":"title","servers":[{"mcp_server_id":"mcp_server_id","mcp_server_name":"mcp_server_name","auth_url":"auth_url","thread_ids":["thread_ids"]}],"sandbox_id":"sandbox_id","turn_id":"turn_id","previous_turn_id":"previous_turn_id","state":{"status":"error","message":"message"},"created_by":{"subject_id":"subject_id","subject_type":"subject_type","subject_slug":"subject_slug"},"sequence_number":1}\n\n';
 
         server
             .mockEndpoint()
@@ -721,7 +706,7 @@ describe("SessionsClient", () => {
                         sourceEventId: "source_event_id",
                     },
                 ],
-                type: "turn.created",
+                type: "turn.done",
                 id: "id",
                 threadId: "thread_id",
                 finishReason: "stop",
@@ -752,39 +737,6 @@ describe("SessionsClient", () => {
                     toolCallId: "tool_call_id",
                 },
                 title: "title",
-                reason: "compaction",
-                context: [
-                    {
-                        role: "user",
-                        content: "content",
-                    },
-                ],
-                currentContextUsage: {
-                    completionTokens: 1,
-                    promptTokens: 1,
-                    totalTokens: 1,
-                    completionTokensDetails: {
-                        reasoningTokens: 1,
-                    },
-                    promptTokensDetails: {
-                        cachedTokens: 1,
-                    },
-                    cacheReadInputTokens: 1,
-                    cacheCreationInputTokens: 1,
-                },
-                compactionLlmUsage: {
-                    completionTokens: 1,
-                    promptTokens: 1,
-                    totalTokens: 1,
-                    completionTokensDetails: {
-                        reasoningTokens: 1,
-                    },
-                    promptTokensDetails: {
-                        cachedTokens: 1,
-                    },
-                    cacheReadInputTokens: 1,
-                    cacheCreationInputTokens: 1,
-                },
                 servers: [
                     {
                         mcpServerId: "mcp_server_id",
@@ -796,11 +748,14 @@ describe("SessionsClient", () => {
                 sandboxId: "sandbox_id",
                 turnId: "turn_id",
                 previousTurnId: "previous_turn_id",
+                state: {
+                    status: "error",
+                    message: "message",
+                },
                 createdBy: {
                     subjectId: "subject_id",
-                    subjectSlug: "subject_slug",
                     subjectType: "subject_type",
-                    tenantName: "tenant_name",
+                    subjectSlug: "subject_slug",
                 },
                 sequenceNumber: 1,
             },
@@ -811,7 +766,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -831,7 +786,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -851,7 +806,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -875,12 +830,15 @@ describe("SessionsClient", () => {
             data: {
                 id: "id",
                 session_id: "session_id",
-                first_turn_id: "first_turn_id",
                 previous_turn_id: "previous_turn_id",
-                state: { status: "running" },
                 input: [{ type: "user.message", content: "content" }],
+                state: { status: "running" },
+                created_by_subject: {
+                    subject_id: "subject_id",
+                    subject_type: "subject_type",
+                    subject_slug: "subject_slug",
+                },
                 created_at: "created_at",
-                updated_at: "updated_at",
             },
         };
 
@@ -900,19 +858,22 @@ describe("SessionsClient", () => {
             data: {
                 id: "id",
                 sessionId: "session_id",
-                firstTurnId: "first_turn_id",
                 previousTurnId: "previous_turn_id",
-                state: {
-                    status: "running",
-                },
                 input: [
                     {
                         type: "user.message",
                         content: "content",
                     },
                 ],
+                state: {
+                    status: "running",
+                },
+                createdBySubject: {
+                    subjectId: "subject_id",
+                    subjectType: "subject_type",
+                    subjectSlug: "subject_slug",
+                },
                 createdAt: "created_at",
-                updatedAt: "updated_at",
             },
         });
     });
@@ -921,7 +882,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -940,7 +901,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -960,7 +921,7 @@ describe("SessionsClient", () => {
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody =
-            'event: \ndata: {"audio":{"id":"id"},"content":[{"mcp_server_id":"mcp_server_id","mcp_server_name":"mcp_server_name","session_id":"session_id"}],"function_call":{"name":"name","arguments":"arguments"},"name":"name","refusal":"refusal","thinking_blocks":[{"type":"thinking","thinking":"thinking","signature":"signature"}],"tool_calls":[{"id":"id","source_event_id":"source_event_id"}],"type":"turn.created","id":"id","thread_id":"thread_id","finish_reason":"stop","created_at":"created_at","usage":{"input_tokens":1,"output_tokens":1,"cache_read_tokens":1,"cache_write_tokens":1,"input_tokens_breakdown":{"harness":1,"skills":1,"instructions":1,"tool_definitions":1,"messages":1}},"reasoning_content":"reasoning_content","tool_call_id":"tool_call_id","agent_info":{"type":"dynamic","name":"name","input":"input","model":"model"},"parent":{"thread_id":"thread_id","tool_call_id":"tool_call_id"},"title":"title","reason":"compaction","context":[{"role":"user","content":"content"}],"current_context_usage":{"completion_tokens":1,"prompt_tokens":1,"total_tokens":1,"completion_tokens_details":{"reasoning_tokens":1},"prompt_tokens_details":{"cached_tokens":1},"cache_read_input_tokens":1,"cache_creation_input_tokens":1},"compaction_llm_usage":{"completion_tokens":1,"prompt_tokens":1,"total_tokens":1,"completion_tokens_details":{"reasoning_tokens":1},"prompt_tokens_details":{"cached_tokens":1},"cache_read_input_tokens":1,"cache_creation_input_tokens":1},"servers":[{"mcp_server_id":"mcp_server_id","mcp_server_name":"mcp_server_name","auth_url":"auth_url","thread_ids":["thread_ids"]}],"sandbox_id":"sandbox_id","turn_id":"turn_id","previous_turn_id":"previous_turn_id","created_by":{"subject_id":"subject_id","subject_slug":"subject_slug","subject_type":"subject_type","tenant_name":"tenant_name"},"sequence_number":1}\n\n';
+            'event: \ndata: {"audio":{"id":"id"},"content":[{"mcp_server_id":"mcp_server_id","mcp_server_name":"mcp_server_name","session_id":"session_id"}],"function_call":{"name":"name","arguments":"arguments"},"name":"name","refusal":"refusal","thinking_blocks":[{"type":"thinking","thinking":"thinking","signature":"signature"}],"tool_calls":[{"id":"id","source_event_id":"source_event_id"}],"type":"turn.done","id":"id","thread_id":"thread_id","finish_reason":"stop","created_at":"created_at","usage":{"input_tokens":1,"output_tokens":1,"cache_read_tokens":1,"cache_write_tokens":1,"input_tokens_breakdown":{"harness":1,"skills":1,"instructions":1,"tool_definitions":1,"messages":1}},"reasoning_content":"reasoning_content","tool_call_id":"tool_call_id","agent_info":{"type":"dynamic","name":"name","input":"input","model":"model"},"parent":{"thread_id":"thread_id","tool_call_id":"tool_call_id"},"title":"title","servers":[{"mcp_server_id":"mcp_server_id","mcp_server_name":"mcp_server_name","auth_url":"auth_url","thread_ids":["thread_ids"]}],"sandbox_id":"sandbox_id","turn_id":"turn_id","previous_turn_id":"previous_turn_id","state":{"status":"error","message":"message"},"created_by":{"subject_id":"subject_id","subject_type":"subject_type","subject_slug":"subject_slug"},"sequence_number":1}\n\n';
 
         server
             .mockEndpoint()
@@ -1012,7 +973,7 @@ describe("SessionsClient", () => {
                         sourceEventId: "source_event_id",
                     },
                 ],
-                type: "turn.created",
+                type: "turn.done",
                 id: "id",
                 threadId: "thread_id",
                 finishReason: "stop",
@@ -1043,39 +1004,6 @@ describe("SessionsClient", () => {
                     toolCallId: "tool_call_id",
                 },
                 title: "title",
-                reason: "compaction",
-                context: [
-                    {
-                        role: "user",
-                        content: "content",
-                    },
-                ],
-                currentContextUsage: {
-                    completionTokens: 1,
-                    promptTokens: 1,
-                    totalTokens: 1,
-                    completionTokensDetails: {
-                        reasoningTokens: 1,
-                    },
-                    promptTokensDetails: {
-                        cachedTokens: 1,
-                    },
-                    cacheReadInputTokens: 1,
-                    cacheCreationInputTokens: 1,
-                },
-                compactionLlmUsage: {
-                    completionTokens: 1,
-                    promptTokens: 1,
-                    totalTokens: 1,
-                    completionTokensDetails: {
-                        reasoningTokens: 1,
-                    },
-                    promptTokensDetails: {
-                        cachedTokens: 1,
-                    },
-                    cacheReadInputTokens: 1,
-                    cacheCreationInputTokens: 1,
-                },
                 servers: [
                     {
                         mcpServerId: "mcp_server_id",
@@ -1087,11 +1015,14 @@ describe("SessionsClient", () => {
                 sandboxId: "sandbox_id",
                 turnId: "turn_id",
                 previousTurnId: "previous_turn_id",
+                state: {
+                    status: "error",
+                    message: "message",
+                },
                 createdBy: {
                     subjectId: "subject_id",
-                    subjectSlug: "subject_slug",
                     subjectType: "subject_type",
-                    tenantName: "tenant_name",
+                    subjectSlug: "subject_slug",
                 },
                 sequenceNumber: 1,
             },
@@ -1102,7 +1033,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -1122,7 +1053,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -1142,7 +1073,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -1162,7 +1093,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -1186,13 +1117,20 @@ describe("SessionsClient", () => {
             data: [
                 {
                     audio: { id: "id" },
-                    content: [{ mcp_server_id: "mcp_server_id", mcp_server_name: "mcp_server_name" }],
+                    content: "content",
                     function_call: { name: "name", arguments: "arguments" },
                     name: "name",
                     refusal: "refusal",
                     thinking_blocks: [{ type: "thinking", thinking: "thinking" }],
-                    tool_calls: [{ id: "id", source_event_id: "source_event_id" }],
-                    type: "tool.response_required",
+                    tool_calls: [
+                        {
+                            id: "id",
+                            type: "function",
+                            function: { name: "name", arguments: "arguments" },
+                            tool_info: { type: "truefoundry-system", name: "name" },
+                        },
+                    ],
+                    type: "model.message",
                     id: "id",
                     thread_id: "thread_id",
                     finish_reason: "stop",
@@ -1212,9 +1150,6 @@ describe("SessionsClient", () => {
                     agent_info: { type: "dynamic", name: "name", input: "input" },
                     parent: { thread_id: "thread_id", tool_call_id: "tool_call_id" },
                     title: "title",
-                    output: { type: "model.message", id: "id", thread_id: "thread_id", created_at: "created_at" },
-                    status: "error",
-                    error: "error",
                     servers: [
                         {
                             mcp_server_id: "mcp_server_id",
@@ -1227,12 +1162,7 @@ describe("SessionsClient", () => {
                     sequence_number: 1,
                 },
             ],
-            pagination: {
-                next_page_token: "next_page_token",
-                previous_page_token: "previous_page_token",
-                limit: 1,
-                order: "asc",
-            },
+            pagination: { next_page_token: "next_page_token", previous_page_token: "previous_page_token", limit: 1 },
         };
 
         server
@@ -1249,12 +1179,7 @@ describe("SessionsClient", () => {
                     audio: {
                         id: "id",
                     },
-                    content: [
-                        {
-                            mcpServerId: "mcp_server_id",
-                            mcpServerName: "mcp_server_name",
-                        },
-                    ],
+                    content: "content",
                     functionCall: {
                         name: "name",
                         arguments: "arguments",
@@ -1270,10 +1195,18 @@ describe("SessionsClient", () => {
                     toolCalls: [
                         {
                             id: "id",
-                            sourceEventId: "source_event_id",
+                            type: "function",
+                            function: {
+                                name: "name",
+                                arguments: "arguments",
+                            },
+                            toolInfo: {
+                                type: "truefoundry-system",
+                                name: "name",
+                            },
                         },
                     ],
-                    type: "tool.response_required",
+                    type: "model.message",
                     id: "id",
                     threadId: "thread_id",
                     finishReason: "stop",
@@ -1300,14 +1233,6 @@ describe("SessionsClient", () => {
                         toolCallId: "tool_call_id",
                     },
                     title: "title",
-                    output: {
-                        type: "model.message",
-                        id: "id",
-                        threadId: "thread_id",
-                        createdAt: "created_at",
-                    },
-                    status: "error",
-                    error: "error",
                     servers: [
                         {
                             mcpServerId: "mcp_server_id",
@@ -1324,7 +1249,6 @@ describe("SessionsClient", () => {
                 nextPageToken: "next_page_token",
                 previousPageToken: "previous_page_token",
                 limit: 1,
-                order: "asc",
             },
         };
         const page = await client.agents.sessions.listTurnEvents(
@@ -1347,7 +1271,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -1366,7 +1290,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()
@@ -1385,7 +1309,7 @@ describe("SessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message" } };
 
         server
             .mockEndpoint()

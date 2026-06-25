@@ -4,7 +4,7 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 import { DraftSessionAgentSpec } from "./DraftSessionAgentSpec.js";
-import { SessionSubject } from "./SessionSubject.js";
+import { Subject } from "./Subject.js";
 
 export const DraftSession: core.serialization.ObjectSchema<
     serializers.DraftSession.Raw,
@@ -14,7 +14,7 @@ export const DraftSession: core.serialization.ObjectSchema<
     agentSpec: core.serialization.property("agent_spec", DraftSessionAgentSpec),
     agentName: core.serialization.property("agent_name", core.serialization.string().optional()),
     title: core.serialization.string().optional(),
-    createdBySubject: core.serialization.property("created_by_subject", SessionSubject),
+    createdBySubject: core.serialization.property("created_by_subject", Subject),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
     updatedAt: core.serialization.property("updated_at", core.serialization.string()),
 });
@@ -25,7 +25,7 @@ export declare namespace DraftSession {
         agent_spec: DraftSessionAgentSpec.Raw;
         agent_name?: string | null;
         title?: string | null;
-        created_by_subject: SessionSubject.Raw;
+        created_by_subject: Subject.Raw;
         created_at: string;
         updated_at: string;
     }

@@ -3,6 +3,7 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
+import { Subject } from "./Subject.js";
 import { TurnInputItem } from "./TurnInputItem.js";
 import { TurnState } from "./TurnState.js";
 
@@ -10,23 +11,21 @@ export const Turn: core.serialization.ObjectSchema<serializers.Turn.Raw, TrueFou
     core.serialization.object({
         id: core.serialization.string(),
         sessionId: core.serialization.property("session_id", core.serialization.string()),
-        firstTurnId: core.serialization.property("first_turn_id", core.serialization.string()),
         previousTurnId: core.serialization.property("previous_turn_id", core.serialization.string().optional()),
-        state: TurnState,
         input: core.serialization.list(TurnInputItem),
+        state: TurnState,
+        createdBySubject: core.serialization.property("created_by_subject", Subject),
         createdAt: core.serialization.property("created_at", core.serialization.string()),
-        updatedAt: core.serialization.property("updated_at", core.serialization.string()),
     });
 
 export declare namespace Turn {
     export interface Raw {
         id: string;
         session_id: string;
-        first_turn_id: string;
         previous_turn_id?: string | null;
-        state: TurnState.Raw;
         input: TurnInputItem.Raw[];
+        state: TurnState.Raw;
+        created_by_subject: Subject.Raw;
         created_at: string;
-        updated_at: string;
     }
 }

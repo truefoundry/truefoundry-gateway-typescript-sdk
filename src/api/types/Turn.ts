@@ -5,10 +5,9 @@ import type * as TrueFoundryGateway from "../index.js";
 export interface Turn {
     id: string;
     sessionId: string;
-    firstTurnId: string;
     previousTurnId?: string;
-    state: TrueFoundryGateway.TurnState;
     input: TrueFoundryGateway.TurnInputItem[];
+    state: TrueFoundryGateway.TurnState;
+    createdBySubject: TrueFoundryGateway.Subject;
     createdAt: string;
-    updatedAt: string;
 }
