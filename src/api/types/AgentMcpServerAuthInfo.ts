@@ -4,5 +4,5 @@ export interface AgentMcpServerAuthInfo {
     mcp_server_id: string;
     mcp_server_name: string;
     auth_url: string;
-    execution_ids: string[];
+    thread_ids: string[];
 }

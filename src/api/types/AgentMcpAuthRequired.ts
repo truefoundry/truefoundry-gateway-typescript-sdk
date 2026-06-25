@@ -4,5 +4,9 @@ import type * as TrueFoundryGateway from "../index.js";
 
 export interface AgentMcpAuthRequired {
     type: "mcp.auth_required";
+    /** Unique identifier for the event */
+    id: string;
+    created_at: string;
     servers: TrueFoundryGateway.AgentMcpServerAuthInfo[];
+    thread_id?: string | undefined;
 }

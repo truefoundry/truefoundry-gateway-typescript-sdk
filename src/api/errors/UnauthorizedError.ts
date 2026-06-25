@@ -2,10 +2,9 @@
 
 import type * as core from "../../core/index.js";
 import * as errors from "../../errors/index.js";
-import type * as TrueFoundryGateway from "../index.js";
 
 export class UnauthorizedError extends errors.TrueFoundryGatewayError {
-    constructor(body: TrueFoundryGateway.RequestErrorResponse, rawResponse?: core.RawResponse) {
+    constructor(body?: unknown, rawResponse?: core.RawResponse) {
         super({
             message: "UnauthorizedError",
             statusCode: 401,
@@ -17,6 +16,6 @@ export class UnauthorizedError extends errors.TrueFoundryGatewayError {
             Error.captureStackTrace(this, this.constructor);
         }
 
-        this.name = this.constructor.name;
+        this.name = "UnauthorizedError";
     }
 }

@@ -4,6 +4,9 @@ import type * as TrueFoundryGateway from "../index.js";
 
 export interface AgentToolResponseRequired {
     type: "tool.response_required";
-    execution_id: string;
+    /** Unique identifier for the event */
+    id: string;
+    created_at: string;
+    thread_id: string;
     tool_calls: TrueFoundryGateway.AgentToolCallRef[];
 }

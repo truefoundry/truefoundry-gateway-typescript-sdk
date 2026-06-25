@@ -1,7 +1,7 @@
 {
-    "cliVersion": "5.37.9",
+    "cliVersion": "5.52.0",
     "generatorName": "fernapi/fern-typescript-node-sdk",
-    "generatorVersion": "3.69.0",
+    "generatorVersion": "3.73.0",
     "generatorConfig": {
         "allowExtraFields": true,
         "allowCustomFetcher": true,
@@ -20,7 +20,7 @@
         "streamType": "web",
         "useDefaultRequestParameterValues": true
     },
-    "originGitCommit": "7c73678acc9bd7a208e6f64661f8709b619bb774",
+    "originGitCommit": "c8d69f2bbcef50bf857e3cbfa7da171ee222e826",
     "originGitCommitIsDirty": false,
     "invokedBy": "ci",
     "requestedVersion": "0.0.0",
