@@ -3,13 +3,13 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { EnrichedToolCall } from "./EnrichedToolCall.js";
 import { FinishReason } from "./FinishReason.js";
 import { ModelMessageEventAudio } from "./ModelMessageEventAudio.js";
 import { ModelMessageEventContent } from "./ModelMessageEventContent.js";
 import { ModelMessageEventFunctionCall } from "./ModelMessageEventFunctionCall.js";
 import { ModelMessageEventThinkingBlocksItem } from "./ModelMessageEventThinkingBlocksItem.js";
 import { ModelMessageEventUsage } from "./ModelMessageEventUsage.js";
+import { ToolCall } from "./ToolCall.js";
 
 export const ModelMessageEvent: core.serialization.ObjectSchema<
     serializers.ModelMessageEvent.Raw,
@@ -24,7 +24,7 @@ export const ModelMessageEvent: core.serialization.ObjectSchema<
         "thinking_blocks",
         core.serialization.list(ModelMessageEventThinkingBlocksItem).optional(),
     ),
-    toolCalls: core.serialization.property("tool_calls", core.serialization.list(EnrichedToolCall).optional()),
+    toolCalls: core.serialization.property("tool_calls", core.serialization.list(ToolCall).optional()),
     type: core.serialization.stringLiteral("model.message"),
     id: core.serialization.string(),
     threadId: core.serialization.property("thread_id", core.serialization.string()),
@@ -42,7 +42,7 @@ export declare namespace ModelMessageEvent {
         name?: string | null;
         refusal?: string | null;
         thinking_blocks?: ModelMessageEventThinkingBlocksItem.Raw[] | null;
-        tool_calls?: EnrichedToolCall.Raw[] | null;
+        tool_calls?: ToolCall.Raw[] | null;
         type: "model.message";
         id: string;
         thread_id: string;

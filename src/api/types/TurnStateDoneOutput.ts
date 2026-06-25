@@ -9,7 +9,7 @@ export interface TurnStateDoneOutput {
     name?: string;
     refusal?: string;
     thinkingBlocks?: TrueFoundryGateway.TurnStateDoneOutputThinkingBlocksItem[];
-    toolCalls?: TrueFoundryGateway.EnrichedToolCall[];
+    toolCalls?: TrueFoundryGateway.ToolCall[];
     type: "model.message";
     /** Unique identifier for the event */
     id: string;
