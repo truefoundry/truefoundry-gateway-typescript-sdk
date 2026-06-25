@@ -25,6 +25,7 @@ Call the gateway directly — not via the control-plane `/api/llm` proxy. The te
 - [Request and Response Types](#request-and-response-types)
 - [Exception Handling](#exception-handling)
 - [Streaming Response](#streaming-response)
+- [Pagination](#pagination)
 - [Advanced](#advanced)
   - [Subpackage Exports](#subpackage-exports)
   - [Additional Headers](#additional-headers)
@@ -94,9 +95,7 @@ Instantiate and use the client with the following:
 import { TrueFoundryGatewayClient } from "truefoundry-gateway-sdk";
 
 const client = new TrueFoundryGatewayClient({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
-const response = await client.agents.responses.create({
-    model: "model"
-});
+const response = await client.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
 for await (const item of response) {
     console.log(item);
 }
@@ -122,7 +121,7 @@ following namespace:
 ```typescript
 import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
-const request: TrueFoundryGateway.ResponsesCancelRequest = {
+const request: TrueFoundryGateway.SessionsListRequest = {
     ...
 };
 ```
@@ -136,7 +135,7 @@ will be thrown.
 import { TrueFoundryGatewayError } from "truefoundry-gateway-sdk";
 
 try {
-    await client.agents.responses.create(...);
+    await client.agents.sessions.createTurn(...);
 } catch (err) {
     if (err instanceof TrueFoundryGatewayError) {
         console.log(err.statusCode);
@@ -156,12 +155,47 @@ The SDK uses async iterators, so you can consume the responses using a `for awai
 import { TrueFoundryGatewayClient } from "truefoundry-gateway-sdk";
 
 const client = new TrueFoundryGatewayClient({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
-const response = await client.agents.responses.create({
-    model: "model"
-});
+const response = await client.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
 for await (const item of response) {
     console.log(item);
 }
+```
+
+## Pagination
+
+List endpoints are paginated. The SDK provides an iterator so that you can simply loop over the items:
+
+```typescript
+import { TrueFoundryGatewayClient } from "truefoundry-gateway-sdk";
+
+const client = new TrueFoundryGatewayClient({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
+const pageableResponse = await client.agents.sessions.list({
+    agent_name: "agent_name",
+    limit: 1,
+    order: "asc",
+    page_token: "page_token",
+    start_timestamp: "start_timestamp",
+    end_timestamp: "end_timestamp"
+});
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.agents.sessions.list({
+    agent_name: "agent_name",
+    limit: 1,
+    order: "asc",
+    page_token: "page_token",
+    start_timestamp: "start_timestamp",
+    end_timestamp: "end_timestamp"
+});
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
 ```
 
 ## Advanced
@@ -190,7 +224,7 @@ const client = new TrueFoundryGatewayClient({
     }
 });
 
-const response = await client.agents.responses.create(..., {
+const response = await client.agents.sessions.createTurn(..., {
     headers: {
         'X-Custom-Header': 'custom value'
     }
@@ -202,7 +236,7 @@ const response = await client.agents.responses.create(..., {
 If you would like to send additional query string parameters as part of the request, use the `queryParams` request option.
 
 ```typescript
-const response = await client.agents.responses.create(..., {
+const response = await client.agents.sessions.createTurn(..., {
     queryParams: {
         'customQueryParamKey': 'custom query param value'
     }
@@ -232,7 +266,7 @@ Which status codes are retried depends on the `retryStatusCodes` generator confi
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.agents.responses.create(..., {
+const response = await client.agents.sessions.createTurn(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -242,7 +276,7 @@ const response = await client.agents.responses.create(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.agents.responses.create(..., {
+const response = await client.agents.sessions.createTurn(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -253,7 +287,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.agents.responses.create(..., {
+const response = await client.agents.sessions.createTurn(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request
@@ -265,7 +299,7 @@ The SDK provides access to raw response data, including headers, through the `.w
 The `.withRawResponse()` method returns a promise that results to an object with a `data` and a `rawResponse` property.
 
 ```typescript
-const { data, rawResponse } = await client.agents.responses.create(...).withRawResponse();
+const { data, rawResponse } = await client.agents.sessions.createTurn(...).withRawResponse();
 
 console.log(data);
 console.log(rawResponse.headers['X-My-Header']);

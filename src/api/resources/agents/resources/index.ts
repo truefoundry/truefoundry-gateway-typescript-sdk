@@ -1,3 +1,3 @@
-export * from "./responses/client/requests/index.js";
-export * as responses from "./responses/index.js";
-export * from "./responses/types/index.js";
+export * from "./sessions/client/requests/index.js";
+export * as sessions from "./sessions/index.js";
+export * from "./sessions/types/index.js";

@@ -16,6 +16,6 @@ export class PreconditionFailedError extends errors.TrueFoundryGatewayError {
             Error.captureStackTrace(this, this.constructor);
         }
 
-        this.name = this.constructor.name;
+        this.name = "PreconditionFailedError";
     }
 }

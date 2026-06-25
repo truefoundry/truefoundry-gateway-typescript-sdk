@@ -2,7 +2,7 @@
 
 import type { BaseClientOptions } from "../../../../BaseClient.js";
 import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "../../../../BaseClient.js";
-import { ResponsesClient } from "../resources/responses/client/Client.js";
+import { SessionsClient } from "../resources/sessions/client/Client.js";
 
 export declare namespace AgentsClient {
     export type Options = BaseClientOptions;
@@ -10,13 +10,13 @@ export declare namespace AgentsClient {
 
 export class AgentsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<AgentsClient.Options>;
-    protected _responses: ResponsesClient | undefined;
+    protected _sessions: SessionsClient | undefined;
 
     constructor(options: AgentsClient.Options) {
         this._options = normalizeClientOptionsWithAuth(options);
     }
 
-    public get responses(): ResponsesClient {
-        return (this._responses ??= new ResponsesClient(this._options));
+    public get sessions(): SessionsClient {
+        return (this._sessions ??= new SessionsClient(this._options));
     }
 }

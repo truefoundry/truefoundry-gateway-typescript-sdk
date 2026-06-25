@@ -2,10 +2,9 @@
 
 import type * as core from "../../core/index.js";
 import * as errors from "../../errors/index.js";
-import type * as TrueFoundryGateway from "../index.js";
 
 export class ForbiddenError extends errors.TrueFoundryGatewayError {
-    constructor(body: TrueFoundryGateway.RequestErrorResponse, rawResponse?: core.RawResponse) {
+    constructor(body?: unknown, rawResponse?: core.RawResponse) {
         super({
             message: "ForbiddenError",
             statusCode: 403,
@@ -17,6 +16,6 @@ export class ForbiddenError extends errors.TrueFoundryGatewayError {
             Error.captureStackTrace(this, this.constructor);
         }
 
-        this.name = this.constructor.name;
+        this.name = "ForbiddenError";
     }
 }

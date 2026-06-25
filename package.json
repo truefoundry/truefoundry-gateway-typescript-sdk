@@ -33,16 +33,49 @@
             },
             "default": "./dist/cjs/api/resources/agents/exports.js"
         },
-        "./agents/responses": {
+        "./agents/sessions": {
             "import": {
-                "types": "./dist/esm/api/resources/agents/resources/responses/exports.d.mts",
-                "default": "./dist/esm/api/resources/agents/resources/responses/exports.mjs"
+                "types": "./dist/esm/api/resources/agents/resources/sessions/exports.d.mts",
+                "default": "./dist/esm/api/resources/agents/resources/sessions/exports.mjs"
             },
             "require": {
-                "types": "./dist/cjs/api/resources/agents/resources/responses/exports.d.ts",
-                "default": "./dist/cjs/api/resources/agents/resources/responses/exports.js"
+                "types": "./dist/cjs/api/resources/agents/resources/sessions/exports.d.ts",
+                "default": "./dist/cjs/api/resources/agents/resources/sessions/exports.js"
             },
-            "default": "./dist/cjs/api/resources/agents/resources/responses/exports.js"
+            "default": "./dist/cjs/api/resources/agents/resources/sessions/exports.js"
+        },
+        "./internal": {
+            "import": {
+                "types": "./dist/esm/api/resources/internal/exports.d.mts",
+                "default": "./dist/esm/api/resources/internal/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/internal/exports.d.ts",
+                "default": "./dist/cjs/api/resources/internal/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/internal/exports.js"
+        },
+        "./internal/agents": {
+            "import": {
+                "types": "./dist/esm/api/resources/internal/resources/agents/exports.d.mts",
+                "default": "./dist/esm/api/resources/internal/resources/agents/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/internal/resources/agents/exports.d.ts",
+                "default": "./dist/cjs/api/resources/internal/resources/agents/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/internal/resources/agents/exports.js"
+        },
+        "./internal/agents/draftSessions": {
+            "import": {
+                "types": "./dist/esm/api/resources/internal/resources/agents/resources/draftSessions/exports.d.mts",
+                "default": "./dist/esm/api/resources/internal/resources/agents/resources/draftSessions/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/internal/resources/agents/resources/draftSessions/exports.d.ts",
+                "default": "./dist/cjs/api/resources/internal/resources/agents/resources/draftSessions/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/internal/resources/agents/resources/draftSessions/exports.js"
         },
         "./package.json": "./package.json"
     },
@@ -72,7 +105,7 @@
         "ts-loader": "^9.5.4",
         "vitest": "^4.1.1",
         "msw": "2.11.2",
-        "@types/node": "^18.19.70",
+        "@types/node": "^20.0.0",
         "typescript": "~5.9.3",
         "@biomejs/biome": "2.4.10"
     },

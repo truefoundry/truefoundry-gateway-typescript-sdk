@@ -10,7 +10,7 @@ export class TrueFoundryGatewayTimeoutError extends Error {
             Error.captureStackTrace(this, this.constructor);
         }
 
-        this.name = this.constructor.name;
+        this.name = "TrueFoundryGatewayTimeoutError";
         if (opts?.cause != null) {
             this.cause = opts.cause;
         }
