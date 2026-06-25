@@ -10,12 +10,12 @@ export const AgentInternalToolCallInfo: core.serialization.ObjectSchema<
     TrueFoundryGateway.AgentInternalToolCallInfo
 > = core.serialization.object({
     type: AgentInternalToolCallInfoType,
-    mcp_server_id: core.serialization.string(),
-    mcp_server_name: core.serialization.string(),
-    original_tool_name: core.serialization.string(),
-    is_approval_required: core.serialization.boolean().optional(),
-    is_deferred: core.serialization.boolean().optional(),
-    is_client_side: core.serialization.boolean().optional(),
+    mcpServerId: core.serialization.property("mcp_server_id", core.serialization.string()),
+    mcpServerName: core.serialization.property("mcp_server_name", core.serialization.string()),
+    originalToolName: core.serialization.property("original_tool_name", core.serialization.string()),
+    isApprovalRequired: core.serialization.property("is_approval_required", core.serialization.boolean().optional()),
+    isDeferred: core.serialization.property("is_deferred", core.serialization.boolean().optional()),
+    isClientSide: core.serialization.property("is_client_side", core.serialization.boolean().optional()),
 });
 
 export declare namespace AgentInternalToolCallInfo {

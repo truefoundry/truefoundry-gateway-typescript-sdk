@@ -8,8 +8,8 @@ export const ChatCompletionContentPartFileFile: core.serialization.ObjectSchema<
     serializers.ChatCompletionContentPartFileFile.Raw,
     TrueFoundryGateway.ChatCompletionContentPartFileFile
 > = core.serialization.object({
-    file_data: core.serialization.string().optional(),
-    file_id: core.serialization.string().optional(),
+    fileData: core.serialization.property("file_data", core.serialization.string().optional()),
+    fileId: core.serialization.property("file_id", core.serialization.string().optional()),
     filename: core.serialization.string().optional(),
 });
 

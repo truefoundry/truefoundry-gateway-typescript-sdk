@@ -9,7 +9,7 @@ export const AgentLlmToolMessage: core.serialization.ObjectSchema<
     TrueFoundryGateway.AgentLlmToolMessage
 > = core.serialization.object({
     role: core.serialization.stringLiteral("tool"),
-    tool_call_id: core.serialization.string(),
+    toolCallId: core.serialization.property("tool_call_id", core.serialization.string()),
     content: core.serialization.string(),
 });
 

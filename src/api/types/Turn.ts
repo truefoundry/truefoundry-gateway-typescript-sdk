@@ -4,11 +4,11 @@ import type * as TrueFoundryGateway from "../index.js";
 
 export interface Turn {
     id: string;
-    session_id: string;
-    first_turn_id: string;
-    previous_turn_id?: string;
+    sessionId: string;
+    firstTurnId: string;
+    previousTurnId?: string;
     state: TrueFoundryGateway.TurnState;
     input: TrueFoundryGateway.TurnInputItem[];
-    created_at: string;
-    updated_at: string;
+    createdAt: string;
+    updatedAt: string;
 }

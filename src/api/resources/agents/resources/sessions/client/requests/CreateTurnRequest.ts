@@ -9,5 +9,5 @@ import type * as TrueFoundryGateway from "../../../../../../index.js";
 export interface CreateTurnRequest {
     input?: TrueFoundryGateway.agents.CreateTurnRequestInputItem[];
     /** Defaults to 'auto' (chain to session last turn). Use 'null' for the session's first turn. */
-    previous_turn_id?: TrueFoundryGateway.agents.CreateTurnRequestPreviousTurnId;
+    previousTurnId?: TrueFoundryGateway.agents.CreateTurnRequestPreviousTurnId;
 }

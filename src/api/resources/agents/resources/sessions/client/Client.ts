@@ -36,12 +36,12 @@ export class SessionsClient {
      *
      * @example
      *     await client.agents.sessions.list({
-     *         agent_name: "agent_name",
+     *         agentName: "agent_name",
      *         limit: 1,
      *         order: "asc",
-     *         page_token: "page_token",
-     *         start_timestamp: "start_timestamp",
-     *         end_timestamp: "end_timestamp"
+     *         pageToken: "page_token",
+     *         startTimestamp: "start_timestamp",
+     *         endTimestamp: "end_timestamp"
      *     })
      */
     public async list(
@@ -52,14 +52,7 @@ export class SessionsClient {
             async (
                 request: TrueFoundryGateway.agents.SessionsListRequest,
             ): Promise<core.WithRawResponse<TrueFoundryGateway.agents.SessionsListResponse>> => {
-                const {
-                    agent_name: agentName,
-                    limit = 10,
-                    order,
-                    page_token: pageToken,
-                    start_timestamp: startTimestamp,
-                    end_timestamp: endTimestamp,
-                } = request;
+                const { agentName, limit = 10, order, pageToken, startTimestamp, endTimestamp } = request;
                 const _queryParams: Record<string, unknown> = {
                     agent_name: agentName,
                     limit,
@@ -144,14 +137,11 @@ export class SessionsClient {
             response: dataWithRawResponse.data,
             rawResponse: dataWithRawResponse.rawResponse,
             hasNextPage: (response) =>
-                response?.pagination.next_page_token != null &&
-                !(
-                    typeof response?.pagination.next_page_token === "string" &&
-                    response?.pagination.next_page_token === ""
-                ),
+                response?.pagination.nextPageToken != null &&
+                !(typeof response?.pagination.nextPageToken === "string" && response?.pagination.nextPageToken === ""),
             getItems: (response) => response?.data ?? [],
             loadPage: (response) => {
-                return list(core.setObjectProperty(request, "page_token", response?.pagination.next_page_token));
+                return list(core.setObjectProperty(request, "pageToken", response?.pagination.nextPageToken));
             },
         });
     }
@@ -171,7 +161,7 @@ export class SessionsClient {
      *
      * @example
      *     await client.agents.sessions.create({
-     *         agent_name: "agent_name"
+     *         agentName: "agent_name"
      *     })
      */
     public create(
@@ -445,7 +435,7 @@ export class SessionsClient {
      *
      * @example
      *     await client.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g", {
-     *         page_token: "page_token",
+     *         pageToken: "page_token",
      *         limit: 1
      *     })
      */
@@ -458,7 +448,7 @@ export class SessionsClient {
             async (
                 request: TrueFoundryGateway.agents.SessionsListTurnsRequest,
             ): Promise<core.WithRawResponse<TrueFoundryGateway.agents.SessionsListTurnsResponse>> => {
-                const { page_token: pageToken, limit = 10 } = request;
+                const { pageToken, limit = 10 } = request;
                 const _queryParams: Record<string, unknown> = {
                     page_token: pageToken,
                     limit,
@@ -527,14 +517,11 @@ export class SessionsClient {
             response: dataWithRawResponse.data,
             rawResponse: dataWithRawResponse.rawResponse,
             hasNextPage: (response) =>
-                response?.pagination.next_page_token != null &&
-                !(
-                    typeof response?.pagination.next_page_token === "string" &&
-                    response?.pagination.next_page_token === ""
-                ),
+                response?.pagination.nextPageToken != null &&
+                !(typeof response?.pagination.nextPageToken === "string" && response?.pagination.nextPageToken === ""),
             getItems: (response) => response?.data ?? [],
             loadPage: (response) => {
-                return list(core.setObjectProperty(request, "page_token", response?.pagination.next_page_token));
+                return list(core.setObjectProperty(request, "pageToken", response?.pagination.nextPageToken));
             },
         });
     }
@@ -827,7 +814,7 @@ export class SessionsClient {
      *
      * @example
      *     await client.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
-     *         page_token: "page_token",
+     *         pageToken: "page_token",
      *         limit: 1,
      *         order: "asc"
      *     })
@@ -844,7 +831,7 @@ export class SessionsClient {
             async (
                 request: TrueFoundryGateway.agents.SessionsListTurnEventsRequest,
             ): Promise<core.WithRawResponse<TrueFoundryGateway.agents.SessionsListTurnEventsResponse>> => {
-                const { page_token: pageToken, limit = 25, order } = request;
+                const { pageToken, limit = 25, order } = request;
                 const _queryParams: Record<string, unknown> = {
                     page_token: pageToken,
                     limit,
@@ -930,14 +917,11 @@ export class SessionsClient {
             response: dataWithRawResponse.data,
             rawResponse: dataWithRawResponse.rawResponse,
             hasNextPage: (response) =>
-                response?.pagination.next_page_token != null &&
-                !(
-                    typeof response?.pagination.next_page_token === "string" &&
-                    response?.pagination.next_page_token === ""
-                ),
+                response?.pagination.nextPageToken != null &&
+                !(typeof response?.pagination.nextPageToken === "string" && response?.pagination.nextPageToken === ""),
             getItems: (response) => response?.data ?? [],
             loadPage: (response) => {
-                return list(core.setObjectProperty(request, "page_token", response?.pagination.next_page_token));
+                return list(core.setObjectProperty(request, "pageToken", response?.pagination.nextPageToken));
             },
         });
     }

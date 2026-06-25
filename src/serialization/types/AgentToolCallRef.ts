@@ -9,7 +9,7 @@ export const AgentToolCallRef: core.serialization.ObjectSchema<
     TrueFoundryGateway.AgentToolCallRef
 > = core.serialization.object({
     id: core.serialization.string(),
-    source_event_id: core.serialization.string(),
+    sourceEventId: core.serialization.property("source_event_id", core.serialization.string()),
 });
 
 export declare namespace AgentToolCallRef {

@@ -10,9 +10,10 @@ export const AgentRawToolCall: core.serialization.ObjectSchema<
     TrueFoundryGateway.AgentRawToolCall
 > = core.serialization
     .object({
-        provider_specific_fields: core.serialization
-            .record(core.serialization.string(), core.serialization.unknown())
-            .optional(),
+        providerSpecificFields: core.serialization.property(
+            "provider_specific_fields",
+            core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
+        ),
     })
     .extend(ChatCompletionMessageToolCall);
 

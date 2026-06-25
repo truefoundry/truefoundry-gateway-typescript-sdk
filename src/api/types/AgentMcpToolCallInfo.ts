@@ -2,7 +2,7 @@
 
 export interface AgentMcpToolCallInfo {
     type: "mcp";
-    server_id: string;
-    server_name: string;
+    serverId: string;
+    serverName: string;
     name: string;
 }

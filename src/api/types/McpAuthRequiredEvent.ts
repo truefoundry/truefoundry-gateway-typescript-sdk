@@ -6,7 +6,7 @@ export interface McpAuthRequiredEvent {
     type: "mcp.auth_required";
     /** Unique identifier for the event */
     id: string;
-    created_at: string;
+    createdAt: string;
     servers: TrueFoundryGateway.AgentMcpServerAuthInfo[];
-    thread_id?: string;
+    threadId?: string;
 }

@@ -5,26 +5,26 @@ import type * as TrueFoundryGateway from "../index.js";
 export interface TurnOutputEvent {
     audio?: TrueFoundryGateway.TurnOutputEventAudio;
     content?: TrueFoundryGateway.AgentMcpInitializationInfo[];
-    function_call?: TrueFoundryGateway.TurnOutputEventFunctionCall;
+    functionCall?: TrueFoundryGateway.TurnOutputEventFunctionCall;
     name?: string;
     refusal?: string;
-    thinking_blocks?: TrueFoundryGateway.TurnOutputEventThinkingBlocksItem[];
-    tool_calls?: TrueFoundryGateway.AgentToolCallRef[];
+    thinkingBlocks?: TrueFoundryGateway.TurnOutputEventThinkingBlocksItem[];
+    toolCalls?: TrueFoundryGateway.AgentToolCallRef[];
     type?: "tool.response_required";
     /** Unique identifier for the event */
     id?: string;
-    thread_id?: string;
-    finish_reason?: TrueFoundryGateway.AgentFinishReason;
-    created_at?: string;
+    threadId?: string;
+    finishReason?: TrueFoundryGateway.AgentFinishReason;
+    createdAt?: string;
     usage?: TrueFoundryGateway.TurnOutputEventUsage;
-    tool_call_id?: string;
-    agent_info?: TrueFoundryGateway.AgentInfo;
+    toolCallId?: string;
+    agentInfo?: TrueFoundryGateway.AgentInfo;
     parent?: TrueFoundryGateway.AgentParent;
     title?: string;
     output?: TrueFoundryGateway.ModelMessageEvent;
     status?: "error";
     error?: string;
     servers?: TrueFoundryGateway.AgentMcpServerAuthInfo[];
-    sandbox_id?: string;
-    sequence_number: number;
+    sandboxId?: string;
+    sequenceNumber: number;
 }

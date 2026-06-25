@@ -11,7 +11,7 @@ export const CreateTurnRequest: core.serialization.Schema<
     TrueFoundryGateway.agents.CreateTurnRequest
 > = core.serialization.object({
     input: core.serialization.list(CreateTurnRequestInputItem).optional(),
-    previous_turn_id: CreateTurnRequestPreviousTurnId.optional(),
+    previousTurnId: core.serialization.property("previous_turn_id", CreateTurnRequestPreviousTurnId.optional()),
 });
 
 export declare namespace CreateTurnRequest {

@@ -10,7 +10,7 @@ export const ChatCompletionContentPartInputAudio: core.serialization.ObjectSchem
     TrueFoundryGateway.ChatCompletionContentPartInputAudio
 > = core.serialization.object({
     type: core.serialization.stringLiteral("input_audio"),
-    input_audio: ChatCompletionContentPartInputAudioInputAudio,
+    inputAudio: core.serialization.property("input_audio", ChatCompletionContentPartInputAudioInputAudio),
 });
 
 export declare namespace ChatCompletionContentPartInputAudio {

@@ -11,9 +11,9 @@ export const McpAuthRequiredEvent: core.serialization.ObjectSchema<
 > = core.serialization.object({
     type: core.serialization.stringLiteral("mcp.auth_required"),
     id: core.serialization.string(),
-    created_at: core.serialization.string(),
+    createdAt: core.serialization.property("created_at", core.serialization.string()),
     servers: core.serialization.list(AgentMcpServerAuthInfo),
-    thread_id: core.serialization.string().optional(),
+    threadId: core.serialization.property("thread_id", core.serialization.string().optional()),
 });
 
 export declare namespace McpAuthRequiredEvent {

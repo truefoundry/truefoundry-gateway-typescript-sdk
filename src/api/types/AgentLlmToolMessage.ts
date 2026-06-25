@@ -2,6 +2,6 @@
 
 export interface AgentLlmToolMessage {
     role: "tool";
-    tool_call_id: string;
+    toolCallId: string;
     content: string;
 }

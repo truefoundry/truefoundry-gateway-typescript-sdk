@@ -3,10 +3,10 @@
 /**
  * @example
  *     {
- *         agent_name: "agent_name"
+ *         agentName: "agent_name"
  *     }
  */
 export interface CreateSessionRequest {
     /** Name of an existing agent in the tenant. */
-    agent_name: string;
+    agentName: string;
 }

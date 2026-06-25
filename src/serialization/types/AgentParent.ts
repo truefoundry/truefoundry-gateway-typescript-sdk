@@ -6,8 +6,8 @@ import type * as serializers from "../index.js";
 
 export const AgentParent: core.serialization.ObjectSchema<serializers.AgentParent.Raw, TrueFoundryGateway.AgentParent> =
     core.serialization.object({
-        thread_id: core.serialization.string(),
-        tool_call_id: core.serialization.string(),
+        threadId: core.serialization.property("thread_id", core.serialization.string()),
+        toolCallId: core.serialization.property("tool_call_id", core.serialization.string()),
     });
 
 export declare namespace AgentParent {

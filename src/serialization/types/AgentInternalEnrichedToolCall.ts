@@ -11,7 +11,7 @@ export const AgentInternalEnrichedToolCall: core.serialization.ObjectSchema<
     TrueFoundryGateway.AgentInternalEnrichedToolCall
 > = core.serialization
     .object({
-        tool_info: AgentInternalToolCallInfo,
+        toolInfo: core.serialization.property("tool_info", AgentInternalToolCallInfo),
     })
     .extend(AgentRawToolCall);
 

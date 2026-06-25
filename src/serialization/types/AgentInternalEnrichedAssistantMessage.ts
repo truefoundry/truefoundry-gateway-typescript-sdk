@@ -16,11 +16,20 @@ export const AgentInternalEnrichedAssistantMessage: core.serialization.ObjectSch
     role: core.serialization.stringLiteral("assistant"),
     audio: AgentInternalEnrichedAssistantMessageAudio.optional(),
     content: AgentInternalEnrichedAssistantMessageContent.optional(),
-    function_call: AgentInternalEnrichedAssistantMessageFunctionCall.optional(),
+    functionCall: core.serialization.property(
+        "function_call",
+        AgentInternalEnrichedAssistantMessageFunctionCall.optional(),
+    ),
     name: core.serialization.string().optional(),
     refusal: core.serialization.string().optional(),
-    thinking_blocks: core.serialization.list(AgentInternalEnrichedAssistantMessageThinkingBlocksItem).optional(),
-    tool_calls: core.serialization.list(AgentInternalEnrichedToolCall).optional(),
+    thinkingBlocks: core.serialization.property(
+        "thinking_blocks",
+        core.serialization.list(AgentInternalEnrichedAssistantMessageThinkingBlocksItem).optional(),
+    ),
+    toolCalls: core.serialization.property(
+        "tool_calls",
+        core.serialization.list(AgentInternalEnrichedToolCall).optional(),
+    ),
 });
 
 export declare namespace AgentInternalEnrichedAssistantMessage {

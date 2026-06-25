@@ -6,7 +6,7 @@ export interface ToolApprovalRequiredEvent {
     type: "tool.approval_required";
     /** Unique identifier for the event */
     id: string;
-    created_at: string;
-    thread_id: string;
-    tool_calls: TrueFoundryGateway.AgentToolCallRef[];
+    createdAt: string;
+    threadId: string;
+    toolCalls: TrueFoundryGateway.AgentToolCallRef[];
 }

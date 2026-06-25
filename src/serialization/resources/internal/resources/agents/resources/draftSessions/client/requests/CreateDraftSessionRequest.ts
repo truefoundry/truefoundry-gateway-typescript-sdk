@@ -9,8 +9,8 @@ export const CreateDraftSessionRequest: core.serialization.Schema<
     serializers.internal.agents.CreateDraftSessionRequest.Raw,
     TrueFoundryGateway.internal.agents.CreateDraftSessionRequest
 > = core.serialization.object({
-    agent_spec: CreateDraftSessionRequestAgentSpec,
-    agent_name: core.serialization.string().optional(),
+    agentSpec: core.serialization.property("agent_spec", CreateDraftSessionRequestAgentSpec),
+    agentName: core.serialization.property("agent_name", core.serialization.string().optional()),
 });
 
 export declare namespace CreateDraftSessionRequest {

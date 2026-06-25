@@ -9,11 +9,14 @@ export const TurnStreamingOutputEventUsage: core.serialization.ObjectSchema<
     serializers.TurnStreamingOutputEventUsage.Raw,
     TrueFoundryGateway.TurnStreamingOutputEventUsage
 > = core.serialization.object({
-    input_tokens: core.serialization.number(),
-    output_tokens: core.serialization.number(),
-    cache_read_tokens: core.serialization.number().optional(),
-    cache_write_tokens: core.serialization.number().optional(),
-    input_tokens_breakdown: TurnStreamingOutputEventUsageInputTokensBreakdown,
+    inputTokens: core.serialization.property("input_tokens", core.serialization.number()),
+    outputTokens: core.serialization.property("output_tokens", core.serialization.number()),
+    cacheReadTokens: core.serialization.property("cache_read_tokens", core.serialization.number().optional()),
+    cacheWriteTokens: core.serialization.property("cache_write_tokens", core.serialization.number().optional()),
+    inputTokensBreakdown: core.serialization.property(
+        "input_tokens_breakdown",
+        TurnStreamingOutputEventUsageInputTokensBreakdown,
+    ),
 });
 
 export declare namespace TurnStreamingOutputEventUsage {

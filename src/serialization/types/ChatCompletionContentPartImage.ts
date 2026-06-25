@@ -10,7 +10,7 @@ export const ChatCompletionContentPartImage: core.serialization.ObjectSchema<
     TrueFoundryGateway.ChatCompletionContentPartImage
 > = core.serialization.object({
     type: core.serialization.stringLiteral("image_url"),
-    image_url: ChatCompletionContentPartImageImageUrl,
+    imageUrl: core.serialization.property("image_url", ChatCompletionContentPartImageImageUrl),
 });
 
 export declare namespace ChatCompletionContentPartImage {

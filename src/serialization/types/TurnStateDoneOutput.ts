@@ -17,16 +17,19 @@ export const TurnStateDoneOutput: core.serialization.ObjectSchema<
 > = core.serialization.object({
     audio: TurnStateDoneOutputAudio.optional(),
     content: TurnStateDoneOutputContent.optional(),
-    function_call: TurnStateDoneOutputFunctionCall.optional(),
+    functionCall: core.serialization.property("function_call", TurnStateDoneOutputFunctionCall.optional()),
     name: core.serialization.string().optional(),
     refusal: core.serialization.string().optional(),
-    thinking_blocks: core.serialization.list(TurnStateDoneOutputThinkingBlocksItem).optional(),
-    tool_calls: core.serialization.list(AgentEnrichedToolCall).optional(),
+    thinkingBlocks: core.serialization.property(
+        "thinking_blocks",
+        core.serialization.list(TurnStateDoneOutputThinkingBlocksItem).optional(),
+    ),
+    toolCalls: core.serialization.property("tool_calls", core.serialization.list(AgentEnrichedToolCall).optional()),
     type: core.serialization.stringLiteral("model.message"),
     id: core.serialization.string(),
-    thread_id: core.serialization.string(),
-    finish_reason: AgentFinishReason.optional(),
-    created_at: core.serialization.string(),
+    threadId: core.serialization.property("thread_id", core.serialization.string()),
+    finishReason: core.serialization.property("finish_reason", AgentFinishReason.optional()),
+    createdAt: core.serialization.property("created_at", core.serialization.string()),
     usage: TurnStateDoneOutputUsage.optional(),
 });
 

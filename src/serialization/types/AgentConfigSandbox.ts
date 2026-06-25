@@ -9,7 +9,7 @@ export const AgentConfigSandbox: core.serialization.ObjectSchema<
     TrueFoundryGateway.AgentConfigSandbox
 > = core.serialization.object({
     enabled: core.serialization.boolean(),
-    file_downloads: core.serialization.boolean(),
+    fileDownloads: core.serialization.property("file_downloads", core.serialization.boolean()),
 });
 
 export declare namespace AgentConfigSandbox {

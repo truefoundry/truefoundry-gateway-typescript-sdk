@@ -3,11 +3,11 @@
 /**
  * @example
  *     {
- *         page_token: "page_token",
+ *         pageToken: "page_token",
  *         limit: 1
  *     }
  */
 export interface SessionsListTurnsRequest {
-    page_token?: string;
+    pageToken?: string;
     limit?: number;
 }

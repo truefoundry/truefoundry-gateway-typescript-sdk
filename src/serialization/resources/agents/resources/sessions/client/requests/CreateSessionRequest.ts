@@ -8,7 +8,7 @@ export const CreateSessionRequest: core.serialization.Schema<
     serializers.agents.CreateSessionRequest.Raw,
     TrueFoundryGateway.agents.CreateSessionRequest
 > = core.serialization.object({
-    agent_name: core.serialization.string(),
+    agentName: core.serialization.property("agent_name", core.serialization.string()),
 });
 
 export declare namespace CreateSessionRequest {

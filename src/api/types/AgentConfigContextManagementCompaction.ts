@@ -2,5 +2,5 @@
 
 export interface AgentConfigContextManagementCompaction {
     enabled: boolean;
-    compaction_threshold_tokens: number;
+    compactionThresholdTokens: number;
 }

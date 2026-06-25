@@ -8,9 +8,9 @@ export const AgentMcpInitializationInfo: core.serialization.ObjectSchema<
     serializers.AgentMcpInitializationInfo.Raw,
     TrueFoundryGateway.AgentMcpInitializationInfo
 > = core.serialization.object({
-    mcp_server_id: core.serialization.string(),
-    mcp_server_name: core.serialization.string(),
-    session_id: core.serialization.string().optional(),
+    mcpServerId: core.serialization.property("mcp_server_id", core.serialization.string()),
+    mcpServerName: core.serialization.property("mcp_server_name", core.serialization.string()),
+    sessionId: core.serialization.property("session_id", core.serialization.string().optional()),
 });
 
 export declare namespace AgentMcpInitializationInfo {

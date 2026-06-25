@@ -4,5 +4,5 @@ import type * as TrueFoundryGateway from "../index.js";
 
 export interface ChatCompletionContentPartImage {
     type: "image_url";
-    image_url: TrueFoundryGateway.ChatCompletionContentPartImageImageUrl;
+    imageUrl: TrueFoundryGateway.ChatCompletionContentPartImageImageUrl;
 }

@@ -36,34 +36,34 @@ describe("DraftSessionsClient", () => {
             data: [
                 {
                     id: "id",
-                    agent_spec: {
+                    agentSpec: {
                         model: {
                             name: "name",
                         },
                     },
-                    agent_name: "agent_name",
+                    agentName: "agent_name",
                     title: "title",
-                    created_by_subject: {
-                        subject_id: "subject_id",
-                        subject_type: "subject_type",
+                    createdBySubject: {
+                        subjectId: "subject_id",
+                        subjectType: "subject_type",
                     },
-                    created_at: "created_at",
-                    updated_at: "updated_at",
+                    createdAt: "created_at",
+                    updatedAt: "updated_at",
                 },
             ],
             pagination: {
-                next_page_token: "next_page_token",
-                previous_page_token: "previous_page_token",
+                nextPageToken: "next_page_token",
+                previousPageToken: "previous_page_token",
                 limit: 1,
             },
         };
         const page = await client.internal.agents.draftSessions.list({
-            agent_name: "agent_name",
+            agentName: "agent_name",
             limit: 1,
             order: "asc",
-            page_token: "page_token",
-            start_timestamp: "start_timestamp",
-            end_timestamp: "end_timestamp",
+            pageToken: "page_token",
+            startTimestamp: "start_timestamp",
+            endTimestamp: "end_timestamp",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -199,7 +199,7 @@ describe("DraftSessionsClient", () => {
             .build();
 
         const response = await client.internal.agents.draftSessions.create({
-            agent_spec: {
+            agentSpec: {
                 model: {
                     name: "name",
                 },
@@ -208,7 +208,7 @@ describe("DraftSessionsClient", () => {
         expect(response).toEqual({
             data: {
                 id: "id",
-                agent_spec: {
+                agentSpec: {
                     model: {
                         name: "name",
                     },
@@ -219,16 +219,16 @@ describe("DraftSessionsClient", () => {
                             content: "content",
                         },
                     ],
-                    mcp_servers: [
+                    mcpServers: [
                         {
                             name: "name",
-                            enable_tools: ["@all"],
-                            disable_tools: ["@all"],
-                            preload_tools: ["@all"],
-                            require_approval_for_tools: ["@all"],
+                            enableTools: ["@all"],
+                            disableTools: ["@all"],
+                            preloadTools: ["@all"],
+                            requireApprovalForTools: ["@all"],
                         },
                     ],
-                    response_format: {
+                    responseFormat: {
                         type: "text",
                     },
                     skills: [
@@ -238,25 +238,25 @@ describe("DraftSessionsClient", () => {
                         },
                     ],
                     config: {
-                        iteration_limit: 1,
+                        iterationLimit: 1,
                     },
                     variables: {
                         key: "value",
                     },
                 },
-                agent_name: "agent_name",
+                agentName: "agent_name",
                 title: "title",
-                created_by_subject: {
-                    subject_id: "subject_id",
-                    subject_type: "subject_type",
-                    subject_slug: "subject_slug",
-                    subject_display_name: "subject_display_name",
-                    subject_pat_name: "subject_pat_name",
-                    subject_controller_name: "subject_controller_name",
-                    subject_external_identity_slug: "subject_external_identity_slug",
+                createdBySubject: {
+                    subjectId: "subject_id",
+                    subjectType: "subject_type",
+                    subjectSlug: "subject_slug",
+                    subjectDisplayName: "subject_display_name",
+                    subjectPatName: "subject_pat_name",
+                    subjectControllerName: "subject_controller_name",
+                    subjectExternalIdentitySlug: "subject_external_identity_slug",
                 },
-                created_at: "created_at",
-                updated_at: "updated_at",
+                createdAt: "created_at",
+                updatedAt: "updated_at",
             },
         });
     });
@@ -278,7 +278,7 @@ describe("DraftSessionsClient", () => {
 
         await expect(async () => {
             return await client.internal.agents.draftSessions.create({
-                agent_spec: {
+                agentSpec: {
                     model: {
                         name: "x",
                     },
@@ -304,7 +304,7 @@ describe("DraftSessionsClient", () => {
 
         await expect(async () => {
             return await client.internal.agents.draftSessions.create({
-                agent_spec: {
+                agentSpec: {
                     model: {
                         name: "x",
                     },
@@ -330,7 +330,7 @@ describe("DraftSessionsClient", () => {
 
         await expect(async () => {
             return await client.internal.agents.draftSessions.create({
-                agent_spec: {
+                agentSpec: {
                     model: {
                         name: "x",
                     },
@@ -356,7 +356,7 @@ describe("DraftSessionsClient", () => {
 
         await expect(async () => {
             return await client.internal.agents.draftSessions.create({
-                agent_spec: {
+                agentSpec: {
                     model: {
                         name: "x",
                     },
@@ -382,7 +382,7 @@ describe("DraftSessionsClient", () => {
 
         await expect(async () => {
             return await client.internal.agents.draftSessions.create({
-                agent_spec: {
+                agentSpec: {
                     model: {
                         name: "x",
                     },
@@ -444,7 +444,7 @@ describe("DraftSessionsClient", () => {
         expect(response).toEqual({
             data: {
                 id: "id",
-                agent_spec: {
+                agentSpec: {
                     model: {
                         name: "name",
                     },
@@ -455,16 +455,16 @@ describe("DraftSessionsClient", () => {
                             content: "content",
                         },
                     ],
-                    mcp_servers: [
+                    mcpServers: [
                         {
                             name: "name",
-                            enable_tools: ["@all"],
-                            disable_tools: ["@all"],
-                            preload_tools: ["@all"],
-                            require_approval_for_tools: ["@all"],
+                            enableTools: ["@all"],
+                            disableTools: ["@all"],
+                            preloadTools: ["@all"],
+                            requireApprovalForTools: ["@all"],
                         },
                     ],
-                    response_format: {
+                    responseFormat: {
                         type: "text",
                     },
                     skills: [
@@ -474,25 +474,25 @@ describe("DraftSessionsClient", () => {
                         },
                     ],
                     config: {
-                        iteration_limit: 1,
+                        iterationLimit: 1,
                     },
                     variables: {
                         key: "value",
                     },
                 },
-                agent_name: "agent_name",
+                agentName: "agent_name",
                 title: "title",
-                created_by_subject: {
-                    subject_id: "subject_id",
-                    subject_type: "subject_type",
-                    subject_slug: "subject_slug",
-                    subject_display_name: "subject_display_name",
-                    subject_pat_name: "subject_pat_name",
-                    subject_controller_name: "subject_controller_name",
-                    subject_external_identity_slug: "subject_external_identity_slug",
+                createdBySubject: {
+                    subjectId: "subject_id",
+                    subjectType: "subject_type",
+                    subjectSlug: "subject_slug",
+                    subjectDisplayName: "subject_display_name",
+                    subjectPatName: "subject_pat_name",
+                    subjectControllerName: "subject_controller_name",
+                    subjectExternalIdentitySlug: "subject_external_identity_slug",
                 },
-                created_at: "created_at",
-                updated_at: "updated_at",
+                createdAt: "created_at",
+                updatedAt: "updated_at",
             },
         });
     });
@@ -589,7 +589,7 @@ describe("DraftSessionsClient", () => {
         expect(response).toEqual({
             data: {
                 id: "id",
-                agent_spec: {
+                agentSpec: {
                     model: {
                         name: "name",
                     },
@@ -600,16 +600,16 @@ describe("DraftSessionsClient", () => {
                             content: "content",
                         },
                     ],
-                    mcp_servers: [
+                    mcpServers: [
                         {
                             name: "name",
-                            enable_tools: ["@all"],
-                            disable_tools: ["@all"],
-                            preload_tools: ["@all"],
-                            require_approval_for_tools: ["@all"],
+                            enableTools: ["@all"],
+                            disableTools: ["@all"],
+                            preloadTools: ["@all"],
+                            requireApprovalForTools: ["@all"],
                         },
                     ],
-                    response_format: {
+                    responseFormat: {
                         type: "text",
                     },
                     skills: [
@@ -619,25 +619,25 @@ describe("DraftSessionsClient", () => {
                         },
                     ],
                     config: {
-                        iteration_limit: 1,
+                        iterationLimit: 1,
                     },
                     variables: {
                         key: "value",
                     },
                 },
-                agent_name: "agent_name",
+                agentName: "agent_name",
                 title: "title",
-                created_by_subject: {
-                    subject_id: "subject_id",
-                    subject_type: "subject_type",
-                    subject_slug: "subject_slug",
-                    subject_display_name: "subject_display_name",
-                    subject_pat_name: "subject_pat_name",
-                    subject_controller_name: "subject_controller_name",
-                    subject_external_identity_slug: "subject_external_identity_slug",
+                createdBySubject: {
+                    subjectId: "subject_id",
+                    subjectType: "subject_type",
+                    subjectSlug: "subject_slug",
+                    subjectDisplayName: "subject_display_name",
+                    subjectPatName: "subject_pat_name",
+                    subjectControllerName: "subject_controller_name",
+                    subjectExternalIdentitySlug: "subject_external_identity_slug",
                 },
-                created_at: "created_at",
-                updated_at: "updated_at",
+                createdAt: "created_at",
+                updatedAt: "updated_at",
             },
         });
     });

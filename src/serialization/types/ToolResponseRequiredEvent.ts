@@ -11,9 +11,9 @@ export const ToolResponseRequiredEvent: core.serialization.ObjectSchema<
 > = core.serialization.object({
     type: core.serialization.stringLiteral("tool.response_required"),
     id: core.serialization.string(),
-    created_at: core.serialization.string(),
-    thread_id: core.serialization.string(),
-    tool_calls: core.serialization.list(AgentToolCallRef),
+    createdAt: core.serialization.property("created_at", core.serialization.string()),
+    threadId: core.serialization.property("thread_id", core.serialization.string()),
+    toolCalls: core.serialization.property("tool_calls", core.serialization.list(AgentToolCallRef)),
 });
 
 export declare namespace ToolResponseRequiredEvent {

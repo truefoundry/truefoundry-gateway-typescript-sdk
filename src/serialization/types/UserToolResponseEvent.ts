@@ -9,8 +9,8 @@ export const UserToolResponseEvent: core.serialization.ObjectSchema<
     TrueFoundryGateway.UserToolResponseEvent
 > = core.serialization.object({
     type: core.serialization.stringLiteral("user.tool_response"),
-    thread_id: core.serialization.string(),
-    tool_call_id: core.serialization.string(),
+    threadId: core.serialization.property("thread_id", core.serialization.string()),
+    toolCallId: core.serialization.property("tool_call_id", core.serialization.string()),
     content: core.serialization.string(),
 });
 

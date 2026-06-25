@@ -4,5 +4,5 @@ import type * as TrueFoundryGateway from "../index.js";
 
 export interface ChatCompletionContentPartInputAudio {
     type: "input_audio";
-    input_audio: TrueFoundryGateway.ChatCompletionContentPartInputAudioInputAudio;
+    inputAudio: TrueFoundryGateway.ChatCompletionContentPartInputAudioInputAudio;
 }

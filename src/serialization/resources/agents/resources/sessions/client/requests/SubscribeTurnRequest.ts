@@ -8,7 +8,7 @@ export const SubscribeTurnRequest: core.serialization.Schema<
     serializers.agents.SubscribeTurnRequest.Raw,
     TrueFoundryGateway.agents.SubscribeTurnRequest
 > = core.serialization.object({
-    after_sequence_number: core.serialization.number().optional(),
+    afterSequenceNumber: core.serialization.property("after_sequence_number", core.serialization.number().optional()),
 });
 
 export declare namespace SubscribeTurnRequest {

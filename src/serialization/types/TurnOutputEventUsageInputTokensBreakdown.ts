@@ -11,7 +11,7 @@ export const TurnOutputEventUsageInputTokensBreakdown: core.serialization.Object
     harness: core.serialization.number(),
     skills: core.serialization.number(),
     instructions: core.serialization.number(),
-    tool_definitions: core.serialization.number(),
+    toolDefinitions: core.serialization.property("tool_definitions", core.serialization.number()),
     messages: core.serialization.number(),
 });
 

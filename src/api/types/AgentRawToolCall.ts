@@ -3,5 +3,5 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface AgentRawToolCall extends TrueFoundryGateway.ChatCompletionMessageToolCall {
-    provider_specific_fields?: Record<string, unknown>;
+    providerSpecificFields?: Record<string, unknown>;
 }

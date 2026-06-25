@@ -2,5 +2,5 @@
 
 export interface AgentConfigSandbox {
     enabled: boolean;
-    file_downloads: boolean;
+    fileDownloads: boolean;
 }

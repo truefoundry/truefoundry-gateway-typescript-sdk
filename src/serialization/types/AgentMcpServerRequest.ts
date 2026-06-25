@@ -14,10 +14,22 @@ export const AgentMcpServerRequest: core.serialization.ObjectSchema<
 > = core.serialization.object({
     name: core.serialization.string(),
     headers: core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
-    enable_tools: core.serialization.list(AgentMcpServerRequestEnableToolsItem),
-    disable_tools: core.serialization.list(AgentMcpServerRequestDisableToolsItem),
-    preload_tools: core.serialization.list(AgentMcpServerRequestPreloadToolsItem),
-    require_approval_for_tools: core.serialization.list(AgentMcpServerRequestRequireApprovalForToolsItem),
+    enableTools: core.serialization.property(
+        "enable_tools",
+        core.serialization.list(AgentMcpServerRequestEnableToolsItem),
+    ),
+    disableTools: core.serialization.property(
+        "disable_tools",
+        core.serialization.list(AgentMcpServerRequestDisableToolsItem),
+    ),
+    preloadTools: core.serialization.property(
+        "preload_tools",
+        core.serialization.list(AgentMcpServerRequestPreloadToolsItem),
+    ),
+    requireApprovalForTools: core.serialization.property(
+        "require_approval_for_tools",
+        core.serialization.list(AgentMcpServerRequestRequireApprovalForToolsItem),
+    ),
     preload: core.serialization.boolean().optional(),
 });
 

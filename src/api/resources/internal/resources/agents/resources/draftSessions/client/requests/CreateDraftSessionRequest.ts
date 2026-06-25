@@ -5,7 +5,7 @@ import type * as TrueFoundryGateway from "../../../../../../../../index.js";
 /**
  * @example
  *     {
- *         agent_spec: {
+ *         agentSpec: {
  *             model: {
  *                 name: "name"
  *             }
@@ -14,7 +14,7 @@ import type * as TrueFoundryGateway from "../../../../../../../../index.js";
  */
 export interface CreateDraftSessionRequest {
     /** Inline agent definition. */
-    agent_spec: TrueFoundryGateway.internal.agents.CreateDraftSessionRequestAgentSpec;
+    agentSpec: TrueFoundryGateway.internal.agents.CreateDraftSessionRequestAgentSpec;
     /** Optionally link the draft to an existing saved agent in the tenant. Omit for a standalone draft. */
-    agent_name?: string;
+    agentName?: string;
 }

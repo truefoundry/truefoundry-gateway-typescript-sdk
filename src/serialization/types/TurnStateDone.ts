@@ -12,7 +12,7 @@ export const TurnStateDone: core.serialization.ObjectSchema<
 > = core.serialization.object({
     status: core.serialization.stringLiteral("done"),
     output: TurnStateDoneOutput.optional(),
-    required_actions: core.serialization.list(ActionRequiredEvent),
+    requiredActions: core.serialization.property("required_actions", core.serialization.list(ActionRequiredEvent)),
 });
 
 export declare namespace TurnStateDone {

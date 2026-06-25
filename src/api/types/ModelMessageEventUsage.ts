@@ -3,9 +3,9 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface ModelMessageEventUsage {
-    input_tokens: number;
-    output_tokens: number;
-    cache_read_tokens?: number;
-    cache_write_tokens?: number;
-    input_tokens_breakdown: TrueFoundryGateway.ModelMessageEventUsageInputTokensBreakdown;
+    inputTokens: number;
+    outputTokens: number;
+    cacheReadTokens?: number;
+    cacheWriteTokens?: number;
+    inputTokensBreakdown: TrueFoundryGateway.ModelMessageEventUsageInputTokensBreakdown;
 }

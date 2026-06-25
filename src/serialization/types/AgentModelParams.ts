@@ -9,12 +9,12 @@ export const AgentModelParams: core.serialization.ObjectSchema<
     serializers.AgentModelParams.Raw,
     TrueFoundryGateway.AgentModelParams
 > = core.serialization.object({
-    max_tokens: core.serialization.number().optional(),
+    maxTokens: core.serialization.property("max_tokens", core.serialization.number().optional()),
     temperature: core.serialization.number().optional(),
-    top_p: core.serialization.number().optional(),
-    top_k: core.serialization.number().optional(),
-    parallel_tool_calls: core.serialization.boolean().optional(),
-    reasoning_effort: AgentModelParamsReasoningEffort.optional(),
+    topP: core.serialization.property("top_p", core.serialization.number().optional()),
+    topK: core.serialization.property("top_k", core.serialization.number().optional()),
+    parallelToolCalls: core.serialization.property("parallel_tool_calls", core.serialization.boolean().optional()),
+    reasoningEffort: core.serialization.property("reasoning_effort", AgentModelParamsReasoningEffort.optional()),
 });
 
 export declare namespace AgentModelParams {

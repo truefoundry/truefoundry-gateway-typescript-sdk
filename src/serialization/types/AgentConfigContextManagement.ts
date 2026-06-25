@@ -11,7 +11,10 @@ export const AgentConfigContextManagement: core.serialization.ObjectSchema<
     TrueFoundryGateway.AgentConfigContextManagement
 > = core.serialization.object({
     compaction: AgentConfigContextManagementCompaction,
-    large_tool_response: AgentConfigContextManagementLargeToolResponse,
+    largeToolResponse: core.serialization.property(
+        "large_tool_response",
+        AgentConfigContextManagementLargeToolResponse,
+    ),
 });
 
 export declare namespace AgentConfigContextManagement {

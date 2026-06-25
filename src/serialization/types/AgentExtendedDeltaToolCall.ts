@@ -11,10 +11,11 @@ export const AgentExtendedDeltaToolCall: core.serialization.ObjectSchema<
     TrueFoundryGateway.AgentExtendedDeltaToolCall
 > = core.serialization
     .object({
-        tool_info: AgentExtendedDeltaToolCallToolInfo.optional(),
-        provider_specific_fields: core.serialization
-            .record(core.serialization.string(), core.serialization.unknown())
-            .optional(),
+        toolInfo: core.serialization.property("tool_info", AgentExtendedDeltaToolCallToolInfo.optional()),
+        providerSpecificFields: core.serialization.property(
+            "provider_specific_fields",
+            core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
+        ),
     })
     .extend(ChatCompletionChunkDeltaToolCall);
 

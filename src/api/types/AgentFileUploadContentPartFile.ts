@@ -3,5 +3,5 @@
 export interface AgentFileUploadContentPartFile {
     filename: string;
     /** Data URI: `data:<mime>;base64,<payload>` */
-    file_data: string;
+    fileData: string;
 }

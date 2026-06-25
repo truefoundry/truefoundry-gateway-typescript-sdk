@@ -9,7 +9,7 @@ export const AgentFileUploadContentPartFile: core.serialization.ObjectSchema<
     TrueFoundryGateway.AgentFileUploadContentPartFile
 > = core.serialization.object({
     filename: core.serialization.string(),
-    file_data: core.serialization.string(),
+    fileData: core.serialization.property("file_data", core.serialization.string()),
 });
 
 export declare namespace AgentFileUploadContentPartFile {

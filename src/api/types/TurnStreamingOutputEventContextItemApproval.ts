@@ -4,6 +4,6 @@ import type * as TrueFoundryGateway from "../index.js";
 
 export interface TurnStreamingOutputEventContextItemApproval {
     type: "user.tool_approval";
-    tool_call_id: string;
+    toolCallId: string;
     approval: TrueFoundryGateway.ApprovalDecision;
 }

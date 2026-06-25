@@ -3,5 +3,5 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface AgentEnrichedToolCall extends TrueFoundryGateway.AgentRawToolCall {
-    tool_info: TrueFoundryGateway.AgentEnrichedToolCallToolInfo;
+    toolInfo: TrueFoundryGateway.AgentEnrichedToolCallToolInfo;
 }

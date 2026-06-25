@@ -5,16 +5,16 @@ import type * as TrueFoundryGateway from "../index.js";
 export interface TurnStateDoneOutput {
     audio?: TrueFoundryGateway.TurnStateDoneOutputAudio;
     content?: TrueFoundryGateway.TurnStateDoneOutputContent;
-    function_call?: TrueFoundryGateway.TurnStateDoneOutputFunctionCall;
+    functionCall?: TrueFoundryGateway.TurnStateDoneOutputFunctionCall;
     name?: string;
     refusal?: string;
-    thinking_blocks?: TrueFoundryGateway.TurnStateDoneOutputThinkingBlocksItem[];
-    tool_calls?: TrueFoundryGateway.AgentEnrichedToolCall[];
+    thinkingBlocks?: TrueFoundryGateway.TurnStateDoneOutputThinkingBlocksItem[];
+    toolCalls?: TrueFoundryGateway.AgentEnrichedToolCall[];
     type: "model.message";
     /** Unique identifier for the event */
     id: string;
-    thread_id: string;
-    finish_reason?: TrueFoundryGateway.AgentFinishReason;
-    created_at: string;
+    threadId: string;
+    finishReason?: TrueFoundryGateway.AgentFinishReason;
+    createdAt: string;
     usage?: TrueFoundryGateway.TurnStateDoneOutputUsage;
 }

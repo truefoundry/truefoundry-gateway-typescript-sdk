@@ -5,9 +5,9 @@ import type * as TrueFoundryGateway from "../index.js";
 export interface AgentMcpServerRequest {
     name: string;
     headers?: Record<string, string>;
-    enable_tools: TrueFoundryGateway.AgentMcpServerRequestEnableToolsItem[];
-    disable_tools: TrueFoundryGateway.AgentMcpServerRequestDisableToolsItem[];
-    preload_tools: TrueFoundryGateway.AgentMcpServerRequestPreloadToolsItem[];
-    require_approval_for_tools: TrueFoundryGateway.AgentMcpServerRequestRequireApprovalForToolsItem[];
+    enableTools: TrueFoundryGateway.AgentMcpServerRequestEnableToolsItem[];
+    disableTools: TrueFoundryGateway.AgentMcpServerRequestDisableToolsItem[];
+    preloadTools: TrueFoundryGateway.AgentMcpServerRequestPreloadToolsItem[];
+    requireApprovalForTools: TrueFoundryGateway.AgentMcpServerRequestRequireApprovalForToolsItem[];
     preload?: boolean;
 }

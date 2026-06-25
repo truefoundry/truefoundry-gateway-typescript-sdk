@@ -9,9 +9,15 @@ export const AgentConfigContextManagementLargeToolResponse: core.serialization.O
     TrueFoundryGateway.AgentConfigContextManagementLargeToolResponse
 > = core.serialization.object({
     enabled: core.serialization.boolean(),
-    individual_tool_response_token_threshold: core.serialization.number(),
-    total_tool_response_token_threshold: core.serialization.number(),
-    preview_number_of_characters: core.serialization.number(),
+    individualToolResponseTokenThreshold: core.serialization.property(
+        "individual_tool_response_token_threshold",
+        core.serialization.number(),
+    ),
+    totalToolResponseTokenThreshold: core.serialization.property(
+        "total_tool_response_token_threshold",
+        core.serialization.number(),
+    ),
+    previewNumberOfCharacters: core.serialization.property("preview_number_of_characters", core.serialization.number()),
 });
 
 export declare namespace AgentConfigContextManagementLargeToolResponse {

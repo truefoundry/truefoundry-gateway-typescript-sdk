@@ -8,10 +8,10 @@ export const CreatedBySubject: core.serialization.ObjectSchema<
     serializers.CreatedBySubject.Raw,
     TrueFoundryGateway.CreatedBySubject
 > = core.serialization.object({
-    subject_id: core.serialization.string(),
-    subject_slug: core.serialization.string(),
-    subject_type: core.serialization.string(),
-    tenant_name: core.serialization.string(),
+    subjectId: core.serialization.property("subject_id", core.serialization.string()),
+    subjectSlug: core.serialization.property("subject_slug", core.serialization.string()),
+    subjectType: core.serialization.property("subject_type", core.serialization.string()),
+    tenantName: core.serialization.property("tenant_name", core.serialization.string()),
 });
 
 export declare namespace CreatedBySubject {

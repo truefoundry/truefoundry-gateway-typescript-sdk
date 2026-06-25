@@ -9,13 +9,13 @@ import { TurnState } from "./TurnState.js";
 export const Turn: core.serialization.ObjectSchema<serializers.Turn.Raw, TrueFoundryGateway.Turn> =
     core.serialization.object({
         id: core.serialization.string(),
-        session_id: core.serialization.string(),
-        first_turn_id: core.serialization.string(),
-        previous_turn_id: core.serialization.string().optional(),
+        sessionId: core.serialization.property("session_id", core.serialization.string()),
+        firstTurnId: core.serialization.property("first_turn_id", core.serialization.string()),
+        previousTurnId: core.serialization.property("previous_turn_id", core.serialization.string().optional()),
         state: TurnState,
         input: core.serialization.list(TurnInputItem),
-        created_at: core.serialization.string(),
-        updated_at: core.serialization.string(),
+        createdAt: core.serialization.property("created_at", core.serialization.string()),
+        updatedAt: core.serialization.property("updated_at", core.serialization.string()),
     });
 
 export declare namespace Turn {

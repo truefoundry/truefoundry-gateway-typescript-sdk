@@ -28,12 +28,12 @@ List sessions for an agent (newest first by default), keyset-paginated. Pass `pa
 
 ```typescript
 const pageableResponse = await client.agents.sessions.list({
-    agent_name: "agent_name",
+    agentName: "agent_name",
     limit: 1,
     order: "asc",
-    page_token: "page_token",
-    start_timestamp: "start_timestamp",
-    end_timestamp: "end_timestamp"
+    pageToken: "page_token",
+    startTimestamp: "start_timestamp",
+    endTimestamp: "end_timestamp"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -41,12 +41,12 @@ for await (const item of pageableResponse) {
 
 // Or you can manually iterate page-by-page
 let page = await client.agents.sessions.list({
-    agent_name: "agent_name",
+    agentName: "agent_name",
     limit: 1,
     order: "asc",
-    page_token: "page_token",
-    start_timestamp: "start_timestamp",
-    end_timestamp: "end_timestamp"
+    pageToken: "page_token",
+    startTimestamp: "start_timestamp",
+    endTimestamp: "end_timestamp"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -117,7 +117,7 @@ Create a session for an existing named agent.
 
 ```typescript
 await client.agents.sessions.create({
-    agent_name: "agent_name"
+    agentName: "agent_name"
 });
 
 ```
@@ -316,7 +316,7 @@ List turns for a session (newest first). Pagination walks the ancestor chain fro
 
 ```typescript
 const pageableResponse = await client.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g", {
-    page_token: "page_token",
+    pageToken: "page_token",
     limit: 1
 });
 for await (const item of pageableResponse) {
@@ -325,7 +325,7 @@ for await (const item of pageableResponse) {
 
 // Or you can manually iterate page-by-page
 let page = await client.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g", {
-    page_token: "page_token",
+    pageToken: "page_token",
     limit: 1
 });
 while (page.hasNextPage()) {
@@ -633,7 +633,7 @@ Paginated list of turn events from the Redis events stream.
 
 ```typescript
 const pageableResponse = await client.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
-    page_token: "page_token",
+    pageToken: "page_token",
     limit: 1,
     order: "asc"
 });
@@ -643,7 +643,7 @@ for await (const item of pageableResponse) {
 
 // Or you can manually iterate page-by-page
 let page = await client.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
-    page_token: "page_token",
+    pageToken: "page_token",
     limit: 1,
     order: "asc"
 });
@@ -733,12 +733,12 @@ List the caller-owned draft sessions (newest first by default), keyset-paginated
 
 ```typescript
 const pageableResponse = await client.internal.agents.draftSessions.list({
-    agent_name: "agent_name",
+    agentName: "agent_name",
     limit: 1,
     order: "asc",
-    page_token: "page_token",
-    start_timestamp: "start_timestamp",
-    end_timestamp: "end_timestamp"
+    pageToken: "page_token",
+    startTimestamp: "start_timestamp",
+    endTimestamp: "end_timestamp"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -746,12 +746,12 @@ for await (const item of pageableResponse) {
 
 // Or you can manually iterate page-by-page
 let page = await client.internal.agents.draftSessions.list({
-    agent_name: "agent_name",
+    agentName: "agent_name",
     limit: 1,
     order: "asc",
-    page_token: "page_token",
-    start_timestamp: "start_timestamp",
-    end_timestamp: "end_timestamp"
+    pageToken: "page_token",
+    startTimestamp: "start_timestamp",
+    endTimestamp: "end_timestamp"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -822,7 +822,7 @@ Create a draft session holding an inline agent spec, optionally linked to a save
 
 ```typescript
 await client.internal.agents.draftSessions.create({
-    agent_spec: {
+    agentSpec: {
         model: {
             name: "name"
         }

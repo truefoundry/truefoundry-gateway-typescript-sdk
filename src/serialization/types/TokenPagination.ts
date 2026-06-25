@@ -8,8 +8,8 @@ export const TokenPagination: core.serialization.ObjectSchema<
     serializers.TokenPagination.Raw,
     TrueFoundryGateway.TokenPagination
 > = core.serialization.object({
-    next_page_token: core.serialization.string().optional(),
-    previous_page_token: core.serialization.string().optional(),
+    nextPageToken: core.serialization.property("next_page_token", core.serialization.string().optional()),
+    previousPageToken: core.serialization.property("previous_page_token", core.serialization.string().optional()),
     limit: core.serialization.number(),
 });
 

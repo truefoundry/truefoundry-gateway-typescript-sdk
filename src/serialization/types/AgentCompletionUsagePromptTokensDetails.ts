@@ -8,7 +8,7 @@ export const AgentCompletionUsagePromptTokensDetails: core.serialization.ObjectS
     serializers.AgentCompletionUsagePromptTokensDetails.Raw,
     TrueFoundryGateway.AgentCompletionUsagePromptTokensDetails
 > = core.serialization.object({
-    cached_tokens: core.serialization.number().optional(),
+    cachedTokens: core.serialization.property("cached_tokens", core.serialization.number().optional()),
 });
 
 export declare namespace AgentCompletionUsagePromptTokensDetails {

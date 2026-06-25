@@ -5,5 +5,5 @@
  *     {}
  */
 export interface SubscribeTurnRequest {
-    after_sequence_number?: number;
+    afterSequenceNumber?: number;
 }

@@ -9,7 +9,7 @@ export const AgentConfigContextManagementCompaction: core.serialization.ObjectSc
     TrueFoundryGateway.AgentConfigContextManagementCompaction
 > = core.serialization.object({
     enabled: core.serialization.boolean(),
-    compaction_threshold_tokens: core.serialization.number(),
+    compactionThresholdTokens: core.serialization.property("compaction_threshold_tokens", core.serialization.number()),
 });
 
 export declare namespace AgentConfigContextManagementCompaction {

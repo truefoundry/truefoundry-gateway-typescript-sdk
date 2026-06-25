@@ -35,29 +35,29 @@ describe("SessionsClient", () => {
             data: [
                 {
                     id: "id",
-                    agent_name: "agent_name",
+                    agentName: "agent_name",
                     title: "title",
-                    created_by_subject: {
-                        subject_id: "subject_id",
-                        subject_type: "subject_type",
+                    createdBySubject: {
+                        subjectId: "subject_id",
+                        subjectType: "subject_type",
                     },
-                    created_at: "created_at",
-                    updated_at: "updated_at",
+                    createdAt: "created_at",
+                    updatedAt: "updated_at",
                 },
             ],
             pagination: {
-                next_page_token: "next_page_token",
-                previous_page_token: "previous_page_token",
+                nextPageToken: "next_page_token",
+                previousPageToken: "previous_page_token",
                 limit: 1,
             },
         };
         const page = await client.agents.sessions.list({
-            agent_name: "agent_name",
+            agentName: "agent_name",
             limit: 1,
             order: "asc",
-            page_token: "page_token",
-            start_timestamp: "start_timestamp",
-            end_timestamp: "end_timestamp",
+            pageToken: "page_token",
+            startTimestamp: "start_timestamp",
+            endTimestamp: "end_timestamp",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -82,7 +82,7 @@ describe("SessionsClient", () => {
 
         await expect(async () => {
             return await client.agents.sessions.list({
-                agent_name: "x",
+                agentName: "x",
             });
         }).rejects.toThrow(TrueFoundryGateway.BadRequestError);
     });
@@ -103,7 +103,7 @@ describe("SessionsClient", () => {
 
         await expect(async () => {
             return await client.agents.sessions.list({
-                agent_name: "x",
+                agentName: "x",
             });
         }).rejects.toThrow(TrueFoundryGateway.UnauthorizedError);
     });
@@ -124,7 +124,7 @@ describe("SessionsClient", () => {
 
         await expect(async () => {
             return await client.agents.sessions.list({
-                agent_name: "x",
+                agentName: "x",
             });
         }).rejects.toThrow(TrueFoundryGateway.ForbiddenError);
     });
@@ -145,7 +145,7 @@ describe("SessionsClient", () => {
 
         await expect(async () => {
             return await client.agents.sessions.list({
-                agent_name: "x",
+                agentName: "x",
             });
         }).rejects.toThrow(TrueFoundryGateway.NotFoundError);
     });
@@ -166,7 +166,7 @@ describe("SessionsClient", () => {
 
         await expect(async () => {
             return await client.agents.sessions.list({
-                agent_name: "x",
+                agentName: "x",
             });
         }).rejects.toThrow(TrueFoundryGateway.UnprocessableEntityError);
     });
@@ -204,24 +204,24 @@ describe("SessionsClient", () => {
             .build();
 
         const response = await client.agents.sessions.create({
-            agent_name: "agent_name",
+            agentName: "agent_name",
         });
         expect(response).toEqual({
             data: {
                 id: "id",
-                agent_name: "agent_name",
+                agentName: "agent_name",
                 title: "title",
-                created_by_subject: {
-                    subject_id: "subject_id",
-                    subject_type: "subject_type",
-                    subject_slug: "subject_slug",
-                    subject_display_name: "subject_display_name",
-                    subject_pat_name: "subject_pat_name",
-                    subject_controller_name: "subject_controller_name",
-                    subject_external_identity_slug: "subject_external_identity_slug",
+                createdBySubject: {
+                    subjectId: "subject_id",
+                    subjectType: "subject_type",
+                    subjectSlug: "subject_slug",
+                    subjectDisplayName: "subject_display_name",
+                    subjectPatName: "subject_pat_name",
+                    subjectControllerName: "subject_controller_name",
+                    subjectExternalIdentitySlug: "subject_external_identity_slug",
                 },
-                created_at: "created_at",
-                updated_at: "updated_at",
+                createdAt: "created_at",
+                updatedAt: "updated_at",
             },
         });
     });
@@ -243,7 +243,7 @@ describe("SessionsClient", () => {
 
         await expect(async () => {
             return await client.agents.sessions.create({
-                agent_name: "x",
+                agentName: "x",
             });
         }).rejects.toThrow(TrueFoundryGateway.BadRequestError);
     });
@@ -265,7 +265,7 @@ describe("SessionsClient", () => {
 
         await expect(async () => {
             return await client.agents.sessions.create({
-                agent_name: "x",
+                agentName: "x",
             });
         }).rejects.toThrow(TrueFoundryGateway.UnauthorizedError);
     });
@@ -287,7 +287,7 @@ describe("SessionsClient", () => {
 
         await expect(async () => {
             return await client.agents.sessions.create({
-                agent_name: "x",
+                agentName: "x",
             });
         }).rejects.toThrow(TrueFoundryGateway.ForbiddenError);
     });
@@ -309,7 +309,7 @@ describe("SessionsClient", () => {
 
         await expect(async () => {
             return await client.agents.sessions.create({
-                agent_name: "x",
+                agentName: "x",
             });
         }).rejects.toThrow(TrueFoundryGateway.NotFoundError);
     });
@@ -331,7 +331,7 @@ describe("SessionsClient", () => {
 
         await expect(async () => {
             return await client.agents.sessions.create({
-                agent_name: "x",
+                agentName: "x",
             });
         }).rejects.toThrow(TrueFoundryGateway.ConflictError);
     });
@@ -353,7 +353,7 @@ describe("SessionsClient", () => {
 
         await expect(async () => {
             return await client.agents.sessions.create({
-                agent_name: "x",
+                agentName: "x",
             });
         }).rejects.toThrow(TrueFoundryGateway.UnprocessableEntityError);
     });
@@ -393,19 +393,19 @@ describe("SessionsClient", () => {
         expect(response).toEqual({
             data: {
                 id: "id",
-                agent_name: "agent_name",
+                agentName: "agent_name",
                 title: "title",
-                created_by_subject: {
-                    subject_id: "subject_id",
-                    subject_type: "subject_type",
-                    subject_slug: "subject_slug",
-                    subject_display_name: "subject_display_name",
-                    subject_pat_name: "subject_pat_name",
-                    subject_controller_name: "subject_controller_name",
-                    subject_external_identity_slug: "subject_external_identity_slug",
+                createdBySubject: {
+                    subjectId: "subject_id",
+                    subjectType: "subject_type",
+                    subjectSlug: "subject_slug",
+                    subjectDisplayName: "subject_display_name",
+                    subjectPatName: "subject_pat_name",
+                    subjectControllerName: "subject_controller_name",
+                    subjectExternalIdentitySlug: "subject_external_identity_slug",
                 },
-                created_at: "created_at",
-                updated_at: "updated_at",
+                createdAt: "created_at",
+                updatedAt: "updated_at",
             },
         });
     });
@@ -598,9 +598,9 @@ describe("SessionsClient", () => {
             data: [
                 {
                     id: "id",
-                    session_id: "session_id",
-                    first_turn_id: "first_turn_id",
-                    previous_turn_id: "previous_turn_id",
+                    sessionId: "session_id",
+                    firstTurnId: "first_turn_id",
+                    previousTurnId: "previous_turn_id",
                     state: {
                         status: "running",
                     },
@@ -610,18 +610,18 @@ describe("SessionsClient", () => {
                             content: "content",
                         },
                     ],
-                    created_at: "created_at",
-                    updated_at: "updated_at",
+                    createdAt: "created_at",
+                    updatedAt: "updated_at",
                 },
             ],
             pagination: {
-                next_page_token: "next_page_token",
-                previous_page_token: "previous_page_token",
+                nextPageToken: "next_page_token",
+                previousPageToken: "previous_page_token",
                 limit: 1,
             },
         };
         const page = await client.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g", {
-            page_token: "page_token",
+            pageToken: "page_token",
             limit: 1,
         });
 
@@ -697,59 +697,59 @@ describe("SessionsClient", () => {
                 },
                 content: [
                     {
-                        mcp_server_id: "mcp_server_id",
-                        mcp_server_name: "mcp_server_name",
-                        session_id: "session_id",
+                        mcpServerId: "mcp_server_id",
+                        mcpServerName: "mcp_server_name",
+                        sessionId: "session_id",
                     },
                 ],
-                function_call: {
+                functionCall: {
                     name: "name",
                     arguments: "arguments",
                 },
                 name: "name",
                 refusal: "refusal",
-                thinking_blocks: [
+                thinkingBlocks: [
                     {
                         type: "thinking",
                         thinking: "thinking",
                         signature: "signature",
                     },
                 ],
-                tool_calls: [
+                toolCalls: [
                     {
                         id: "id",
-                        source_event_id: "source_event_id",
+                        sourceEventId: "source_event_id",
                     },
                 ],
                 type: "turn.created",
                 id: "id",
-                thread_id: "thread_id",
-                finish_reason: "stop",
-                created_at: "created_at",
+                threadId: "thread_id",
+                finishReason: "stop",
+                createdAt: "created_at",
                 usage: {
-                    input_tokens: 1,
-                    output_tokens: 1,
-                    cache_read_tokens: 1,
-                    cache_write_tokens: 1,
-                    input_tokens_breakdown: {
+                    inputTokens: 1,
+                    outputTokens: 1,
+                    cacheReadTokens: 1,
+                    cacheWriteTokens: 1,
+                    inputTokensBreakdown: {
                         harness: 1,
                         skills: 1,
                         instructions: 1,
-                        tool_definitions: 1,
+                        toolDefinitions: 1,
                         messages: 1,
                     },
                 },
-                reasoning_content: "reasoning_content",
-                tool_call_id: "tool_call_id",
-                agent_info: {
+                reasoningContent: "reasoning_content",
+                toolCallId: "tool_call_id",
+                agentInfo: {
                     type: "dynamic",
                     name: "name",
                     input: "input",
                     model: "model",
                 },
                 parent: {
-                    thread_id: "thread_id",
-                    tool_call_id: "tool_call_id",
+                    threadId: "thread_id",
+                    toolCallId: "tool_call_id",
                 },
                 title: "title",
                 reason: "compaction",
@@ -759,50 +759,50 @@ describe("SessionsClient", () => {
                         content: "content",
                     },
                 ],
-                current_context_usage: {
-                    completion_tokens: 1,
-                    prompt_tokens: 1,
-                    total_tokens: 1,
-                    completion_tokens_details: {
-                        reasoning_tokens: 1,
+                currentContextUsage: {
+                    completionTokens: 1,
+                    promptTokens: 1,
+                    totalTokens: 1,
+                    completionTokensDetails: {
+                        reasoningTokens: 1,
                     },
-                    prompt_tokens_details: {
-                        cached_tokens: 1,
+                    promptTokensDetails: {
+                        cachedTokens: 1,
                     },
-                    cache_read_input_tokens: 1,
-                    cache_creation_input_tokens: 1,
+                    cacheReadInputTokens: 1,
+                    cacheCreationInputTokens: 1,
                 },
-                compaction_llm_usage: {
-                    completion_tokens: 1,
-                    prompt_tokens: 1,
-                    total_tokens: 1,
-                    completion_tokens_details: {
-                        reasoning_tokens: 1,
+                compactionLlmUsage: {
+                    completionTokens: 1,
+                    promptTokens: 1,
+                    totalTokens: 1,
+                    completionTokensDetails: {
+                        reasoningTokens: 1,
                     },
-                    prompt_tokens_details: {
-                        cached_tokens: 1,
+                    promptTokensDetails: {
+                        cachedTokens: 1,
                     },
-                    cache_read_input_tokens: 1,
-                    cache_creation_input_tokens: 1,
+                    cacheReadInputTokens: 1,
+                    cacheCreationInputTokens: 1,
                 },
                 servers: [
                     {
-                        mcp_server_id: "mcp_server_id",
-                        mcp_server_name: "mcp_server_name",
-                        auth_url: "auth_url",
-                        thread_ids: ["thread_ids"],
+                        mcpServerId: "mcp_server_id",
+                        mcpServerName: "mcp_server_name",
+                        authUrl: "auth_url",
+                        threadIds: ["thread_ids"],
                     },
                 ],
-                sandbox_id: "sandbox_id",
-                turn_id: "turn_id",
-                previous_turn_id: "previous_turn_id",
-                created_by: {
-                    subject_id: "subject_id",
-                    subject_slug: "subject_slug",
-                    subject_type: "subject_type",
-                    tenant_name: "tenant_name",
+                sandboxId: "sandbox_id",
+                turnId: "turn_id",
+                previousTurnId: "previous_turn_id",
+                createdBy: {
+                    subjectId: "subject_id",
+                    subjectSlug: "subject_slug",
+                    subjectType: "subject_type",
+                    tenantName: "tenant_name",
                 },
-                sequence_number: 1,
+                sequenceNumber: 1,
             },
         ]);
     });
@@ -899,9 +899,9 @@ describe("SessionsClient", () => {
         expect(response).toEqual({
             data: {
                 id: "id",
-                session_id: "session_id",
-                first_turn_id: "first_turn_id",
-                previous_turn_id: "previous_turn_id",
+                sessionId: "session_id",
+                firstTurnId: "first_turn_id",
+                previousTurnId: "previous_turn_id",
                 state: {
                     status: "running",
                 },
@@ -911,8 +911,8 @@ describe("SessionsClient", () => {
                         content: "content",
                     },
                 ],
-                created_at: "created_at",
-                updated_at: "updated_at",
+                createdAt: "created_at",
+                updatedAt: "updated_at",
             },
         });
     });
@@ -988,59 +988,59 @@ describe("SessionsClient", () => {
                 },
                 content: [
                     {
-                        mcp_server_id: "mcp_server_id",
-                        mcp_server_name: "mcp_server_name",
-                        session_id: "session_id",
+                        mcpServerId: "mcp_server_id",
+                        mcpServerName: "mcp_server_name",
+                        sessionId: "session_id",
                     },
                 ],
-                function_call: {
+                functionCall: {
                     name: "name",
                     arguments: "arguments",
                 },
                 name: "name",
                 refusal: "refusal",
-                thinking_blocks: [
+                thinkingBlocks: [
                     {
                         type: "thinking",
                         thinking: "thinking",
                         signature: "signature",
                     },
                 ],
-                tool_calls: [
+                toolCalls: [
                     {
                         id: "id",
-                        source_event_id: "source_event_id",
+                        sourceEventId: "source_event_id",
                     },
                 ],
                 type: "turn.created",
                 id: "id",
-                thread_id: "thread_id",
-                finish_reason: "stop",
-                created_at: "created_at",
+                threadId: "thread_id",
+                finishReason: "stop",
+                createdAt: "created_at",
                 usage: {
-                    input_tokens: 1,
-                    output_tokens: 1,
-                    cache_read_tokens: 1,
-                    cache_write_tokens: 1,
-                    input_tokens_breakdown: {
+                    inputTokens: 1,
+                    outputTokens: 1,
+                    cacheReadTokens: 1,
+                    cacheWriteTokens: 1,
+                    inputTokensBreakdown: {
                         harness: 1,
                         skills: 1,
                         instructions: 1,
-                        tool_definitions: 1,
+                        toolDefinitions: 1,
                         messages: 1,
                     },
                 },
-                reasoning_content: "reasoning_content",
-                tool_call_id: "tool_call_id",
-                agent_info: {
+                reasoningContent: "reasoning_content",
+                toolCallId: "tool_call_id",
+                agentInfo: {
                     type: "dynamic",
                     name: "name",
                     input: "input",
                     model: "model",
                 },
                 parent: {
-                    thread_id: "thread_id",
-                    tool_call_id: "tool_call_id",
+                    threadId: "thread_id",
+                    toolCallId: "tool_call_id",
                 },
                 title: "title",
                 reason: "compaction",
@@ -1050,50 +1050,50 @@ describe("SessionsClient", () => {
                         content: "content",
                     },
                 ],
-                current_context_usage: {
-                    completion_tokens: 1,
-                    prompt_tokens: 1,
-                    total_tokens: 1,
-                    completion_tokens_details: {
-                        reasoning_tokens: 1,
+                currentContextUsage: {
+                    completionTokens: 1,
+                    promptTokens: 1,
+                    totalTokens: 1,
+                    completionTokensDetails: {
+                        reasoningTokens: 1,
                     },
-                    prompt_tokens_details: {
-                        cached_tokens: 1,
+                    promptTokensDetails: {
+                        cachedTokens: 1,
                     },
-                    cache_read_input_tokens: 1,
-                    cache_creation_input_tokens: 1,
+                    cacheReadInputTokens: 1,
+                    cacheCreationInputTokens: 1,
                 },
-                compaction_llm_usage: {
-                    completion_tokens: 1,
-                    prompt_tokens: 1,
-                    total_tokens: 1,
-                    completion_tokens_details: {
-                        reasoning_tokens: 1,
+                compactionLlmUsage: {
+                    completionTokens: 1,
+                    promptTokens: 1,
+                    totalTokens: 1,
+                    completionTokensDetails: {
+                        reasoningTokens: 1,
                     },
-                    prompt_tokens_details: {
-                        cached_tokens: 1,
+                    promptTokensDetails: {
+                        cachedTokens: 1,
                     },
-                    cache_read_input_tokens: 1,
-                    cache_creation_input_tokens: 1,
+                    cacheReadInputTokens: 1,
+                    cacheCreationInputTokens: 1,
                 },
                 servers: [
                     {
-                        mcp_server_id: "mcp_server_id",
-                        mcp_server_name: "mcp_server_name",
-                        auth_url: "auth_url",
-                        thread_ids: ["thread_ids"],
+                        mcpServerId: "mcp_server_id",
+                        mcpServerName: "mcp_server_name",
+                        authUrl: "auth_url",
+                        threadIds: ["thread_ids"],
                     },
                 ],
-                sandbox_id: "sandbox_id",
-                turn_id: "turn_id",
-                previous_turn_id: "previous_turn_id",
-                created_by: {
-                    subject_id: "subject_id",
-                    subject_slug: "subject_slug",
-                    subject_type: "subject_type",
-                    tenant_name: "tenant_name",
+                sandboxId: "sandbox_id",
+                turnId: "turn_id",
+                previousTurnId: "previous_turn_id",
+                createdBy: {
+                    subjectId: "subject_id",
+                    subjectSlug: "subject_slug",
+                    subjectType: "subject_type",
+                    tenantName: "tenant_name",
                 },
-                sequence_number: 1,
+                sequenceNumber: 1,
             },
         ]);
     });
@@ -1251,78 +1251,78 @@ describe("SessionsClient", () => {
                     },
                     content: [
                         {
-                            mcp_server_id: "mcp_server_id",
-                            mcp_server_name: "mcp_server_name",
+                            mcpServerId: "mcp_server_id",
+                            mcpServerName: "mcp_server_name",
                         },
                     ],
-                    function_call: {
+                    functionCall: {
                         name: "name",
                         arguments: "arguments",
                     },
                     name: "name",
                     refusal: "refusal",
-                    thinking_blocks: [
+                    thinkingBlocks: [
                         {
                             type: "thinking",
                             thinking: "thinking",
                         },
                     ],
-                    tool_calls: [
+                    toolCalls: [
                         {
                             id: "id",
-                            source_event_id: "source_event_id",
+                            sourceEventId: "source_event_id",
                         },
                     ],
                     type: "tool.response_required",
                     id: "id",
-                    thread_id: "thread_id",
-                    finish_reason: "stop",
-                    created_at: "created_at",
+                    threadId: "thread_id",
+                    finishReason: "stop",
+                    createdAt: "created_at",
                     usage: {
-                        input_tokens: 1,
-                        output_tokens: 1,
-                        input_tokens_breakdown: {
+                        inputTokens: 1,
+                        outputTokens: 1,
+                        inputTokensBreakdown: {
                             harness: 1,
                             skills: 1,
                             instructions: 1,
-                            tool_definitions: 1,
+                            toolDefinitions: 1,
                             messages: 1,
                         },
                     },
-                    tool_call_id: "tool_call_id",
-                    agent_info: {
+                    toolCallId: "tool_call_id",
+                    agentInfo: {
                         type: "dynamic",
                         name: "name",
                         input: "input",
                     },
                     parent: {
-                        thread_id: "thread_id",
-                        tool_call_id: "tool_call_id",
+                        threadId: "thread_id",
+                        toolCallId: "tool_call_id",
                     },
                     title: "title",
                     output: {
                         type: "model.message",
                         id: "id",
-                        thread_id: "thread_id",
-                        created_at: "created_at",
+                        threadId: "thread_id",
+                        createdAt: "created_at",
                     },
                     status: "error",
                     error: "error",
                     servers: [
                         {
-                            mcp_server_id: "mcp_server_id",
-                            mcp_server_name: "mcp_server_name",
-                            auth_url: "auth_url",
-                            thread_ids: ["thread_ids"],
+                            mcpServerId: "mcp_server_id",
+                            mcpServerName: "mcp_server_name",
+                            authUrl: "auth_url",
+                            threadIds: ["thread_ids"],
                         },
                     ],
-                    sandbox_id: "sandbox_id",
-                    sequence_number: 1,
+                    sandboxId: "sandbox_id",
+                    sequenceNumber: 1,
                 },
             ],
             pagination: {
-                next_page_token: "next_page_token",
-                previous_page_token: "previous_page_token",
+                nextPageToken: "next_page_token",
+                previousPageToken: "previous_page_token",
                 limit: 1,
                 order: "asc",
             },
@@ -1331,7 +1331,7 @@ describe("SessionsClient", () => {
             "01arz3ndektsv4rrffq69g5fav.g",
             "01arz3ndektsv4rrffq69g5fav.g.ab12cd",
             {
-                page_token: "page_token",
+                pageToken: "page_token",
                 limit: 1,
                 order: "asc",
             },

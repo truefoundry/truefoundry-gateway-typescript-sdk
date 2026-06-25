@@ -6,9 +6,9 @@ export interface AgentInternalEnrichedAssistantMessage {
     role: "assistant";
     audio?: TrueFoundryGateway.AgentInternalEnrichedAssistantMessageAudio;
     content?: TrueFoundryGateway.AgentInternalEnrichedAssistantMessageContent;
-    function_call?: TrueFoundryGateway.AgentInternalEnrichedAssistantMessageFunctionCall;
+    functionCall?: TrueFoundryGateway.AgentInternalEnrichedAssistantMessageFunctionCall;
     name?: string;
     refusal?: string;
-    thinking_blocks?: TrueFoundryGateway.AgentInternalEnrichedAssistantMessageThinkingBlocksItem[];
-    tool_calls?: TrueFoundryGateway.AgentInternalEnrichedToolCall[];
+    thinkingBlocks?: TrueFoundryGateway.AgentInternalEnrichedAssistantMessageThinkingBlocksItem[];
+    toolCalls?: TrueFoundryGateway.AgentInternalEnrichedToolCall[];
 }

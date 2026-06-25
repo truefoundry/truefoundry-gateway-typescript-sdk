@@ -8,13 +8,19 @@ export const SessionSubject: core.serialization.ObjectSchema<
     serializers.SessionSubject.Raw,
     TrueFoundryGateway.SessionSubject
 > = core.serialization.object({
-    subject_id: core.serialization.string(),
-    subject_type: core.serialization.string(),
-    subject_slug: core.serialization.string().optional(),
-    subject_display_name: core.serialization.string().optional(),
-    subject_pat_name: core.serialization.string().optional(),
-    subject_controller_name: core.serialization.string().optional(),
-    subject_external_identity_slug: core.serialization.string().optional(),
+    subjectId: core.serialization.property("subject_id", core.serialization.string()),
+    subjectType: core.serialization.property("subject_type", core.serialization.string()),
+    subjectSlug: core.serialization.property("subject_slug", core.serialization.string().optional()),
+    subjectDisplayName: core.serialization.property("subject_display_name", core.serialization.string().optional()),
+    subjectPatName: core.serialization.property("subject_pat_name", core.serialization.string().optional()),
+    subjectControllerName: core.serialization.property(
+        "subject_controller_name",
+        core.serialization.string().optional(),
+    ),
+    subjectExternalIdentitySlug: core.serialization.property(
+        "subject_external_identity_slug",
+        core.serialization.string().optional(),
+    ),
 });
 
 export declare namespace SessionSubject {

@@ -10,7 +10,7 @@ export const TurnStreamingOutputEventContextItemApproval: core.serialization.Obj
     TrueFoundryGateway.TurnStreamingOutputEventContextItemApproval
 > = core.serialization.object({
     type: core.serialization.stringLiteral("user.tool_approval"),
-    tool_call_id: core.serialization.string(),
+    toolCallId: core.serialization.property("tool_call_id", core.serialization.string()),
     approval: ApprovalDecision,
 });
 

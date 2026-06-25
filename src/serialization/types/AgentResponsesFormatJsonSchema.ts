@@ -10,7 +10,7 @@ export const AgentResponsesFormatJsonSchema: core.serialization.ObjectSchema<
     TrueFoundryGateway.AgentResponsesFormatJsonSchema
 > = core.serialization.object({
     type: core.serialization.stringLiteral("json_schema"),
-    json_schema: AgentResponsesFormatJsonSchemaJsonSchema,
+    jsonSchema: core.serialization.property("json_schema", AgentResponsesFormatJsonSchemaJsonSchema),
 });
 
 export declare namespace AgentResponsesFormatJsonSchema {

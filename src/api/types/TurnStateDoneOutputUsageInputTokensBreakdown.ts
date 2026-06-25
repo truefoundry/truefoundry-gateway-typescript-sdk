@@ -4,6 +4,6 @@ export interface TurnStateDoneOutputUsageInputTokensBreakdown {
     harness: number;
     skills: number;
     instructions: number;
-    tool_definitions: number;
+    toolDefinitions: number;
     messages: number;
 }

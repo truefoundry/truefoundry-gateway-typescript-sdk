@@ -9,8 +9,8 @@ export interface CreateDraftSessionRequestAgentSpec {
     model: TrueFoundryGateway.AgentModelSpec;
     instructions?: string;
     messages?: TrueFoundryGateway.internal.agents.CreateDraftSessionRequestAgentSpecMessagesItem[];
-    mcp_servers?: TrueFoundryGateway.AgentMcpServerRequest[];
-    response_format?: TrueFoundryGateway.AgentResponsesFormat;
+    mcpServers?: TrueFoundryGateway.AgentMcpServerRequest[];
+    responseFormat?: TrueFoundryGateway.AgentResponsesFormat;
     skills?: TrueFoundryGateway.AgentSkillMount[];
     config?: TrueFoundryGateway.AgentConfig;
     variables?: Record<string, string>;

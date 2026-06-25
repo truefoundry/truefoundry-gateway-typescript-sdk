@@ -5,19 +5,19 @@ import type * as TrueFoundryGateway from "../../../../../../../../index.js";
 /**
  * @example
  *     {
- *         agent_name: "agent_name",
+ *         agentName: "agent_name",
  *         limit: 1,
  *         order: "asc",
- *         page_token: "page_token",
- *         start_timestamp: "start_timestamp",
- *         end_timestamp: "end_timestamp"
+ *         pageToken: "page_token",
+ *         startTimestamp: "start_timestamp",
+ *         endTimestamp: "end_timestamp"
  *     }
  */
 export interface DraftSessionsListRequest {
-    agent_name?: string;
+    agentName?: string;
     limit?: number;
     order?: TrueFoundryGateway.internal.agents.DraftSessionsListRequestOrder;
-    page_token?: string;
-    start_timestamp?: string;
-    end_timestamp?: string;
+    pageToken?: string;
+    startTimestamp?: string;
+    endTimestamp?: string;
 }

@@ -3,11 +3,11 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface AgentCompletionUsage {
-    completion_tokens: number;
-    prompt_tokens: number;
-    total_tokens: number;
-    completion_tokens_details?: TrueFoundryGateway.AgentCompletionUsageCompletionTokensDetails;
-    prompt_tokens_details?: TrueFoundryGateway.AgentCompletionUsagePromptTokensDetails;
-    cache_read_input_tokens?: number;
-    cache_creation_input_tokens?: number;
+    completionTokens: number;
+    promptTokens: number;
+    totalTokens: number;
+    completionTokensDetails?: TrueFoundryGateway.AgentCompletionUsageCompletionTokensDetails;
+    promptTokensDetails?: TrueFoundryGateway.AgentCompletionUsagePromptTokensDetails;
+    cacheReadInputTokens?: number;
+    cacheCreationInputTokens?: number;
 }

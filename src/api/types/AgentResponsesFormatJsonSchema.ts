@@ -4,5 +4,5 @@ import type * as TrueFoundryGateway from "../index.js";
 
 export interface AgentResponsesFormatJsonSchema {
     type: "json_schema";
-    json_schema: TrueFoundryGateway.AgentResponsesFormatJsonSchemaJsonSchema;
+    jsonSchema: TrueFoundryGateway.AgentResponsesFormatJsonSchemaJsonSchema;
 }

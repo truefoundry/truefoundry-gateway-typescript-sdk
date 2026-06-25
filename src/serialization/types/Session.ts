@@ -8,11 +8,11 @@ import { SessionSubject } from "./SessionSubject.js";
 export const Session: core.serialization.ObjectSchema<serializers.Session.Raw, TrueFoundryGateway.Session> =
     core.serialization.object({
         id: core.serialization.string(),
-        agent_name: core.serialization.string(),
+        agentName: core.serialization.property("agent_name", core.serialization.string()),
         title: core.serialization.string().optional(),
-        created_by_subject: SessionSubject,
-        created_at: core.serialization.string(),
-        updated_at: core.serialization.string(),
+        createdBySubject: core.serialization.property("created_by_subject", SessionSubject),
+        createdAt: core.serialization.property("created_at", core.serialization.string()),
+        updatedAt: core.serialization.property("updated_at", core.serialization.string()),
     });
 
 export declare namespace Session {

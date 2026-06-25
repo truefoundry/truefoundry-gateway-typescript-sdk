@@ -8,7 +8,7 @@ export const AgentCompletionUsageCompletionTokensDetails: core.serialization.Obj
     serializers.AgentCompletionUsageCompletionTokensDetails.Raw,
     TrueFoundryGateway.AgentCompletionUsageCompletionTokensDetails
 > = core.serialization.object({
-    reasoning_tokens: core.serialization.number().optional(),
+    reasoningTokens: core.serialization.property("reasoning_tokens", core.serialization.number().optional()),
 });
 
 export declare namespace AgentCompletionUsageCompletionTokensDetails {

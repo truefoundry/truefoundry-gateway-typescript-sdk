@@ -11,12 +11,12 @@ import { AgentConfigSandbox } from "./AgentConfigSandbox.js";
 
 export const AgentConfig: core.serialization.ObjectSchema<serializers.AgentConfig.Raw, TrueFoundryGateway.AgentConfig> =
     core.serialization.object({
-        iteration_limit: core.serialization.number(),
+        iterationLimit: core.serialization.property("iteration_limit", core.serialization.number()),
         sandbox: AgentConfigSandbox.optional(),
-        dynamic_sub_agents: AgentConfigDynamicSubAgents.optional(),
-        context_management: AgentConfigContextManagement.optional(),
-        generative_ui: AgentConfigGenerativeUi.optional(),
-        ask_user_questions: AgentConfigAskUserQuestions.optional(),
+        dynamicSubAgents: core.serialization.property("dynamic_sub_agents", AgentConfigDynamicSubAgents.optional()),
+        contextManagement: core.serialization.property("context_management", AgentConfigContextManagement.optional()),
+        generativeUi: core.serialization.property("generative_ui", AgentConfigGenerativeUi.optional()),
+        askUserQuestions: core.serialization.property("ask_user_questions", AgentConfigAskUserQuestions.optional()),
     });
 
 export declare namespace AgentConfig {

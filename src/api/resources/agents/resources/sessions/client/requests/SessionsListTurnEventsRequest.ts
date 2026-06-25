@@ -5,13 +5,13 @@ import type * as TrueFoundryGateway from "../../../../../../index.js";
 /**
  * @example
  *     {
- *         page_token: "page_token",
+ *         pageToken: "page_token",
  *         limit: 1,
  *         order: "asc"
  *     }
  */
 export interface SessionsListTurnEventsRequest {
-    page_token?: string;
+    pageToken?: string;
     limit?: number;
     order?: TrueFoundryGateway.agents.SessionsListTurnEventsRequestOrder;
 }

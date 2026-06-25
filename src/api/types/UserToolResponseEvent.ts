@@ -2,7 +2,7 @@
 
 export interface UserToolResponseEvent {
     type: "user.tool_response";
-    thread_id: string;
-    tool_call_id: string;
+    threadId: string;
+    toolCallId: string;
     content: string;
 }

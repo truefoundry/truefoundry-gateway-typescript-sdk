@@ -3,10 +3,10 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface AgentConfig {
-    iteration_limit: number;
+    iterationLimit: number;
     sandbox?: TrueFoundryGateway.AgentConfigSandbox;
-    dynamic_sub_agents?: TrueFoundryGateway.AgentConfigDynamicSubAgents;
-    context_management?: TrueFoundryGateway.AgentConfigContextManagement;
-    generative_ui?: TrueFoundryGateway.AgentConfigGenerativeUi;
-    ask_user_questions?: TrueFoundryGateway.AgentConfigAskUserQuestions;
+    dynamicSubAgents?: TrueFoundryGateway.AgentConfigDynamicSubAgents;
+    contextManagement?: TrueFoundryGateway.AgentConfigContextManagement;
+    generativeUi?: TrueFoundryGateway.AgentConfigGenerativeUi;
+    askUserQuestions?: TrueFoundryGateway.AgentConfigAskUserQuestions;
 }

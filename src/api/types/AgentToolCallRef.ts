@@ -2,5 +2,5 @@
 
 export interface AgentToolCallRef {
     id: string;
-    source_event_id: string;
+    sourceEventId: string;
 }

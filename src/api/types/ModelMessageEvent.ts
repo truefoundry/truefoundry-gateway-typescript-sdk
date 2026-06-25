@@ -5,16 +5,16 @@ import type * as TrueFoundryGateway from "../index.js";
 export interface ModelMessageEvent {
     audio?: TrueFoundryGateway.ModelMessageEventAudio;
     content?: TrueFoundryGateway.ModelMessageEventContent;
-    function_call?: TrueFoundryGateway.ModelMessageEventFunctionCall;
+    functionCall?: TrueFoundryGateway.ModelMessageEventFunctionCall;
     name?: string;
     refusal?: string;
-    thinking_blocks?: TrueFoundryGateway.ModelMessageEventThinkingBlocksItem[];
-    tool_calls?: TrueFoundryGateway.AgentEnrichedToolCall[];
+    thinkingBlocks?: TrueFoundryGateway.ModelMessageEventThinkingBlocksItem[];
+    toolCalls?: TrueFoundryGateway.AgentEnrichedToolCall[];
     type: "model.message";
     /** Unique identifier for the event */
     id: string;
-    thread_id: string;
-    finish_reason?: TrueFoundryGateway.AgentFinishReason;
-    created_at: string;
+    threadId: string;
+    finishReason?: TrueFoundryGateway.AgentFinishReason;
+    createdAt: string;
     usage?: TrueFoundryGateway.ModelMessageEventUsage;
 }

@@ -4,5 +4,5 @@ import type * as TrueFoundryGateway from "../index.js";
 
 export interface AgentConfigContextManagement {
     compaction: TrueFoundryGateway.AgentConfigContextManagementCompaction;
-    large_tool_response: TrueFoundryGateway.AgentConfigContextManagementLargeToolResponse;
+    largeToolResponse: TrueFoundryGateway.AgentConfigContextManagementLargeToolResponse;
 }

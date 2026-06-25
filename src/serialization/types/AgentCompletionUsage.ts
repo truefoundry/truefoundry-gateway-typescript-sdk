@@ -10,13 +10,25 @@ export const AgentCompletionUsage: core.serialization.ObjectSchema<
     serializers.AgentCompletionUsage.Raw,
     TrueFoundryGateway.AgentCompletionUsage
 > = core.serialization.object({
-    completion_tokens: core.serialization.number(),
-    prompt_tokens: core.serialization.number(),
-    total_tokens: core.serialization.number(),
-    completion_tokens_details: AgentCompletionUsageCompletionTokensDetails.optional(),
-    prompt_tokens_details: AgentCompletionUsagePromptTokensDetails.optional(),
-    cache_read_input_tokens: core.serialization.number().optional(),
-    cache_creation_input_tokens: core.serialization.number().optional(),
+    completionTokens: core.serialization.property("completion_tokens", core.serialization.number()),
+    promptTokens: core.serialization.property("prompt_tokens", core.serialization.number()),
+    totalTokens: core.serialization.property("total_tokens", core.serialization.number()),
+    completionTokensDetails: core.serialization.property(
+        "completion_tokens_details",
+        AgentCompletionUsageCompletionTokensDetails.optional(),
+    ),
+    promptTokensDetails: core.serialization.property(
+        "prompt_tokens_details",
+        AgentCompletionUsagePromptTokensDetails.optional(),
+    ),
+    cacheReadInputTokens: core.serialization.property(
+        "cache_read_input_tokens",
+        core.serialization.number().optional(),
+    ),
+    cacheCreationInputTokens: core.serialization.property(
+        "cache_creation_input_tokens",
+        core.serialization.number().optional(),
+    ),
 });
 
 export declare namespace AgentCompletionUsage {

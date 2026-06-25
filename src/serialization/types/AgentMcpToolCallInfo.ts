@@ -9,8 +9,8 @@ export const AgentMcpToolCallInfo: core.serialization.ObjectSchema<
     TrueFoundryGateway.AgentMcpToolCallInfo
 > = core.serialization.object({
     type: core.serialization.stringLiteral("mcp"),
-    server_id: core.serialization.string(),
-    server_name: core.serialization.string(),
+    serverId: core.serialization.property("server_id", core.serialization.string()),
+    serverName: core.serialization.property("server_name", core.serialization.string()),
     name: core.serialization.string(),
 });
 

@@ -4,9 +4,9 @@ import type * as TrueFoundryGateway from "../index.js";
 
 export interface Session {
     id: string;
-    agent_name: string;
+    agentName: string;
     title?: string;
-    created_by_subject: TrueFoundryGateway.SessionSubject;
-    created_at: string;
-    updated_at: string;
+    createdBySubject: TrueFoundryGateway.SessionSubject;
+    createdAt: string;
+    updatedAt: string;
 }

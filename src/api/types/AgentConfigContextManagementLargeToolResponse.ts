@@ -2,7 +2,7 @@
 
 export interface AgentConfigContextManagementLargeToolResponse {
     enabled: boolean;
-    individual_tool_response_token_threshold: number;
-    total_tool_response_token_threshold: number;
-    preview_number_of_characters: number;
+    individualToolResponseTokenThreshold: number;
+    totalToolResponseTokenThreshold: number;
+    previewNumberOfCharacters: number;
 }

@@ -38,12 +38,12 @@ export class DraftSessionsClient {
      *
      * @example
      *     await client.internal.agents.draftSessions.list({
-     *         agent_name: "agent_name",
+     *         agentName: "agent_name",
      *         limit: 1,
      *         order: "asc",
-     *         page_token: "page_token",
-     *         start_timestamp: "start_timestamp",
-     *         end_timestamp: "end_timestamp"
+     *         pageToken: "page_token",
+     *         startTimestamp: "start_timestamp",
+     *         endTimestamp: "end_timestamp"
      *     })
      */
     public async list(
@@ -56,14 +56,7 @@ export class DraftSessionsClient {
             async (
                 request: TrueFoundryGateway.internal.agents.DraftSessionsListRequest,
             ): Promise<core.WithRawResponse<TrueFoundryGateway.internal.agents.DraftSessionsListResponse>> => {
-                const {
-                    agent_name: agentName,
-                    limit = 10,
-                    order,
-                    page_token: pageToken,
-                    start_timestamp: startTimestamp,
-                    end_timestamp: endTimestamp,
-                } = request;
+                const { agentName, limit = 10, order, pageToken, startTimestamp, endTimestamp } = request;
                 const _queryParams: Record<string, unknown> = {
                     agent_name: agentName,
                     limit,
@@ -154,14 +147,11 @@ export class DraftSessionsClient {
             response: dataWithRawResponse.data,
             rawResponse: dataWithRawResponse.rawResponse,
             hasNextPage: (response) =>
-                response?.pagination.next_page_token != null &&
-                !(
-                    typeof response?.pagination.next_page_token === "string" &&
-                    response?.pagination.next_page_token === ""
-                ),
+                response?.pagination.nextPageToken != null &&
+                !(typeof response?.pagination.nextPageToken === "string" && response?.pagination.nextPageToken === ""),
             getItems: (response) => response?.data ?? [],
             loadPage: (response) => {
-                return list(core.setObjectProperty(request, "page_token", response?.pagination.next_page_token));
+                return list(core.setObjectProperty(request, "pageToken", response?.pagination.nextPageToken));
             },
         });
     }
@@ -180,7 +170,7 @@ export class DraftSessionsClient {
      *
      * @example
      *     await client.internal.agents.draftSessions.create({
-     *         agent_spec: {
+     *         agentSpec: {
      *             model: {
      *                 name: "name"
      *             }
