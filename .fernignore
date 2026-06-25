@@ -1,5 +1,6 @@
 # Paths Fern's TypeScript generator must leave alone on every regen. The
-# hand-maintained top-level src/index.ts lives at a stable path so users can
-# import across releases without Fern overwriting it.
+# hand-maintained top-level src/index.ts and agent/ folder live at stable
+# paths so they are not overwritten on SDK regeneration.
 src/index.ts
+src/agent/
 .github/workflows/ci.yml

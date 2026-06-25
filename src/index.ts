@@ -10,3 +10,7 @@ export type { BaseClientOptions, BaseRequestOptions } from "./BaseClient.js";
 export { TrueFoundryGatewayClient } from "./Client.js";
 export { TrueFoundryGatewayError, TrueFoundryGatewayTimeoutError } from "./errors/index.js";
 export * from "./exports.js";
+
+// Hand-written agent session wrapper (.fernignore-protected):
+export { AgentSessionClient } from "./agent/index.js";
+export type { AgentSession } from "./agent/index.js";
