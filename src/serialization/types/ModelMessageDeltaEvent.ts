@@ -3,8 +3,8 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { AgentExtendedDeltaToolCall } from "./AgentExtendedDeltaToolCall.js";
-import { AgentFinishReason } from "./AgentFinishReason.js";
+import { ExtendedChunkDeltaToolCall } from "./ExtendedChunkDeltaToolCall.js";
+import { FinishReason } from "./FinishReason.js";
 import { ModelMessageDeltaEventFunctionCall } from "./ModelMessageDeltaEventFunctionCall.js";
 import { ModelMessageDeltaEventThinkingBlocksItem } from "./ModelMessageDeltaEventThinkingBlocksItem.js";
 
@@ -17,7 +17,7 @@ export const ModelMessageDeltaEvent: core.serialization.ObjectSchema<
     functionCall: core.serialization.property("function_call", ModelMessageDeltaEventFunctionCall.optional()),
     toolCalls: core.serialization.property(
         "tool_calls",
-        core.serialization.list(AgentExtendedDeltaToolCall).optional(),
+        core.serialization.list(ExtendedChunkDeltaToolCall).optional(),
     ),
     thinkingBlocks: core.serialization.property(
         "thinking_blocks",
@@ -28,7 +28,7 @@ export const ModelMessageDeltaEvent: core.serialization.ObjectSchema<
     id: core.serialization.string(),
     threadId: core.serialization.property("thread_id", core.serialization.string()),
     createdAt: core.serialization.property("created_at", core.serialization.string().optional()),
-    finishReason: core.serialization.property("finish_reason", AgentFinishReason.optional()),
+    finishReason: core.serialization.property("finish_reason", FinishReason.optional()),
     sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
 });
 
@@ -37,14 +37,14 @@ export declare namespace ModelMessageDeltaEvent {
         content?: string | null;
         refusal?: string | null;
         function_call?: ModelMessageDeltaEventFunctionCall.Raw | null;
-        tool_calls?: AgentExtendedDeltaToolCall.Raw[] | null;
+        tool_calls?: ExtendedChunkDeltaToolCall.Raw[] | null;
         thinking_blocks?: ModelMessageDeltaEventThinkingBlocksItem.Raw[] | null;
         reasoning_content?: string | null;
         type: "model.message.delta";
         id: string;
         thread_id: string;
         created_at?: string | null;
-        finish_reason?: AgentFinishReason.Raw | null;
+        finish_reason?: FinishReason.Raw | null;
         sequence_number: number;
     }
 }

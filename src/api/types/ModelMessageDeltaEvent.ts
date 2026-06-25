@@ -6,7 +6,7 @@ export interface ModelMessageDeltaEvent {
     content?: string;
     refusal?: string;
     functionCall?: TrueFoundryGateway.ModelMessageDeltaEventFunctionCall;
-    toolCalls?: TrueFoundryGateway.AgentExtendedDeltaToolCall[];
+    toolCalls?: TrueFoundryGateway.ExtendedChunkDeltaToolCall[];
     thinkingBlocks?: TrueFoundryGateway.ModelMessageDeltaEventThinkingBlocksItem[];
     reasoningContent?: string;
     type: "model.message.delta";
@@ -14,6 +14,6 @@ export interface ModelMessageDeltaEvent {
     id: string;
     threadId: string;
     createdAt?: string;
-    finishReason?: TrueFoundryGateway.AgentFinishReason;
+    finishReason?: TrueFoundryGateway.FinishReason;
     sequenceNumber: number;
 }

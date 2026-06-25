@@ -4,7 +4,7 @@ import type * as TrueFoundryGateway from "../index.js";
 
 export interface DraftSession {
     id: string;
-    agentSpec: TrueFoundryGateway.DraftSessionAgentSpec;
+    agentSpec: TrueFoundryGateway.AgentSpec;
     agentName?: string;
     title?: string;
     createdBySubject: TrueFoundryGateway.Subject;

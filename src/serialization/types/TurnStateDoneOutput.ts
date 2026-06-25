@@ -3,8 +3,8 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { AgentEnrichedToolCall } from "./AgentEnrichedToolCall.js";
-import { AgentFinishReason } from "./AgentFinishReason.js";
+import { EnrichedToolCall } from "./EnrichedToolCall.js";
+import { FinishReason } from "./FinishReason.js";
 import { TurnStateDoneOutputAudio } from "./TurnStateDoneOutputAudio.js";
 import { TurnStateDoneOutputContent } from "./TurnStateDoneOutputContent.js";
 import { TurnStateDoneOutputFunctionCall } from "./TurnStateDoneOutputFunctionCall.js";
@@ -24,11 +24,11 @@ export const TurnStateDoneOutput: core.serialization.ObjectSchema<
         "thinking_blocks",
         core.serialization.list(TurnStateDoneOutputThinkingBlocksItem).optional(),
     ),
-    toolCalls: core.serialization.property("tool_calls", core.serialization.list(AgentEnrichedToolCall).optional()),
+    toolCalls: core.serialization.property("tool_calls", core.serialization.list(EnrichedToolCall).optional()),
     type: core.serialization.stringLiteral("model.message"),
     id: core.serialization.string(),
     threadId: core.serialization.property("thread_id", core.serialization.string()),
-    finishReason: core.serialization.property("finish_reason", AgentFinishReason.optional()),
+    finishReason: core.serialization.property("finish_reason", FinishReason.optional()),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
     usage: TurnStateDoneOutputUsage.optional(),
     sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
@@ -42,11 +42,11 @@ export declare namespace TurnStateDoneOutput {
         name?: string | null;
         refusal?: string | null;
         thinking_blocks?: TurnStateDoneOutputThinkingBlocksItem.Raw[] | null;
-        tool_calls?: AgentEnrichedToolCall.Raw[] | null;
+        tool_calls?: EnrichedToolCall.Raw[] | null;
         type: "model.message";
         id: string;
         thread_id: string;
-        finish_reason?: AgentFinishReason.Raw | null;
+        finish_reason?: FinishReason.Raw | null;
         created_at: string;
         usage?: TurnStateDoneOutputUsage.Raw | null;
         sequence_number: number;

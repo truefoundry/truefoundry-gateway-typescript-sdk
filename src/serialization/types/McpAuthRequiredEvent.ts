@@ -3,7 +3,7 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { AgentMcpServerAuthInfo } from "./AgentMcpServerAuthInfo.js";
+import { McpServerAuthInfo } from "./McpServerAuthInfo.js";
 
 export const McpAuthRequiredEvent: core.serialization.ObjectSchema<
     serializers.McpAuthRequiredEvent.Raw,
@@ -12,7 +12,7 @@ export const McpAuthRequiredEvent: core.serialization.ObjectSchema<
     type: core.serialization.stringLiteral("mcp.auth_required"),
     id: core.serialization.string(),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
-    servers: core.serialization.list(AgentMcpServerAuthInfo),
+    servers: core.serialization.list(McpServerAuthInfo),
     threadId: core.serialization.property("thread_id", core.serialization.string().optional()),
     sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
 });
@@ -22,7 +22,7 @@ export declare namespace McpAuthRequiredEvent {
         type: "mcp.auth_required";
         id: string;
         created_at: string;
-        servers: AgentMcpServerAuthInfo.Raw[];
+        servers: McpServerAuthInfo.Raw[];
         thread_id?: string | null;
         sequence_number: number;
     }

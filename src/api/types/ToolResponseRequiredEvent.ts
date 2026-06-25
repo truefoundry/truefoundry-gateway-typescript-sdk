@@ -8,6 +8,6 @@ export interface ToolResponseRequiredEvent {
     id: string;
     createdAt: string;
     threadId: string;
-    toolCalls: TrueFoundryGateway.AgentToolCallRef[];
+    toolCalls: TrueFoundryGateway.ToolCallRef[];
     sequenceNumber: number;
 }

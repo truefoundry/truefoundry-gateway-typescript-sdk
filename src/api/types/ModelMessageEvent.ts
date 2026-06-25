@@ -9,12 +9,12 @@ export interface ModelMessageEvent {
     name?: string;
     refusal?: string;
     thinkingBlocks?: TrueFoundryGateway.ModelMessageEventThinkingBlocksItem[];
-    toolCalls?: TrueFoundryGateway.AgentEnrichedToolCall[];
+    toolCalls?: TrueFoundryGateway.EnrichedToolCall[];
     type: "model.message";
     /** Unique identifier for the event */
     id: string;
     threadId: string;
-    finishReason?: TrueFoundryGateway.AgentFinishReason;
+    finishReason?: TrueFoundryGateway.FinishReason;
     createdAt: string;
     usage?: TrueFoundryGateway.ModelMessageEventUsage;
     sequenceNumber: number;

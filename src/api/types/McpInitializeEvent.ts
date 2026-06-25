@@ -8,6 +8,6 @@ export interface McpInitializeEvent {
     id: string;
     createdAt: string;
     threadId: string;
-    content: TrueFoundryGateway.AgentMcpInitializationInfo[];
+    content: TrueFoundryGateway.McpInitializationInfo[];
     sequenceNumber: number;
 }

@@ -3,36 +3,36 @@
 import type * as TrueFoundryGateway from "../../../../../../../../api/index.js";
 import * as core from "../../../../../../../../core/index.js";
 import type * as serializers from "../../../../../../../index.js";
-import { AgentConfig } from "../../../../../../../types/AgentConfig.js";
-import { AgentMcpServerRequest } from "../../../../../../../types/AgentMcpServerRequest.js";
-import { AgentModelSpec } from "../../../../../../../types/AgentModelSpec.js";
-import { AgentResponsesFormat } from "../../../../../../../types/AgentResponsesFormat.js";
-import { AgentSkillMount } from "../../../../../../../types/AgentSkillMount.js";
+import { McpServer } from "../../../../../../../types/McpServer.js";
+import { Model } from "../../../../../../../types/Model.js";
+import { ResponseFormat } from "../../../../../../../types/ResponseFormat.js";
+import { RuntimeConfig } from "../../../../../../../types/RuntimeConfig.js";
+import { Skill } from "../../../../../../../types/Skill.js";
 import { CreateDraftSessionRequestAgentSpecMessagesItem } from "./CreateDraftSessionRequestAgentSpecMessagesItem.js";
 
 export const CreateDraftSessionRequestAgentSpec: core.serialization.ObjectSchema<
     serializers.internal.agents.CreateDraftSessionRequestAgentSpec.Raw,
     TrueFoundryGateway.internal.agents.CreateDraftSessionRequestAgentSpec
 > = core.serialization.object({
-    model: AgentModelSpec,
+    model: Model,
     instructions: core.serialization.string().optional(),
     messages: core.serialization.list(CreateDraftSessionRequestAgentSpecMessagesItem).optional(),
-    mcpServers: core.serialization.property("mcp_servers", core.serialization.list(AgentMcpServerRequest).optional()),
-    responseFormat: core.serialization.property("response_format", AgentResponsesFormat.optional()),
-    skills: core.serialization.list(AgentSkillMount).optional(),
-    config: AgentConfig.optional(),
+    mcpServers: core.serialization.property("mcp_servers", core.serialization.list(McpServer).optional()),
+    responseFormat: core.serialization.property("response_format", ResponseFormat.optional()),
+    skills: core.serialization.list(Skill).optional(),
+    config: RuntimeConfig.optional(),
     variables: core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
 });
 
 export declare namespace CreateDraftSessionRequestAgentSpec {
     export interface Raw {
-        model: AgentModelSpec.Raw;
+        model: Model.Raw;
         instructions?: string | null;
         messages?: CreateDraftSessionRequestAgentSpecMessagesItem.Raw[] | null;
-        mcp_servers?: AgentMcpServerRequest.Raw[] | null;
-        response_format?: AgentResponsesFormat.Raw | null;
-        skills?: AgentSkillMount.Raw[] | null;
-        config?: AgentConfig.Raw | null;
+        mcp_servers?: McpServer.Raw[] | null;
+        response_format?: ResponseFormat.Raw | null;
+        skills?: Skill.Raw[] | null;
+        config?: RuntimeConfig.Raw | null;
         variables?: Record<string, string> | null;
     }
 }

@@ -2,6 +2,4 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export type UserMessageContentOneItem =
-    | TrueFoundryGateway.AgentTextContentPart
-    | TrueFoundryGateway.AgentFileUploadContentPart;
+export type UserMessageContentOneItem = TrueFoundryGateway.TextContentPart | TrueFoundryGateway.FileUploadContentPart;

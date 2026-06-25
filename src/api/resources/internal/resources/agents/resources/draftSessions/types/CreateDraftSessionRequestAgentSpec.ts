@@ -6,12 +6,12 @@ import type * as TrueFoundryGateway from "../../../../../../../index.js";
  * Inline agent definition.
  */
 export interface CreateDraftSessionRequestAgentSpec {
-    model: TrueFoundryGateway.AgentModelSpec;
+    model: TrueFoundryGateway.Model;
     instructions?: string;
     messages?: TrueFoundryGateway.internal.agents.CreateDraftSessionRequestAgentSpecMessagesItem[];
-    mcpServers?: TrueFoundryGateway.AgentMcpServerRequest[];
-    responseFormat?: TrueFoundryGateway.AgentResponsesFormat;
-    skills?: TrueFoundryGateway.AgentSkillMount[];
-    config?: TrueFoundryGateway.AgentConfig;
+    mcpServers?: TrueFoundryGateway.McpServer[];
+    responseFormat?: TrueFoundryGateway.ResponseFormat;
+    skills?: TrueFoundryGateway.Skill[];
+    config?: TrueFoundryGateway.RuntimeConfig;
     variables?: Record<string, string>;
 }

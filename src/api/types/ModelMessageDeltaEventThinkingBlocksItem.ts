@@ -3,5 +3,5 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export type ModelMessageDeltaEventThinkingBlocksItem =
-    | TrueFoundryGateway.AgentThinkingBlock
-    | TrueFoundryGateway.AgentRedactedThinkingBlock;
+    | TrueFoundryGateway.ThinkingBlock
+    | TrueFoundryGateway.RedactedThinkingBlock;

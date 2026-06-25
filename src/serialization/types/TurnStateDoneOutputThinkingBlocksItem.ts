@@ -3,14 +3,14 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { AgentRedactedThinkingBlock } from "./AgentRedactedThinkingBlock.js";
-import { AgentThinkingBlock } from "./AgentThinkingBlock.js";
+import { RedactedThinkingBlock } from "./RedactedThinkingBlock.js";
+import { ThinkingBlock } from "./ThinkingBlock.js";
 
 export const TurnStateDoneOutputThinkingBlocksItem: core.serialization.Schema<
     serializers.TurnStateDoneOutputThinkingBlocksItem.Raw,
     TrueFoundryGateway.TurnStateDoneOutputThinkingBlocksItem
-> = core.serialization.undiscriminatedUnion([AgentThinkingBlock, AgentRedactedThinkingBlock]);
+> = core.serialization.undiscriminatedUnion([ThinkingBlock, RedactedThinkingBlock]);
 
 export declare namespace TurnStateDoneOutputThinkingBlocksItem {
-    export type Raw = AgentThinkingBlock.Raw | AgentRedactedThinkingBlock.Raw;
+    export type Raw = ThinkingBlock.Raw | RedactedThinkingBlock.Raw;
 }
