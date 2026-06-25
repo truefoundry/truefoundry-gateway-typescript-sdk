@@ -2,26 +2,13 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export interface TurnEvent {
-    audio?: TrueFoundryGateway.TurnEventAudio;
-    content?: TrueFoundryGateway.TurnEventContent;
-    functionCall?: TrueFoundryGateway.TurnEventFunctionCall;
-    name?: string;
-    refusal?: string;
-    thinkingBlocks?: TrueFoundryGateway.TurnEventThinkingBlocksItem[];
-    toolCalls?: TrueFoundryGateway.AgentEnrichedToolCall[];
-    type?: "model.message";
-    /** Unique identifier for the event */
-    id?: string;
-    threadId?: string;
-    finishReason?: TrueFoundryGateway.AgentFinishReason;
-    createdAt?: string;
-    usage?: TrueFoundryGateway.TurnEventUsage;
-    toolCallId?: string;
-    agentInfo?: TrueFoundryGateway.AgentInfo;
-    parent?: TrueFoundryGateway.AgentParent;
-    title?: string;
-    servers?: TrueFoundryGateway.AgentMcpServerAuthInfo[];
-    sandboxId?: string;
-    sequenceNumber: number;
-}
+export type TurnEvent =
+    | TrueFoundryGateway.ModelMessageEvent
+    | TrueFoundryGateway.ToolResponseEvent
+    | TrueFoundryGateway.ThreadCreatedEvent
+    | TrueFoundryGateway.ThreadDoneEvent
+    | TrueFoundryGateway.McpAuthRequiredEvent
+    | TrueFoundryGateway.McpInitializeEvent
+    | TrueFoundryGateway.SandboxCreatedEvent
+    | TrueFoundryGateway.ToolApprovalRequiredEvent
+    | TrueFoundryGateway.ToolResponseRequiredEvent;

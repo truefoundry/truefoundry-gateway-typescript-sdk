@@ -2,13 +2,13 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export interface TurnStateDoneOutput {
-    audio?: TrueFoundryGateway.TurnStateDoneOutputAudio;
-    content?: TrueFoundryGateway.TurnStateDoneOutputContent;
-    functionCall?: TrueFoundryGateway.TurnStateDoneOutputFunctionCall;
+export interface ModelMessageEvent {
+    audio?: TrueFoundryGateway.ModelMessageEventAudio;
+    content?: TrueFoundryGateway.ModelMessageEventContent;
+    functionCall?: TrueFoundryGateway.ModelMessageEventFunctionCall;
     name?: string;
     refusal?: string;
-    thinkingBlocks?: TrueFoundryGateway.TurnStateDoneOutputThinkingBlocksItem[];
+    thinkingBlocks?: TrueFoundryGateway.ModelMessageEventThinkingBlocksItem[];
     toolCalls?: TrueFoundryGateway.AgentEnrichedToolCall[];
     type: "model.message";
     /** Unique identifier for the event */
@@ -16,6 +16,6 @@ export interface TurnStateDoneOutput {
     threadId: string;
     finishReason?: TrueFoundryGateway.AgentFinishReason;
     createdAt: string;
-    usage?: TrueFoundryGateway.TurnStateDoneOutputUsage;
+    usage?: TrueFoundryGateway.ModelMessageEventUsage;
     sequenceNumber: number;
 }

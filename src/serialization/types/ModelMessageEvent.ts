@@ -5,24 +5,24 @@ import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 import { AgentEnrichedToolCall } from "./AgentEnrichedToolCall.js";
 import { AgentFinishReason } from "./AgentFinishReason.js";
-import { TurnStateDoneOutputAudio } from "./TurnStateDoneOutputAudio.js";
-import { TurnStateDoneOutputContent } from "./TurnStateDoneOutputContent.js";
-import { TurnStateDoneOutputFunctionCall } from "./TurnStateDoneOutputFunctionCall.js";
-import { TurnStateDoneOutputThinkingBlocksItem } from "./TurnStateDoneOutputThinkingBlocksItem.js";
-import { TurnStateDoneOutputUsage } from "./TurnStateDoneOutputUsage.js";
+import { ModelMessageEventAudio } from "./ModelMessageEventAudio.js";
+import { ModelMessageEventContent } from "./ModelMessageEventContent.js";
+import { ModelMessageEventFunctionCall } from "./ModelMessageEventFunctionCall.js";
+import { ModelMessageEventThinkingBlocksItem } from "./ModelMessageEventThinkingBlocksItem.js";
+import { ModelMessageEventUsage } from "./ModelMessageEventUsage.js";
 
-export const TurnStateDoneOutput: core.serialization.ObjectSchema<
-    serializers.TurnStateDoneOutput.Raw,
-    TrueFoundryGateway.TurnStateDoneOutput
+export const ModelMessageEvent: core.serialization.ObjectSchema<
+    serializers.ModelMessageEvent.Raw,
+    TrueFoundryGateway.ModelMessageEvent
 > = core.serialization.object({
-    audio: TurnStateDoneOutputAudio.optional(),
-    content: TurnStateDoneOutputContent.optional(),
-    functionCall: core.serialization.property("function_call", TurnStateDoneOutputFunctionCall.optional()),
+    audio: ModelMessageEventAudio.optional(),
+    content: ModelMessageEventContent.optional(),
+    functionCall: core.serialization.property("function_call", ModelMessageEventFunctionCall.optional()),
     name: core.serialization.string().optional(),
     refusal: core.serialization.string().optional(),
     thinkingBlocks: core.serialization.property(
         "thinking_blocks",
-        core.serialization.list(TurnStateDoneOutputThinkingBlocksItem).optional(),
+        core.serialization.list(ModelMessageEventThinkingBlocksItem).optional(),
     ),
     toolCalls: core.serialization.property("tool_calls", core.serialization.list(AgentEnrichedToolCall).optional()),
     type: core.serialization.stringLiteral("model.message"),
@@ -30,25 +30,25 @@ export const TurnStateDoneOutput: core.serialization.ObjectSchema<
     threadId: core.serialization.property("thread_id", core.serialization.string()),
     finishReason: core.serialization.property("finish_reason", AgentFinishReason.optional()),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
-    usage: TurnStateDoneOutputUsage.optional(),
+    usage: ModelMessageEventUsage.optional(),
     sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
 });
 
-export declare namespace TurnStateDoneOutput {
+export declare namespace ModelMessageEvent {
     export interface Raw {
-        audio?: TurnStateDoneOutputAudio.Raw | null;
-        content?: TurnStateDoneOutputContent.Raw | null;
-        function_call?: TurnStateDoneOutputFunctionCall.Raw | null;
+        audio?: ModelMessageEventAudio.Raw | null;
+        content?: ModelMessageEventContent.Raw | null;
+        function_call?: ModelMessageEventFunctionCall.Raw | null;
         name?: string | null;
         refusal?: string | null;
-        thinking_blocks?: TurnStateDoneOutputThinkingBlocksItem.Raw[] | null;
+        thinking_blocks?: ModelMessageEventThinkingBlocksItem.Raw[] | null;
         tool_calls?: AgentEnrichedToolCall.Raw[] | null;
         type: "model.message";
         id: string;
         thread_id: string;
         finish_reason?: AgentFinishReason.Raw | null;
         created_at: string;
-        usage?: TurnStateDoneOutputUsage.Raw | null;
+        usage?: ModelMessageEventUsage.Raw | null;
         sequence_number: number;
     }
 }

@@ -3,27 +3,32 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { AgentToolCallRef } from "./AgentToolCallRef.js";
+import { AgentInfo } from "./AgentInfo.js";
+import { AgentParent } from "./AgentParent.js";
 
-export const ToolApprovalRequiredEvent: core.serialization.ObjectSchema<
-    serializers.ToolApprovalRequiredEvent.Raw,
-    TrueFoundryGateway.ToolApprovalRequiredEvent
+export const ThreadCreatedEvent: core.serialization.ObjectSchema<
+    serializers.ThreadCreatedEvent.Raw,
+    TrueFoundryGateway.ThreadCreatedEvent
 > = core.serialization.object({
-    type: core.serialization.stringLiteral("tool.approval_required"),
+    type: core.serialization.stringLiteral("thread.created"),
     id: core.serialization.string(),
+    agentInfo: core.serialization.property("agent_info", AgentInfo),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
+    parent: AgentParent,
     threadId: core.serialization.property("thread_id", core.serialization.string()),
-    toolCalls: core.serialization.property("tool_calls", core.serialization.list(AgentToolCallRef)),
+    title: core.serialization.string(),
     sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
 });
 
-export declare namespace ToolApprovalRequiredEvent {
+export declare namespace ThreadCreatedEvent {
     export interface Raw {
-        type: "tool.approval_required";
+        type: "thread.created";
         id: string;
+        agent_info: AgentInfo.Raw;
         created_at: string;
+        parent: AgentParent.Raw;
         thread_id: string;
-        tool_calls: AgentToolCallRef.Raw[];
+        title: string;
         sequence_number: number;
     }
 }

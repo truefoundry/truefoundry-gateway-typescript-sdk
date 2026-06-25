@@ -2,12 +2,12 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export interface ToolResponseRequiredEvent {
-    type: "tool.response_required";
+export interface TurnDoneError {
+    type: "turn.done";
     /** Unique identifier for the event */
     id: string;
+    state: TrueFoundryGateway.TurnStateError;
     createdAt: string;
-    threadId: string;
-    toolCalls: TrueFoundryGateway.AgentToolCallRef[];
+    threadId?: string;
     sequenceNumber: number;
 }

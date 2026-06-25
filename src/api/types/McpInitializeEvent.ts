@@ -2,12 +2,12 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export interface ToolResponseRequiredEvent {
-    type: "tool.response_required";
+export interface McpInitializeEvent {
+    type: "mcp.initialize";
     /** Unique identifier for the event */
     id: string;
     createdAt: string;
     threadId: string;
-    toolCalls: TrueFoundryGateway.AgentToolCallRef[];
+    content: TrueFoundryGateway.AgentMcpInitializationInfo[];
     sequenceNumber: number;
 }

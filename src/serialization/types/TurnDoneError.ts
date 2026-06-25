@@ -3,26 +3,26 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { AgentMcpServerAuthInfo } from "./AgentMcpServerAuthInfo.js";
+import { TurnStateError } from "./TurnStateError.js";
 
-export const McpAuthRequiredEvent: core.serialization.ObjectSchema<
-    serializers.McpAuthRequiredEvent.Raw,
-    TrueFoundryGateway.McpAuthRequiredEvent
+export const TurnDoneError: core.serialization.ObjectSchema<
+    serializers.TurnDoneError.Raw,
+    TrueFoundryGateway.TurnDoneError
 > = core.serialization.object({
-    type: core.serialization.stringLiteral("mcp.auth_required"),
+    type: core.serialization.stringLiteral("turn.done"),
     id: core.serialization.string(),
+    state: TurnStateError,
     createdAt: core.serialization.property("created_at", core.serialization.string()),
-    servers: core.serialization.list(AgentMcpServerAuthInfo),
     threadId: core.serialization.property("thread_id", core.serialization.string().optional()),
     sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
 });
 
-export declare namespace McpAuthRequiredEvent {
+export declare namespace TurnDoneError {
     export interface Raw {
-        type: "mcp.auth_required";
+        type: "turn.done";
         id: string;
+        state: TurnStateError.Raw;
         created_at: string;
-        servers: AgentMcpServerAuthInfo.Raw[];
         thread_id?: string | null;
         sequence_number: number;
     }

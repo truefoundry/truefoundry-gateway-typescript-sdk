@@ -3,27 +3,27 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { AgentToolCallRef } from "./AgentToolCallRef.js";
+import { AgentMcpInitializationInfo } from "./AgentMcpInitializationInfo.js";
 
-export const ToolApprovalRequiredEvent: core.serialization.ObjectSchema<
-    serializers.ToolApprovalRequiredEvent.Raw,
-    TrueFoundryGateway.ToolApprovalRequiredEvent
+export const McpInitializeEvent: core.serialization.ObjectSchema<
+    serializers.McpInitializeEvent.Raw,
+    TrueFoundryGateway.McpInitializeEvent
 > = core.serialization.object({
-    type: core.serialization.stringLiteral("tool.approval_required"),
+    type: core.serialization.stringLiteral("mcp.initialize"),
     id: core.serialization.string(),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
     threadId: core.serialization.property("thread_id", core.serialization.string()),
-    toolCalls: core.serialization.property("tool_calls", core.serialization.list(AgentToolCallRef)),
+    content: core.serialization.list(AgentMcpInitializationInfo),
     sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
 });
 
-export declare namespace ToolApprovalRequiredEvent {
+export declare namespace McpInitializeEvent {
     export interface Raw {
-        type: "tool.approval_required";
+        type: "mcp.initialize";
         id: string;
         created_at: string;
         thread_id: string;
-        tool_calls: AgentToolCallRef.Raw[];
+        content: AgentMcpInitializationInfo.Raw[];
         sequence_number: number;
     }
 }

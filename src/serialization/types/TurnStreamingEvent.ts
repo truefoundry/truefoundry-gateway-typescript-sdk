@@ -3,79 +3,55 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { AgentFinishReason } from "./AgentFinishReason.js";
-import { AgentInfo } from "./AgentInfo.js";
-import { AgentMcpInitializationInfo } from "./AgentMcpInitializationInfo.js";
-import { AgentMcpServerAuthInfo } from "./AgentMcpServerAuthInfo.js";
-import { AgentParent } from "./AgentParent.js";
-import { AgentToolCallRef } from "./AgentToolCallRef.js";
-import { Subject } from "./Subject.js";
-import { TurnStateError } from "./TurnStateError.js";
-import { TurnStreamingEventAudio } from "./TurnStreamingEventAudio.js";
-import { TurnStreamingEventFunctionCall } from "./TurnStreamingEventFunctionCall.js";
-import { TurnStreamingEventThinkingBlocksItem } from "./TurnStreamingEventThinkingBlocksItem.js";
-import { TurnStreamingEventUsage } from "./TurnStreamingEventUsage.js";
+import { McpAuthRequiredEvent } from "./McpAuthRequiredEvent.js";
+import { McpInitializeEvent } from "./McpInitializeEvent.js";
+import { ModelMessageDeltaEvent } from "./ModelMessageDeltaEvent.js";
+import { ModelMessageEvent } from "./ModelMessageEvent.js";
+import { SandboxCreatedEvent } from "./SandboxCreatedEvent.js";
+import { ThreadCreatedEvent } from "./ThreadCreatedEvent.js";
+import { ThreadDoneEvent } from "./ThreadDoneEvent.js";
+import { ToolApprovalRequiredEvent } from "./ToolApprovalRequiredEvent.js";
+import { ToolResponseEvent } from "./ToolResponseEvent.js";
+import { ToolResponseRequiredEvent } from "./ToolResponseRequiredEvent.js";
+import { TurnCreatedEvent } from "./TurnCreatedEvent.js";
+import { TurnDoneCancelled } from "./TurnDoneCancelled.js";
+import { TurnDoneCompleted } from "./TurnDoneCompleted.js";
+import { TurnDoneError } from "./TurnDoneError.js";
 
-export const TurnStreamingEvent: core.serialization.ObjectSchema<
+export const TurnStreamingEvent: core.serialization.Schema<
     serializers.TurnStreamingEvent.Raw,
     TrueFoundryGateway.TurnStreamingEvent
-> = core.serialization.object({
-    audio: TurnStreamingEventAudio.optional(),
-    content: core.serialization.list(AgentMcpInitializationInfo).optional(),
-    functionCall: core.serialization.property("function_call", TurnStreamingEventFunctionCall.optional()),
-    name: core.serialization.string().optional(),
-    refusal: core.serialization.string().optional(),
-    thinkingBlocks: core.serialization.property(
-        "thinking_blocks",
-        core.serialization.list(TurnStreamingEventThinkingBlocksItem).optional(),
-    ),
-    toolCalls: core.serialization.property("tool_calls", core.serialization.list(AgentToolCallRef).optional()),
-    type: core.serialization.stringLiteral("turn.done").optional(),
-    id: core.serialization.string().optional(),
-    threadId: core.serialization.property("thread_id", core.serialization.string().optional()),
-    finishReason: core.serialization.property("finish_reason", AgentFinishReason.optional()),
-    createdAt: core.serialization.property("created_at", core.serialization.string().optional()),
-    usage: TurnStreamingEventUsage.optional(),
-    reasoningContent: core.serialization.property("reasoning_content", core.serialization.string().optional()),
-    toolCallId: core.serialization.property("tool_call_id", core.serialization.string().optional()),
-    agentInfo: core.serialization.property("agent_info", AgentInfo.optional()),
-    parent: AgentParent.optional(),
-    title: core.serialization.string().optional(),
-    servers: core.serialization.list(AgentMcpServerAuthInfo).optional(),
-    sandboxId: core.serialization.property("sandbox_id", core.serialization.string().optional()),
-    turnId: core.serialization.property("turn_id", core.serialization.string().optional()),
-    previousTurnId: core.serialization.property("previous_turn_id", core.serialization.string().optional()),
-    state: TurnStateError.optional(),
-    createdBy: core.serialization.property("created_by", Subject.optional()),
-    sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
-});
+> = core.serialization.undiscriminatedUnion([
+    ModelMessageEvent,
+    ModelMessageDeltaEvent,
+    ToolResponseEvent,
+    ThreadCreatedEvent,
+    ThreadDoneEvent,
+    McpAuthRequiredEvent,
+    McpInitializeEvent,
+    SandboxCreatedEvent,
+    ToolApprovalRequiredEvent,
+    ToolResponseRequiredEvent,
+    TurnCreatedEvent,
+    TurnDoneCompleted,
+    TurnDoneCancelled,
+    TurnDoneError,
+]);
 
 export declare namespace TurnStreamingEvent {
-    export interface Raw {
-        audio?: TurnStreamingEventAudio.Raw | null;
-        content?: AgentMcpInitializationInfo.Raw[] | null;
-        function_call?: TurnStreamingEventFunctionCall.Raw | null;
-        name?: string | null;
-        refusal?: string | null;
-        thinking_blocks?: TurnStreamingEventThinkingBlocksItem.Raw[] | null;
-        tool_calls?: AgentToolCallRef.Raw[] | null;
-        type?: "turn.done" | null;
-        id?: string | null;
-        thread_id?: string | null;
-        finish_reason?: AgentFinishReason.Raw | null;
-        created_at?: string | null;
-        usage?: TurnStreamingEventUsage.Raw | null;
-        reasoning_content?: string | null;
-        tool_call_id?: string | null;
-        agent_info?: AgentInfo.Raw | null;
-        parent?: AgentParent.Raw | null;
-        title?: string | null;
-        servers?: AgentMcpServerAuthInfo.Raw[] | null;
-        sandbox_id?: string | null;
-        turn_id?: string | null;
-        previous_turn_id?: string | null;
-        state?: TurnStateError.Raw | null;
-        created_by?: Subject.Raw | null;
-        sequence_number: number;
-    }
+    export type Raw =
+        | ModelMessageEvent.Raw
+        | ModelMessageDeltaEvent.Raw
+        | ToolResponseEvent.Raw
+        | ThreadCreatedEvent.Raw
+        | ThreadDoneEvent.Raw
+        | McpAuthRequiredEvent.Raw
+        | McpInitializeEvent.Raw
+        | SandboxCreatedEvent.Raw
+        | ToolApprovalRequiredEvent.Raw
+        | ToolResponseRequiredEvent.Raw
+        | TurnCreatedEvent.Raw
+        | TurnDoneCompleted.Raw
+        | TurnDoneCancelled.Raw
+        | TurnDoneError.Raw;
 }

@@ -9,4 +9,5 @@ export interface ToolApprovalRequiredEvent {
     createdAt: string;
     threadId: string;
     toolCalls: TrueFoundryGateway.AgentToolCallRef[];
+    sequenceNumber: number;
 }

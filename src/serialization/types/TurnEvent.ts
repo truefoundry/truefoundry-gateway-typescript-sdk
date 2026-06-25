@@ -3,65 +3,38 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { AgentEnrichedToolCall } from "./AgentEnrichedToolCall.js";
-import { AgentFinishReason } from "./AgentFinishReason.js";
-import { AgentInfo } from "./AgentInfo.js";
-import { AgentMcpServerAuthInfo } from "./AgentMcpServerAuthInfo.js";
-import { AgentParent } from "./AgentParent.js";
-import { TurnEventAudio } from "./TurnEventAudio.js";
-import { TurnEventContent } from "./TurnEventContent.js";
-import { TurnEventFunctionCall } from "./TurnEventFunctionCall.js";
-import { TurnEventThinkingBlocksItem } from "./TurnEventThinkingBlocksItem.js";
-import { TurnEventUsage } from "./TurnEventUsage.js";
+import { McpAuthRequiredEvent } from "./McpAuthRequiredEvent.js";
+import { McpInitializeEvent } from "./McpInitializeEvent.js";
+import { ModelMessageEvent } from "./ModelMessageEvent.js";
+import { SandboxCreatedEvent } from "./SandboxCreatedEvent.js";
+import { ThreadCreatedEvent } from "./ThreadCreatedEvent.js";
+import { ThreadDoneEvent } from "./ThreadDoneEvent.js";
+import { ToolApprovalRequiredEvent } from "./ToolApprovalRequiredEvent.js";
+import { ToolResponseEvent } from "./ToolResponseEvent.js";
+import { ToolResponseRequiredEvent } from "./ToolResponseRequiredEvent.js";
 
-export const TurnEvent: core.serialization.ObjectSchema<serializers.TurnEvent.Raw, TrueFoundryGateway.TurnEvent> =
-    core.serialization.object({
-        audio: TurnEventAudio.optional(),
-        content: TurnEventContent.optional(),
-        functionCall: core.serialization.property("function_call", TurnEventFunctionCall.optional()),
-        name: core.serialization.string().optional(),
-        refusal: core.serialization.string().optional(),
-        thinkingBlocks: core.serialization.property(
-            "thinking_blocks",
-            core.serialization.list(TurnEventThinkingBlocksItem).optional(),
-        ),
-        toolCalls: core.serialization.property("tool_calls", core.serialization.list(AgentEnrichedToolCall).optional()),
-        type: core.serialization.stringLiteral("model.message").optional(),
-        id: core.serialization.string().optional(),
-        threadId: core.serialization.property("thread_id", core.serialization.string().optional()),
-        finishReason: core.serialization.property("finish_reason", AgentFinishReason.optional()),
-        createdAt: core.serialization.property("created_at", core.serialization.string().optional()),
-        usage: TurnEventUsage.optional(),
-        toolCallId: core.serialization.property("tool_call_id", core.serialization.string().optional()),
-        agentInfo: core.serialization.property("agent_info", AgentInfo.optional()),
-        parent: AgentParent.optional(),
-        title: core.serialization.string().optional(),
-        servers: core.serialization.list(AgentMcpServerAuthInfo).optional(),
-        sandboxId: core.serialization.property("sandbox_id", core.serialization.string().optional()),
-        sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
-    });
+export const TurnEvent: core.serialization.Schema<serializers.TurnEvent.Raw, TrueFoundryGateway.TurnEvent> =
+    core.serialization.undiscriminatedUnion([
+        ModelMessageEvent,
+        ToolResponseEvent,
+        ThreadCreatedEvent,
+        ThreadDoneEvent,
+        McpAuthRequiredEvent,
+        McpInitializeEvent,
+        SandboxCreatedEvent,
+        ToolApprovalRequiredEvent,
+        ToolResponseRequiredEvent,
+    ]);
 
 export declare namespace TurnEvent {
-    export interface Raw {
-        audio?: TurnEventAudio.Raw | null;
-        content?: TurnEventContent.Raw | null;
-        function_call?: TurnEventFunctionCall.Raw | null;
-        name?: string | null;
-        refusal?: string | null;
-        thinking_blocks?: TurnEventThinkingBlocksItem.Raw[] | null;
-        tool_calls?: AgentEnrichedToolCall.Raw[] | null;
-        type?: "model.message" | null;
-        id?: string | null;
-        thread_id?: string | null;
-        finish_reason?: AgentFinishReason.Raw | null;
-        created_at?: string | null;
-        usage?: TurnEventUsage.Raw | null;
-        tool_call_id?: string | null;
-        agent_info?: AgentInfo.Raw | null;
-        parent?: AgentParent.Raw | null;
-        title?: string | null;
-        servers?: AgentMcpServerAuthInfo.Raw[] | null;
-        sandbox_id?: string | null;
-        sequence_number: number;
-    }
+    export type Raw =
+        | ModelMessageEvent.Raw
+        | ToolResponseEvent.Raw
+        | ThreadCreatedEvent.Raw
+        | ThreadDoneEvent.Raw
+        | McpAuthRequiredEvent.Raw
+        | McpInitializeEvent.Raw
+        | SandboxCreatedEvent.Raw
+        | ToolApprovalRequiredEvent.Raw
+        | ToolResponseRequiredEvent.Raw;
 }

@@ -2,12 +2,14 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export interface ToolResponseRequiredEvent {
-    type: "tool.response_required";
+export interface ThreadCreatedEvent {
+    type: "thread.created";
     /** Unique identifier for the event */
     id: string;
+    agentInfo: TrueFoundryGateway.AgentInfo;
     createdAt: string;
+    parent: TrueFoundryGateway.AgentParent;
     threadId: string;
-    toolCalls: TrueFoundryGateway.AgentToolCallRef[];
+    title: string;
     sequenceNumber: number;
 }

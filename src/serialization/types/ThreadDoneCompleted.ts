@@ -3,27 +3,34 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { AgentToolCallRef } from "./AgentToolCallRef.js";
+import { AgentParent } from "./AgentParent.js";
+import { ModelMessageEvent } from "./ModelMessageEvent.js";
 
-export const ToolApprovalRequiredEvent: core.serialization.ObjectSchema<
-    serializers.ToolApprovalRequiredEvent.Raw,
-    TrueFoundryGateway.ToolApprovalRequiredEvent
+export const ThreadDoneCompleted: core.serialization.ObjectSchema<
+    serializers.ThreadDoneCompleted.Raw,
+    TrueFoundryGateway.ThreadDoneCompleted
 > = core.serialization.object({
-    type: core.serialization.stringLiteral("tool.approval_required"),
+    type: core.serialization.stringLiteral("thread.done"),
     id: core.serialization.string(),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
+    output: ModelMessageEvent,
+    parent: AgentParent.optional(),
+    status: core.serialization.stringLiteral("done"),
     threadId: core.serialization.property("thread_id", core.serialization.string()),
-    toolCalls: core.serialization.property("tool_calls", core.serialization.list(AgentToolCallRef)),
+    title: core.serialization.string().optional(),
     sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
 });
 
-export declare namespace ToolApprovalRequiredEvent {
+export declare namespace ThreadDoneCompleted {
     export interface Raw {
-        type: "tool.approval_required";
+        type: "thread.done";
         id: string;
         created_at: string;
+        output: ModelMessageEvent.Raw;
+        parent?: AgentParent.Raw | null;
+        status: "done";
         thread_id: string;
-        tool_calls: AgentToolCallRef.Raw[];
+        title?: string | null;
         sequence_number: number;
     }
 }

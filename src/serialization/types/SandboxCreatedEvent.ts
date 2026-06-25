@@ -3,26 +3,25 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { AgentMcpServerAuthInfo } from "./AgentMcpServerAuthInfo.js";
 
-export const McpAuthRequiredEvent: core.serialization.ObjectSchema<
-    serializers.McpAuthRequiredEvent.Raw,
-    TrueFoundryGateway.McpAuthRequiredEvent
+export const SandboxCreatedEvent: core.serialization.ObjectSchema<
+    serializers.SandboxCreatedEvent.Raw,
+    TrueFoundryGateway.SandboxCreatedEvent
 > = core.serialization.object({
-    type: core.serialization.stringLiteral("mcp.auth_required"),
+    type: core.serialization.stringLiteral("sandbox.created"),
     id: core.serialization.string(),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
-    servers: core.serialization.list(AgentMcpServerAuthInfo),
+    sandboxId: core.serialization.property("sandbox_id", core.serialization.string()),
     threadId: core.serialization.property("thread_id", core.serialization.string().optional()),
     sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
 });
 
-export declare namespace McpAuthRequiredEvent {
+export declare namespace SandboxCreatedEvent {
     export interface Raw {
-        type: "mcp.auth_required";
+        type: "sandbox.created";
         id: string;
         created_at: string;
-        servers: AgentMcpServerAuthInfo.Raw[];
+        sandbox_id: string;
         thread_id?: string | null;
         sequence_number: number;
     }

@@ -6,7 +6,7 @@ export interface Turn {
     id: string;
     sessionId: string;
     previousTurnId?: string;
-    input: TrueFoundryGateway.TurnInputItem[];
+    input?: TrueFoundryGateway.TurnInputItem[];
     state: TrueFoundryGateway.TurnState;
     createdBySubject: TrueFoundryGateway.Subject;
     createdAt: string;

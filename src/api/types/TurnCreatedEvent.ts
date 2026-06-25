@@ -2,12 +2,15 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export interface ToolResponseRequiredEvent {
-    type: "tool.response_required";
+export interface TurnCreatedEvent {
+    type: "turn.created";
     /** Unique identifier for the event */
     id: string;
+    turnId: string;
+    previousTurnId?: string;
+    state: TrueFoundryGateway.TurnStateRunning;
+    createdBy: TrueFoundryGateway.Subject;
     createdAt: string;
-    threadId: string;
-    toolCalls: TrueFoundryGateway.AgentToolCallRef[];
+    threadId?: string;
     sequenceNumber: number;
 }

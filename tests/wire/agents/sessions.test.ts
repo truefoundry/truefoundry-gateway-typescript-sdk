@@ -659,7 +659,7 @@ describe("SessionsClient", () => {
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody =
-            'event: \ndata: {"audio":{"id":"id"},"content":[{"mcp_server_id":"mcp_server_id","mcp_server_name":"mcp_server_name","session_id":"session_id"}],"function_call":{"name":"name","arguments":"arguments"},"name":"name","refusal":"refusal","thinking_blocks":[{"type":"thinking","thinking":"thinking","signature":"signature"}],"tool_calls":[{"id":"id","source_event_id":"source_event_id"}],"type":"turn.done","id":"id","thread_id":"thread_id","finish_reason":"stop","created_at":"created_at","usage":{"input_tokens":1,"output_tokens":1,"cache_read_tokens":1,"cache_write_tokens":1,"input_tokens_breakdown":{"harness":1,"skills":1,"instructions":1,"tool_definitions":1,"messages":1}},"reasoning_content":"reasoning_content","tool_call_id":"tool_call_id","agent_info":{"type":"dynamic","name":"name","input":"input","model":"model"},"parent":{"thread_id":"thread_id","tool_call_id":"tool_call_id"},"title":"title","servers":[{"mcp_server_id":"mcp_server_id","mcp_server_name":"mcp_server_name","auth_url":"auth_url","thread_ids":["thread_ids"]}],"sandbox_id":"sandbox_id","turn_id":"turn_id","previous_turn_id":"previous_turn_id","state":{"status":"error","message":"message"},"created_by":{"subject_id":"subject_id","subject_type":"subject_type","subject_slug":"subject_slug"},"sequence_number":1}\n\n';
+            'event: \ndata: {"audio":{"id":"id"},"content":"content","function_call":{"name":"name","arguments":"arguments"},"name":"name","refusal":"refusal","thinking_blocks":[{"type":"thinking","thinking":"thinking","signature":"signature"}],"tool_calls":[{"id":"id","type":"function","function":{"name":"name","arguments":"arguments"},"provider_specific_fields":{"key":"value"},"tool_info":{"type":"truefoundry-system","name":"name"}}],"type":"model.message","id":"id","thread_id":"thread_id","finish_reason":"stop","created_at":"created_at","usage":{"input_tokens":1,"output_tokens":1,"cache_read_tokens":1,"cache_write_tokens":1,"input_tokens_breakdown":{"harness":1,"skills":1,"instructions":1,"tool_definitions":1,"messages":1}},"sequence_number":1}\n\n';
 
         server
             .mockEndpoint()
@@ -680,13 +680,7 @@ describe("SessionsClient", () => {
                 audio: {
                     id: "id",
                 },
-                content: [
-                    {
-                        mcpServerId: "mcp_server_id",
-                        mcpServerName: "mcp_server_name",
-                        sessionId: "session_id",
-                    },
-                ],
+                content: "content",
                 functionCall: {
                     name: "name",
                     arguments: "arguments",
@@ -703,10 +697,21 @@ describe("SessionsClient", () => {
                 toolCalls: [
                     {
                         id: "id",
-                        sourceEventId: "source_event_id",
+                        type: "function",
+                        function: {
+                            name: "name",
+                            arguments: "arguments",
+                        },
+                        providerSpecificFields: {
+                            key: "value",
+                        },
+                        toolInfo: {
+                            type: "truefoundry-system",
+                            name: "name",
+                        },
                     },
                 ],
-                type: "turn.done",
+                type: "model.message",
                 id: "id",
                 threadId: "thread_id",
                 finishReason: "stop",
@@ -723,39 +728,6 @@ describe("SessionsClient", () => {
                         toolDefinitions: 1,
                         messages: 1,
                     },
-                },
-                reasoningContent: "reasoning_content",
-                toolCallId: "tool_call_id",
-                agentInfo: {
-                    type: "dynamic",
-                    name: "name",
-                    input: "input",
-                    model: "model",
-                },
-                parent: {
-                    threadId: "thread_id",
-                    toolCallId: "tool_call_id",
-                },
-                title: "title",
-                servers: [
-                    {
-                        mcpServerId: "mcp_server_id",
-                        mcpServerName: "mcp_server_name",
-                        authUrl: "auth_url",
-                        threadIds: ["thread_ids"],
-                    },
-                ],
-                sandboxId: "sandbox_id",
-                turnId: "turn_id",
-                previousTurnId: "previous_turn_id",
-                state: {
-                    status: "error",
-                    message: "message",
-                },
-                createdBy: {
-                    subjectId: "subject_id",
-                    subjectType: "subject_type",
-                    subjectSlug: "subject_slug",
                 },
                 sequenceNumber: 1,
             },
@@ -921,7 +893,7 @@ describe("SessionsClient", () => {
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody =
-            'event: \ndata: {"audio":{"id":"id"},"content":[{"mcp_server_id":"mcp_server_id","mcp_server_name":"mcp_server_name","session_id":"session_id"}],"function_call":{"name":"name","arguments":"arguments"},"name":"name","refusal":"refusal","thinking_blocks":[{"type":"thinking","thinking":"thinking","signature":"signature"}],"tool_calls":[{"id":"id","source_event_id":"source_event_id"}],"type":"turn.done","id":"id","thread_id":"thread_id","finish_reason":"stop","created_at":"created_at","usage":{"input_tokens":1,"output_tokens":1,"cache_read_tokens":1,"cache_write_tokens":1,"input_tokens_breakdown":{"harness":1,"skills":1,"instructions":1,"tool_definitions":1,"messages":1}},"reasoning_content":"reasoning_content","tool_call_id":"tool_call_id","agent_info":{"type":"dynamic","name":"name","input":"input","model":"model"},"parent":{"thread_id":"thread_id","tool_call_id":"tool_call_id"},"title":"title","servers":[{"mcp_server_id":"mcp_server_id","mcp_server_name":"mcp_server_name","auth_url":"auth_url","thread_ids":["thread_ids"]}],"sandbox_id":"sandbox_id","turn_id":"turn_id","previous_turn_id":"previous_turn_id","state":{"status":"error","message":"message"},"created_by":{"subject_id":"subject_id","subject_type":"subject_type","subject_slug":"subject_slug"},"sequence_number":1}\n\n';
+            'event: \ndata: {"audio":{"id":"id"},"content":"content","function_call":{"name":"name","arguments":"arguments"},"name":"name","refusal":"refusal","thinking_blocks":[{"type":"thinking","thinking":"thinking","signature":"signature"}],"tool_calls":[{"id":"id","type":"function","function":{"name":"name","arguments":"arguments"},"provider_specific_fields":{"key":"value"},"tool_info":{"type":"truefoundry-system","name":"name"}}],"type":"model.message","id":"id","thread_id":"thread_id","finish_reason":"stop","created_at":"created_at","usage":{"input_tokens":1,"output_tokens":1,"cache_read_tokens":1,"cache_write_tokens":1,"input_tokens_breakdown":{"harness":1,"skills":1,"instructions":1,"tool_definitions":1,"messages":1}},"sequence_number":1}\n\n';
 
         server
             .mockEndpoint()
@@ -947,13 +919,7 @@ describe("SessionsClient", () => {
                 audio: {
                     id: "id",
                 },
-                content: [
-                    {
-                        mcpServerId: "mcp_server_id",
-                        mcpServerName: "mcp_server_name",
-                        sessionId: "session_id",
-                    },
-                ],
+                content: "content",
                 functionCall: {
                     name: "name",
                     arguments: "arguments",
@@ -970,10 +936,21 @@ describe("SessionsClient", () => {
                 toolCalls: [
                     {
                         id: "id",
-                        sourceEventId: "source_event_id",
+                        type: "function",
+                        function: {
+                            name: "name",
+                            arguments: "arguments",
+                        },
+                        providerSpecificFields: {
+                            key: "value",
+                        },
+                        toolInfo: {
+                            type: "truefoundry-system",
+                            name: "name",
+                        },
                     },
                 ],
-                type: "turn.done",
+                type: "model.message",
                 id: "id",
                 threadId: "thread_id",
                 finishReason: "stop",
@@ -990,39 +967,6 @@ describe("SessionsClient", () => {
                         toolDefinitions: 1,
                         messages: 1,
                     },
-                },
-                reasoningContent: "reasoning_content",
-                toolCallId: "tool_call_id",
-                agentInfo: {
-                    type: "dynamic",
-                    name: "name",
-                    input: "input",
-                    model: "model",
-                },
-                parent: {
-                    threadId: "thread_id",
-                    toolCallId: "tool_call_id",
-                },
-                title: "title",
-                servers: [
-                    {
-                        mcpServerId: "mcp_server_id",
-                        mcpServerName: "mcp_server_name",
-                        authUrl: "auth_url",
-                        threadIds: ["thread_ids"],
-                    },
-                ],
-                sandboxId: "sandbox_id",
-                turnId: "turn_id",
-                previousTurnId: "previous_turn_id",
-                state: {
-                    status: "error",
-                    message: "message",
-                },
-                createdBy: {
-                    subjectId: "subject_id",
-                    subjectType: "subject_type",
-                    subjectSlug: "subject_slug",
                 },
                 sequenceNumber: 1,
             },
@@ -1146,19 +1090,6 @@ describe("SessionsClient", () => {
                             messages: 1,
                         },
                     },
-                    tool_call_id: "tool_call_id",
-                    agent_info: { type: "dynamic", name: "name", input: "input" },
-                    parent: { thread_id: "thread_id", tool_call_id: "tool_call_id" },
-                    title: "title",
-                    servers: [
-                        {
-                            mcp_server_id: "mcp_server_id",
-                            mcp_server_name: "mcp_server_name",
-                            auth_url: "auth_url",
-                            thread_ids: ["thread_ids"],
-                        },
-                    ],
-                    sandbox_id: "sandbox_id",
                     sequence_number: 1,
                 },
             ],
@@ -1222,26 +1153,6 @@ describe("SessionsClient", () => {
                             messages: 1,
                         },
                     },
-                    toolCallId: "tool_call_id",
-                    agentInfo: {
-                        type: "dynamic",
-                        name: "name",
-                        input: "input",
-                    },
-                    parent: {
-                        threadId: "thread_id",
-                        toolCallId: "tool_call_id",
-                    },
-                    title: "title",
-                    servers: [
-                        {
-                            mcpServerId: "mcp_server_id",
-                            mcpServerName: "mcp_server_name",
-                            authUrl: "auth_url",
-                            threadIds: ["thread_ids"],
-                        },
-                    ],
-                    sandboxId: "sandbox_id",
                     sequenceNumber: 1,
                 },
             ],
