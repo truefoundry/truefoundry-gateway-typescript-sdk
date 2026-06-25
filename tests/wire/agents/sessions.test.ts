@@ -31,7 +31,26 @@ describe("SessionsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const expected = rawResponseBody;
+        const expected = {
+            data: [
+                {
+                    id: "id",
+                    agent_name: "agent_name",
+                    title: "title",
+                    created_by_subject: {
+                        subject_id: "subject_id",
+                        subject_type: "subject_type",
+                    },
+                    created_at: "created_at",
+                    updated_at: "updated_at",
+                },
+            ],
+            pagination: {
+                next_page_token: "next_page_token",
+                previous_page_token: "previous_page_token",
+                limit: 1,
+            },
+        };
         const page = await client.agents.sessions.list({
             agent_name: "agent_name",
             limit: 1,
@@ -187,7 +206,24 @@ describe("SessionsClient", () => {
         const response = await client.agents.sessions.create({
             agent_name: "agent_name",
         });
-        expect(response).toEqual(rawResponseBody);
+        expect(response).toEqual({
+            data: {
+                id: "id",
+                agent_name: "agent_name",
+                title: "title",
+                created_by_subject: {
+                    subject_id: "subject_id",
+                    subject_type: "subject_type",
+                    subject_slug: "subject_slug",
+                    subject_display_name: "subject_display_name",
+                    subject_pat_name: "subject_pat_name",
+                    subject_controller_name: "subject_controller_name",
+                    subject_external_identity_slug: "subject_external_identity_slug",
+                },
+                created_at: "created_at",
+                updated_at: "updated_at",
+            },
+        });
     });
 
     test("create (2)", async () => {
@@ -354,7 +390,24 @@ describe("SessionsClient", () => {
             .build();
 
         const response = await client.agents.sessions.get("sessionId");
-        expect(response).toEqual(rawResponseBody);
+        expect(response).toEqual({
+            data: {
+                id: "id",
+                agent_name: "agent_name",
+                title: "title",
+                created_by_subject: {
+                    subject_id: "subject_id",
+                    subject_type: "subject_type",
+                    subject_slug: "subject_slug",
+                    subject_display_name: "subject_display_name",
+                    subject_pat_name: "subject_pat_name",
+                    subject_controller_name: "subject_controller_name",
+                    subject_external_identity_slug: "subject_external_identity_slug",
+                },
+                created_at: "created_at",
+                updated_at: "updated_at",
+            },
+        });
     });
 
     test("get (2)", async () => {
@@ -430,7 +483,7 @@ describe("SessionsClient", () => {
             .build();
 
         const response = await client.agents.sessions.cancel("01arz3ndektsv4rrffq69g5fav.g");
-        expect(response).toEqual(rawResponseBody);
+        expect(response).toEqual({});
     });
 
     test("cancel (2)", async () => {
@@ -541,7 +594,32 @@ describe("SessionsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const expected = rawResponseBody;
+        const expected = {
+            data: [
+                {
+                    id: "id",
+                    session_id: "session_id",
+                    first_turn_id: "first_turn_id",
+                    previous_turn_id: "previous_turn_id",
+                    state: {
+                        status: "running",
+                    },
+                    input: [
+                        {
+                            type: "user.message",
+                            content: "content",
+                        },
+                    ],
+                    created_at: "created_at",
+                    updated_at: "updated_at",
+                },
+            ],
+            pagination: {
+                next_page_token: "next_page_token",
+                previous_page_token: "previous_page_token",
+                limit: 1,
+            },
+        };
         const page = await client.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g", {
             page_token: "page_token",
             limit: 1,
@@ -818,7 +896,25 @@ describe("SessionsClient", () => {
             "01arz3ndektsv4rrffq69g5fav.g",
             "01arz3ndektsv4rrffq69g5fav.g.ab12cd",
         );
-        expect(response).toEqual(rawResponseBody);
+        expect(response).toEqual({
+            data: {
+                id: "id",
+                session_id: "session_id",
+                first_turn_id: "first_turn_id",
+                previous_turn_id: "previous_turn_id",
+                state: {
+                    status: "running",
+                },
+                input: [
+                    {
+                        type: "user.message",
+                        content: "content",
+                    },
+                ],
+                created_at: "created_at",
+                updated_at: "updated_at",
+            },
+        });
     });
 
     test("get_turn (2)", async () => {
@@ -1147,7 +1243,90 @@ describe("SessionsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const expected = rawResponseBody;
+        const expected = {
+            data: [
+                {
+                    audio: {
+                        id: "id",
+                    },
+                    content: [
+                        {
+                            mcp_server_id: "mcp_server_id",
+                            mcp_server_name: "mcp_server_name",
+                        },
+                    ],
+                    function_call: {
+                        name: "name",
+                        arguments: "arguments",
+                    },
+                    name: "name",
+                    refusal: "refusal",
+                    thinking_blocks: [
+                        {
+                            type: "thinking",
+                            thinking: "thinking",
+                        },
+                    ],
+                    tool_calls: [
+                        {
+                            id: "id",
+                            source_event_id: "source_event_id",
+                        },
+                    ],
+                    type: "tool.response_required",
+                    id: "id",
+                    thread_id: "thread_id",
+                    finish_reason: "stop",
+                    created_at: "created_at",
+                    usage: {
+                        input_tokens: 1,
+                        output_tokens: 1,
+                        input_tokens_breakdown: {
+                            harness: 1,
+                            skills: 1,
+                            instructions: 1,
+                            tool_definitions: 1,
+                            messages: 1,
+                        },
+                    },
+                    tool_call_id: "tool_call_id",
+                    agent_info: {
+                        type: "dynamic",
+                        name: "name",
+                        input: "input",
+                    },
+                    parent: {
+                        thread_id: "thread_id",
+                        tool_call_id: "tool_call_id",
+                    },
+                    title: "title",
+                    output: {
+                        type: "model.message",
+                        id: "id",
+                        thread_id: "thread_id",
+                        created_at: "created_at",
+                    },
+                    status: "error",
+                    error: "error",
+                    servers: [
+                        {
+                            mcp_server_id: "mcp_server_id",
+                            mcp_server_name: "mcp_server_name",
+                            auth_url: "auth_url",
+                            thread_ids: ["thread_ids"],
+                        },
+                    ],
+                    sandbox_id: "sandbox_id",
+                    sequence_number: 1,
+                },
+            ],
+            pagination: {
+                next_page_token: "next_page_token",
+                previous_page_token: "previous_page_token",
+                limit: 1,
+                order: "asc",
+            },
+        };
         const page = await client.agents.sessions.listTurnEvents(
             "01arz3ndektsv4rrffq69g5fav.g",
             "01arz3ndektsv4rrffq69g5fav.g.ab12cd",

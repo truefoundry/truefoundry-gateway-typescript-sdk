@@ -3,8 +3,8 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface EventsTokenPagination {
-    next_page_token?: string | undefined;
-    previous_page_token?: string | undefined;
+    next_page_token?: string;
+    previous_page_token?: string;
     limit: number;
     order: TrueFoundryGateway.EventsTokenPaginationOrder;
 }

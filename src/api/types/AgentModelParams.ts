@@ -3,10 +3,10 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface AgentModelParams {
-    max_tokens?: number | undefined;
-    temperature?: number | undefined;
-    top_p?: number | undefined;
-    top_k?: number | undefined;
-    parallel_tool_calls?: boolean | undefined;
-    reasoning_effort?: TrueFoundryGateway.AgentModelParamsReasoningEffort | undefined;
+    max_tokens?: number;
+    temperature?: number;
+    top_p?: number;
+    top_k?: number;
+    parallel_tool_calls?: boolean;
+    reasoning_effort?: TrueFoundryGateway.AgentModelParamsReasoningEffort;
 }

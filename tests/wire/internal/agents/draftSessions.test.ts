@@ -32,7 +32,31 @@ describe("DraftSessionsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const expected = rawResponseBody;
+        const expected = {
+            data: [
+                {
+                    id: "id",
+                    agent_spec: {
+                        model: {
+                            name: "name",
+                        },
+                    },
+                    agent_name: "agent_name",
+                    title: "title",
+                    created_by_subject: {
+                        subject_id: "subject_id",
+                        subject_type: "subject_type",
+                    },
+                    created_at: "created_at",
+                    updated_at: "updated_at",
+                },
+            ],
+            pagination: {
+                next_page_token: "next_page_token",
+                previous_page_token: "previous_page_token",
+                limit: 1,
+            },
+        };
         const page = await client.internal.agents.draftSessions.list({
             agent_name: "agent_name",
             limit: 1,
@@ -181,7 +205,60 @@ describe("DraftSessionsClient", () => {
                 },
             },
         });
-        expect(response).toEqual(rawResponseBody);
+        expect(response).toEqual({
+            data: {
+                id: "id",
+                agent_spec: {
+                    model: {
+                        name: "name",
+                    },
+                    instructions: "instructions",
+                    messages: [
+                        {
+                            role: "user",
+                            content: "content",
+                        },
+                    ],
+                    mcp_servers: [
+                        {
+                            name: "name",
+                            enable_tools: ["@all"],
+                            disable_tools: ["@all"],
+                            preload_tools: ["@all"],
+                            require_approval_for_tools: ["@all"],
+                        },
+                    ],
+                    response_format: {
+                        type: "text",
+                    },
+                    skills: [
+                        {
+                            fqn: "fqn",
+                            preload: true,
+                        },
+                    ],
+                    config: {
+                        iteration_limit: 1,
+                    },
+                    variables: {
+                        key: "value",
+                    },
+                },
+                agent_name: "agent_name",
+                title: "title",
+                created_by_subject: {
+                    subject_id: "subject_id",
+                    subject_type: "subject_type",
+                    subject_slug: "subject_slug",
+                    subject_display_name: "subject_display_name",
+                    subject_pat_name: "subject_pat_name",
+                    subject_controller_name: "subject_controller_name",
+                    subject_external_identity_slug: "subject_external_identity_slug",
+                },
+                created_at: "created_at",
+                updated_at: "updated_at",
+            },
+        });
     });
 
     test("create (2)", async () => {
@@ -364,7 +441,60 @@ describe("DraftSessionsClient", () => {
             .build();
 
         const response = await client.internal.agents.draftSessions.get("draftSessionId");
-        expect(response).toEqual(rawResponseBody);
+        expect(response).toEqual({
+            data: {
+                id: "id",
+                agent_spec: {
+                    model: {
+                        name: "name",
+                    },
+                    instructions: "instructions",
+                    messages: [
+                        {
+                            role: "user",
+                            content: "content",
+                        },
+                    ],
+                    mcp_servers: [
+                        {
+                            name: "name",
+                            enable_tools: ["@all"],
+                            disable_tools: ["@all"],
+                            preload_tools: ["@all"],
+                            require_approval_for_tools: ["@all"],
+                        },
+                    ],
+                    response_format: {
+                        type: "text",
+                    },
+                    skills: [
+                        {
+                            fqn: "fqn",
+                            preload: true,
+                        },
+                    ],
+                    config: {
+                        iteration_limit: 1,
+                    },
+                    variables: {
+                        key: "value",
+                    },
+                },
+                agent_name: "agent_name",
+                title: "title",
+                created_by_subject: {
+                    subject_id: "subject_id",
+                    subject_type: "subject_type",
+                    subject_slug: "subject_slug",
+                    subject_display_name: "subject_display_name",
+                    subject_pat_name: "subject_pat_name",
+                    subject_controller_name: "subject_controller_name",
+                    subject_external_identity_slug: "subject_external_identity_slug",
+                },
+                created_at: "created_at",
+                updated_at: "updated_at",
+            },
+        });
     });
 
     test("get (2)", async () => {
@@ -456,7 +586,60 @@ describe("DraftSessionsClient", () => {
             .build();
 
         const response = await client.internal.agents.draftSessions.update("draftSessionId");
-        expect(response).toEqual(rawResponseBody);
+        expect(response).toEqual({
+            data: {
+                id: "id",
+                agent_spec: {
+                    model: {
+                        name: "name",
+                    },
+                    instructions: "instructions",
+                    messages: [
+                        {
+                            role: "user",
+                            content: "content",
+                        },
+                    ],
+                    mcp_servers: [
+                        {
+                            name: "name",
+                            enable_tools: ["@all"],
+                            disable_tools: ["@all"],
+                            preload_tools: ["@all"],
+                            require_approval_for_tools: ["@all"],
+                        },
+                    ],
+                    response_format: {
+                        type: "text",
+                    },
+                    skills: [
+                        {
+                            fqn: "fqn",
+                            preload: true,
+                        },
+                    ],
+                    config: {
+                        iteration_limit: 1,
+                    },
+                    variables: {
+                        key: "value",
+                    },
+                },
+                agent_name: "agent_name",
+                title: "title",
+                created_by_subject: {
+                    subject_id: "subject_id",
+                    subject_type: "subject_type",
+                    subject_slug: "subject_slug",
+                    subject_display_name: "subject_display_name",
+                    subject_pat_name: "subject_pat_name",
+                    subject_controller_name: "subject_controller_name",
+                    subject_external_identity_slug: "subject_external_identity_slug",
+                },
+                created_at: "created_at",
+                updated_at: "updated_at",
+            },
+        });
     });
 
     test("update (2)", async () => {

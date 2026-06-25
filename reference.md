@@ -377,7 +377,7 @@ const response = page.response;
 </dl>
 </details>
 
-<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">createTurn</a>(sessionId, { ...params }) -> core.Stream&lt;TrueFoundryGateway.SequencedTurnStreamingOutputEvent&gt;</code></summary>
+<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">createTurn</a>(sessionId, { ...params }) -> core.Stream&lt;TrueFoundryGateway.TurnStreamingOutputEvent&gt;</code></summary>
 <dl>
 <dd>
 
@@ -523,7 +523,7 @@ await client.agents.sessions.getTurn("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndek
 </dl>
 </details>
 
-<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">subscribeToTurn</a>(sessionId, turnId, { ...params }) -> core.Stream&lt;TrueFoundryGateway.SequencedTurnStreamingOutputEvent&gt;</code></summary>
+<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">subscribeToTurn</a>(sessionId, turnId, { ...params }) -> core.Stream&lt;TrueFoundryGateway.TurnStreamingOutputEvent&gt;</code></summary>
 <dl>
 <dd>
 
@@ -605,7 +605,7 @@ for await (const item of response) {
 </dl>
 </details>
 
-<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">listTurnEvents</a>(sessionId, turnId, { ...params }) -> core.Page&lt;TrueFoundryGateway.SequencedTurnPersistedEvent, TrueFoundryGateway.SessionsListTurnEventsResponse&gt;</code></summary>
+<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">listTurnEvents</a>(sessionId, turnId, { ...params }) -> core.Page&lt;TrueFoundryGateway.TurnOutputEvent, TrueFoundryGateway.SessionsListTurnEventsResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -938,7 +938,7 @@ await client.internal.agents.draftSessions.get("draftSessionId");
 <dl>
 <dd>
 
-Update a draft session's inline spec and/or title. Owner-only. An empty body is a valid no-op that refreshes `updated_at`.
+Update a draft session's inline spec. Owner-only. An empty body is a valid no-op that refreshes `updated_at`.
 </dd>
 </dl>
 </dd>

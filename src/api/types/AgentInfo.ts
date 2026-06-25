@@ -4,5 +4,5 @@ export interface AgentInfo {
     type: "dynamic";
     name: string;
     input: string;
-    model?: string | undefined;
+    model?: string;
 }

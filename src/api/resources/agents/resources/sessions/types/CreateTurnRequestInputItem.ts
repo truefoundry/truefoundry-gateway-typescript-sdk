@@ -4,5 +4,5 @@ import type * as TrueFoundryGateway from "../../../../../index.js";
 
 export type CreateTurnRequestInputItem =
     | TrueFoundryGateway.UserMessage
-    | TrueFoundryGateway.UserToolApprovalMessage
-    | TrueFoundryGateway.UserToolResponseMessage;
+    | TrueFoundryGateway.UserToolApprovalEvent
+    | TrueFoundryGateway.UserToolResponseEvent;

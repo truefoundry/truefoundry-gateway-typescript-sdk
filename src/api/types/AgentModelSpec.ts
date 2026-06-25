@@ -4,5 +4,5 @@ import type * as TrueFoundryGateway from "../index.js";
 
 export interface AgentModelSpec {
     name: string;
-    params?: TrueFoundryGateway.AgentModelParams | undefined;
+    params?: TrueFoundryGateway.AgentModelParams;
 }

@@ -3,5 +3,5 @@
 export interface AgentMcpInitializationInfo {
     mcp_server_id: string;
     mcp_server_name: string;
-    session_id?: string | undefined;
+    session_id?: string;
 }

@@ -3,18 +3,18 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface TurnStateDoneOutput {
-    audio?: TrueFoundryGateway.TurnStateDoneOutputAudio | undefined;
-    content?: TrueFoundryGateway.TurnStateDoneOutputContent | undefined;
-    function_call?: TrueFoundryGateway.TurnStateDoneOutputFunctionCall | undefined;
-    name?: string | undefined;
-    refusal?: string | undefined;
-    thinking_blocks?: TrueFoundryGateway.TurnStateDoneOutputThinkingBlocksItem[] | undefined;
-    tool_calls?: TrueFoundryGateway.AgentEnrichedToolCall[] | undefined;
+    audio?: TrueFoundryGateway.TurnStateDoneOutputAudio;
+    content?: TrueFoundryGateway.TurnStateDoneOutputContent;
+    function_call?: TrueFoundryGateway.TurnStateDoneOutputFunctionCall;
+    name?: string;
+    refusal?: string;
+    thinking_blocks?: TrueFoundryGateway.TurnStateDoneOutputThinkingBlocksItem[];
+    tool_calls?: TrueFoundryGateway.AgentEnrichedToolCall[];
     type: "model.message";
     /** Unique identifier for the event */
     id: string;
     thread_id: string;
-    finish_reason?: TrueFoundryGateway.AgentFinishReason | undefined;
+    finish_reason?: TrueFoundryGateway.AgentFinishReason;
     created_at: string;
-    usage?: TrueFoundryGateway.TurnStateDoneOutputUsage | undefined;
+    usage?: TrueFoundryGateway.TurnStateDoneOutputUsage;
 }

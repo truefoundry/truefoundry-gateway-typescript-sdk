@@ -3,5 +3,5 @@
 export interface AgentThinkingBlock {
     type: "thinking";
     thinking: string;
-    signature?: string | undefined;
+    signature?: string;
 }

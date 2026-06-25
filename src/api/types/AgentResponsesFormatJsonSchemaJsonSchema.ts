@@ -2,7 +2,7 @@
 
 export interface AgentResponsesFormatJsonSchemaJsonSchema {
     name: string;
-    description?: string | undefined;
-    schema?: Record<string, unknown> | undefined;
-    strict?: boolean | undefined;
+    description?: string;
+    schema?: Record<string, unknown>;
+    strict?: boolean;
 }

@@ -3,9 +3,9 @@
 export interface SessionSubject {
     subject_id: string;
     subject_type: string;
-    subject_slug?: string | undefined;
-    subject_display_name?: string | undefined;
-    subject_pat_name?: string | undefined;
-    subject_controller_name?: string | undefined;
-    subject_external_identity_slug?: string | undefined;
+    subject_slug?: string;
+    subject_display_name?: string;
+    subject_pat_name?: string;
+    subject_controller_name?: string;
+    subject_external_identity_slug?: string;
 }

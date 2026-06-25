@@ -9,6 +9,7 @@ import { mergeHeaders } from "../../../../../../../../core/headers.js";
 import * as core from "../../../../../../../../core/index.js";
 import { handleNonStatusCodeError } from "../../../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../../../errors/index.js";
+import * as serializers from "../../../../../../../../serialization/index.js";
 import * as TrueFoundryGateway from "../../../../../../../index.js";
 
 export declare namespace DraftSessionsClient {
@@ -66,7 +67,15 @@ export class DraftSessionsClient {
                 const _queryParams: Record<string, unknown> = {
                     agent_name: agentName,
                     limit,
-                    order: order != null ? order : undefined,
+                    order:
+                        order != null
+                            ? serializers.internal.agents.DraftSessionsListRequestOrder.jsonOrThrow(order, {
+                                  unrecognizedObjectKeys: "passthrough",
+                                  allowUnrecognizedUnionMembers: true,
+                                  allowUnrecognizedEnumValues: true,
+                                  omitUndefined: true,
+                              })
+                            : undefined,
                     page_token: pageToken,
                     start_timestamp: startTimestamp,
                     end_timestamp: endTimestamp,
@@ -98,30 +107,27 @@ export class DraftSessionsClient {
                 });
                 if (_response.ok) {
                     return {
-                        data: _response.body as TrueFoundryGateway.internal.agents.DraftSessionsListResponse,
+                        data: serializers.internal.agents.DraftSessionsListResponse.parseOrThrow(_response.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
                         rawResponse: _response.rawResponse,
                     };
                 }
                 if (_response.error.reason === "status-code") {
                     switch (_response.error.statusCode) {
                         case 400:
-                            throw new TrueFoundryGateway.BadRequestError(
-                                _response.error.body as unknown,
-                                _response.rawResponse,
-                            );
+                            throw new TrueFoundryGateway.BadRequestError(_response.error.body, _response.rawResponse);
                         case 401:
-                            throw new TrueFoundryGateway.UnauthorizedError(
-                                _response.error.body as unknown,
-                                _response.rawResponse,
-                            );
+                            throw new TrueFoundryGateway.UnauthorizedError(_response.error.body, _response.rawResponse);
                         case 404:
-                            throw new TrueFoundryGateway.NotFoundError(
-                                _response.error.body as unknown,
-                                _response.rawResponse,
-                            );
+                            throw new TrueFoundryGateway.NotFoundError(_response.error.body, _response.rawResponse);
                         case 422:
                             throw new TrueFoundryGateway.UnprocessableEntityError(
-                                _response.error.body as unknown,
+                                _response.error.body,
                                 _response.rawResponse,
                             );
                         default:
@@ -209,7 +215,12 @@ export class DraftSessionsClient {
             contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
-            body: request,
+            body: serializers.internal.agents.CreateDraftSessionRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                omitUndefined: true,
+            }),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -218,7 +229,13 @@ export class DraftSessionsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as TrueFoundryGateway.internal.agents.DraftSessionsCreateResponse,
+                data: serializers.internal.agents.DraftSessionsCreateResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    skipValidation: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -226,27 +243,15 @@ export class DraftSessionsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
-                    throw new TrueFoundryGateway.BadRequestError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
+                    throw new TrueFoundryGateway.BadRequestError(_response.error.body, _response.rawResponse);
                 case 401:
-                    throw new TrueFoundryGateway.UnauthorizedError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
+                    throw new TrueFoundryGateway.UnauthorizedError(_response.error.body, _response.rawResponse);
                 case 404:
-                    throw new TrueFoundryGateway.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                    throw new TrueFoundryGateway.NotFoundError(_response.error.body, _response.rawResponse);
                 case 422:
-                    throw new TrueFoundryGateway.UnprocessableEntityError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
+                    throw new TrueFoundryGateway.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 case 500:
-                    throw new TrueFoundryGateway.InternalServerError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
+                    throw new TrueFoundryGateway.InternalServerError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.TrueFoundryGatewayError({
                         statusCode: _response.error.statusCode,
@@ -305,7 +310,13 @@ export class DraftSessionsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as TrueFoundryGateway.internal.agents.DraftSessionsGetResponse,
+                data: serializers.internal.agents.DraftSessionsGetResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    skipValidation: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -313,12 +324,9 @@ export class DraftSessionsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 401:
-                    throw new TrueFoundryGateway.UnauthorizedError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
+                    throw new TrueFoundryGateway.UnauthorizedError(_response.error.body, _response.rawResponse);
                 case 404:
-                    throw new TrueFoundryGateway.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                    throw new TrueFoundryGateway.NotFoundError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.TrueFoundryGatewayError({
                         statusCode: _response.error.statusCode,
@@ -337,7 +345,7 @@ export class DraftSessionsClient {
     }
 
     /**
-     * Update a draft session's inline spec and/or title. Owner-only. An empty body is a valid no-op that refreshes `updated_at`.
+     * Update a draft session's inline spec. Owner-only. An empty body is a valid no-op that refreshes `updated_at`.
      *
      * @param {string} draftSessionId
      * @param {TrueFoundryGateway.internal.agents.UpdateDraftSessionRequest} request
@@ -381,7 +389,12 @@ export class DraftSessionsClient {
             contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
-            body: request,
+            body: serializers.internal.agents.UpdateDraftSessionRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                omitUndefined: true,
+            }),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -390,7 +403,13 @@ export class DraftSessionsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as TrueFoundryGateway.internal.agents.DraftSessionsUpdateResponse,
+                data: serializers.internal.agents.DraftSessionsUpdateResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    skipValidation: true,
+                    breadcrumbsPrefix: ["response"],
+                }),
                 rawResponse: _response.rawResponse,
             };
         }
@@ -398,22 +417,13 @@ export class DraftSessionsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
-                    throw new TrueFoundryGateway.BadRequestError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
+                    throw new TrueFoundryGateway.BadRequestError(_response.error.body, _response.rawResponse);
                 case 401:
-                    throw new TrueFoundryGateway.UnauthorizedError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
+                    throw new TrueFoundryGateway.UnauthorizedError(_response.error.body, _response.rawResponse);
                 case 404:
-                    throw new TrueFoundryGateway.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                    throw new TrueFoundryGateway.NotFoundError(_response.error.body, _response.rawResponse);
                 case 422:
-                    throw new TrueFoundryGateway.UnprocessableEntityError(
-                        _response.error.body as unknown,
-                        _response.rawResponse,
-                    );
+                    throw new TrueFoundryGateway.UnprocessableEntityError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.TrueFoundryGatewayError({
                         statusCode: _response.error.statusCode,

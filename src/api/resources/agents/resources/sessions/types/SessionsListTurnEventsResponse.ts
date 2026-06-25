@@ -3,6 +3,6 @@
 import type * as TrueFoundryGateway from "../../../../../index.js";
 
 export interface SessionsListTurnEventsResponse {
-    data: TrueFoundryGateway.SequencedTurnPersistedEvent[];
+    data: TrueFoundryGateway.TurnOutputEvent[];
     pagination: TrueFoundryGateway.EventsTokenPagination;
 }

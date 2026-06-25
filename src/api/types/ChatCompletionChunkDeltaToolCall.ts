@@ -4,7 +4,7 @@ import type * as TrueFoundryGateway from "../index.js";
 
 export interface ChatCompletionChunkDeltaToolCall {
     index: number;
-    id?: string | undefined;
-    type?: "function" | undefined;
-    function?: TrueFoundryGateway.ChatCompletionChunkDeltaToolCallFunction | undefined;
+    id?: string;
+    type?: "function";
+    function?: TrueFoundryGateway.ChatCompletionChunkDeltaToolCallFunction;
 }

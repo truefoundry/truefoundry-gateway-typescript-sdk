@@ -4,11 +4,11 @@ import type * as TrueFoundryGateway from "../index.js";
 
 export interface DraftSessionAgentSpec {
     model: TrueFoundryGateway.AgentModelSpec;
-    instructions?: string | undefined;
-    messages?: TrueFoundryGateway.DraftSessionAgentSpecMessagesItem[] | undefined;
-    mcp_servers?: TrueFoundryGateway.AgentMcpServerRequest[] | undefined;
-    response_format?: TrueFoundryGateway.AgentResponsesFormat | undefined;
-    skills?: TrueFoundryGateway.AgentSkillMount[] | undefined;
-    config?: TrueFoundryGateway.AgentConfig | undefined;
-    variables?: Record<string, string> | undefined;
+    instructions?: string;
+    messages?: TrueFoundryGateway.DraftSessionAgentSpecMessagesItem[];
+    mcp_servers?: TrueFoundryGateway.AgentMcpServerRequest[];
+    response_format?: TrueFoundryGateway.AgentResponsesFormat;
+    skills?: TrueFoundryGateway.AgentSkillMount[];
+    config?: TrueFoundryGateway.AgentConfig;
+    variables?: Record<string, string>;
 }

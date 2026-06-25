@@ -4,9 +4,9 @@ import type * as TrueFoundryGateway from "../index.js";
 
 export interface AgentConfig {
     iteration_limit: number;
-    sandbox?: TrueFoundryGateway.AgentConfigSandbox | undefined;
-    dynamic_sub_agents?: TrueFoundryGateway.AgentConfigDynamicSubAgents | undefined;
-    context_management?: TrueFoundryGateway.AgentConfigContextManagement | undefined;
-    generative_ui?: TrueFoundryGateway.AgentConfigGenerativeUi | undefined;
-    ask_user_questions?: TrueFoundryGateway.AgentConfigAskUserQuestions | undefined;
+    sandbox?: TrueFoundryGateway.AgentConfigSandbox;
+    dynamic_sub_agents?: TrueFoundryGateway.AgentConfigDynamicSubAgents;
+    context_management?: TrueFoundryGateway.AgentConfigContextManagement;
+    generative_ui?: TrueFoundryGateway.AgentConfigGenerativeUi;
+    ask_user_questions?: TrueFoundryGateway.AgentConfigAskUserQuestions;
 }

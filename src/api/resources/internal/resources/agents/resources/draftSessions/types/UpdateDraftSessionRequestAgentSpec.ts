@@ -7,11 +7,11 @@ import type * as TrueFoundryGateway from "../../../../../../../index.js";
  */
 export interface UpdateDraftSessionRequestAgentSpec {
     model: TrueFoundryGateway.AgentModelSpec;
-    instructions?: string | undefined;
-    messages?: TrueFoundryGateway.internal.agents.UpdateDraftSessionRequestAgentSpecMessagesItem[] | undefined;
-    mcp_servers?: TrueFoundryGateway.AgentMcpServerRequest[] | undefined;
-    response_format?: TrueFoundryGateway.AgentResponsesFormat | undefined;
-    skills?: TrueFoundryGateway.AgentSkillMount[] | undefined;
-    config?: TrueFoundryGateway.AgentConfig | undefined;
-    variables?: Record<string, string> | undefined;
+    instructions?: string;
+    messages?: TrueFoundryGateway.internal.agents.UpdateDraftSessionRequestAgentSpecMessagesItem[];
+    mcp_servers?: TrueFoundryGateway.AgentMcpServerRequest[];
+    response_format?: TrueFoundryGateway.AgentResponsesFormat;
+    skills?: TrueFoundryGateway.AgentSkillMount[];
+    config?: TrueFoundryGateway.AgentConfig;
+    variables?: Record<string, string>;
 }

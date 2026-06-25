@@ -3,6 +3,6 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export type ActionRequiredEvent =
-    | TrueFoundryGateway.AgentApprovalRequired
-    | TrueFoundryGateway.AgentToolResponseRequired
-    | TrueFoundryGateway.AgentMcpAuthRequired;
+    | TrueFoundryGateway.ToolApprovalRequiredEvent
+    | TrueFoundryGateway.ToolResponseRequiredEvent
+    | TrueFoundryGateway.McpAuthRequiredEvent;

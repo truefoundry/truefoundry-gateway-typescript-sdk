@@ -5,7 +5,7 @@ import type * as TrueFoundryGateway from "../index.js";
 export interface TurnStateDoneOutputUsage {
     input_tokens: number;
     output_tokens: number;
-    cache_read_tokens?: number | undefined;
-    cache_write_tokens?: number | undefined;
+    cache_read_tokens?: number;
+    cache_write_tokens?: number;
     input_tokens_breakdown: TrueFoundryGateway.TurnStateDoneOutputUsageInputTokensBreakdown;
 }

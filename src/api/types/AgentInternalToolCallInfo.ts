@@ -7,7 +7,7 @@ export interface AgentInternalToolCallInfo {
     mcp_server_id: string;
     mcp_server_name: string;
     original_tool_name: string;
-    is_approval_required?: boolean | undefined;
-    is_deferred?: boolean | undefined;
-    is_client_side?: boolean | undefined;
+    is_approval_required?: boolean;
+    is_deferred?: boolean;
+    is_client_side?: boolean;
 }

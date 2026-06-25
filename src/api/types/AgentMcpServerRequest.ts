@@ -4,10 +4,10 @@ import type * as TrueFoundryGateway from "../index.js";
 
 export interface AgentMcpServerRequest {
     name: string;
-    headers?: Record<string, string> | undefined;
+    headers?: Record<string, string>;
     enable_tools: TrueFoundryGateway.AgentMcpServerRequestEnableToolsItem[];
     disable_tools: TrueFoundryGateway.AgentMcpServerRequestDisableToolsItem[];
     preload_tools: TrueFoundryGateway.AgentMcpServerRequestPreloadToolsItem[];
     require_approval_for_tools: TrueFoundryGateway.AgentMcpServerRequestRequireApprovalForToolsItem[];
-    preload?: boolean | undefined;
+    preload?: boolean;
 }

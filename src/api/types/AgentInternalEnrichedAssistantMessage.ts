@@ -4,11 +4,11 @@ import type * as TrueFoundryGateway from "../index.js";
 
 export interface AgentInternalEnrichedAssistantMessage {
     role: "assistant";
-    audio?: TrueFoundryGateway.AgentInternalEnrichedAssistantMessageAudio | undefined;
-    content?: TrueFoundryGateway.AgentInternalEnrichedAssistantMessageContent | undefined;
-    function_call?: TrueFoundryGateway.AgentInternalEnrichedAssistantMessageFunctionCall | undefined;
-    name?: string | undefined;
-    refusal?: string | undefined;
-    thinking_blocks?: TrueFoundryGateway.AgentInternalEnrichedAssistantMessageThinkingBlocksItem[] | undefined;
-    tool_calls?: TrueFoundryGateway.AgentInternalEnrichedToolCall[] | undefined;
+    audio?: TrueFoundryGateway.AgentInternalEnrichedAssistantMessageAudio;
+    content?: TrueFoundryGateway.AgentInternalEnrichedAssistantMessageContent;
+    function_call?: TrueFoundryGateway.AgentInternalEnrichedAssistantMessageFunctionCall;
+    name?: string;
+    refusal?: string;
+    thinking_blocks?: TrueFoundryGateway.AgentInternalEnrichedAssistantMessageThinkingBlocksItem[];
+    tool_calls?: TrueFoundryGateway.AgentInternalEnrichedToolCall[];
 }

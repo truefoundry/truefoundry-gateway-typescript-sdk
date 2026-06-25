@@ -6,8 +6,8 @@ export interface AgentCompletionUsage {
     completion_tokens: number;
     prompt_tokens: number;
     total_tokens: number;
-    completion_tokens_details?: TrueFoundryGateway.AgentCompletionUsageCompletionTokensDetails | undefined;
-    prompt_tokens_details?: TrueFoundryGateway.AgentCompletionUsagePromptTokensDetails | undefined;
-    cache_read_input_tokens?: number | undefined;
-    cache_creation_input_tokens?: number | undefined;
+    completion_tokens_details?: TrueFoundryGateway.AgentCompletionUsageCompletionTokensDetails;
+    prompt_tokens_details?: TrueFoundryGateway.AgentCompletionUsagePromptTokensDetails;
+    cache_read_input_tokens?: number;
+    cache_creation_input_tokens?: number;
 }
