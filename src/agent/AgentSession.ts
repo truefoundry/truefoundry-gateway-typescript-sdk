@@ -3,7 +3,7 @@ import type { TrueFoundryGatewayClient } from "../Client.js";
 
 export class AgentSession implements TrueFoundryGateway.Session {
     readonly id: string;
-    readonly agent_name?: string;
+    readonly agent_name: string;
     readonly title?: string;
     readonly created_by_subject: TrueFoundryGateway.SessionSubject;
     readonly created_at: string;
