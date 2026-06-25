@@ -103,15 +103,18 @@ for await (const item of response) {
 
 ## Environments
 
-This SDK allows you to configure different environments for API requests.
+Pass the gateway base URL (including your tenant) via the `environment` option:
 
 ```typescript
-import { TruefoundryGatewayClient, TruefoundryGatewayEnvironment } from "truefoundry-gateway-sdk";
+import { TrueFoundryGatewayClient } from "truefoundry-gateway-sdk";
 
-const client = new TruefoundryGatewayClient({
-    environment: TruefoundryGatewayEnvironment.Default,
+const client = new TrueFoundryGatewayClient({
+    apiKey: "YOUR_API_KEY",
+    environment: "https://gateway.truefoundry.ai/<tenant>",
 });
 ```
+
+You can also use `baseUrl` instead of `environment` if you prefer.
 
 ## Request and Response Types
 

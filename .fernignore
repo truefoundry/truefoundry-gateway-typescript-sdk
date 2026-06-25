@@ -1,8 +1,5 @@
-# Paths Fern's TypeScript generator must leave alone on every regen. Hand-
-# written helpers, their tests, and the top-level src/index.ts (which re-
-# exports both Fern-generated symbols and helpers) live under stable paths so
-# users can import them across releases without Fern overwriting them.
-src/helpers/
+# Paths Fern's TypeScript generator must leave alone on every regen. The
+# hand-maintained top-level src/index.ts lives at a stable path so users can
+# import across releases without Fern overwriting it.
 src/index.ts
-tests/mergeAssistantMessage.test.ts
 .github/workflows/ci.yml
