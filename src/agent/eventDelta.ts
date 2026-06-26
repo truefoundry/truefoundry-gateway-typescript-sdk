@@ -114,5 +114,7 @@ function mergeModelMessageDelta(
         base.finishReason = delta.finishReason;
     }
 
-    // TODO: merge delta.reasoningContent once ModelMessageEvent gains a `reasoningContent` field.
+    if (delta.reasoningContent) {
+        base.reasoningContent = (base.reasoningContent ?? "") + delta.reasoningContent;
+    }
 }
