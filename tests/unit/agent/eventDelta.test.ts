@@ -16,7 +16,6 @@ function modelMessageBase(
         id: EVENT_ID,
         threadId: THREAD_ID,
         createdAt: "2026-01-01T00:00:00Z",
-        sequenceNumber: 6,
         ...overrides,
     };
 }
@@ -28,7 +27,6 @@ function modelMessageDelta(
         type: "model.message.delta",
         id: EVENT_ID,
         threadId: THREAD_ID,
-        sequenceNumber: 7,
         ...overrides,
     };
 }
@@ -45,7 +43,6 @@ describe("isEventDelta", () => {
                 id: EVENT_ID,
                 threadId: THREAD_ID,
                 createdAt: "2026-01-01T00:00:00Z",
-                sequenceNumber: 6,
             }),
         ).toBe(false);
         expect(
@@ -56,7 +53,6 @@ describe("isEventDelta", () => {
                 toolCallId: "tc-1",
                 content: "ok",
                 createdAt: "2026-01-01T00:00:00Z",
-                sequenceNumber: 6,
             }),
         ).toBe(false);
         expect(
@@ -65,7 +61,6 @@ describe("isEventDelta", () => {
                 id: EVENT_ID,
                 state: { status: "done", requiredActions: [] },
                 createdAt: "2026-01-01T00:00:00Z",
-                sequenceNumber: 6,
             }),
         ).toBe(false);
         expect(
@@ -75,7 +70,6 @@ describe("isEventDelta", () => {
                 threadId: THREAD_ID,
                 title: "t",
                 createdAt: "2026-01-01T00:00:00Z",
-                sequenceNumber: 6,
                 agentInfo: { type: "dynamic", name: "a", input: "{}" },
                 parent: { threadId: "parent-thread", toolCallId: "tc-1" },
             }),
@@ -94,18 +88,14 @@ describe("isEventDelta", () => {
 });
 
 describe("mergeEventDelta / content", () => {
-    it("merges the headline Hello! scenario and leaves sequenceNumber unchanged", () => {
+    it("merges the headline Hello! scenario", () => {
         const base = modelMessageBase({ content: "" });
-        mergeEventDelta(base, modelMessageDelta({ content: "Hel", sequenceNumber: 7 }));
-        mergeEventDelta(base, modelMessageDelta({ content: "lo", sequenceNumber: 8 }));
-        mergeEventDelta(
-            base,
-            modelMessageDelta({ content: "!", finishReason: "stop", sequenceNumber: 9 }),
-        );
+        mergeEventDelta(base, modelMessageDelta({ content: "Hel" }));
+        mergeEventDelta(base, modelMessageDelta({ content: "lo" }));
+        mergeEventDelta(base, modelMessageDelta({ content: "!", finishReason: "stop" }));
 
         expect(base.content).toBe("Hello!");
         expect(base.finishReason).toBe("stop");
-        expect(base.sequenceNumber).toBe(6);
     });
 
     it("seeds content from undefined", () => {
@@ -298,7 +288,6 @@ describe("mergeEventDelta / dispatch and id semantics", () => {
             toolCallId: "tc-1",
             content: "ok",
             createdAt: "2026-01-01T00:00:00Z",
-            sequenceNumber: 6,
         };
         mergeEventDelta(base, modelMessageDelta({ content: "ignored" }));
         expect(base.content).toBe("ok");

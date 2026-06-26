@@ -4,6 +4,7 @@ import type { TrueFoundryGatewayClient } from "../Client.js";
 import type * as core from "../core/index.js";
 import type { AgentSession } from "./AgentSession.js";
 import { Turn } from "./Turn.js";
+import { parseSequenceNumber, type TurnStreamEnvelope } from "./TurnStreamEnvelope.js";
 
 // Per-request overrides (abortSignal / timeoutInSeconds / maxRetries / headers) forwarded to every autogen call.
 // SessionsClient is NOT re-exported under TrueFoundryGateway.agents, so import it directly (as AgentSessionClient does).
@@ -57,7 +58,7 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
     // latches one-shot use), so a second execute() throws before any duplicate request can begin.
     // stream:true -> live iterator over the createTurn run; stream:false (default) -> wait for terminal TurnState.
     // The return type narrows only when `stream` is passed as a boolean literal.
-    execute(opts: { stream: true }, requestOptions?: RequestOptions): AsyncIterable<TrueFoundryGateway.TurnStreamingEvent>;
+    execute(opts: { stream: true }, requestOptions?: RequestOptions): AsyncIterable<TurnStreamEnvelope>;
     execute(
         opts?: { stream?: false; pollIntervalMs?: number },
         requestOptions?: RequestOptions,
@@ -65,7 +66,7 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
     execute(
         opts?: { stream?: boolean; pollIntervalMs?: number },
         requestOptions?: RequestOptions,
-    ): AsyncIterable<TrueFoundryGateway.TurnStreamingEvent> | Promise<TrueFoundryGateway.TurnState> {
+    ): AsyncIterable<TurnStreamEnvelope> | Promise<TrueFoundryGateway.TurnState> {
         if (this.#start != null) throw new Error("Turn already started; use stream() / waitForCompletion().");
         this.#start = this.openCreateTurn(requestOptions); // POST fires now (synchronously), before we return
         return opts?.stream ? this.runStreaming() : this.startAndWait(opts?.pollIntervalMs, requestOptions);
@@ -76,7 +77,7 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
     async *stream(
         opts?: { afterSequenceNumber?: number },
         requestOptions?: RequestOptions,
-    ): AsyncIterable<TrueFoundryGateway.TurnStreamingEvent> {
+    ): AsyncIterable<TurnStreamEnvelope> {
         yield* this.mustGetTurn().stream(opts, requestOptions);
     }
     async syncState(requestOptions?: RequestOptions): Promise<TrueFoundryGateway.TurnState> {
@@ -99,7 +100,7 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
     }
 
     // execute(stream:true) path: consume the already-open createTurn SSE (#start), adopting the inner Turn on turn.created.
-    private async *runStreaming(): AsyncIterable<TrueFoundryGateway.TurnStreamingEvent> {
+    private async *runStreaming(): AsyncIterable<TurnStreamEnvelope> {
         yield* this.consumeStream(await this.#start!);
     }
 
@@ -117,11 +118,11 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
     // NOTE: reconnect/resume is out of current scope.
     private async *consumeStream(
         sse: core.Stream<TrueFoundryGateway.TurnStreamingEvent>,
-    ): AsyncIterable<TrueFoundryGateway.TurnStreamingEvent> {
-        for await (const event of sse) {
+    ): AsyncIterable<TurnStreamEnvelope> {
+        for await (const { data: event, id } of sse.withMetadata()) {
             if (event.type === "turn.created" && this.#turn == null) this.adoptTurn(event); // ctor seeds #state = running
             else this.#turn?.applyEvent(event); // keep inner Turn's #state in sync (e.g. turn.done -> terminal)
-            yield event;
+            yield { sequenceNumber: parseSequenceNumber(id), event };
         }
     }
 

@@ -4,6 +4,7 @@ export type { AgentSession } from "./AgentSession.js";
 export type { DeltaEvents } from "./eventDelta.js";
 export type { PreparedTurn } from "./PreparedTurn.js";
 export type { Turn } from "./Turn.js";
+export type { TurnStreamEnvelope } from "./TurnStreamEnvelope.js";
 
 export type {
     TurnEvent,
