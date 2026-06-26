@@ -80,86 +80,60 @@ export class Stream<T> implements AsyncIterable<T> {
     private async *iterMessages(): AsyncGenerator<ServerSentEvent<T>, void> {
         if (this.eventDiscriminator != null) {
             yield* this.iterSseEvents();
-        } else if (this.prefix != null) {
-            yield* this.iterDataMessages();
         } else {
-            yield* this.iterJsonMessages();
-        }
-    }
-
-    private async *iterJsonMessages(): AsyncGenerator<ServerSentEvent<T>, void> {
-        const stream = readableStreamAsyncIterable<any>(this.stream);
-        let buf = "";
-        for await (const chunk of stream) {
-            buf += this.decodeChunk(chunk);
-
-            let terminatorIndex: number;
-            while ((terminatorIndex = buf.indexOf(this.messageTerminator)) >= 0) {
-                const line = buf.slice(0, terminatorIndex);
-                buf = buf.slice(terminatorIndex + this.messageTerminator.length);
-
-                if (!line.trim()) {
-                    continue;
-                }
-
-                if (this.streamTerminator != null && line.includes(this.streamTerminator)) {
-                    return;
-                }
-                const data = await this.parse(fromJson(line));
-                yield { data, id: undefined, retry: undefined, event: undefined };
-            }
+            yield* this.iterDataMessages();
         }
     }
 
     private async *iterDataMessages(): AsyncGenerator<ServerSentEvent<T>, void> {
         const stream = readableStreamAsyncIterable<any>(this.stream);
         let buf = "";
-        let dataValue: string | undefined;
+        let prefixSeen = false;
         let lastId: string | undefined;
         let lastRetry: number | undefined;
-
         for await (const chunk of stream) {
             buf += this.decodeChunk(chunk);
 
             let terminatorIndex: number;
-            while ((terminatorIndex = buf.indexOf("\n")) >= 0) {
-                const line = buf.slice(0, terminatorIndex).replace(/\r$/, "");
-                buf = buf.slice(terminatorIndex + 1);
+            while ((terminatorIndex = buf.indexOf(this.messageTerminator)) >= 0) {
+                let line = buf.slice(0, terminatorIndex);
+                buf = buf.slice(terminatorIndex + this.messageTerminator.length);
 
                 if (!line.trim()) {
-                    if (dataValue != null) {
-                        const data = await this.dispatchSseEvent(dataValue, undefined);
-                        if (data == null) {
-                            return;
-                        }
-                        yield { data, id: lastId, retry: lastRetry, event: undefined };
-                    }
-                    dataValue = undefined;
                     continue;
                 }
 
-                if (line.startsWith(DATA_PREFIX)) {
-                    const val = line.slice(DATA_PREFIX.length).trim();
-                    dataValue = dataValue != null ? `${dataValue}\n${val}` : val;
-                } else if (line.startsWith(ID_PREFIX)) {
+                if (line.startsWith(ID_PREFIX)) {
                     const idValue = line.slice(ID_PREFIX.length).trim();
                     if (!idValue.includes("\0")) {
                         lastId = idValue;
                     }
-                } else if (line.startsWith(RETRY_PREFIX)) {
+                    continue;
+                }
+                if (line.startsWith(RETRY_PREFIX)) {
                     const retryValue = line.slice(RETRY_PREFIX.length).trim();
                     const parsed = parseInt(retryValue, 10);
                     if (!Number.isNaN(parsed) && String(parsed) === retryValue) {
                         lastRetry = parsed;
                     }
+                    continue;
                 }
-            }
-        }
 
-        if (dataValue != null) {
-            const data = await this.dispatchSseEvent(dataValue, undefined);
-            if (data != null) {
+                if (!prefixSeen && this.prefix != null) {
+                    const prefixIndex = line.indexOf(this.prefix);
+                    if (prefixIndex === -1) {
+                        continue;
+                    }
+                    prefixSeen = true;
+                    line = line.slice(prefixIndex + this.prefix.length);
+                }
+
+                if (this.streamTerminator != null && line.includes(this.streamTerminator)) {
+                    return;
+                }
+                const data = await this.parse(fromJson(line));
                 yield { data, id: lastId, retry: lastRetry, event: undefined };
+                prefixSeen = false;
             }
         }
     }

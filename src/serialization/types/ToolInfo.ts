@@ -6,11 +6,9 @@ import type * as serializers from "../index.js";
 import { McpToolCallInfo } from "./McpToolCallInfo.js";
 import { TrueFoundrySystemToolCallInfo } from "./TrueFoundrySystemToolCallInfo.js";
 
-export const ToolCallToolInfo: core.serialization.Schema<
-    serializers.ToolCallToolInfo.Raw,
-    TrueFoundryGateway.ToolCallToolInfo
-> = core.serialization.undiscriminatedUnion([TrueFoundrySystemToolCallInfo, McpToolCallInfo]);
+export const ToolInfo: core.serialization.Schema<serializers.ToolInfo.Raw, TrueFoundryGateway.ToolInfo> =
+    core.serialization.undiscriminatedUnion([TrueFoundrySystemToolCallInfo, McpToolCallInfo]);
 
-export declare namespace ToolCallToolInfo {
+export declare namespace ToolInfo {
     export type Raw = TrueFoundrySystemToolCallInfo.Raw | McpToolCallInfo.Raw;
 }

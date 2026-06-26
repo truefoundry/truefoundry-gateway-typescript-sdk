@@ -4,17 +4,17 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 import { RawToolCall } from "./RawToolCall.js";
-import { ToolCallToolInfo } from "./ToolCallToolInfo.js";
+import { ToolInfo } from "./ToolInfo.js";
 
 export const ToolCall: core.serialization.ObjectSchema<serializers.ToolCall.Raw, TrueFoundryGateway.ToolCall> =
     core.serialization
         .object({
-            toolInfo: core.serialization.property("tool_info", ToolCallToolInfo),
+            toolInfo: core.serialization.property("tool_info", ToolInfo),
         })
         .extend(RawToolCall);
 
 export declare namespace ToolCall {
     export interface Raw extends RawToolCall.Raw {
-        tool_info: ToolCallToolInfo.Raw;
+        tool_info: ToolInfo.Raw;
     }
 }

@@ -2,4 +2,4 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export type ToolCallToolInfo = TrueFoundryGateway.TrueFoundrySystemToolCallInfo | TrueFoundryGateway.McpToolCallInfo;
+export type ToolInfo = TrueFoundryGateway.TrueFoundrySystemToolCallInfo | TrueFoundryGateway.McpToolCallInfo;

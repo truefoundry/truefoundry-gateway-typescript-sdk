@@ -2,6 +2,8 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export interface ToolCall extends TrueFoundryGateway.RawToolCall {
-    toolInfo: TrueFoundryGateway.ToolInfo;
+export interface BaseThreadDoneEvent {
+    parent?: TrueFoundryGateway.AgentParent;
+    threadId: string;
+    title: string;
 }

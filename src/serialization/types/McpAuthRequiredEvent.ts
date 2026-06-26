@@ -3,25 +3,22 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
+import { BaseMcpAuthRequiredEvent } from "./BaseMcpAuthRequiredEvent.js";
 import { McpServerAuthInfo } from "./McpServerAuthInfo.js";
 
 export const McpAuthRequiredEvent: core.serialization.ObjectSchema<
     serializers.McpAuthRequiredEvent.Raw,
     TrueFoundryGateway.McpAuthRequiredEvent
-> = core.serialization.object({
-    type: core.serialization.stringLiteral("mcp.auth_required"),
-    id: core.serialization.string(),
-    createdAt: core.serialization.property("created_at", core.serialization.string()),
-    mcpServers: core.serialization.property("mcp_servers", core.serialization.list(McpServerAuthInfo)),
-    threadId: core.serialization.property("thread_id", core.serialization.string().optional()),
-});
+> = core.serialization
+    .object({
+        type: core.serialization.stringLiteral("mcp.auth_required"),
+        mcpServers: core.serialization.property("mcp_servers", core.serialization.list(McpServerAuthInfo)),
+    })
+    .extend(BaseMcpAuthRequiredEvent);
 
 export declare namespace McpAuthRequiredEvent {
-    export interface Raw {
+    export interface Raw extends BaseMcpAuthRequiredEvent.Raw {
         type: "mcp.auth_required";
-        id: string;
-        created_at: string;
         mcp_servers: McpServerAuthInfo.Raw[];
-        thread_id?: string | null;
     }
 }
