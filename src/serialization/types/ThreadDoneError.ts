@@ -18,7 +18,7 @@ export const ThreadDoneError: core.serialization.ObjectSchema<
     parent: AgentParent.optional(),
     status: core.serialization.stringLiteral("error"),
     threadId: core.serialization.property("thread_id", core.serialization.string()),
-    title: core.serialization.string().optional(),
+    title: core.serialization.string(),
 });
 
 export declare namespace ThreadDoneError {
@@ -31,6 +31,6 @@ export declare namespace ThreadDoneError {
         parent?: AgentParent.Raw | null;
         status: "error";
         thread_id: string;
-        title?: string | null;
+        title: string;
     }
 }

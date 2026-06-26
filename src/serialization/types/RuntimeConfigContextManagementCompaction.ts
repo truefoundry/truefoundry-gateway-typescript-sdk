@@ -9,12 +9,15 @@ export const RuntimeConfigContextManagementCompaction: core.serialization.Object
     TrueFoundryGateway.RuntimeConfigContextManagementCompaction
 > = core.serialization.object({
     enabled: core.serialization.boolean(),
-    compactionThresholdTokens: core.serialization.property("compaction_threshold_tokens", core.serialization.number()),
+    compactionThresholdTokens: core.serialization.property(
+        "compaction_threshold_tokens",
+        core.serialization.number().optional(),
+    ),
 });
 
 export declare namespace RuntimeConfigContextManagementCompaction {
     export interface Raw {
         enabled: boolean;
-        compaction_threshold_tokens: number;
+        compaction_threshold_tokens?: number | null;
     }
 }

@@ -14,9 +14,7 @@ import { ToolApprovalRequiredEvent } from "./ToolApprovalRequiredEvent.js";
 import { ToolResponseEvent } from "./ToolResponseEvent.js";
 import { ToolResponseRequiredEvent } from "./ToolResponseRequiredEvent.js";
 import { TurnCreatedEvent } from "./TurnCreatedEvent.js";
-import { TurnDoneCancelled } from "./TurnDoneCancelled.js";
-import { TurnDoneCompleted } from "./TurnDoneCompleted.js";
-import { TurnDoneError } from "./TurnDoneError.js";
+import { TurnDoneEvent } from "./TurnDoneEvent.js";
 
 export const TurnStreamingEvent: core.serialization.Schema<
     serializers.TurnStreamingEvent.Raw,
@@ -33,9 +31,7 @@ export const TurnStreamingEvent: core.serialization.Schema<
     ToolApprovalRequiredEvent,
     ToolResponseRequiredEvent,
     TurnCreatedEvent,
-    TurnDoneCompleted,
-    TurnDoneCancelled,
-    TurnDoneError,
+    TurnDoneEvent,
 ]);
 
 export declare namespace TurnStreamingEvent {
@@ -51,7 +47,5 @@ export declare namespace TurnStreamingEvent {
         | ToolApprovalRequiredEvent.Raw
         | ToolResponseRequiredEvent.Raw
         | TurnCreatedEvent.Raw
-        | TurnDoneCompleted.Raw
-        | TurnDoneCancelled.Raw
-        | TurnDoneError.Raw;
+        | TurnDoneEvent.Raw;
 }

@@ -2,11 +2,11 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export interface TurnDoneCancelled {
+export interface TurnDoneEvent {
     type: "turn.done";
     /** Unique identifier for the event */
     id: string;
-    state: TrueFoundryGateway.TurnStateCancelled;
+    state: TrueFoundryGateway.TurnDoneEventState;
     createdAt: string;
     threadId?: string;
 }

@@ -24,6 +24,7 @@ export const TurnStateDoneOutput: core.serialization.ObjectSchema<
         "thinking_blocks",
         core.serialization.list(TurnStateDoneOutputThinkingBlocksItem).optional(),
     ),
+    reasoningContent: core.serialization.property("reasoning_content", core.serialization.string().optional()),
     toolCalls: core.serialization.property("tool_calls", core.serialization.list(ToolCall).optional()),
     type: core.serialization.stringLiteral("model.message"),
     id: core.serialization.string(),
@@ -41,6 +42,7 @@ export declare namespace TurnStateDoneOutput {
         name?: string | null;
         refusal?: string | null;
         thinking_blocks?: TurnStateDoneOutputThinkingBlocksItem.Raw[] | null;
+        reasoning_content?: string | null;
         tool_calls?: ToolCall.Raw[] | null;
         type: "model.message";
         id: string;

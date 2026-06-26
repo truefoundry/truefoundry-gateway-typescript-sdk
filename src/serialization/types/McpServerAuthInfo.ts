@@ -8,16 +8,16 @@ export const McpServerAuthInfo: core.serialization.ObjectSchema<
     serializers.McpServerAuthInfo.Raw,
     TrueFoundryGateway.McpServerAuthInfo
 > = core.serialization.object({
-    mcpServerId: core.serialization.property("mcp_server_id", core.serialization.string()),
-    mcpServerName: core.serialization.property("mcp_server_name", core.serialization.string()),
+    id: core.serialization.string(),
+    name: core.serialization.string(),
     authUrl: core.serialization.property("auth_url", core.serialization.string()),
     threadIds: core.serialization.property("thread_ids", core.serialization.list(core.serialization.string())),
 });
 
 export declare namespace McpServerAuthInfo {
     export interface Raw {
-        mcp_server_id: string;
-        mcp_server_name: string;
+        id: string;
+        name: string;
         auth_url: string;
         thread_ids: string[];
     }

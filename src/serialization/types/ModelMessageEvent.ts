@@ -24,6 +24,7 @@ export const ModelMessageEvent: core.serialization.ObjectSchema<
         "thinking_blocks",
         core.serialization.list(ModelMessageEventThinkingBlocksItem).optional(),
     ),
+    reasoningContent: core.serialization.property("reasoning_content", core.serialization.string().optional()),
     toolCalls: core.serialization.property("tool_calls", core.serialization.list(ToolCall).optional()),
     type: core.serialization.stringLiteral("model.message"),
     id: core.serialization.string(),
@@ -41,6 +42,7 @@ export declare namespace ModelMessageEvent {
         name?: string | null;
         refusal?: string | null;
         thinking_blocks?: ModelMessageEventThinkingBlocksItem.Raw[] | null;
+        reasoning_content?: string | null;
         tool_calls?: ToolCall.Raw[] | null;
         type: "model.message";
         id: string;

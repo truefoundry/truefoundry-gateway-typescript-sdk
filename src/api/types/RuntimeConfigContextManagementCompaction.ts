@@ -2,5 +2,5 @@
 
 export interface RuntimeConfigContextManagementCompaction {
     enabled: boolean;
-    compactionThresholdTokens: number;
+    compactionThresholdTokens?: number;
 }

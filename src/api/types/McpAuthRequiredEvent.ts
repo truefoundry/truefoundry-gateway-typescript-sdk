@@ -7,6 +7,6 @@ export interface McpAuthRequiredEvent {
     /** Unique identifier for the event */
     id: string;
     createdAt: string;
-    servers: TrueFoundryGateway.McpServerAuthInfo[];
+    mcpServers: TrueFoundryGateway.McpServerAuthInfo[];
     threadId?: string;
 }

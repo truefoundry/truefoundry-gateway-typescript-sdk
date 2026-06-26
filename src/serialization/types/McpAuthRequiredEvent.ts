@@ -12,7 +12,7 @@ export const McpAuthRequiredEvent: core.serialization.ObjectSchema<
     type: core.serialization.stringLiteral("mcp.auth_required"),
     id: core.serialization.string(),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
-    servers: core.serialization.list(McpServerAuthInfo),
+    mcpServers: core.serialization.property("mcp_servers", core.serialization.list(McpServerAuthInfo)),
     threadId: core.serialization.property("thread_id", core.serialization.string().optional()),
 });
 
@@ -21,7 +21,7 @@ export declare namespace McpAuthRequiredEvent {
         type: "mcp.auth_required";
         id: string;
         created_at: string;
-        servers: McpServerAuthInfo.Raw[];
+        mcp_servers: McpServerAuthInfo.Raw[];
         thread_id?: string | null;
     }
 }

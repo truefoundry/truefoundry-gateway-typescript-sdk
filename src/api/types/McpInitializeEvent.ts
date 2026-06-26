@@ -8,5 +8,5 @@ export interface McpInitializeEvent {
     id: string;
     createdAt: string;
     threadId: string;
-    content: TrueFoundryGateway.McpInitializationInfo[];
+    mcpServers: TrueFoundryGateway.McpServerInitInfo[];
 }

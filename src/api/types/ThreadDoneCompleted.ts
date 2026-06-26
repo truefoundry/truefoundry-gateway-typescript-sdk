@@ -11,5 +11,5 @@ export interface ThreadDoneCompleted {
     parent?: TrueFoundryGateway.AgentParent;
     status: "done";
     threadId: string;
-    title?: string;
+    title: string;
 }

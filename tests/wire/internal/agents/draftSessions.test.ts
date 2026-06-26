@@ -172,10 +172,7 @@ describe("DraftSessionsClient", () => {
                     skills: [{ fqn: "fqn", preload: true }],
                     config: {
                         iteration_limit: 1,
-                        context_management: {
-                            compaction: { enabled: true, compaction_threshold_tokens: 1 },
-                            large_tool_response: { enabled: true },
-                        },
+                        context_management: { compaction: { enabled: true }, large_tool_response: { enabled: true } },
                     },
                     variables: { key: "value" },
                 },
@@ -244,7 +241,6 @@ describe("DraftSessionsClient", () => {
                         contextManagement: {
                             compaction: {
                                 enabled: true,
-                                compactionThresholdTokens: 1,
                             },
                             largeToolResponse: {
                                 enabled: true,
@@ -422,10 +418,7 @@ describe("DraftSessionsClient", () => {
                     skills: [{ fqn: "fqn", preload: true }],
                     config: {
                         iteration_limit: 1,
-                        context_management: {
-                            compaction: { enabled: true, compaction_threshold_tokens: 1 },
-                            large_tool_response: { enabled: true },
-                        },
+                        context_management: { compaction: { enabled: true }, large_tool_response: { enabled: true } },
                     },
                     variables: { key: "value" },
                 },
@@ -487,7 +480,6 @@ describe("DraftSessionsClient", () => {
                         contextManagement: {
                             compaction: {
                                 enabled: true,
-                                compactionThresholdTokens: 1,
                             },
                             largeToolResponse: {
                                 enabled: true,
@@ -573,10 +565,7 @@ describe("DraftSessionsClient", () => {
                     skills: [{ fqn: "fqn", preload: true }],
                     config: {
                         iteration_limit: 1,
-                        context_management: {
-                            compaction: { enabled: true, compaction_threshold_tokens: 1 },
-                            large_tool_response: { enabled: true },
-                        },
+                        context_management: { compaction: { enabled: true }, large_tool_response: { enabled: true } },
                     },
                     variables: { key: "value" },
                 },
@@ -639,7 +628,6 @@ describe("DraftSessionsClient", () => {
                         contextManagement: {
                             compaction: {
                                 enabled: true,
-                                compactionThresholdTokens: 1,
                             },
                             largeToolResponse: {
                                 enabled: true,

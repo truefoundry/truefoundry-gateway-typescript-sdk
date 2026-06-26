@@ -17,7 +17,7 @@ export const ThreadDoneCompleted: core.serialization.ObjectSchema<
     parent: AgentParent.optional(),
     status: core.serialization.stringLiteral("done"),
     threadId: core.serialization.property("thread_id", core.serialization.string()),
-    title: core.serialization.string().optional(),
+    title: core.serialization.string(),
 });
 
 export declare namespace ThreadDoneCompleted {
@@ -29,6 +29,6 @@ export declare namespace ThreadDoneCompleted {
         parent?: AgentParent.Raw | null;
         status: "done";
         thread_id: string;
-        title?: string | null;
+        title: string;
     }
 }

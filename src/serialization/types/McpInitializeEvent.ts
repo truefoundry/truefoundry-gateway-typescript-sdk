@@ -3,7 +3,7 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { McpInitializationInfo } from "./McpInitializationInfo.js";
+import { McpServerInitInfo } from "./McpServerInitInfo.js";
 
 export const McpInitializeEvent: core.serialization.ObjectSchema<
     serializers.McpInitializeEvent.Raw,
@@ -13,7 +13,7 @@ export const McpInitializeEvent: core.serialization.ObjectSchema<
     id: core.serialization.string(),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
     threadId: core.serialization.property("thread_id", core.serialization.string()),
-    content: core.serialization.list(McpInitializationInfo),
+    mcpServers: core.serialization.property("mcp_servers", core.serialization.list(McpServerInitInfo)),
 });
 
 export declare namespace McpInitializeEvent {
@@ -22,6 +22,6 @@ export declare namespace McpInitializeEvent {
         id: string;
         created_at: string;
         thread_id: string;
-        content: McpInitializationInfo.Raw[];
+        mcp_servers: McpServerInitInfo.Raw[];
     }
 }

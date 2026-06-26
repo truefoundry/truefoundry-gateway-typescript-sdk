@@ -14,6 +14,4 @@ export type TurnStreamingEvent =
     | TrueFoundryGateway.ToolApprovalRequiredEvent
     | TrueFoundryGateway.ToolResponseRequiredEvent
     | TrueFoundryGateway.TurnCreatedEvent
-    | TrueFoundryGateway.TurnDoneCompleted
-    | TrueFoundryGateway.TurnDoneCancelled
-    | TrueFoundryGateway.TurnDoneError;
+    | TrueFoundryGateway.TurnDoneEvent;

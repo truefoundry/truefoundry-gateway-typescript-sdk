@@ -659,7 +659,7 @@ describe("SessionsClient", () => {
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody =
-            'event: \ndata: {"audio":{"id":"id"},"content":"content","function_call":{"name":"name","arguments":"arguments"},"name":"name","refusal":"refusal","thinking_blocks":[{"type":"thinking","thinking":"thinking","signature":"signature"}],"tool_calls":[{"id":"id","type":"function","function":{"name":"name","arguments":"arguments"},"provider_specific_fields":{"key":"value"},"tool_info":{"type":"truefoundry-system","name":"name"}}],"type":"model.message","id":"id","thread_id":"thread_id","finish_reason":"stop","created_at":"created_at","usage":{"input_tokens":1,"output_tokens":1,"cache_read_tokens":1,"cache_write_tokens":1,"input_tokens_breakdown":{"harness":1,"skills":1,"instructions":1,"tool_definitions":1,"messages":1}}}\n\n';
+            'event: \ndata: {"audio":{"id":"id"},"content":"content","function_call":{"name":"name","arguments":"arguments"},"name":"name","refusal":"refusal","thinking_blocks":[{"type":"thinking","thinking":"thinking","signature":"signature"}],"reasoning_content":"reasoning_content","tool_calls":[{"id":"id","type":"function","function":{"name":"name","arguments":"arguments"},"provider_specific_fields":{"key":"value"},"tool_info":{"type":"truefoundry-system","name":"name"}}],"type":"model.message","id":"id","thread_id":"thread_id","finish_reason":"stop","created_at":"created_at","usage":{"input_tokens":1,"output_tokens":1,"cache_read_tokens":1,"cache_write_tokens":1,"input_tokens_breakdown":{"harness":1,"skills":1,"instructions":1,"tool_definitions":1,"messages":1}}}\n\n';
 
         server
             .mockEndpoint()
@@ -694,6 +694,7 @@ describe("SessionsClient", () => {
                         signature: "signature",
                     },
                 ],
+                reasoningContent: "reasoning_content",
                 toolCalls: [
                     {
                         id: "id",
@@ -892,7 +893,7 @@ describe("SessionsClient", () => {
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody =
-            'event: \ndata: {"audio":{"id":"id"},"content":"content","function_call":{"name":"name","arguments":"arguments"},"name":"name","refusal":"refusal","thinking_blocks":[{"type":"thinking","thinking":"thinking","signature":"signature"}],"tool_calls":[{"id":"id","type":"function","function":{"name":"name","arguments":"arguments"},"provider_specific_fields":{"key":"value"},"tool_info":{"type":"truefoundry-system","name":"name"}}],"type":"model.message","id":"id","thread_id":"thread_id","finish_reason":"stop","created_at":"created_at","usage":{"input_tokens":1,"output_tokens":1,"cache_read_tokens":1,"cache_write_tokens":1,"input_tokens_breakdown":{"harness":1,"skills":1,"instructions":1,"tool_definitions":1,"messages":1}}}\n\n';
+            'event: \ndata: {"audio":{"id":"id"},"content":"content","function_call":{"name":"name","arguments":"arguments"},"name":"name","refusal":"refusal","thinking_blocks":[{"type":"thinking","thinking":"thinking","signature":"signature"}],"reasoning_content":"reasoning_content","tool_calls":[{"id":"id","type":"function","function":{"name":"name","arguments":"arguments"},"provider_specific_fields":{"key":"value"},"tool_info":{"type":"truefoundry-system","name":"name"}}],"type":"model.message","id":"id","thread_id":"thread_id","finish_reason":"stop","created_at":"created_at","usage":{"input_tokens":1,"output_tokens":1,"cache_read_tokens":1,"cache_write_tokens":1,"input_tokens_breakdown":{"harness":1,"skills":1,"instructions":1,"tool_definitions":1,"messages":1}}}\n\n';
 
         server
             .mockEndpoint()
@@ -932,6 +933,7 @@ describe("SessionsClient", () => {
                         signature: "signature",
                     },
                 ],
+                reasoningContent: "reasoning_content",
                 toolCalls: [
                     {
                         id: "id",
@@ -1064,6 +1066,7 @@ describe("SessionsClient", () => {
                     name: "name",
                     refusal: "refusal",
                     thinking_blocks: [{ type: "thinking", thinking: "thinking" }],
+                    reasoning_content: "reasoning_content",
                     tool_calls: [
                         {
                             id: "id",
@@ -1120,6 +1123,7 @@ describe("SessionsClient", () => {
                             thinking: "thinking",
                         },
                     ],
+                    reasoningContent: "reasoning_content",
                     toolCalls: [
                         {
                             id: "id",

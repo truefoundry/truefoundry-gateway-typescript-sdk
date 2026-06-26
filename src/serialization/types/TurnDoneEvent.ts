@@ -3,24 +3,24 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { TurnStateCancelled } from "./TurnStateCancelled.js";
+import { TurnDoneEventState } from "./TurnDoneEventState.js";
 
-export const TurnDoneCancelled: core.serialization.ObjectSchema<
-    serializers.TurnDoneCancelled.Raw,
-    TrueFoundryGateway.TurnDoneCancelled
+export const TurnDoneEvent: core.serialization.ObjectSchema<
+    serializers.TurnDoneEvent.Raw,
+    TrueFoundryGateway.TurnDoneEvent
 > = core.serialization.object({
     type: core.serialization.stringLiteral("turn.done"),
     id: core.serialization.string(),
-    state: TurnStateCancelled,
+    state: TurnDoneEventState,
     createdAt: core.serialization.property("created_at", core.serialization.string()),
     threadId: core.serialization.property("thread_id", core.serialization.string().optional()),
 });
 
-export declare namespace TurnDoneCancelled {
+export declare namespace TurnDoneEvent {
     export interface Raw {
         type: "turn.done";
         id: string;
-        state: TurnStateCancelled.Raw;
+        state: TurnDoneEventState.Raw;
         created_at: string;
         thread_id?: string | null;
     }

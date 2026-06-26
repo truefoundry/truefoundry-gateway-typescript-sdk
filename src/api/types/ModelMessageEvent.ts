@@ -9,6 +9,7 @@ export interface ModelMessageEvent {
     name?: string;
     refusal?: string;
     thinkingBlocks?: TrueFoundryGateway.ModelMessageEventThinkingBlocksItem[];
+    reasoningContent?: string;
     toolCalls?: TrueFoundryGateway.ToolCall[];
     type: "model.message";
     /** Unique identifier for the event */

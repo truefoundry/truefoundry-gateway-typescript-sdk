@@ -12,5 +12,5 @@ export interface ThreadDoneError {
     parent?: TrueFoundryGateway.AgentParent;
     status: "error";
     threadId: string;
-    title?: string;
+    title: string;
 }
