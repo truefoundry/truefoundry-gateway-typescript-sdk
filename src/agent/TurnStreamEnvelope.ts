@@ -6,7 +6,7 @@ export interface TurnStreamEnvelope {
 }
 
 export function parseSequenceNumber(id: string | undefined): number {
-    if (id == null || id === "") {
+    if (!id) {
         throw new Error("Missing SSE sequence number id.");
     }
     const parsed = Number(id);
