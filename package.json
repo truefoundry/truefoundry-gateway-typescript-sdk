@@ -88,7 +88,18 @@
             },
             "default": "./dist/cjs/api/resources/internal/resources/agents/resources/draftSessions/exports.js"
         },
-        "./package.json": "./package.json"
+        "./package.json": "./package.json",
+        "./agent": {
+            "types": "./dist/cjs/agent/index.d.ts",
+            "import": {
+                "types": "./dist/esm/agent/index.d.mts",
+                "default": "./dist/esm/agent/index.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/agent/index.d.ts",
+                "default": "./dist/cjs/agent/index.js"
+            }
+        }
     },
     "files": [
         "dist",

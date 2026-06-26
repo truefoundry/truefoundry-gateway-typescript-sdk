@@ -3,6 +3,21 @@
     "generatorName": "fernapi/fern-typescript-node-sdk",
     "generatorVersion": "3.73.0",
     "generatorConfig": {
+        "packageJson": {
+            "exports": {
+                "./agent": {
+                    "types": "./dist/cjs/agent/index.d.ts",
+                    "import": {
+                        "types": "./dist/esm/agent/index.d.mts",
+                        "default": "./dist/esm/agent/index.mjs"
+                    },
+                    "require": {
+                        "types": "./dist/cjs/agent/index.d.ts",
+                        "default": "./dist/cjs/agent/index.js"
+                    }
+                }
+            }
+        },
         "allowExtraFields": true,
         "allowCustomFetcher": true,
         "enableInlineTypes": false,
@@ -20,7 +35,7 @@
         "streamType": "web",
         "useDefaultRequestParameterValues": true
     },
-    "originGitCommit": "69eec90901c5578b0c87c70f6be618399926069f",
+    "originGitCommit": "f014ec76ce055801b5ff59295583c352e09a91b7",
     "originGitCommitIsDirty": false,
     "invokedBy": "ci",
     "requestedVersion": "0.0.0",
