@@ -3,4 +3,5 @@
 # paths so they are not overwritten on SDK regeneration.
 src/index.ts
 src/agent/
+tests/unit/agent/
 .github/workflows/ci.yml

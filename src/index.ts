@@ -10,13 +10,3 @@ export type { BaseClientOptions, BaseRequestOptions } from "./BaseClient.js";
 export { TrueFoundryGatewayClient } from "./Client.js";
 export { TrueFoundryGatewayError, TrueFoundryGatewayTimeoutError } from "./errors/index.js";
 export * from "./exports.js";
-
-// Hand-written agent session wrapper (.fernignore-protected):
-export { AgentSessionClient, isEventDelta, mergeEventDelta } from "./agent/index.js";
-export type { AgentSession, DeltaEvents, PreparedTurn, Turn } from "./agent/index.js";
-export type {
-    ModelMessageDeltaEvent,
-    ModelMessageEvent,
-    TurnEvent,
-    TurnStreamingEvent,
-} from "./api/index.js";
