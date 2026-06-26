@@ -3,5 +3,7 @@
 # paths so they are not overwritten on SDK regeneration.
 src/index.ts
 src/agent/
+src/core/stream/Stream.ts
 tests/unit/agent/
+tests/unit/stream/Stream.test.ts
 .github/workflows/ci.yml
