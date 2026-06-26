@@ -12,5 +12,11 @@ export { TrueFoundryGatewayError, TrueFoundryGatewayTimeoutError } from "./error
 export * from "./exports.js";
 
 // Hand-written agent session wrapper (.fernignore-protected):
-export { AgentSessionClient } from "./agent/index.js";
-export type { AgentSession, PreparedTurn, Turn } from "./agent/index.js";
+export { AgentSessionClient, isEventDelta, mergeEventDelta } from "./agent/index.js";
+export type { AgentSession, DeltaEvents, PreparedTurn, Turn } from "./agent/index.js";
+export type {
+    ModelMessageDeltaEvent,
+    ModelMessageEvent,
+    TurnEvent,
+    TurnStreamingEvent,
+} from "./api/index.js";
