@@ -41,16 +41,6 @@ function mergeModelMessageDelta(
         base.refusal = (base.refusal ?? "") + delta.refusal;
     }
 
-    if (delta.functionCall) {
-        base.functionCall ??= { name: "", arguments: "" };
-        if (delta.functionCall.name) {
-            base.functionCall.name = delta.functionCall.name;
-        }
-        if (delta.functionCall.arguments) {
-            base.functionCall.arguments += delta.functionCall.arguments;
-        }
-    }
-
     if (delta.toolCalls) {
         base.toolCalls ??= [];
         for (const d of delta.toolCalls) {
@@ -90,31 +80,15 @@ function mergeModelMessageDelta(
         }
     }
 
-    if (delta.thinkingBlocks) {
-        base.thinkingBlocks ??= [];
-        for (let i = 0; i < delta.thinkingBlocks.length; i++) {
-            const d = delta.thinkingBlocks[i]!;
-            const b = base.thinkingBlocks[i];
-            if (b === undefined) {
-                base.thinkingBlocks[i] = d as TrueFoundryGateway.ModelMessageEventThinkingBlocksItem;
-            } else if (b.type === "thinking" && d.type === "thinking") {
-                b.thinking += d.thinking;
-                if (d.signature) {
-                    b.signature = d.signature;
-                }
-            } else if (b.type === "redacted_thinking" && d.type === "redacted_thinking") {
-                b.data += d.data;
-            } else {
-                base.thinkingBlocks[i] = d as TrueFoundryGateway.ModelMessageEventThinkingBlocksItem;
-            }
-        }
-    }
-
     if (delta.finishReason) {
         base.finishReason = delta.finishReason;
     }
 
     if (delta.reasoningContent) {
         base.reasoningContent = (base.reasoningContent ?? "") + delta.reasoningContent;
+    }
+
+    if (delta.usage) {
+        base.usage = delta.usage;
     }
 }

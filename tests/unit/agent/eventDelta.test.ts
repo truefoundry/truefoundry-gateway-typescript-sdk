@@ -232,41 +232,30 @@ describe("mergeEventDelta / toolCalls", () => {
     });
 });
 
-describe("mergeEventDelta / thinkingBlocks", () => {
-    it("concatenates thinking blocks and overwrites signature", () => {
-        const base = modelMessageBase();
-        mergeEventDelta(
-            base,
-            modelMessageDelta({
-                thinkingBlocks: [{ type: "thinking", thinking: "Hel", signature: "sig1" }],
-            }),
-        );
-        mergeEventDelta(
-            base,
-            modelMessageDelta({
-                thinkingBlocks: [{ type: "thinking", thinking: "lo", signature: "sig2" }],
-            }),
-        );
+describe("mergeEventDelta / usage", () => {
+    const usage: TrueFoundryGateway.ModelMessageUsage = {
+        inputTokens: 10611,
+        outputTokens: 84,
+        inputTokensBreakdown: {
+            harness: 7824,
+            skills: 0,
+            instructions: 0,
+            toolDefinitions: 1093,
+            messages: 1694,
+        },
+    };
 
-        expect(base.thinkingBlocks).toEqual([{ type: "thinking", thinking: "Hello", signature: "sig2" }]);
+    it("sets usage from a delta", () => {
+        const base = modelMessageBase();
+        mergeEventDelta(base, modelMessageDelta({ usage }));
+        expect(base.usage).toEqual(usage);
     });
 
-    it("concatenates redacted_thinking data", () => {
+    it("overwrites usage when a later delta carries an update", () => {
         const base = modelMessageBase();
-        mergeEventDelta(
-            base,
-            modelMessageDelta({
-                thinkingBlocks: [{ type: "redacted_thinking", data: "ab" }],
-            }),
-        );
-        mergeEventDelta(
-            base,
-            modelMessageDelta({
-                thinkingBlocks: [{ type: "redacted_thinking", data: "cd" }],
-            }),
-        );
-
-        expect(base.thinkingBlocks).toEqual([{ type: "redacted_thinking", data: "abcd" }]);
+        mergeEventDelta(base, modelMessageDelta({ usage: { ...usage, outputTokens: 10 } }));
+        mergeEventDelta(base, modelMessageDelta({ usage }));
+        expect(base.usage?.outputTokens).toBe(84);
     });
 });
 
@@ -313,18 +302,5 @@ describe("mergeEventDelta / dispatch and id semantics", () => {
 
         expect((events.get("msg-a") as TrueFoundryGateway.ModelMessageEvent).content).toBe("A!");
         expect((events.get("msg-b") as TrueFoundryGateway.ModelMessageEvent).content).toBe("B");
-    });
-});
-
-describe("mergeEventDelta / functionCall", () => {
-    it("sets name and accumulates arguments for legacy functionCall", () => {
-        const base = modelMessageBase();
-        mergeEventDelta(
-            base,
-            modelMessageDelta({ functionCall: { name: "fn", arguments: '{"x":' } }),
-        );
-        mergeEventDelta(base, modelMessageDelta({ functionCall: { arguments: "1}" } }));
-
-        expect(base.functionCall).toEqual({ name: "fn", arguments: '{"x":1}' });
     });
 });

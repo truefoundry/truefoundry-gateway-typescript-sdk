@@ -14,6 +14,8 @@ export type {
     McpInitializeEvent,
     ModelMessageDeltaEvent,
     ModelMessageEvent,
+    ModelMessageUsage,
+    ModelMessageUsageInputTokensBreakdown,
     SandboxCreatedEvent,
     ThreadCreatedEvent,
     ThreadDoneEvent,
