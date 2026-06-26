@@ -11,5 +11,4 @@ export interface ThreadCreatedEvent {
     parent: TrueFoundryGateway.AgentParent;
     threadId: string;
     title: string;
-    sequenceNumber: number;
 }

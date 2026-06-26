@@ -31,7 +31,6 @@ export const ModelMessageEvent: core.serialization.ObjectSchema<
     finishReason: core.serialization.property("finish_reason", FinishReason.optional()),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
     usage: ModelMessageEventUsage.optional(),
-    sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
 });
 
 export declare namespace ModelMessageEvent {
@@ -49,6 +48,5 @@ export declare namespace ModelMessageEvent {
         finish_reason?: FinishReason.Raw | null;
         created_at: string;
         usage?: ModelMessageEventUsage.Raw | null;
-        sequence_number: number;
     }
 }

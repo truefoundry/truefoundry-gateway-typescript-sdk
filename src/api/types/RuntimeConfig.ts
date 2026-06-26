@@ -6,7 +6,7 @@ export interface RuntimeConfig {
     iterationLimit: number;
     sandbox?: TrueFoundryGateway.RuntimeConfigSandbox;
     dynamicSubAgents?: TrueFoundryGateway.RuntimeConfigDynamicSubAgents;
-    contextManagement?: TrueFoundryGateway.RuntimeConfigContextManagement;
+    contextManagement: TrueFoundryGateway.RuntimeConfigContextManagement;
     generativeUi?: TrueFoundryGateway.RuntimeConfigGenerativeUi;
     askUserQuestions?: TrueFoundryGateway.RuntimeConfigAskUserQuestions;
 }

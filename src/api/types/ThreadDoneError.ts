@@ -13,5 +13,4 @@ export interface ThreadDoneError {
     status: "error";
     threadId: string;
     title?: string;
-    sequenceNumber: number;
 }

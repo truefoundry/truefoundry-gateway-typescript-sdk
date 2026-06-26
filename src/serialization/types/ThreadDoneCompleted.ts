@@ -18,7 +18,6 @@ export const ThreadDoneCompleted: core.serialization.ObjectSchema<
     status: core.serialization.stringLiteral("done"),
     threadId: core.serialization.property("thread_id", core.serialization.string()),
     title: core.serialization.string().optional(),
-    sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
 });
 
 export declare namespace ThreadDoneCompleted {
@@ -31,6 +30,5 @@ export declare namespace ThreadDoneCompleted {
         status: "done";
         thread_id: string;
         title?: string | null;
-        sequence_number: number;
     }
 }

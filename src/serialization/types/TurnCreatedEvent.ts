@@ -18,7 +18,6 @@ export const TurnCreatedEvent: core.serialization.ObjectSchema<
     createdBy: core.serialization.property("created_by", Subject),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
     threadId: core.serialization.property("thread_id", core.serialization.string().optional()),
-    sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
 });
 
 export declare namespace TurnCreatedEvent {
@@ -31,6 +30,5 @@ export declare namespace TurnCreatedEvent {
         created_by: Subject.Raw;
         created_at: string;
         thread_id?: string | null;
-        sequence_number: number;
     }
 }

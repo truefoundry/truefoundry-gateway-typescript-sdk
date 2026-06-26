@@ -14,7 +14,6 @@ export const TurnDoneCancelled: core.serialization.ObjectSchema<
     state: TurnStateCancelled,
     createdAt: core.serialization.property("created_at", core.serialization.string()),
     threadId: core.serialization.property("thread_id", core.serialization.string().optional()),
-    sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
 });
 
 export declare namespace TurnDoneCancelled {
@@ -24,6 +23,5 @@ export declare namespace TurnDoneCancelled {
         state: TurnStateCancelled.Raw;
         created_at: string;
         thread_id?: string | null;
-        sequence_number: number;
     }
 }

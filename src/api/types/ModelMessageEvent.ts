@@ -17,5 +17,4 @@ export interface ModelMessageEvent {
     finishReason?: TrueFoundryGateway.FinishReason;
     createdAt: string;
     usage?: TrueFoundryGateway.ModelMessageEventUsage;
-    sequenceNumber: number;
 }

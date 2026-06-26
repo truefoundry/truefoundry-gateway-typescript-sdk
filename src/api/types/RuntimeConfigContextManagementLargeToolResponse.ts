@@ -2,7 +2,4 @@
 
 export interface RuntimeConfigContextManagementLargeToolResponse {
     enabled: boolean;
-    individualToolResponseTokenThreshold: number;
-    totalToolResponseTokenThreshold: number;
-    previewNumberOfCharacters: number;
 }

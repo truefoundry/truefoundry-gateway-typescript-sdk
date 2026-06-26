@@ -12,5 +12,4 @@ export interface ThreadDoneCompleted {
     status: "done";
     threadId: string;
     title?: string;
-    sequenceNumber: number;
 }

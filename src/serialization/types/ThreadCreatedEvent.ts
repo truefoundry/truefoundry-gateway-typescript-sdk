@@ -17,7 +17,6 @@ export const ThreadCreatedEvent: core.serialization.ObjectSchema<
     parent: AgentParent,
     threadId: core.serialization.property("thread_id", core.serialization.string()),
     title: core.serialization.string(),
-    sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
 });
 
 export declare namespace ThreadCreatedEvent {
@@ -29,6 +28,5 @@ export declare namespace ThreadCreatedEvent {
         parent: AgentParent.Raw;
         thread_id: string;
         title: string;
-        sequence_number: number;
     }
 }

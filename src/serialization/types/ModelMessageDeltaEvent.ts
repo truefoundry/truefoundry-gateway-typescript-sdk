@@ -29,7 +29,6 @@ export const ModelMessageDeltaEvent: core.serialization.ObjectSchema<
     threadId: core.serialization.property("thread_id", core.serialization.string()),
     createdAt: core.serialization.property("created_at", core.serialization.string().optional()),
     finishReason: core.serialization.property("finish_reason", FinishReason.optional()),
-    sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
 });
 
 export declare namespace ModelMessageDeltaEvent {
@@ -45,6 +44,5 @@ export declare namespace ModelMessageDeltaEvent {
         thread_id: string;
         created_at?: string | null;
         finish_reason?: FinishReason.Raw | null;
-        sequence_number: number;
     }
 }

@@ -7,5 +7,4 @@ export interface SandboxCreatedEvent {
     createdAt: string;
     sandboxId: string;
     threadId?: string;
-    sequenceNumber: number;
 }

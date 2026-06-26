@@ -16,7 +16,7 @@ export const RuntimeConfig: core.serialization.ObjectSchema<
     iterationLimit: core.serialization.property("iteration_limit", core.serialization.number()),
     sandbox: RuntimeConfigSandbox.optional(),
     dynamicSubAgents: core.serialization.property("dynamic_sub_agents", RuntimeConfigDynamicSubAgents.optional()),
-    contextManagement: core.serialization.property("context_management", RuntimeConfigContextManagement.optional()),
+    contextManagement: core.serialization.property("context_management", RuntimeConfigContextManagement),
     generativeUi: core.serialization.property("generative_ui", RuntimeConfigGenerativeUi.optional()),
     askUserQuestions: core.serialization.property("ask_user_questions", RuntimeConfigAskUserQuestions.optional()),
 });
@@ -26,7 +26,7 @@ export declare namespace RuntimeConfig {
         iteration_limit: number;
         sandbox?: RuntimeConfigSandbox.Raw | null;
         dynamic_sub_agents?: RuntimeConfigDynamicSubAgents.Raw | null;
-        context_management?: RuntimeConfigContextManagement.Raw | null;
+        context_management: RuntimeConfigContextManagement.Raw;
         generative_ui?: RuntimeConfigGenerativeUi.Raw | null;
         ask_user_questions?: RuntimeConfigAskUserQuestions.Raw | null;
     }

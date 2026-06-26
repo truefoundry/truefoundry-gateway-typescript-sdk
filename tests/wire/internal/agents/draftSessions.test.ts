@@ -170,7 +170,13 @@ describe("DraftSessionsClient", () => {
                     ],
                     response_format: { type: "text" },
                     skills: [{ fqn: "fqn", preload: true }],
-                    config: { iteration_limit: 1 },
+                    config: {
+                        iteration_limit: 1,
+                        context_management: {
+                            compaction: { enabled: true, compaction_threshold_tokens: 1 },
+                            large_tool_response: { enabled: true },
+                        },
+                    },
                     variables: { key: "value" },
                 },
                 agent_name: "agent_name",
@@ -235,6 +241,15 @@ describe("DraftSessionsClient", () => {
                     ],
                     config: {
                         iterationLimit: 1,
+                        contextManagement: {
+                            compaction: {
+                                enabled: true,
+                                compactionThresholdTokens: 1,
+                            },
+                            largeToolResponse: {
+                                enabled: true,
+                            },
+                        },
                     },
                     variables: {
                         key: "value",
@@ -405,7 +420,13 @@ describe("DraftSessionsClient", () => {
                     ],
                     response_format: { type: "text" },
                     skills: [{ fqn: "fqn", preload: true }],
-                    config: { iteration_limit: 1 },
+                    config: {
+                        iteration_limit: 1,
+                        context_management: {
+                            compaction: { enabled: true, compaction_threshold_tokens: 1 },
+                            large_tool_response: { enabled: true },
+                        },
+                    },
                     variables: { key: "value" },
                 },
                 agent_name: "agent_name",
@@ -463,6 +484,15 @@ describe("DraftSessionsClient", () => {
                     ],
                     config: {
                         iterationLimit: 1,
+                        contextManagement: {
+                            compaction: {
+                                enabled: true,
+                                compactionThresholdTokens: 1,
+                            },
+                            largeToolResponse: {
+                                enabled: true,
+                            },
+                        },
                     },
                     variables: {
                         key: "value",
@@ -541,7 +571,13 @@ describe("DraftSessionsClient", () => {
                     ],
                     response_format: { type: "text" },
                     skills: [{ fqn: "fqn", preload: true }],
-                    config: { iteration_limit: 1 },
+                    config: {
+                        iteration_limit: 1,
+                        context_management: {
+                            compaction: { enabled: true, compaction_threshold_tokens: 1 },
+                            large_tool_response: { enabled: true },
+                        },
+                    },
                     variables: { key: "value" },
                 },
                 agent_name: "agent_name",
@@ -600,6 +636,15 @@ describe("DraftSessionsClient", () => {
                     ],
                     config: {
                         iterationLimit: 1,
+                        contextManagement: {
+                            compaction: {
+                                enabled: true,
+                                compactionThresholdTokens: 1,
+                            },
+                            largeToolResponse: {
+                                enabled: true,
+                            },
+                        },
                     },
                     variables: {
                         key: "value",

@@ -14,7 +14,6 @@ export const ToolResponseEvent: core.serialization.ObjectSchema<
     id: core.serialization.string(),
     threadId: core.serialization.property("thread_id", core.serialization.string()),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
-    sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
 });
 
 export declare namespace ToolResponseEvent {
@@ -25,6 +24,5 @@ export declare namespace ToolResponseEvent {
         id: string;
         thread_id: string;
         created_at: string;
-        sequence_number: number;
     }
 }

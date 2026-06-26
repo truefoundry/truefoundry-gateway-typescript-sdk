@@ -9,22 +9,10 @@ export const RuntimeConfigContextManagementLargeToolResponse: core.serialization
     TrueFoundryGateway.RuntimeConfigContextManagementLargeToolResponse
 > = core.serialization.object({
     enabled: core.serialization.boolean(),
-    individualToolResponseTokenThreshold: core.serialization.property(
-        "individual_tool_response_token_threshold",
-        core.serialization.number(),
-    ),
-    totalToolResponseTokenThreshold: core.serialization.property(
-        "total_tool_response_token_threshold",
-        core.serialization.number(),
-    ),
-    previewNumberOfCharacters: core.serialization.property("preview_number_of_characters", core.serialization.number()),
 });
 
 export declare namespace RuntimeConfigContextManagementLargeToolResponse {
     export interface Raw {
         enabled: boolean;
-        individual_tool_response_token_threshold: number;
-        total_tool_response_token_threshold: number;
-        preview_number_of_characters: number;
     }
 }

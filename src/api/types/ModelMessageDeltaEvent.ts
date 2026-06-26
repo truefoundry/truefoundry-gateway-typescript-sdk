@@ -15,5 +15,4 @@ export interface ModelMessageDeltaEvent {
     threadId: string;
     createdAt?: string;
     finishReason?: TrueFoundryGateway.FinishReason;
-    sequenceNumber: number;
 }

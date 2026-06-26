@@ -14,7 +14,6 @@ export const McpAuthRequiredEvent: core.serialization.ObjectSchema<
     createdAt: core.serialization.property("created_at", core.serialization.string()),
     servers: core.serialization.list(McpServerAuthInfo),
     threadId: core.serialization.property("thread_id", core.serialization.string().optional()),
-    sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
 });
 
 export declare namespace McpAuthRequiredEvent {
@@ -24,6 +23,5 @@ export declare namespace McpAuthRequiredEvent {
         created_at: string;
         servers: McpServerAuthInfo.Raw[];
         thread_id?: string | null;
-        sequence_number: number;
     }
 }

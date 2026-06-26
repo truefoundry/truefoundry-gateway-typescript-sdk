@@ -9,5 +9,4 @@ export interface McpAuthRequiredEvent {
     createdAt: string;
     servers: TrueFoundryGateway.McpServerAuthInfo[];
     threadId?: string;
-    sequenceNumber: number;
 }

@@ -12,5 +12,4 @@ export interface TurnCreatedEvent {
     createdBy: TrueFoundryGateway.Subject;
     createdAt: string;
     threadId?: string;
-    sequenceNumber: number;
 }

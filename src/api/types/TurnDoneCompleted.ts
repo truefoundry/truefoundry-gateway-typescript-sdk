@@ -9,5 +9,4 @@ export interface TurnDoneCompleted {
     state: TrueFoundryGateway.TurnStateDone;
     createdAt: string;
     threadId?: string;
-    sequenceNumber: number;
 }

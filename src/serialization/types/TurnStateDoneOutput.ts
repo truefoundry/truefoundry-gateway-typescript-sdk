@@ -31,7 +31,6 @@ export const TurnStateDoneOutput: core.serialization.ObjectSchema<
     finishReason: core.serialization.property("finish_reason", FinishReason.optional()),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
     usage: TurnStateDoneOutputUsage.optional(),
-    sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
 });
 
 export declare namespace TurnStateDoneOutput {
@@ -49,6 +48,5 @@ export declare namespace TurnStateDoneOutput {
         finish_reason?: FinishReason.Raw | null;
         created_at: string;
         usage?: TurnStateDoneOutputUsage.Raw | null;
-        sequence_number: number;
     }
 }

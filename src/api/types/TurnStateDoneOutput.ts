@@ -17,5 +17,4 @@ export interface TurnStateDoneOutput {
     finishReason?: TrueFoundryGateway.FinishReason;
     createdAt: string;
     usage?: TrueFoundryGateway.TurnStateDoneOutputUsage;
-    sequenceNumber: number;
 }

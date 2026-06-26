@@ -8,5 +8,4 @@ export interface ToolResponseEvent {
     id: string;
     threadId: string;
     createdAt: string;
-    sequenceNumber: number;
 }

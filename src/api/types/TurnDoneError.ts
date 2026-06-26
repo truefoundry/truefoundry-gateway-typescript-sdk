@@ -9,5 +9,4 @@ export interface TurnDoneError {
     state: TrueFoundryGateway.TurnStateError;
     createdAt: string;
     threadId?: string;
-    sequenceNumber: number;
 }

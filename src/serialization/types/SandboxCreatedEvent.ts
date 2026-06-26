@@ -13,7 +13,6 @@ export const SandboxCreatedEvent: core.serialization.ObjectSchema<
     createdAt: core.serialization.property("created_at", core.serialization.string()),
     sandboxId: core.serialization.property("sandbox_id", core.serialization.string()),
     threadId: core.serialization.property("thread_id", core.serialization.string().optional()),
-    sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
 });
 
 export declare namespace SandboxCreatedEvent {
@@ -23,6 +22,5 @@ export declare namespace SandboxCreatedEvent {
         created_at: string;
         sandbox_id: string;
         thread_id?: string | null;
-        sequence_number: number;
     }
 }

@@ -14,7 +14,6 @@ export const McpInitializeEvent: core.serialization.ObjectSchema<
     createdAt: core.serialization.property("created_at", core.serialization.string()),
     threadId: core.serialization.property("thread_id", core.serialization.string()),
     content: core.serialization.list(McpInitializationInfo),
-    sequenceNumber: core.serialization.property("sequence_number", core.serialization.number()),
 });
 
 export declare namespace McpInitializeEvent {
@@ -24,6 +23,5 @@ export declare namespace McpInitializeEvent {
         created_at: string;
         thread_id: string;
         content: McpInitializationInfo.Raw[];
-        sequence_number: number;
     }
 }

@@ -9,5 +9,4 @@ export interface McpInitializeEvent {
     createdAt: string;
     threadId: string;
     content: TrueFoundryGateway.McpInitializationInfo[];
-    sequenceNumber: number;
 }

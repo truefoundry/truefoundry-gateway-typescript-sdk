@@ -9,5 +9,4 @@ export interface TurnDoneCancelled {
     state: TrueFoundryGateway.TurnStateCancelled;
     createdAt: string;
     threadId?: string;
-    sequenceNumber: number;
 }
