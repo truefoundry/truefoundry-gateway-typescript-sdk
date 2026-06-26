@@ -4,5 +4,4 @@ export interface McpServerAuthInfo {
     id: string;
     name: string;
     authUrl: string;
-    threadIds: string[];
 }

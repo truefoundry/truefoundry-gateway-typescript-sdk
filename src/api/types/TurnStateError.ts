@@ -3,4 +3,5 @@
 export interface TurnStateError {
     status: "error";
     message: string;
+    completedAt: string;
 }

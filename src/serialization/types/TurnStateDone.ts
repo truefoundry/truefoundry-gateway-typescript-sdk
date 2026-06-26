@@ -13,6 +13,7 @@ export const TurnStateDone: core.serialization.ObjectSchema<
     status: core.serialization.stringLiteral("done"),
     output: TurnStateDoneOutput.optional(),
     requiredActions: core.serialization.property("required_actions", core.serialization.list(ActionRequiredEvent)),
+    completedAt: core.serialization.property("completed_at", core.serialization.string()),
 });
 
 export declare namespace TurnStateDone {
@@ -20,5 +21,6 @@ export declare namespace TurnStateDone {
         status: "done";
         output?: TurnStateDoneOutput.Raw | null;
         required_actions: ActionRequiredEvent.Raw[];
+        completed_at: string;
     }
 }

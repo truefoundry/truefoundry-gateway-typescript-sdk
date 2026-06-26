@@ -3,14 +3,30 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { ThreadDoneCompleted } from "./ThreadDoneCompleted.js";
-import { ThreadDoneError } from "./ThreadDoneError.js";
+import { AgentParent } from "./AgentParent.js";
+import { ThreadState } from "./ThreadState.js";
 
-export const ThreadDoneEvent: core.serialization.Schema<
+export const ThreadDoneEvent: core.serialization.ObjectSchema<
     serializers.ThreadDoneEvent.Raw,
     TrueFoundryGateway.ThreadDoneEvent
-> = core.serialization.undiscriminatedUnion([ThreadDoneCompleted, ThreadDoneError]);
+> = core.serialization.object({
+    type: core.serialization.stringLiteral("thread.done"),
+    id: core.serialization.string(),
+    createdAt: core.serialization.property("created_at", core.serialization.string()),
+    parent: AgentParent.optional(),
+    state: ThreadState,
+    threadId: core.serialization.property("thread_id", core.serialization.string()),
+    title: core.serialization.string(),
+});
 
 export declare namespace ThreadDoneEvent {
-    export type Raw = ThreadDoneCompleted.Raw | ThreadDoneError.Raw;
+    export interface Raw {
+        type: "thread.done";
+        id: string;
+        created_at: string;
+        parent?: AgentParent.Raw | null;
+        state: ThreadState.Raw;
+        thread_id: string;
+        title: string;
+    }
 }

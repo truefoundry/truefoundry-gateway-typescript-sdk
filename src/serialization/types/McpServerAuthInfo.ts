@@ -11,7 +11,6 @@ export const McpServerAuthInfo: core.serialization.ObjectSchema<
     id: core.serialization.string(),
     name: core.serialization.string(),
     authUrl: core.serialization.property("auth_url", core.serialization.string()),
-    threadIds: core.serialization.property("thread_ids", core.serialization.list(core.serialization.string())),
 });
 
 export declare namespace McpServerAuthInfo {
@@ -19,6 +18,5 @@ export declare namespace McpServerAuthInfo {
         id: string;
         name: string;
         auth_url: string;
-        thread_ids: string[];
     }
 }

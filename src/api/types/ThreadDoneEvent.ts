@@ -2,4 +2,13 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export type ThreadDoneEvent = TrueFoundryGateway.ThreadDoneCompleted | TrueFoundryGateway.ThreadDoneError;
+export interface ThreadDoneEvent {
+    type: "thread.done";
+    /** Unique identifier for the event */
+    id: string;
+    createdAt: string;
+    parent?: TrueFoundryGateway.AgentParent;
+    state: TrueFoundryGateway.ThreadState;
+    threadId: string;
+    title: string;
+}

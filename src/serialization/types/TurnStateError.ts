@@ -10,11 +10,13 @@ export const TurnStateError: core.serialization.ObjectSchema<
 > = core.serialization.object({
     status: core.serialization.stringLiteral("error"),
     message: core.serialization.string(),
+    completedAt: core.serialization.property("completed_at", core.serialization.string()),
 });
 
 export declare namespace TurnStateError {
     export interface Raw {
         status: "error";
         message: string;
+        completed_at: string;
     }
 }

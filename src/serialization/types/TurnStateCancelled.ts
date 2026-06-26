@@ -11,11 +11,13 @@ export const TurnStateCancelled: core.serialization.ObjectSchema<
 > = core.serialization.object({
     status: core.serialization.stringLiteral("cancelled"),
     reason: TurnStateCancelledReason,
+    completedAt: core.serialization.property("completed_at", core.serialization.string()),
 });
 
 export declare namespace TurnStateCancelled {
     export interface Raw {
         status: "cancelled";
         reason: TurnStateCancelledReason.Raw;
+        completed_at: string;
     }
 }

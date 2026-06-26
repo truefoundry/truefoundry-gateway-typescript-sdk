@@ -6,4 +6,5 @@ export interface TurnStateDone {
     status: "done";
     output?: TrueFoundryGateway.TurnStateDoneOutput;
     requiredActions: TrueFoundryGateway.ActionRequiredEvent[];
+    completedAt: string;
 }
