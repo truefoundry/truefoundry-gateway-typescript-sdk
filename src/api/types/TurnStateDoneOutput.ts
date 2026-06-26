@@ -3,12 +3,9 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface TurnStateDoneOutput {
-    audio?: TrueFoundryGateway.TurnStateDoneOutputAudio;
     content?: TrueFoundryGateway.TurnStateDoneOutputContent;
-    functionCall?: TrueFoundryGateway.TurnStateDoneOutputFunctionCall;
     name?: string;
     refusal?: string;
-    thinkingBlocks?: TrueFoundryGateway.TurnStateDoneOutputThinkingBlocksItem[];
     reasoningContent?: string;
     toolCalls?: TrueFoundryGateway.ToolCall[];
     type: "model.message";
@@ -17,5 +14,5 @@ export interface TurnStateDoneOutput {
     threadId: string;
     finishReason?: TrueFoundryGateway.FinishReason;
     createdAt: string;
-    usage?: TrueFoundryGateway.TurnStateDoneOutputUsage;
+    usage?: TrueFoundryGateway.ModelMessageUsage;
 }

@@ -3,12 +3,9 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface ModelMessageEvent {
-    audio?: TrueFoundryGateway.ModelMessageEventAudio;
     content?: TrueFoundryGateway.ModelMessageEventContent;
-    functionCall?: TrueFoundryGateway.ModelMessageEventFunctionCall;
     name?: string;
     refusal?: string;
-    thinkingBlocks?: TrueFoundryGateway.ModelMessageEventThinkingBlocksItem[];
     reasoningContent?: string;
     toolCalls?: TrueFoundryGateway.ToolCall[];
     type: "model.message";
@@ -17,5 +14,5 @@ export interface ModelMessageEvent {
     threadId: string;
     finishReason?: TrueFoundryGateway.FinishReason;
     createdAt: string;
-    usage?: TrueFoundryGateway.ModelMessageEventUsage;
+    usage?: TrueFoundryGateway.ModelMessageUsage;
 }

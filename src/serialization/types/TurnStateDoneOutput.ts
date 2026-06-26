@@ -4,26 +4,17 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 import { FinishReason } from "./FinishReason.js";
+import { ModelMessageUsage } from "./ModelMessageUsage.js";
 import { ToolCall } from "./ToolCall.js";
-import { TurnStateDoneOutputAudio } from "./TurnStateDoneOutputAudio.js";
 import { TurnStateDoneOutputContent } from "./TurnStateDoneOutputContent.js";
-import { TurnStateDoneOutputFunctionCall } from "./TurnStateDoneOutputFunctionCall.js";
-import { TurnStateDoneOutputThinkingBlocksItem } from "./TurnStateDoneOutputThinkingBlocksItem.js";
-import { TurnStateDoneOutputUsage } from "./TurnStateDoneOutputUsage.js";
 
 export const TurnStateDoneOutput: core.serialization.ObjectSchema<
     serializers.TurnStateDoneOutput.Raw,
     TrueFoundryGateway.TurnStateDoneOutput
 > = core.serialization.object({
-    audio: TurnStateDoneOutputAudio.optional(),
     content: TurnStateDoneOutputContent.optional(),
-    functionCall: core.serialization.property("function_call", TurnStateDoneOutputFunctionCall.optional()),
     name: core.serialization.string().optional(),
     refusal: core.serialization.string().optional(),
-    thinkingBlocks: core.serialization.property(
-        "thinking_blocks",
-        core.serialization.list(TurnStateDoneOutputThinkingBlocksItem).optional(),
-    ),
     reasoningContent: core.serialization.property("reasoning_content", core.serialization.string().optional()),
     toolCalls: core.serialization.property("tool_calls", core.serialization.list(ToolCall).optional()),
     type: core.serialization.stringLiteral("model.message"),
@@ -31,17 +22,14 @@ export const TurnStateDoneOutput: core.serialization.ObjectSchema<
     threadId: core.serialization.property("thread_id", core.serialization.string()),
     finishReason: core.serialization.property("finish_reason", FinishReason.optional()),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
-    usage: TurnStateDoneOutputUsage.optional(),
+    usage: ModelMessageUsage.optional(),
 });
 
 export declare namespace TurnStateDoneOutput {
     export interface Raw {
-        audio?: TurnStateDoneOutputAudio.Raw | null;
         content?: TurnStateDoneOutputContent.Raw | null;
-        function_call?: TurnStateDoneOutputFunctionCall.Raw | null;
         name?: string | null;
         refusal?: string | null;
-        thinking_blocks?: TurnStateDoneOutputThinkingBlocksItem.Raw[] | null;
         reasoning_content?: string | null;
         tool_calls?: ToolCall.Raw[] | null;
         type: "model.message";
@@ -49,6 +37,6 @@ export declare namespace TurnStateDoneOutput {
         thread_id: string;
         finish_reason?: FinishReason.Raw | null;
         created_at: string;
-        usage?: TurnStateDoneOutputUsage.Raw | null;
+        usage?: ModelMessageUsage.Raw | null;
     }
 }

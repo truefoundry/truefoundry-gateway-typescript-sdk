@@ -5,8 +5,7 @@ import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 import { ExtendedChunkDeltaToolCall } from "./ExtendedChunkDeltaToolCall.js";
 import { FinishReason } from "./FinishReason.js";
-import { ModelMessageDeltaEventFunctionCall } from "./ModelMessageDeltaEventFunctionCall.js";
-import { ModelMessageDeltaEventThinkingBlocksItem } from "./ModelMessageDeltaEventThinkingBlocksItem.js";
+import { ModelMessageUsage } from "./ModelMessageUsage.js";
 
 export const ModelMessageDeltaEvent: core.serialization.ObjectSchema<
     serializers.ModelMessageDeltaEvent.Raw,
@@ -14,14 +13,9 @@ export const ModelMessageDeltaEvent: core.serialization.ObjectSchema<
 > = core.serialization.object({
     content: core.serialization.string().optional(),
     refusal: core.serialization.string().optional(),
-    functionCall: core.serialization.property("function_call", ModelMessageDeltaEventFunctionCall.optional()),
     toolCalls: core.serialization.property(
         "tool_calls",
         core.serialization.list(ExtendedChunkDeltaToolCall).optional(),
-    ),
-    thinkingBlocks: core.serialization.property(
-        "thinking_blocks",
-        core.serialization.list(ModelMessageDeltaEventThinkingBlocksItem).optional(),
     ),
     reasoningContent: core.serialization.property("reasoning_content", core.serialization.string().optional()),
     type: core.serialization.stringLiteral("model.message.delta"),
@@ -29,20 +23,20 @@ export const ModelMessageDeltaEvent: core.serialization.ObjectSchema<
     threadId: core.serialization.property("thread_id", core.serialization.string()),
     createdAt: core.serialization.property("created_at", core.serialization.string().optional()),
     finishReason: core.serialization.property("finish_reason", FinishReason.optional()),
+    usage: ModelMessageUsage.optional(),
 });
 
 export declare namespace ModelMessageDeltaEvent {
     export interface Raw {
         content?: string | null;
         refusal?: string | null;
-        function_call?: ModelMessageDeltaEventFunctionCall.Raw | null;
         tool_calls?: ExtendedChunkDeltaToolCall.Raw[] | null;
-        thinking_blocks?: ModelMessageDeltaEventThinkingBlocksItem.Raw[] | null;
         reasoning_content?: string | null;
         type: "model.message.delta";
         id: string;
         thread_id: string;
         created_at?: string | null;
         finish_reason?: FinishReason.Raw | null;
+        usage?: ModelMessageUsage.Raw | null;
     }
 }

@@ -3,28 +3,25 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { ModelMessageEventUsageInputTokensBreakdown } from "./ModelMessageEventUsageInputTokensBreakdown.js";
+import { ModelMessageUsageInputTokensBreakdown } from "./ModelMessageUsageInputTokensBreakdown.js";
 
-export const ModelMessageEventUsage: core.serialization.ObjectSchema<
-    serializers.ModelMessageEventUsage.Raw,
-    TrueFoundryGateway.ModelMessageEventUsage
+export const ModelMessageUsage: core.serialization.ObjectSchema<
+    serializers.ModelMessageUsage.Raw,
+    TrueFoundryGateway.ModelMessageUsage
 > = core.serialization.object({
     inputTokens: core.serialization.property("input_tokens", core.serialization.number()),
     outputTokens: core.serialization.property("output_tokens", core.serialization.number()),
     cacheReadTokens: core.serialization.property("cache_read_tokens", core.serialization.number().optional()),
     cacheWriteTokens: core.serialization.property("cache_write_tokens", core.serialization.number().optional()),
-    inputTokensBreakdown: core.serialization.property(
-        "input_tokens_breakdown",
-        ModelMessageEventUsageInputTokensBreakdown,
-    ),
+    inputTokensBreakdown: core.serialization.property("input_tokens_breakdown", ModelMessageUsageInputTokensBreakdown),
 });
 
-export declare namespace ModelMessageEventUsage {
+export declare namespace ModelMessageUsage {
     export interface Raw {
         input_tokens: number;
         output_tokens: number;
         cache_read_tokens?: number | null;
         cache_write_tokens?: number | null;
-        input_tokens_breakdown: ModelMessageEventUsageInputTokensBreakdown.Raw;
+        input_tokens_breakdown: ModelMessageUsageInputTokensBreakdown.Raw;
     }
 }

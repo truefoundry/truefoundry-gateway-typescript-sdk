@@ -2,10 +2,10 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export interface TurnStateDoneOutputUsage {
+export interface ModelMessageUsage {
     inputTokens: number;
     outputTokens: number;
     cacheReadTokens?: number;
     cacheWriteTokens?: number;
-    inputTokensBreakdown: TrueFoundryGateway.TurnStateDoneOutputUsageInputTokensBreakdown;
+    inputTokensBreakdown: TrueFoundryGateway.ModelMessageUsageInputTokensBreakdown;
 }

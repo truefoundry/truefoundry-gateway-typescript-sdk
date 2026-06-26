@@ -4,26 +4,17 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 import { FinishReason } from "./FinishReason.js";
-import { ModelMessageEventAudio } from "./ModelMessageEventAudio.js";
 import { ModelMessageEventContent } from "./ModelMessageEventContent.js";
-import { ModelMessageEventFunctionCall } from "./ModelMessageEventFunctionCall.js";
-import { ModelMessageEventThinkingBlocksItem } from "./ModelMessageEventThinkingBlocksItem.js";
-import { ModelMessageEventUsage } from "./ModelMessageEventUsage.js";
+import { ModelMessageUsage } from "./ModelMessageUsage.js";
 import { ToolCall } from "./ToolCall.js";
 
 export const ModelMessageEvent: core.serialization.ObjectSchema<
     serializers.ModelMessageEvent.Raw,
     TrueFoundryGateway.ModelMessageEvent
 > = core.serialization.object({
-    audio: ModelMessageEventAudio.optional(),
     content: ModelMessageEventContent.optional(),
-    functionCall: core.serialization.property("function_call", ModelMessageEventFunctionCall.optional()),
     name: core.serialization.string().optional(),
     refusal: core.serialization.string().optional(),
-    thinkingBlocks: core.serialization.property(
-        "thinking_blocks",
-        core.serialization.list(ModelMessageEventThinkingBlocksItem).optional(),
-    ),
     reasoningContent: core.serialization.property("reasoning_content", core.serialization.string().optional()),
     toolCalls: core.serialization.property("tool_calls", core.serialization.list(ToolCall).optional()),
     type: core.serialization.stringLiteral("model.message"),
@@ -31,17 +22,14 @@ export const ModelMessageEvent: core.serialization.ObjectSchema<
     threadId: core.serialization.property("thread_id", core.serialization.string()),
     finishReason: core.serialization.property("finish_reason", FinishReason.optional()),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
-    usage: ModelMessageEventUsage.optional(),
+    usage: ModelMessageUsage.optional(),
 });
 
 export declare namespace ModelMessageEvent {
     export interface Raw {
-        audio?: ModelMessageEventAudio.Raw | null;
         content?: ModelMessageEventContent.Raw | null;
-        function_call?: ModelMessageEventFunctionCall.Raw | null;
         name?: string | null;
         refusal?: string | null;
-        thinking_blocks?: ModelMessageEventThinkingBlocksItem.Raw[] | null;
         reasoning_content?: string | null;
         tool_calls?: ToolCall.Raw[] | null;
         type: "model.message";
@@ -49,6 +37,6 @@ export declare namespace ModelMessageEvent {
         thread_id: string;
         finish_reason?: FinishReason.Raw | null;
         created_at: string;
-        usage?: ModelMessageEventUsage.Raw | null;
+        usage?: ModelMessageUsage.Raw | null;
     }
 }

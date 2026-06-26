@@ -5,9 +5,7 @@ import type * as TrueFoundryGateway from "../index.js";
 export interface ModelMessageDeltaEvent {
     content?: string;
     refusal?: string;
-    functionCall?: TrueFoundryGateway.ModelMessageDeltaEventFunctionCall;
     toolCalls?: TrueFoundryGateway.ExtendedChunkDeltaToolCall[];
-    thinkingBlocks?: TrueFoundryGateway.ModelMessageDeltaEventThinkingBlocksItem[];
     reasoningContent?: string;
     type: "model.message.delta";
     /** Unique identifier for the event */
@@ -15,4 +13,5 @@ export interface ModelMessageDeltaEvent {
     threadId: string;
     createdAt?: string;
     finishReason?: TrueFoundryGateway.FinishReason;
+    usage?: TrueFoundryGateway.ModelMessageUsage;
 }

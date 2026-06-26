@@ -4,9 +4,9 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 
-export const TurnStateDoneOutputUsageInputTokensBreakdown: core.serialization.ObjectSchema<
-    serializers.TurnStateDoneOutputUsageInputTokensBreakdown.Raw,
-    TrueFoundryGateway.TurnStateDoneOutputUsageInputTokensBreakdown
+export const ModelMessageUsageInputTokensBreakdown: core.serialization.ObjectSchema<
+    serializers.ModelMessageUsageInputTokensBreakdown.Raw,
+    TrueFoundryGateway.ModelMessageUsageInputTokensBreakdown
 > = core.serialization.object({
     harness: core.serialization.number(),
     skills: core.serialization.number(),
@@ -15,7 +15,7 @@ export const TurnStateDoneOutputUsageInputTokensBreakdown: core.serialization.Ob
     messages: core.serialization.number(),
 });
 
-export declare namespace TurnStateDoneOutputUsageInputTokensBreakdown {
+export declare namespace ModelMessageUsageInputTokensBreakdown {
     export interface Raw {
         harness: number;
         skills: number;
