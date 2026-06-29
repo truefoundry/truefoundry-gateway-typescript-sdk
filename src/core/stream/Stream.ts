@@ -123,7 +123,6 @@ export class Stream<T> implements AsyncIterable<T> {
                 }
 
                 if (line.startsWith(EVENT_PREFIX)) {
-                    continue;
                 } else if (line.startsWith(DATA_PREFIX)) {
                     const val = line.slice(DATA_PREFIX.length).trim();
                     dataValue = dataValue != null ? `${dataValue}\n${val}` : val;

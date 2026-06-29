@@ -135,7 +135,7 @@ describe("mergeEventDelta / content", () => {
 });
 
 describe("mergeEventDelta / toolCalls", () => {
-    const toolInfo: TrueFoundryGateway.McpToolCallInfo = {
+    const toolInfo: TrueFoundryGateway.McpToolInfo = {
         type: "mcp",
         serverId: "srv-1",
         serverName: "weather",

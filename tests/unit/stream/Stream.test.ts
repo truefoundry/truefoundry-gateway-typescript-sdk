@@ -119,9 +119,7 @@ describe("Stream", () => {
         });
 
         it("should stop at stream terminator", async () => {
-            const mockStream = createReadableStream([
-                'data: {"value": 1}\n\ndata: [DONE]\n\ndata: {"value": 2}\n\n',
-            ]);
+            const mockStream = createReadableStream(['data: {"value": 1}\n\ndata: [DONE]\n\ndata: {"value": 2}\n\n']);
             const stream = new Stream({
                 stream: mockStream,
                 parse: async (val: unknown) => val as { value: number },
@@ -155,9 +153,7 @@ describe("Stream", () => {
         });
 
         it("should attach id when id line follows data within an event block", async () => {
-            const mockStream = createReadableStream([
-                'event: \ndata: {"type":"turn.created"}\nid: 42\n\n',
-            ]);
+            const mockStream = createReadableStream(['event: \ndata: {"type":"turn.created"}\nid: 42\n\n']);
             const stream = new Stream({
                 stream: mockStream,
                 parse: async (val: unknown) => val,
@@ -169,9 +165,7 @@ describe("Stream", () => {
                 events.push(event);
             }
 
-            expect(events).toEqual([
-                { data: { type: "turn.created" }, id: "42", retry: undefined, event: undefined },
-            ]);
+            expect(events).toEqual([{ data: { type: "turn.created" }, id: "42", retry: undefined, event: undefined }]);
         });
     });
 
@@ -413,9 +407,7 @@ describe("Stream", () => {
         });
 
         it("should persist id across events per SSE spec", async () => {
-            const mockStream = createReadableStream([
-                'id: evt-1\ndata: {"value": 1}\n\ndata: {"value": 2}\n\n',
-            ]);
+            const mockStream = createReadableStream(['id: evt-1\ndata: {"value": 1}\n\ndata: {"value": 2}\n\n']);
             const stream = new Stream({
                 stream: mockStream,
                 parse: async (val: unknown) => val as { value: number },
