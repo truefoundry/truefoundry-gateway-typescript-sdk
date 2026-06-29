@@ -3,15 +3,15 @@
 import type * as TrueFoundryGateway from "../../../../../../../index.js";
 
 /**
- * Replacement inline spec; never cleared.
+ * Agent definition
  */
 export interface UpdateDraftSessionRequestAgentSpec {
     model: TrueFoundryGateway.Model;
     instructions?: string;
-    messages?: TrueFoundryGateway.private_.agents.UpdateDraftSessionRequestAgentSpecMessagesItem[];
+    messages?: TrueFoundryGateway.AgentSpecUserMessage[];
     mcpServers?: TrueFoundryGateway.McpServer[];
     responseFormat?: TrueFoundryGateway.ResponseFormat;
-    skills?: TrueFoundryGateway.Skill[];
+    skills?: TrueFoundryGateway.SkillMount[];
     config?: TrueFoundryGateway.RuntimeConfig;
     variables?: Record<string, string>;
 }

@@ -7,6 +7,6 @@ import type * as TrueFoundryGateway from "../../../../../../../../index.js";
  *     {}
  */
 export interface UpdateDraftSessionRequest {
-    /** Replacement inline spec; never cleared. */
+    /** Agent definition */
     agentSpec?: TrueFoundryGateway.private_.agents.UpdateDraftSessionRequestAgentSpec;
 }

@@ -4,15 +4,15 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 
-export const AgentSpecMessagesItem: core.serialization.ObjectSchema<
-    serializers.AgentSpecMessagesItem.Raw,
-    TrueFoundryGateway.AgentSpecMessagesItem
+export const AgentSpecUserMessage: core.serialization.ObjectSchema<
+    serializers.AgentSpecUserMessage.Raw,
+    TrueFoundryGateway.AgentSpecUserMessage
 > = core.serialization.object({
     role: core.serialization.stringLiteral("user"),
     content: core.serialization.string(),
 });
 
-export declare namespace AgentSpecMessagesItem {
+export declare namespace AgentSpecUserMessage {
     export interface Raw {
         role: "user";
         content: string;

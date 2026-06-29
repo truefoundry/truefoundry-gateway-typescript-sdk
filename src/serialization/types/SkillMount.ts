@@ -4,13 +4,13 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 
-export const Skill: core.serialization.ObjectSchema<serializers.Skill.Raw, TrueFoundryGateway.Skill> =
+export const SkillMount: core.serialization.ObjectSchema<serializers.SkillMount.Raw, TrueFoundryGateway.SkillMount> =
     core.serialization.object({
         fqn: core.serialization.string(),
         preload: core.serialization.boolean().optional(),
     });
 
-export declare namespace Skill {
+export declare namespace SkillMount {
     export interface Raw {
         fqn: string;
         preload?: boolean | null;

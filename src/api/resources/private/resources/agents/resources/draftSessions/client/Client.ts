@@ -49,13 +49,11 @@ export class DraftSessionsClient {
     public async list(
         request: TrueFoundryGateway.private_.agents.DraftSessionsListRequest = {},
         requestOptions?: DraftSessionsClient.RequestOptions,
-    ): Promise<
-        core.Page<TrueFoundryGateway.DraftSession, TrueFoundryGateway.private_.agents.DraftSessionsListResponse>
-    > {
+    ): Promise<core.Page<TrueFoundryGateway.DraftSession, TrueFoundryGateway.ListDraftSessionsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (
                 request: TrueFoundryGateway.private_.agents.DraftSessionsListRequest,
-            ): Promise<core.WithRawResponse<TrueFoundryGateway.private_.agents.DraftSessionsListResponse>> => {
+            ): Promise<core.WithRawResponse<TrueFoundryGateway.ListDraftSessionsResponse>> => {
                 const { agentName, limit = 10, order, pageToken, startTimestamp, endTimestamp } = request;
                 const _queryParams: Record<string, unknown> = {
                     agent_name: agentName,
@@ -100,7 +98,7 @@ export class DraftSessionsClient {
                 });
                 if (_response.ok) {
                     return {
-                        data: serializers.private_.agents.DraftSessionsListResponse.parseOrThrow(_response.body, {
+                        data: serializers.ListDraftSessionsResponse.parseOrThrow(_response.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -173,10 +171,7 @@ export class DraftSessionsClient {
             },
         );
         const dataWithRawResponse = await list(request).withRawResponse();
-        return new core.Page<
-            TrueFoundryGateway.DraftSession,
-            TrueFoundryGateway.private_.agents.DraftSessionsListResponse
-        >({
+        return new core.Page<TrueFoundryGateway.DraftSession, TrueFoundryGateway.ListDraftSessionsResponse>({
             response: dataWithRawResponse.data,
             rawResponse: dataWithRawResponse.rawResponse,
             hasNextPage: (response) =>
@@ -213,14 +208,14 @@ export class DraftSessionsClient {
     public create(
         request: TrueFoundryGateway.private_.agents.CreateDraftSessionRequest,
         requestOptions?: DraftSessionsClient.RequestOptions,
-    ): core.HttpResponsePromise<TrueFoundryGateway.private_.agents.DraftSessionsCreateResponse> {
+    ): core.HttpResponsePromise<TrueFoundryGateway.GetDraftSessionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
         request: TrueFoundryGateway.private_.agents.CreateDraftSessionRequest,
         requestOptions?: DraftSessionsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<TrueFoundryGateway.private_.agents.DraftSessionsCreateResponse>> {
+    ): Promise<core.WithRawResponse<TrueFoundryGateway.GetDraftSessionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -252,7 +247,7 @@ export class DraftSessionsClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.private_.agents.DraftSessionsCreateResponse.parseOrThrow(_response.body, {
+                data: serializers.GetDraftSessionResponse.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
@@ -347,14 +342,14 @@ export class DraftSessionsClient {
     public get(
         draftSessionId: string,
         requestOptions?: DraftSessionsClient.RequestOptions,
-    ): core.HttpResponsePromise<TrueFoundryGateway.private_.agents.DraftSessionsGetResponse> {
+    ): core.HttpResponsePromise<TrueFoundryGateway.GetDraftSessionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__get(draftSessionId, requestOptions));
     }
 
     private async __get(
         draftSessionId: string,
         requestOptions?: DraftSessionsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<TrueFoundryGateway.private_.agents.DraftSessionsGetResponse>> {
+    ): Promise<core.WithRawResponse<TrueFoundryGateway.GetDraftSessionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -378,7 +373,7 @@ export class DraftSessionsClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.private_.agents.DraftSessionsGetResponse.parseOrThrow(_response.body, {
+                data: serializers.GetDraftSessionResponse.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
@@ -449,7 +444,7 @@ export class DraftSessionsClient {
         draftSessionId: string,
         request: TrueFoundryGateway.private_.agents.UpdateDraftSessionRequest = {},
         requestOptions?: DraftSessionsClient.RequestOptions,
-    ): core.HttpResponsePromise<TrueFoundryGateway.private_.agents.DraftSessionsUpdateResponse> {
+    ): core.HttpResponsePromise<TrueFoundryGateway.GetDraftSessionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__update(draftSessionId, request, requestOptions));
     }
 
@@ -457,7 +452,7 @@ export class DraftSessionsClient {
         draftSessionId: string,
         request: TrueFoundryGateway.private_.agents.UpdateDraftSessionRequest = {},
         requestOptions?: DraftSessionsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<TrueFoundryGateway.private_.agents.DraftSessionsUpdateResponse>> {
+    ): Promise<core.WithRawResponse<TrueFoundryGateway.GetDraftSessionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -489,7 +484,7 @@ export class DraftSessionsClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.private_.agents.DraftSessionsUpdateResponse.parseOrThrow(_response.body, {
+                data: serializers.GetDraftSessionResponse.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,

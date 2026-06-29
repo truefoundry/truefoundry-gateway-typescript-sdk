@@ -1,6 +1,6 @@
 # Reference
 ## Private Agents DraftSessions
-<details><summary><code>client.private.agents.draftSessions.<a href="/src/api/resources/private/resources/agents/resources/draftSessions/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;TrueFoundryGateway.DraftSession, TrueFoundryGateway.DraftSessionsListResponse&gt;</code></summary>
+<details><summary><code>client.private.agents.draftSessions.<a href="/src/api/resources/private/resources/agents/resources/draftSessions/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;TrueFoundryGateway.DraftSession, TrueFoundryGateway.ListDraftSessionsResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -89,7 +89,7 @@ const response = page.response;
 </dl>
 </details>
 
-<details><summary><code>client.private.agents.draftSessions.<a href="/src/api/resources/private/resources/agents/resources/draftSessions/client/Client.ts">create</a>({ ...params }) -> TrueFoundryGateway.DraftSessionsCreateResponse</code></summary>
+<details><summary><code>client.private.agents.draftSessions.<a href="/src/api/resources/private/resources/agents/resources/draftSessions/client/Client.ts">create</a>({ ...params }) -> TrueFoundryGateway.GetDraftSessionResponse</code></summary>
 <dl>
 <dd>
 
@@ -158,7 +158,7 @@ await client.private.agents.draftSessions.create({
 </dl>
 </details>
 
-<details><summary><code>client.private.agents.draftSessions.<a href="/src/api/resources/private/resources/agents/resources/draftSessions/client/Client.ts">get</a>(draftSessionId) -> TrueFoundryGateway.DraftSessionsGetResponse</code></summary>
+<details><summary><code>client.private.agents.draftSessions.<a href="/src/api/resources/private/resources/agents/resources/draftSessions/client/Client.ts">get</a>(draftSessionId) -> TrueFoundryGateway.GetDraftSessionResponse</code></summary>
 <dl>
 <dd>
 
@@ -221,7 +221,7 @@ await client.private.agents.draftSessions.get("draftSessionId");
 </dl>
 </details>
 
-<details><summary><code>client.private.agents.draftSessions.<a href="/src/api/resources/private/resources/agents/resources/draftSessions/client/Client.ts">update</a>(draftSessionId, { ...params }) -> TrueFoundryGateway.DraftSessionsUpdateResponse</code></summary>
+<details><summary><code>client.private.agents.draftSessions.<a href="/src/api/resources/private/resources/agents/resources/draftSessions/client/Client.ts">update</a>(draftSessionId, { ...params }) -> TrueFoundryGateway.GetDraftSessionResponse</code></summary>
 <dl>
 <dd>
 
