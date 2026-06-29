@@ -38,7 +38,7 @@ export class AgentSession implements TrueFoundryGateway.Session {
     async listTurns(
         opts?: TrueFoundryGateway.agents.SessionsListTurnsRequest,
         requestOptions?: RequestOptions,
-    ): Promise<core.Page<Turn, TrueFoundryGateway.agents.SessionsListTurnsResponse>> {
+    ): Promise<core.Page<Turn, TrueFoundryGateway.ListTurnsResponse>> {
         const client = this.#client;
         const sessionId = this.id;
         const page = await client.agents.sessions.listTurns(sessionId, opts, requestOptions);

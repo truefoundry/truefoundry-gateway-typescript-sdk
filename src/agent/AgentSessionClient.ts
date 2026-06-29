@@ -27,7 +27,7 @@ export class AgentSessionClient {
     async listSessions(
         opts: TrueFoundryGateway.agents.SessionsListRequest,
         requestOptions?: AgentSessionClient.RequestOptions,
-    ): Promise<core.Page<AgentSession, TrueFoundryGateway.agents.SessionsListResponse>> {
+    ): Promise<core.Page<AgentSession, TrueFoundryGateway.ListSessionsResponse>> {
         const page = await this.client.agents.sessions.list(opts, requestOptions);
         const client = this.client;
         return new core.Page({

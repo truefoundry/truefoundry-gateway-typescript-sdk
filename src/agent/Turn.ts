@@ -91,17 +91,15 @@ export class Turn implements TrueFoundryGateway.Turn {
             requestOptions,
         );
         for await (const { data: event, id } of sse.withMetadata()) {
-            this.applyEvent(event);
+            this.#applyEvent(event);
             yield { sequenceNumber: parseSequenceNumber(id), event };
         }
     }
 
     // Keep #state in sync from streamed events that carry a state snapshot
-    // (turn.created -> running, turn.done -> done/cancelled/error). Intentionally NOT `private`:
-    // it is an internal cross-class hook also called by PreparedTurn.consumeStream(). Not part of
-    // the public TrueFoundryGateway.Turn interface (@internal).
-    /** @internal */
-    applyEvent(event: TrueFoundryGateway.TurnStreamingEvent): void {
+    // (turn.created -> running, turn.done -> done/cancelled/error). Used only by this Turn's own
+    // stream() above; hard-private so it never appears on instances handed to SDK users.
+    #applyEvent(event: TrueFoundryGateway.TurnStreamingEvent): void {
         if (event.type === "turn.created" || event.type === "turn.done") this.#state = event.state;
     }
 
@@ -113,7 +111,7 @@ export class Turn implements TrueFoundryGateway.Turn {
     listEvents(
         opts?: TrueFoundryGateway.agents.SessionsListTurnEventsRequest,
         requestOptions?: RequestOptions,
-    ): Promise<core.Page<TrueFoundryGateway.TurnEvent, TrueFoundryGateway.agents.SessionsListTurnEventsResponse>> {
+    ): Promise<core.Page<TrueFoundryGateway.TurnEvent, TrueFoundryGateway.ListEventsResponse>> {
         return this.#client.agents.sessions.listTurnEvents(this.sessionId, this.id, opts, requestOptions);
     }
 }

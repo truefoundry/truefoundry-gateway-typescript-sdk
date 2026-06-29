@@ -97,7 +97,7 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
     listEvents(
         opts?: TrueFoundryGateway.agents.SessionsListTurnEventsRequest,
         requestOptions?: RequestOptions,
-    ): Promise<core.Page<TrueFoundryGateway.TurnEvent, TrueFoundryGateway.agents.SessionsListTurnEventsResponse>> {
+    ): Promise<core.Page<TrueFoundryGateway.TurnEvent, TrueFoundryGateway.ListEventsResponse>> {
         return this.mustGetTurn().listEvents(opts, requestOptions);
     }
 
@@ -124,7 +124,8 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
         for await (const { data: event, id } of sse.withMetadata()) {
             if (event.type === "turn.created" && this.#turn == null)
                 this.adoptTurn(event); // ctor seeds #state = running
-            else this.#turn?.applyEvent(event); // keep inner Turn's #state in sync (e.g. turn.done -> terminal)
+            else if (this.#turn != null && event.type === "turn.done")
+                this.replaceTurnState(event.state); // rebuild the inner Turn with the terminal state (state changes are rare)
             yield { sequenceNumber: parseSequenceNumber(id), event };
         }
     }
@@ -171,6 +172,25 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
                 state: event.state,
                 createdBySubject: event.createdBy,
                 createdAt: event.createdAt,
+            },
+            this.session,
+            this.#client,
+        );
+    }
+
+    // Replace the inner Turn with a fresh one carrying the new state. State changes are rare, so
+    // rebuilding via Turn's own constructor (rather than mutating it) keeps Turn the source of truth.
+    private replaceTurnState(state: TrueFoundryGateway.TurnState): void {
+        const turn = this.mustGetTurn();
+        this.#turn = new Turn(
+            {
+                id: turn.id,
+                sessionId: turn.sessionId,
+                previousTurnId: turn.previousTurnId,
+                input: turn.input,
+                state,
+                createdBySubject: turn.createdBySubject,
+                createdAt: turn.createdAt,
             },
             this.session,
             this.#client,
