@@ -1,5 +1,5 @@
 import type { AgentsClient } from "./api/resources/private/resources/agents/client/Client.js";
-import { TrueFoundryGateway as BaseTrueFoundryGateway } from "./Client";
+import { TrueFoundryGateway as BaseTrueFoundryGateway } from "./Client.js";
 import type * as core from "./core";
 
 export declare namespace TrueFoundryGateway {
