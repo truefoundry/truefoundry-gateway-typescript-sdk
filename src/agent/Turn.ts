@@ -3,7 +3,7 @@ import type { SessionsClient } from "../api/resources/agents/resources/sessions/
 import type { TrueFoundryGatewayClient } from "../Client.js";
 import type * as core from "../core/index.js";
 import type { AgentSession } from "./AgentSession.js";
-import { parseSequenceNumber, type TurnStreamEnvelope } from "./TurnStreamEnvelope.js";
+import { parseSequenceNumber, type TurnStreamData } from "./TurnStreamData.js";
 
 // Per-request overrides (abortSignal / timeoutInSeconds / maxRetries / headers) forwarded to every autogen call.
 // SessionsClient is NOT re-exported under TrueFoundryGateway.agents, so import it directly (as AgentSessionClient does).
@@ -75,7 +75,7 @@ export class Turn implements TrueFoundryGateway.Turn {
     async *stream(
         opts?: { afterSequenceNumber?: number },
         requestOptions?: RequestOptions,
-    ): AsyncIterable<TurnStreamEnvelope> {
+    ): AsyncIterable<TurnStreamData> {
         const sse = await this.#client.agents.sessions.subscribeToTurn(
             this.sessionId,
             this.id,

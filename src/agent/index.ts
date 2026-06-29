@@ -34,4 +34,4 @@ export type { DeltaEvents } from "./eventDelta.js";
 export { isEventDelta, mergeEventDelta } from "./eventDelta.js";
 export type { PreparedTurn } from "./PreparedTurn.js";
 export type { Turn } from "./Turn.js";
-export type { TurnStreamEnvelope } from "./TurnStreamEnvelope.js";
+export type { TurnStreamData } from "./TurnStreamData.js";

@@ -1,6 +1,6 @@
 import type * as TrueFoundryGateway from "../api/index.js";
 
-export interface TurnStreamEnvelope {
+export interface TurnStreamData {
     sequenceNumber: number;
     event: TrueFoundryGateway.TurnStreamingEvent;
 }
