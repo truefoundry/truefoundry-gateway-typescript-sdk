@@ -56,20 +56,20 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
 
     // The ONLY initiator. Fires the createTurn POST SYNCHRONOUSLY (stored in #start, which also
     // latches one-shot use), so a second execute() throws before any duplicate request can begin.
-    // stream:true -> live iterator over the createTurn run; stream:false (default) -> wait for terminal TurnState.
+    // stream:true (default) -> live iterator over the createTurn run; stream:false -> wait for terminal TurnState.
     // The return type narrows only when `stream` is passed as a boolean literal.
-    execute(opts: { stream: true }, requestOptions?: RequestOptions): AsyncIterable<TurnStreamEnvelope>;
     execute(
-        opts?: { stream?: false; pollIntervalMs?: number },
+        opts: { stream: false; pollIntervalMs?: number },
         requestOptions?: RequestOptions,
     ): Promise<TrueFoundryGateway.TurnState>;
+    execute(opts?: { stream?: true }, requestOptions?: RequestOptions): AsyncIterable<TurnStreamEnvelope>;
     execute(
         opts?: { stream?: boolean; pollIntervalMs?: number },
         requestOptions?: RequestOptions,
     ): AsyncIterable<TurnStreamEnvelope> | Promise<TrueFoundryGateway.TurnState> {
         if (this.#start != null) throw new Error("Turn already started; use stream() / waitForCompletion().");
         this.#start = this.openCreateTurn(requestOptions); // POST fires now (synchronously), before we return
-        return opts?.stream ? this.runStreaming() : this.startAndWait(opts?.pollIntervalMs, requestOptions);
+        return opts?.stream === false ? this.startAndWait(opts?.pollIntervalMs, requestOptions) : this.runStreaming();
     }
 
     // Post-execution behaviors. Each throws via mustGetTurn() until execute() has started the turn,
@@ -80,8 +80,8 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
     ): AsyncIterable<TurnStreamEnvelope> {
         yield* this.mustGetTurn().stream(opts, requestOptions);
     }
-    async syncState(requestOptions?: RequestOptions): Promise<TrueFoundryGateway.TurnState> {
-        return this.mustGetTurn().syncState(requestOptions);
+    async getState(requestOptions?: RequestOptions): Promise<TrueFoundryGateway.TurnState> {
+        return this.mustGetTurn().getState(requestOptions);
     }
     async waitForCompletion(
         opts?: { pollIntervalMs?: number },
@@ -120,7 +120,8 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
         sse: core.Stream<TrueFoundryGateway.TurnStreamingEvent>,
     ): AsyncIterable<TurnStreamEnvelope> {
         for await (const { data: event, id } of sse.withMetadata()) {
-            if (event.type === "turn.created" && this.#turn == null) this.adoptTurn(event); // ctor seeds #state = running
+            if (event.type === "turn.created" && this.#turn == null)
+                this.adoptTurn(event); // ctor seeds #state = running
             else this.#turn?.applyEvent(event); // keep inner Turn's #state in sync (e.g. turn.done -> terminal)
             yield { sequenceNumber: parseSequenceNumber(id), event };
         }

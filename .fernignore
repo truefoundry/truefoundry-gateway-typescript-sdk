@@ -1,7 +1,8 @@
 # Paths Fern's TypeScript generator must leave alone on every regen. The
 # hand-maintained top-level src/index.ts and agent/ folder live at stable
 # paths so they are not overwritten on SDK regeneration.
-src/index.ts
 src/agent/
+src/CustomClient.ts
+src/index.ts
 tests/unit/agent/
 .github/workflows/ci.yml

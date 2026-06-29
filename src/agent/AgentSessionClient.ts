@@ -1,5 +1,5 @@
 import type * as TrueFoundryGateway from "../api/index.js";
-import { SessionsClient } from "../api/resources/agents/resources/sessions/client/Client.js";
+import type { SessionsClient } from "../api/resources/agents/resources/sessions/client/Client.js";
 import { TrueFoundryGatewayClient } from "../Client.js";
 import * as core from "../core/index.js";
 import { AgentSession } from "./AgentSession.js";
@@ -34,8 +34,7 @@ export class AgentSessionClient {
             response: page.response,
             rawResponse: page.rawResponse,
             hasNextPage: (response) => !!response?.pagination.nextPageToken,
-            getItems: (response) =>
-                (response?.data ?? []).map((session) => new AgentSession(session, client)),
+            getItems: (response) => (response?.data ?? []).map((session) => new AgentSession(session, client)),
             loadPage: (response) =>
                 core.HttpResponsePromise.fromPromise(
                     client.agents.sessions

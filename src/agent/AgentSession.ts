@@ -39,7 +39,6 @@ export class AgentSession implements TrueFoundryGateway.Session {
         opts?: TrueFoundryGateway.agents.SessionsListTurnsRequest,
         requestOptions?: RequestOptions,
     ): Promise<core.Page<Turn, TrueFoundryGateway.agents.SessionsListTurnsResponse>> {
-        const session = this;
         const client = this.#client;
         const sessionId = this.id;
         const page = await client.agents.sessions.listTurns(sessionId, opts, requestOptions);
@@ -47,11 +46,15 @@ export class AgentSession implements TrueFoundryGateway.Session {
             response: page.response,
             rawResponse: page.rawResponse,
             hasNextPage: (response) => !!response?.pagination.nextPageToken,
-            getItems: (response) => (response?.data ?? []).map((turn) => new Turn(turn, session, client)),
+            getItems: (response) => (response?.data ?? []).map((turn) => new Turn(turn, this, client)),
             loadPage: (response) =>
                 core.HttpResponsePromise.fromPromise(
                     client.agents.sessions
-                        .listTurns(sessionId, { ...opts, pageToken: response?.pagination.nextPageToken }, requestOptions)
+                        .listTurns(
+                            sessionId,
+                            { ...opts, pageToken: response?.pagination.nextPageToken },
+                            requestOptions,
+                        )
                         .then((nextPage) => ({ data: nextPage.response, rawResponse: nextPage.rawResponse })),
                 ),
         });
