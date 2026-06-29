@@ -47,9 +47,8 @@ export class Turn implements TrueFoundryGateway.Turn {
         return state.status !== "running";
     }
 
-    // Refetch only when the cached state is non-terminal; updates #state in place and returns self.
+    // Refetch from the server, update #state in place, and return self.
     async refresh(requestOptions?: RequestOptions): Promise<this> {
-        if (this.isTerminal(this.#state)) return this;
         const response = await this.#client.agents.sessions.getTurn(this.sessionId, this.id, requestOptions);
         this.#state = response.data.state;
         return this;
