@@ -92,9 +92,9 @@ A full reference for this library is available [here](https://github.com/truefou
 Instantiate and use the client with the following:
 
 ```typescript
-import { TrueFoundryGatewayClient } from "truefoundry-gateway-sdk";
+import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
-const client = new TrueFoundryGatewayClient({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
+const client = new TrueFoundryGateway({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
 const response = await client.private.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
 for await (const item of response) {
     console.log(item);
@@ -155,9 +155,9 @@ Some endpoints return streaming responses instead of returning the full response
 The SDK uses async iterators, so you can consume the responses using a `for await...of` loop.
 
 ```typescript
-import { TrueFoundryGatewayClient } from "truefoundry-gateway-sdk";
+import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
-const client = new TrueFoundryGatewayClient({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
+const client = new TrueFoundryGateway({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
 const response = await client.private.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
 for await (const item of response) {
     console.log(item);
@@ -169,9 +169,9 @@ for await (const item of response) {
 List endpoints are paginated. The SDK provides an iterator so that you can simply loop over the items:
 
 ```typescript
-import { TrueFoundryGatewayClient } from "truefoundry-gateway-sdk";
+import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
-const client = new TrueFoundryGatewayClient({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
+const client = new TrueFoundryGateway({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
 const pageableResponse = await client.private.agents.draftSessions.list({
     agentName: "agent_name",
     limit: 1,
@@ -218,9 +218,9 @@ const client = new PrivateClient({...});
 If you would like to send additional headers as part of the request, use the `headers` request option.
 
 ```typescript
-import { TrueFoundryGatewayClient } from "truefoundry-gateway-sdk";
+import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
-const client = new TrueFoundryGatewayClient({
+const client = new TrueFoundryGateway({
     ...
     headers: {
         'X-Custom-Header': 'custom value'
@@ -313,9 +313,9 @@ console.log(rawResponse.headers['X-My-Header']);
 The SDK supports logging. You can configure the logger by passing in a `logging` object to the client options.
 
 ```typescript
-import { TrueFoundryGatewayClient, logging } from "truefoundry-gateway-sdk";
+import { TrueFoundryGateway, logging } from "truefoundry-gateway-sdk";
 
-const client = new TrueFoundryGatewayClient({
+const client = new TrueFoundryGateway({
     ...
     logging: {
         level: logging.LogLevel.Debug, // defaults to logging.LogLevel.Info
@@ -397,9 +397,9 @@ The SDK provides a way for you to customize the underlying HTTP client / Fetch f
 unsupported environment, this provides a way for you to break glass and ensure the SDK works.
 
 ```typescript
-import { TrueFoundryGatewayClient } from "truefoundry-gateway-sdk";
+import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
-const client = new TrueFoundryGatewayClient({
+const client = new TrueFoundryGateway({
     ...
     fetcher: // provide your implementation here
 });
