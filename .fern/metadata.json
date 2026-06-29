@@ -1,7 +1,7 @@
 {
-    "cliVersion": "5.55.0",
+    "cliVersion": "5.56.0",
     "generatorName": "fernapi/fern-typescript-node-sdk",
-    "generatorVersion": "3.73.2",
+    "generatorVersion": "3.73.4",
     "generatorConfig": {
         "packageJson": {
             "exports": {
@@ -35,7 +35,7 @@
         "streamType": "web",
         "useDefaultRequestParameterValues": true
     },
-    "originGitCommit": "2f62b89ed4136787e1eb2ed11d19831d5533920d",
+    "originGitCommit": "1c3364b3d42555ecef78ccd4d48e9efc00348ac9",
     "originGitCommitIsDirty": false,
     "invokedBy": "ci",
     "requestedVersion": "0.0.0",

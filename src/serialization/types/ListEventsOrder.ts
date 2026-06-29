@@ -4,9 +4,11 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 
-export const Order: core.serialization.Schema<serializers.Order.Raw, TrueFoundryGateway.Order> =
-    core.serialization.enum_(["asc", "desc"]);
+export const ListEventsOrder: core.serialization.Schema<
+    serializers.ListEventsOrder.Raw,
+    TrueFoundryGateway.ListEventsOrder
+> = core.serialization.enum_(["asc", "desc"]);
 
-export declare namespace Order {
+export declare namespace ListEventsOrder {
     export type Raw = "asc" | "desc";
 }

@@ -3,14 +3,14 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { FileUploadContentPart } from "./FileUploadContentPart.js";
+import { FileContent } from "./FileContent.js";
 import { TextContentPart } from "./TextContentPart.js";
 
 export const UserMessageContentOneItem: core.serialization.Schema<
     serializers.UserMessageContentOneItem.Raw,
     TrueFoundryGateway.UserMessageContentOneItem
-> = core.serialization.undiscriminatedUnion([TextContentPart, FileUploadContentPart]);
+> = core.serialization.undiscriminatedUnion([TextContentPart, FileContent]);
 
 export declare namespace UserMessageContentOneItem {
-    export type Raw = TextContentPart.Raw | FileUploadContentPart.Raw;
+    export type Raw = TextContentPart.Raw | FileContent.Raw;
 }

@@ -4,20 +4,20 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 
-export const RuntimeConfigContextManagementCompaction: core.serialization.ObjectSchema<
-    serializers.RuntimeConfigContextManagementCompaction.Raw,
-    TrueFoundryGateway.RuntimeConfigContextManagementCompaction
+export const ContextManagementConfigCompaction: core.serialization.ObjectSchema<
+    serializers.ContextManagementConfigCompaction.Raw,
+    TrueFoundryGateway.ContextManagementConfigCompaction
 > = core.serialization.object({
-    enabled: core.serialization.boolean(),
+    enabled: core.serialization.boolean().optional(),
     compactionThresholdTokens: core.serialization.property(
         "compaction_threshold_tokens",
         core.serialization.number().optional(),
     ),
 });
 
-export declare namespace RuntimeConfigContextManagementCompaction {
+export declare namespace ContextManagementConfigCompaction {
     export interface Raw {
-        enabled: boolean;
+        enabled?: boolean | null;
         compaction_threshold_tokens?: number | null;
     }
 }

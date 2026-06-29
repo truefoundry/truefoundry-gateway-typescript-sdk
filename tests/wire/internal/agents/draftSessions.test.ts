@@ -159,21 +159,9 @@ describe("DraftSessionsClient", () => {
                     model: { name: "name" },
                     instructions: "instructions",
                     messages: [{ role: "user", content: "content" }],
-                    mcp_servers: [
-                        {
-                            name: "name",
-                            enable_tools: ["@all"],
-                            disable_tools: ["@all"],
-                            preload_tools: ["@all"],
-                            require_approval_for_tools: ["@all"],
-                        },
-                    ],
+                    mcp_servers: [{ name: "name" }],
                     response_format: { type: "text" },
-                    skills: [{ fqn: "fqn", preload: true }],
-                    config: {
-                        iteration_limit: 1,
-                        context_management: { compaction: { enabled: true }, large_tool_response: { enabled: true } },
-                    },
+                    skills: [{ fqn: "fqn" }],
                     variables: { key: "value" },
                 },
                 agent_name: "agent_name",
@@ -221,10 +209,6 @@ describe("DraftSessionsClient", () => {
                     mcpServers: [
                         {
                             name: "name",
-                            enableTools: ["@all"],
-                            disableTools: ["@all"],
-                            preloadTools: ["@all"],
-                            requireApprovalForTools: ["@all"],
                         },
                     ],
                     responseFormat: {
@@ -233,20 +217,8 @@ describe("DraftSessionsClient", () => {
                     skills: [
                         {
                             fqn: "fqn",
-                            preload: true,
                         },
                     ],
-                    config: {
-                        iterationLimit: 1,
-                        contextManagement: {
-                            compaction: {
-                                enabled: true,
-                            },
-                            largeToolResponse: {
-                                enabled: true,
-                            },
-                        },
-                    },
                     variables: {
                         key: "value",
                     },
@@ -405,21 +377,9 @@ describe("DraftSessionsClient", () => {
                     model: { name: "name" },
                     instructions: "instructions",
                     messages: [{ role: "user", content: "content" }],
-                    mcp_servers: [
-                        {
-                            name: "name",
-                            enable_tools: ["@all"],
-                            disable_tools: ["@all"],
-                            preload_tools: ["@all"],
-                            require_approval_for_tools: ["@all"],
-                        },
-                    ],
+                    mcp_servers: [{ name: "name" }],
                     response_format: { type: "text" },
-                    skills: [{ fqn: "fqn", preload: true }],
-                    config: {
-                        iteration_limit: 1,
-                        context_management: { compaction: { enabled: true }, large_tool_response: { enabled: true } },
-                    },
+                    skills: [{ fqn: "fqn" }],
                     variables: { key: "value" },
                 },
                 agent_name: "agent_name",
@@ -460,10 +420,6 @@ describe("DraftSessionsClient", () => {
                     mcpServers: [
                         {
                             name: "name",
-                            enableTools: ["@all"],
-                            disableTools: ["@all"],
-                            preloadTools: ["@all"],
-                            requireApprovalForTools: ["@all"],
                         },
                     ],
                     responseFormat: {
@@ -472,20 +428,8 @@ describe("DraftSessionsClient", () => {
                     skills: [
                         {
                             fqn: "fqn",
-                            preload: true,
                         },
                     ],
-                    config: {
-                        iterationLimit: 1,
-                        contextManagement: {
-                            compaction: {
-                                enabled: true,
-                            },
-                            largeToolResponse: {
-                                enabled: true,
-                            },
-                        },
-                    },
                     variables: {
                         key: "value",
                     },
@@ -552,21 +496,9 @@ describe("DraftSessionsClient", () => {
                     model: { name: "name" },
                     instructions: "instructions",
                     messages: [{ role: "user", content: "content" }],
-                    mcp_servers: [
-                        {
-                            name: "name",
-                            enable_tools: ["@all"],
-                            disable_tools: ["@all"],
-                            preload_tools: ["@all"],
-                            require_approval_for_tools: ["@all"],
-                        },
-                    ],
+                    mcp_servers: [{ name: "name" }],
                     response_format: { type: "text" },
-                    skills: [{ fqn: "fqn", preload: true }],
-                    config: {
-                        iteration_limit: 1,
-                        context_management: { compaction: { enabled: true }, large_tool_response: { enabled: true } },
-                    },
+                    skills: [{ fqn: "fqn" }],
                     variables: { key: "value" },
                 },
                 agent_name: "agent_name",
@@ -608,10 +540,6 @@ describe("DraftSessionsClient", () => {
                     mcpServers: [
                         {
                             name: "name",
-                            enableTools: ["@all"],
-                            disableTools: ["@all"],
-                            preloadTools: ["@all"],
-                            requireApprovalForTools: ["@all"],
                         },
                     ],
                     responseFormat: {
@@ -620,20 +548,8 @@ describe("DraftSessionsClient", () => {
                     skills: [
                         {
                             fqn: "fqn",
-                            preload: true,
                         },
                     ],
-                    config: {
-                        iterationLimit: 1,
-                        contextManagement: {
-                            compaction: {
-                                enabled: true,
-                            },
-                            largeToolResponse: {
-                                enabled: true,
-                            },
-                        },
-                    },
                     variables: {
                         key: "value",
                     },

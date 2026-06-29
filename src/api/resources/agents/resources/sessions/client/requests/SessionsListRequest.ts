@@ -14,10 +14,16 @@ import type * as TrueFoundryGateway from "../../../../../../index.js";
  *     }
  */
 export interface SessionsListRequest {
+    /** Agent whose sessions to list. Must exist in the tenant. */
     agentName: string;
+    /** Page size. Defaults to 10, max 100. */
     limit?: number;
-    order?: TrueFoundryGateway.Order;
+    /** Sort sessions by creation time. Defaults to "desc". */
+    order?: TrueFoundryGateway.ListSessionsOrder;
+    /** Opaque token from a previous response `next_page_token`. */
     pageToken?: string;
+    /** Inclusive lower bound on `created_at` (ISO-8601). Defaults upstream to 30 min before `end_timestamp`. */
     startTimestamp?: string;
+    /** Inclusive upper bound on `created_at` (ISO-8601). Defaults upstream to now. */
     endTimestamp?: string;
 }

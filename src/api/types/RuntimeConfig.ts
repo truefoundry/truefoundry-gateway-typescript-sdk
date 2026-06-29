@@ -3,10 +3,10 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface RuntimeConfig {
-    iterationLimit: number;
-    sandbox?: TrueFoundryGateway.RuntimeConfigSandbox;
-    dynamicSubAgents?: TrueFoundryGateway.RuntimeConfigDynamicSubAgents;
-    contextManagement: TrueFoundryGateway.RuntimeConfigContextManagement;
-    generativeUi?: TrueFoundryGateway.RuntimeConfigGenerativeUi;
-    askUserQuestions?: TrueFoundryGateway.RuntimeConfigAskUserQuestions;
+    iterationLimit?: number;
+    sandbox?: TrueFoundryGateway.SandboxConfig;
+    dynamicSubAgents?: TrueFoundryGateway.DynamicSubAgentsConfig;
+    contextManagement?: TrueFoundryGateway.ContextManagementConfig;
+    generativeUi?: TrueFoundryGateway.GenerativeUiConfig;
+    askUserQuestions?: TrueFoundryGateway.AskUserQuestionsConfig;
 }

@@ -12,12 +12,21 @@ export const McpServer: core.serialization.ObjectSchema<serializers.McpServer.Ra
     core.serialization.object({
         name: core.serialization.string(),
         headers: core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
-        enableTools: core.serialization.property("enable_tools", core.serialization.list(McpServerEnableToolsItem)),
-        disableTools: core.serialization.property("disable_tools", core.serialization.list(McpServerDisableToolsItem)),
-        preloadTools: core.serialization.property("preload_tools", core.serialization.list(McpServerPreloadToolsItem)),
+        enableTools: core.serialization.property(
+            "enable_tools",
+            core.serialization.list(McpServerEnableToolsItem).optional(),
+        ),
+        disableTools: core.serialization.property(
+            "disable_tools",
+            core.serialization.list(McpServerDisableToolsItem).optional(),
+        ),
+        preloadTools: core.serialization.property(
+            "preload_tools",
+            core.serialization.list(McpServerPreloadToolsItem).optional(),
+        ),
         requireApprovalForTools: core.serialization.property(
             "require_approval_for_tools",
-            core.serialization.list(McpServerRequireApprovalForToolsItem),
+            core.serialization.list(McpServerRequireApprovalForToolsItem).optional(),
         ),
         preload: core.serialization.boolean().optional(),
     });
@@ -26,10 +35,10 @@ export declare namespace McpServer {
     export interface Raw {
         name: string;
         headers?: Record<string, string> | null;
-        enable_tools: McpServerEnableToolsItem.Raw[];
-        disable_tools: McpServerDisableToolsItem.Raw[];
-        preload_tools: McpServerPreloadToolsItem.Raw[];
-        require_approval_for_tools: McpServerRequireApprovalForToolsItem.Raw[];
+        enable_tools?: McpServerEnableToolsItem.Raw[] | null;
+        disable_tools?: McpServerDisableToolsItem.Raw[] | null;
+        preload_tools?: McpServerPreloadToolsItem.Raw[] | null;
+        require_approval_for_tools?: McpServerRequireApprovalForToolsItem.Raw[] | null;
         preload?: boolean | null;
     }
 }

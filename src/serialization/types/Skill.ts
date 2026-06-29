@@ -7,12 +7,12 @@ import type * as serializers from "../index.js";
 export const Skill: core.serialization.ObjectSchema<serializers.Skill.Raw, TrueFoundryGateway.Skill> =
     core.serialization.object({
         fqn: core.serialization.string(),
-        preload: core.serialization.boolean(),
+        preload: core.serialization.boolean().optional(),
     });
 
 export declare namespace Skill {
     export interface Raw {
         fqn: string;
-        preload: boolean;
+        preload?: boolean | null;
     }
 }

@@ -4,5 +4,5 @@ export interface Skill {
     /** Fully qualified name of the agent skill version. */
     fqn: string;
     /** If true, the SKILL.md content is injected into the agent context. */
-    preload: boolean;
+    preload?: boolean;
 }

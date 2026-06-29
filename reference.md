@@ -197,7 +197,7 @@ await client.agents.sessions.get("sessionId");
 <dl>
 <dd>
 
-**sessionId:** `string` 
+**sessionId:** `string` — Session identifier.
     
 </dd>
 </dl>
@@ -632,20 +632,20 @@ Paginated list of turn events from the Redis events stream.
 <dd>
 
 ```typescript
-const pageableResponse = await client.agents.sessions.listTurnEvents("sessionId", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
-    order: "asc",
+const pageableResponse = await client.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
     pageToken: "page_token",
-    limit: 1
+    limit: 1,
+    order: "asc"
 });
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.agents.sessions.listTurnEvents("sessionId", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
-    order: "asc",
+let page = await client.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
     pageToken: "page_token",
-    limit: 1
+    limit: 1,
+    order: "asc"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -906,7 +906,7 @@ await client.internal.agents.draftSessions.get("draftSessionId");
 <dl>
 <dd>
 
-**draftSessionId:** `string` 
+**draftSessionId:** `string` — Draft session identifier.
     
 </dd>
 </dl>
@@ -969,7 +969,7 @@ await client.internal.agents.draftSessions.update("draftSessionId");
 <dl>
 <dd>
 
-**draftSessionId:** `string` 
+**draftSessionId:** `string` — Draft session identifier.
     
 </dd>
 </dl>

@@ -3,20 +3,20 @@
 import type * as TrueFoundryGateway from "../../../../../../../api/index.js";
 import * as core from "../../../../../../../core/index.js";
 import type * as serializers from "../../../../../../index.js";
-import { CreateTurnRequestInputItem } from "../../types/CreateTurnRequestInputItem.js";
-import { CreateTurnRequestPreviousTurnId } from "../../types/CreateTurnRequestPreviousTurnId.js";
+import { PreviousTurnIdInput } from "../../../../../../types/PreviousTurnIdInput.js";
+import { TurnInputItem } from "../../../../../../types/TurnInputItem.js";
 
 export const CreateTurnRequest: core.serialization.Schema<
     serializers.agents.CreateTurnRequest.Raw,
     TrueFoundryGateway.agents.CreateTurnRequest
 > = core.serialization.object({
-    input: core.serialization.list(CreateTurnRequestInputItem).optional(),
-    previousTurnId: core.serialization.property("previous_turn_id", CreateTurnRequestPreviousTurnId.optional()),
+    input: core.serialization.list(TurnInputItem).optional(),
+    previousTurnId: core.serialization.property("previous_turn_id", PreviousTurnIdInput.optional()),
 });
 
 export declare namespace CreateTurnRequest {
     export interface Raw {
-        input?: CreateTurnRequestInputItem.Raw[] | null;
-        previous_turn_id?: CreateTurnRequestPreviousTurnId.Raw | null;
+        input?: TurnInputItem.Raw[] | null;
+        previous_turn_id?: PreviousTurnIdInput.Raw | null;
     }
 }

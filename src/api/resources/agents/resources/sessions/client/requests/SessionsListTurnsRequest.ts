@@ -9,5 +9,6 @@
  */
 export interface SessionsListTurnsRequest {
     pageToken?: string;
+    /** Page size. Defaults to 10, max 25. */
     limit?: number;
 }

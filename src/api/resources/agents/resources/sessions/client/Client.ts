@@ -58,7 +58,7 @@ export class SessionsClient {
                     limit,
                     order:
                         order != null
-                            ? serializers.Order.jsonOrThrow(order, {
+                            ? serializers.ListSessionsOrder.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,
                                   allowUnrecognizedEnumValues: true,
@@ -342,7 +342,7 @@ export class SessionsClient {
     /**
      * Get a session by id. Visible to the session owner or a manager of the session agent.
      *
-     * @param {string} sessionId
+     * @param {string} sessionId - Session identifier.
      * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link TrueFoundryGateway.UnauthorizedError}
@@ -1082,10 +1082,10 @@ export class SessionsClient {
      * @throws {@link TrueFoundryGateway.PreconditionFailedError}
      *
      * @example
-     *     await client.agents.sessions.listTurnEvents("sessionId", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
-     *         order: "asc",
+     *     await client.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
      *         pageToken: "page_token",
-     *         limit: 1
+     *         limit: 1,
+     *         order: "asc"
      *     })
      */
     public async listTurnEvents(
@@ -1098,19 +1098,19 @@ export class SessionsClient {
             async (
                 request: TrueFoundryGateway.agents.SessionsListTurnEventsRequest,
             ): Promise<core.WithRawResponse<TrueFoundryGateway.ListEventsResponse>> => {
-                const { order, pageToken, limit = 25 } = request;
+                const { pageToken, limit = 25, order } = request;
                 const _queryParams: Record<string, unknown> = {
+                    page_token: pageToken,
+                    limit,
                     order:
                         order != null
-                            ? serializers.agents.SessionsListTurnEventsRequestOrder.jsonOrThrow(order, {
+                            ? serializers.ListEventsOrder.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,
                                   allowUnrecognizedEnumValues: true,
                                   omitUndefined: true,
                               })
                             : undefined,
-                    page_token: pageToken,
-                    limit,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

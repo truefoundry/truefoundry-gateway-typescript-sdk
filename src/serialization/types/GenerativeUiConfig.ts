@@ -4,15 +4,15 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 
-export const RuntimeConfigGenerativeUi: core.serialization.ObjectSchema<
-    serializers.RuntimeConfigGenerativeUi.Raw,
-    TrueFoundryGateway.RuntimeConfigGenerativeUi
+export const GenerativeUiConfig: core.serialization.ObjectSchema<
+    serializers.GenerativeUiConfig.Raw,
+    TrueFoundryGateway.GenerativeUiConfig
 > = core.serialization.object({
-    enabled: core.serialization.boolean(),
+    enabled: core.serialization.boolean().optional(),
 });
 
-export declare namespace RuntimeConfigGenerativeUi {
+export declare namespace GenerativeUiConfig {
     export interface Raw {
-        enabled: boolean;
+        enabled?: boolean | null;
     }
 }

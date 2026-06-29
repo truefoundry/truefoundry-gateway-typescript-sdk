@@ -1086,7 +1086,7 @@ describe("SessionsClient", () => {
 
         server
             .mockEndpoint({ once: false })
-            .get("/v1/agents/sessions/sessionId/turns/01arz3ndektsv4rrffq69g5fav.g.ab12cd/events")
+            .get("/v1/agents/sessions/01arz3ndektsv4rrffq69g5fav.g/turns/01arz3ndektsv4rrffq69g5fav.g.ab12cd/events")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
@@ -1137,11 +1137,15 @@ describe("SessionsClient", () => {
                 limit: 1,
             },
         };
-        const page = await client.agents.sessions.listTurnEvents("sessionId", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
-            order: "asc",
-            pageToken: "page_token",
-            limit: 1,
-        });
+        const page = await client.agents.sessions.listTurnEvents(
+            "01arz3ndektsv4rrffq69g5fav.g",
+            "01arz3ndektsv4rrffq69g5fav.g.ab12cd",
+            {
+                pageToken: "page_token",
+                limit: 1,
+                order: "asc",
+            },
+        );
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);

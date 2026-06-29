@@ -5,9 +5,9 @@ import type * as TrueFoundryGateway from "../index.js";
 export interface McpServer {
     name: string;
     headers?: Record<string, string>;
-    enableTools: TrueFoundryGateway.McpServerEnableToolsItem[];
-    disableTools: TrueFoundryGateway.McpServerDisableToolsItem[];
-    preloadTools: TrueFoundryGateway.McpServerPreloadToolsItem[];
-    requireApprovalForTools: TrueFoundryGateway.McpServerRequireApprovalForToolsItem[];
+    enableTools?: TrueFoundryGateway.McpServerEnableToolsItem[];
+    disableTools?: TrueFoundryGateway.McpServerDisableToolsItem[];
+    preloadTools?: TrueFoundryGateway.McpServerPreloadToolsItem[];
+    requireApprovalForTools?: TrueFoundryGateway.McpServerRequireApprovalForToolsItem[];
     preload?: boolean;
 }

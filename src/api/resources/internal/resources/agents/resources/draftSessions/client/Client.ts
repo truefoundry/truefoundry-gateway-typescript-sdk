@@ -62,7 +62,7 @@ export class DraftSessionsClient {
                     limit,
                     order:
                         order != null
-                            ? serializers.Order.jsonOrThrow(order, {
+                            ? serializers.ListDraftSessionsOrder.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,
                                   allowUnrecognizedEnumValues: true,
@@ -335,7 +335,7 @@ export class DraftSessionsClient {
     /**
      * Get a draft session by id. Owner-only.
      *
-     * @param {string} draftSessionId
+     * @param {string} draftSessionId - Draft session identifier.
      * @param {DraftSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link TrueFoundryGateway.UnauthorizedError}
@@ -433,7 +433,7 @@ export class DraftSessionsClient {
     /**
      * Update a draft session's inline spec. Owner-only. An empty body is a valid no-op that refreshes `updated_at`.
      *
-     * @param {string} draftSessionId
+     * @param {string} draftSessionId - Draft session identifier.
      * @param {TrueFoundryGateway.internal.agents.UpdateDraftSessionRequest} request
      * @param {DraftSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *

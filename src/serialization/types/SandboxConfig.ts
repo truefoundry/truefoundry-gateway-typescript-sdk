@@ -4,17 +4,17 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 
-export const RuntimeConfigSandbox: core.serialization.ObjectSchema<
-    serializers.RuntimeConfigSandbox.Raw,
-    TrueFoundryGateway.RuntimeConfigSandbox
+export const SandboxConfig: core.serialization.ObjectSchema<
+    serializers.SandboxConfig.Raw,
+    TrueFoundryGateway.SandboxConfig
 > = core.serialization.object({
     enabled: core.serialization.boolean(),
-    fileDownloads: core.serialization.property("file_downloads", core.serialization.boolean()),
+    fileDownloads: core.serialization.property("file_downloads", core.serialization.boolean().optional()),
 });
 
-export declare namespace RuntimeConfigSandbox {
+export declare namespace SandboxConfig {
     export interface Raw {
         enabled: boolean;
-        file_downloads: boolean;
+        file_downloads?: boolean | null;
     }
 }
