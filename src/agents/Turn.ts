@@ -1,6 +1,6 @@
-import type * as TrueFoundryGateway from "../api/index.js";
+import type * as TrueFoundryGatewayApi from "../api/index.js";
 import type { SessionsClient } from "../api/resources/private/resources/agents/resources/sessions/client/Client.js";
-import type { TrueFoundryGatewayClient } from "../CustomClient.js";
+import type { TrueFoundryGateway } from "../CustomClient.js";
 import type * as core from "../core/index.js";
 import type { AgentSession } from "./AgentSession.js";
 import { parseSequenceNumber, type TurnStreamData } from "./TurnStreamData.js";
@@ -16,18 +16,18 @@ const MIN_POLL_INTERVAL_MS = 3000;
 // Output of listTurns / getTurn (and what PreparedTurn mints once started): a started turn that
 // owns all data AND behavior. Identity fields are immutable readonly; the volatile field
 // (state) is getter-backed and updated in place by refresh()/waitForCompletion().
-export class Turn implements TrueFoundryGateway.Turn {
+export class Turn implements TrueFoundryGatewayApi.Turn {
     readonly id: string;
     readonly sessionId: string;
     readonly previousTurnId?: string;
-    readonly input?: TrueFoundryGateway.TurnInputItem[];
-    readonly createdBySubject: TrueFoundryGateway.Subject;
+    readonly input?: TrueFoundryGatewayApi.TurnInputItem[];
+    readonly createdBySubject: TrueFoundryGatewayApi.Subject;
     readonly createdAt: string;
     readonly session: AgentSession;
-    readonly #client: TrueFoundryGatewayClient;
-    #state: TrueFoundryGateway.TurnState;
+    readonly #client: TrueFoundryGateway;
+    #state: TrueFoundryGatewayApi.TurnState;
 
-    constructor(turn: TrueFoundryGateway.Turn, session: AgentSession, client: TrueFoundryGatewayClient) {
+    constructor(turn: TrueFoundryGatewayApi.Turn, session: AgentSession, client: TrueFoundryGateway) {
         this.id = turn.id;
         this.sessionId = turn.sessionId;
         this.previousTurnId = turn.previousTurnId;
@@ -39,13 +39,13 @@ export class Turn implements TrueFoundryGateway.Turn {
         this.#client = client;
     }
 
-    get state(): TrueFoundryGateway.TurnState {
+    get state(): TrueFoundryGatewayApi.TurnState {
         return this.#state;
     }
 
     // Terminal states are listed explicitly (not `status !== "running"`) so a newly added
     // non-terminal status keeps polling by default; new terminal states must be added here.
-    private isTerminal(state: TrueFoundryGateway.TurnState): boolean {
+    private isTerminal(state: TrueFoundryGatewayApi.TurnState): boolean {
         switch (state.status) {
             case "done":
             case "cancelled":
@@ -66,7 +66,7 @@ export class Turn implements TrueFoundryGateway.Turn {
     async waitForCompletion(
         opts?: { pollIntervalMs?: number },
         requestOptions?: RequestOptions,
-    ): Promise<TrueFoundryGateway.TurnState> {
+    ): Promise<TrueFoundryGatewayApi.TurnState> {
         const pollIntervalMs = opts?.pollIntervalMs ?? DEFAULT_POLL_INTERVAL_MS;
         if (pollIntervalMs < MIN_POLL_INTERVAL_MS) {
             throw new Error(`pollIntervalMs must be at least ${MIN_POLL_INTERVAL_MS}ms`);
@@ -99,7 +99,7 @@ export class Turn implements TrueFoundryGateway.Turn {
     // Keep #state in sync from streamed events that carry a state snapshot
     // (turn.created -> running, turn.done -> done/cancelled/error). Used only by this Turn's own
     // stream() above; hard-private so it never appears on instances handed to SDK users.
-    #applyEvent(event: TrueFoundryGateway.TurnStreamingEvent): void {
+    #applyEvent(event: TrueFoundryGatewayApi.TurnStreamingEvent): void {
         if (event.type === "turn.created" || event.type === "turn.done") this.#state = event.state;
     }
 
@@ -109,9 +109,9 @@ export class Turn implements TrueFoundryGateway.Turn {
 
     // Expose the autogen Fern Page as-is (it is already async-iterable); no re-wrapping.
     listEvents(
-        opts?: TrueFoundryGateway.agents.SessionsListTurnEventsRequest,
+        opts?: TrueFoundryGatewayApi.agents.SessionsListTurnEventsRequest,
         requestOptions?: RequestOptions,
-    ): Promise<core.Page<TrueFoundryGateway.TurnEvent, TrueFoundryGateway.ListEventsResponse>> {
+    ): Promise<core.Page<TrueFoundryGatewayApi.TurnEvent, TrueFoundryGatewayApi.ListEventsResponse>> {
         return this.#client.agents.sessions.listTurnEvents(this.sessionId, this.id, opts, requestOptions);
     }
 }

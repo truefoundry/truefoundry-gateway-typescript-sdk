@@ -1,6 +1,6 @@
-import type * as TrueFoundryGateway from "../api/index.js";
+import type * as TrueFoundryGatewayApi from "../api/index.js";
 import type { SessionsClient } from "../api/resources/private/resources/agents/resources/sessions/client/Client.js";
-import type { TrueFoundryGatewayClient } from "../CustomClient.js";
+import type { TrueFoundryGateway } from "../CustomClient.js";
 import type * as core from "../core/index.js";
 import type { AgentSession } from "./AgentSession.js";
 import { Turn } from "./Turn.js";
@@ -11,22 +11,22 @@ import { parseSequenceNumber, type TurnStreamData } from "./TurnStreamData.js";
 type RequestOptions = SessionsClient.RequestOptions;
 
 export interface PreparedTurnInit {
-    input?: TrueFoundryGateway.TurnInputItem[];
-    previousTurnId?: TrueFoundryGateway.PreviousTurnIdInput;
+    input?: TrueFoundryGatewayApi.TurnInputItem[];
+    previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput;
 }
 
 // Output of prepareTurn: not yet started (no HTTP). execute() fires the createTurn POST and mints
 // a real Turn (the only place the createTurn SSE lives), then delegates everything to that inner Turn.
-export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
+export class PreparedTurn implements Partial<TrueFoundryGatewayApi.Turn> {
     readonly session: AgentSession;
     readonly sessionId: string; // always known from the parent session
-    readonly #client: TrueFoundryGatewayClient;
-    readonly #input?: TrueFoundryGateway.TurnInputItem[];
-    readonly #previousTurnIdInput?: TrueFoundryGateway.PreviousTurnIdInput; // server defaults to 'auto'
-    #start?: Promise<core.Stream<TrueFoundryGateway.TurnStreamingEvent>>; // in-flight createTurn; also the one-shot latch
+    readonly #client: TrueFoundryGateway;
+    readonly #input?: TrueFoundryGatewayApi.TurnInputItem[];
+    readonly #previousTurnIdInput?: TrueFoundryGatewayApi.PreviousTurnIdInput; // server defaults to 'auto'
+    #start?: Promise<core.Stream<TrueFoundryGatewayApi.TurnStreamingEvent>>; // in-flight createTurn; also the one-shot latch
     #turn?: Turn; // the real Turn, created once started
 
-    constructor(init: PreparedTurnInit, session: AgentSession, client: TrueFoundryGatewayClient) {
+    constructor(init: PreparedTurnInit, session: AgentSession, client: TrueFoundryGateway) {
         this.session = session;
         this.sessionId = session.id;
         this.#client = client;
@@ -41,16 +41,16 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
     get previousTurnId(): string | undefined {
         return this.#turn?.previousTurnId;
     }
-    get state(): TrueFoundryGateway.TurnState | undefined {
+    get state(): TrueFoundryGatewayApi.TurnState | undefined {
         return this.#turn?.state;
     }
-    get createdBySubject(): TrueFoundryGateway.Subject | undefined {
+    get createdBySubject(): TrueFoundryGatewayApi.Subject | undefined {
         return this.#turn?.createdBySubject;
     }
     get createdAt(): string | undefined {
         return this.#turn?.createdAt;
     }
-    get input(): TrueFoundryGateway.TurnInputItem[] | undefined {
+    get input(): TrueFoundryGatewayApi.TurnInputItem[] | undefined {
         return this.#turn?.input ?? this.#input;
     }
 
@@ -61,12 +61,12 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
     execute(
         opts: { stream: false; pollIntervalMs?: number },
         requestOptions?: RequestOptions,
-    ): Promise<TrueFoundryGateway.TurnState>;
+    ): Promise<TrueFoundryGatewayApi.TurnState>;
     execute(opts?: { stream?: true }, requestOptions?: RequestOptions): AsyncIterable<TurnStreamData>;
     execute(
         opts?: { stream?: boolean; pollIntervalMs?: number },
         requestOptions?: RequestOptions,
-    ): AsyncIterable<TurnStreamData> | Promise<TrueFoundryGateway.TurnState> {
+    ): AsyncIterable<TurnStreamData> | Promise<TrueFoundryGatewayApi.TurnState> {
         if (this.#start != null) throw new Error("Turn already started; use stream() / waitForCompletion().");
         this.#start = this.openCreateTurn(requestOptions); // POST fires now (synchronously), before we return
         const { stream = true, pollIntervalMs } = opts ?? {};
@@ -88,16 +88,16 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
     async waitForCompletion(
         opts?: { pollIntervalMs?: number },
         requestOptions?: RequestOptions,
-    ): Promise<TrueFoundryGateway.TurnState> {
+    ): Promise<TrueFoundryGatewayApi.TurnState> {
         return this.mustGetTurn().waitForCompletion(opts, requestOptions);
     }
     async cancel(requestOptions?: RequestOptions): Promise<void> {
         return this.mustGetTurn().cancel(requestOptions);
     }
     listEvents(
-        opts?: TrueFoundryGateway.agents.SessionsListTurnEventsRequest,
+        opts?: TrueFoundryGatewayApi.agents.SessionsListTurnEventsRequest,
         requestOptions?: RequestOptions,
-    ): Promise<core.Page<TrueFoundryGateway.TurnEvent, TrueFoundryGateway.ListEventsResponse>> {
+    ): Promise<core.Page<TrueFoundryGatewayApi.TurnEvent, TrueFoundryGatewayApi.ListEventsResponse>> {
         return this.mustGetTurn().listEvents(opts, requestOptions);
     }
 
@@ -110,7 +110,7 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
     private async startAndWait(
         pollIntervalMs?: number,
         requestOptions?: RequestOptions,
-    ): Promise<TrueFoundryGateway.TurnState> {
+    ): Promise<TrueFoundryGatewayApi.TurnState> {
         const turn = await this.createTurnIfNotExist();
         return turn.waitForCompletion({ pollIntervalMs }, requestOptions);
     }
@@ -119,7 +119,7 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
     // Isolated so a future reconnect wrapper can re-open the stream (subscribeToTurn) on disconnect.
     // NOTE: reconnect/resume is out of current scope.
     private async *consumeStream(
-        sse: core.Stream<TrueFoundryGateway.TurnStreamingEvent>,
+        sse: core.Stream<TrueFoundryGatewayApi.TurnStreamingEvent>,
     ): AsyncIterable<TurnStreamData> {
         for await (const { data: event, id } of sse.withMetadata()) {
             if (event.type === "turn.created" && this.#turn == null)
@@ -161,7 +161,7 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
     // Build the inner Turn directly from the turn.created event (no extra getTurn round trip).
     // The TurnCreatedEvent member of the TurnStreamingEvent union carries everything Turn needs.
     // input comes from the request we sent (this.#input), not the event.
-    private adoptTurn(event: TrueFoundryGateway.TurnCreatedEvent): void {
+    private adoptTurn(event: TrueFoundryGatewayApi.TurnCreatedEvent): void {
         this.#turn = new Turn(
             {
                 id: event.turnId,
@@ -179,7 +179,7 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
 
     // Replace the inner Turn with a fresh one carrying the new state. State changes are rare, so
     // rebuilding via Turn's own constructor (rather than mutating it) keeps Turn the source of truth.
-    private replaceTurnState(state: TrueFoundryGateway.TurnState): void {
+    private replaceTurnState(state: TrueFoundryGatewayApi.TurnState): void {
         const turn = this.mustGetTurn();
         this.#turn = new Turn(
             {

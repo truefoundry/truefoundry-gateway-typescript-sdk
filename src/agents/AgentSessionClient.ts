@@ -1,23 +1,23 @@
-import type * as TrueFoundryGateway from "../api/index.js";
+import type * as TrueFoundryGatewayApi from "../api/index.js";
 import type { SessionsClient } from "../api/resources/private/resources/agents/resources/sessions/client/Client.js";
-import { TrueFoundryGatewayClient } from "../CustomClient.js";
+import { TrueFoundryGateway } from "../CustomClient.js";
 import * as core from "../core/index.js";
 import { AgentSession } from "./AgentSession.js";
 
 export declare namespace AgentSessionClient {
-    export type Options = TrueFoundryGatewayClient.Options;
+    export type Options = TrueFoundryGateway.Options;
     export type RequestOptions = SessionsClient.RequestOptions;
 }
 
 export class AgentSessionClient {
-    private readonly client: TrueFoundryGatewayClient;
+    private readonly client: TrueFoundryGateway;
 
     constructor(options: AgentSessionClient.Options) {
-        this.client = new TrueFoundryGatewayClient(options);
+        this.client = new TrueFoundryGateway(options);
     }
 
     async createSession(
-        opts: TrueFoundryGateway.agents.CreateSessionRequest,
+        opts: TrueFoundryGatewayApi.agents.CreateSessionRequest,
         requestOptions?: AgentSessionClient.RequestOptions,
     ): Promise<AgentSession> {
         const response = await this.client.agents.sessions.create(opts, requestOptions);
@@ -25,9 +25,9 @@ export class AgentSessionClient {
     }
 
     async listSessions(
-        opts: TrueFoundryGateway.agents.SessionsListRequest,
+        opts: TrueFoundryGatewayApi.agents.SessionsListRequest,
         requestOptions?: AgentSessionClient.RequestOptions,
-    ): Promise<core.Page<AgentSession, TrueFoundryGateway.ListSessionsResponse>> {
+    ): Promise<core.Page<AgentSession, TrueFoundryGatewayApi.ListSessionsResponse>> {
         const page = await this.client.agents.sessions.list(opts, requestOptions);
         const client = this.client;
         return new core.Page({

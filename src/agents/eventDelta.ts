@@ -1,13 +1,13 @@
-import type * as TrueFoundryGateway from "../api/index.js";
+import type * as TrueFoundryGatewayApi from "../api/index.js";
 
 /** Union of all streaming delta events. Expand this as more `.delta` events are added. */
-export type DeltaEvents = TrueFoundryGateway.ModelMessageDeltaEvent;
+export type DeltaEvents = TrueFoundryGatewayApi.ModelMessageDeltaEvent;
 
-export function isEventDelta(event: TrueFoundryGateway.TurnStreamingEvent): event is DeltaEvents {
+export function isEventDelta(event: TrueFoundryGatewayApi.TurnStreamingEvent): event is DeltaEvents {
     return typeof event.type === "string" && event.type.endsWith(".delta");
 }
 
-export function mergeEventDelta(base: TrueFoundryGateway.TurnEvent, delta: DeltaEvents): void {
+export function mergeEventDelta(base: TrueFoundryGatewayApi.TurnEvent, delta: DeltaEvents): void {
     if (base.id !== delta.id) {
         throw new Error(`Cannot merge delta into a different event: base id "${base.id}" != delta id "${delta.id}".`);
     }
@@ -17,8 +17,8 @@ export function mergeEventDelta(base: TrueFoundryGateway.TurnEvent, delta: Delta
 }
 
 function mergeModelMessageDelta(
-    base: TrueFoundryGateway.ModelMessageEvent,
-    delta: TrueFoundryGateway.ModelMessageDeltaEvent,
+    base: TrueFoundryGatewayApi.ModelMessageEvent,
+    delta: TrueFoundryGatewayApi.ModelMessageDeltaEvent,
 ): void {
     if (delta.content) {
         if (base.content === undefined || typeof base.content === "string") {
@@ -46,8 +46,8 @@ function mergeModelMessageDelta(
                     id: d.id ?? "",
                     type: (d.type ?? "function") as "function",
                     function: { name: d.function?.name ?? "", arguments: "" },
-                    ...(d.toolInfo != null ? { toolInfo: d.toolInfo as TrueFoundryGateway.ToolInfo } : {}),
-                } as TrueFoundryGateway.ToolCall;
+                    ...(d.toolInfo != null ? { toolInfo: d.toolInfo as TrueFoundryGatewayApi.ToolInfo } : {}),
+                } as TrueFoundryGatewayApi.ToolCall;
                 base.toolCalls[d.index] = tc;
             }
             if (d.id) {
@@ -63,7 +63,7 @@ function mergeModelMessageDelta(
                 tc.function.arguments += d.function.arguments;
             }
             if (d.toolInfo) {
-                tc.toolInfo = d.toolInfo as TrueFoundryGateway.ToolInfo;
+                tc.toolInfo = d.toolInfo as TrueFoundryGatewayApi.ToolInfo;
             }
             if (d.providerSpecificFields) {
                 tc.providerSpecificFields = {

@@ -1,6 +1,6 @@
-import type * as TrueFoundryGateway from "../api/index.js";
+import type * as TrueFoundryGatewayApi from "../api/index.js";
 import type { SessionsClient } from "../api/resources/private/resources/agents/resources/sessions/client/Client.js";
-import type { TrueFoundryGatewayClient } from "../CustomClient.js";
+import type { TrueFoundryGateway } from "../CustomClient.js";
 import * as core from "../core/index.js";
 import { PreparedTurn } from "./PreparedTurn.js";
 import { Turn } from "./Turn.js";
@@ -9,16 +9,16 @@ import { Turn } from "./Turn.js";
 // SessionsClient is NOT re-exported under TrueFoundryGateway.agents, so import it directly (as AgentSessionClient does).
 type RequestOptions = SessionsClient.RequestOptions;
 
-export class AgentSession implements TrueFoundryGateway.Session {
+export class AgentSession implements TrueFoundryGatewayApi.Session {
     readonly id: string;
     readonly agentName: string;
     readonly title?: string;
-    readonly createdBySubject: TrueFoundryGateway.Subject;
+    readonly createdBySubject: TrueFoundryGatewayApi.Subject;
     readonly createdAt: string;
     readonly updatedAt: string;
-    readonly #client: TrueFoundryGatewayClient;
+    readonly #client: TrueFoundryGateway;
 
-    constructor(session: TrueFoundryGateway.Session, client: TrueFoundryGatewayClient) {
+    constructor(session: TrueFoundryGatewayApi.Session, client: TrueFoundryGateway) {
         this.id = session.id;
         this.agentName = session.agentName;
         this.title = session.title;
@@ -29,16 +29,16 @@ export class AgentSession implements TrueFoundryGateway.Session {
     }
 
     prepareTurn(opts?: {
-        input?: TrueFoundryGateway.TurnInputItem[];
-        previousTurnId?: TrueFoundryGateway.PreviousTurnIdInput;
+        input?: TrueFoundryGatewayApi.TurnInputItem[];
+        previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput;
     }): PreparedTurn {
         return new PreparedTurn({ input: opts?.input, previousTurnId: opts?.previousTurnId }, this, this.#client);
     }
 
     async listTurns(
-        opts?: TrueFoundryGateway.agents.SessionsListTurnsRequest,
+        opts?: TrueFoundryGatewayApi.agents.SessionsListTurnsRequest,
         requestOptions?: RequestOptions,
-    ): Promise<core.Page<Turn, TrueFoundryGateway.ListTurnsResponse>> {
+    ): Promise<core.Page<Turn, TrueFoundryGatewayApi.ListTurnsResponse>> {
         const client = this.#client;
         const sessionId = this.id;
         const page = await client.agents.sessions.listTurns(sessionId, opts, requestOptions);

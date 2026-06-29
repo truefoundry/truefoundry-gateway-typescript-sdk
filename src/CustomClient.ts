@@ -1,24 +1,24 @@
 import type { AgentsClient } from "./api/resources/private/resources/agents/client/Client.js";
-import { TrueFoundryGatewayClient as BaseTrueFoundryGatewayClient } from "./Client";
+import { TrueFoundryGateway as BaseTrueFoundryGateway } from "./Client";
 import type * as core from "./core";
 
-export declare namespace TrueFoundryGatewayClient {
-    export type Options = Omit<BaseTrueFoundryGatewayClient.Options, "environment"> & {
+export declare namespace TrueFoundryGateway {
+    export type Options = Omit<BaseTrueFoundryGateway.Options, "environment"> & {
         baseUrl: core.Supplier<string>;
         environment?: core.Supplier<string>;
     };
 
-    export interface RequestOptions extends BaseTrueFoundryGatewayClient.RequestOptions {}
+    export interface RequestOptions extends BaseTrueFoundryGateway.RequestOptions {}
 }
 
-export class TrueFoundryGatewayClient extends BaseTrueFoundryGatewayClient {
+export class TrueFoundryGateway extends BaseTrueFoundryGateway {
     protected _agents: AgentsClient | undefined;
 
-    constructor(_options: TrueFoundryGatewayClient.Options) {
+    constructor(_options: TrueFoundryGateway.Options) {
         const options = {
             ..._options,
             environment: _options.environment ?? "",
-        } as BaseTrueFoundryGatewayClient.Options;
+        } as BaseTrueFoundryGateway.Options;
         super(options);
     }
 

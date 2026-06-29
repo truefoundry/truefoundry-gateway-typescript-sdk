@@ -1,8 +1,8 @@
-import type * as TrueFoundryGateway from "../api/index.js";
+import type * as TrueFoundryGatewayApi from "../api/index.js";
 
 export interface TurnStreamData {
     sequenceNumber: number;
-    event: TrueFoundryGateway.TurnStreamingEvent;
+    event: TrueFoundryGatewayApi.TurnStreamingEvent;
 }
 
 export function parseSequenceNumber(id: string | undefined): number {
