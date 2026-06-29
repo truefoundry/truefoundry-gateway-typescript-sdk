@@ -46,7 +46,7 @@ function mergeModelMessageDelta(
                     id: d.id ?? "",
                     type: (d.type ?? "function") as "function",
                     function: { name: d.function?.name ?? "", arguments: "" },
-                    ...(d.toolInfo != null ? { toolInfo: d.toolInfo as TrueFoundryGateway.ToolCallToolInfo } : {}),
+                    ...(d.toolInfo != null ? { toolInfo: d.toolInfo as TrueFoundryGateway.ToolInfo } : {}),
                 } as TrueFoundryGateway.ToolCall;
                 base.toolCalls[d.index] = tc;
             }
@@ -63,7 +63,7 @@ function mergeModelMessageDelta(
                 tc.function.arguments += d.function.arguments;
             }
             if (d.toolInfo) {
-                tc.toolInfo = d.toolInfo as TrueFoundryGateway.ToolCallToolInfo;
+                tc.toolInfo = d.toolInfo as TrueFoundryGateway.ToolInfo;
             }
             if (d.providerSpecificFields) {
                 tc.providerSpecificFields = {
