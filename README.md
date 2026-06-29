@@ -95,7 +95,7 @@ Instantiate and use the client with the following:
 import { TrueFoundryGatewayClient } from "truefoundry-gateway-sdk";
 
 const client = new TrueFoundryGatewayClient({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
-const response = await client.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
+const response = await client.private.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
 for await (const item of response) {
     console.log(item);
 }
@@ -124,7 +124,7 @@ following namespace:
 ```typescript
 import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
-const request: TrueFoundryGateway.SessionsListRequest = {
+const request: TrueFoundryGateway.DraftSessionsListRequest = {
     ...
 };
 ```
@@ -138,7 +138,7 @@ will be thrown.
 import { TrueFoundryGatewayError } from "truefoundry-gateway-sdk";
 
 try {
-    await client.agents.sessions.createTurn(...);
+    await client.private.agents.sessions.createTurn(...);
 } catch (err) {
     if (err instanceof TrueFoundryGatewayError) {
         console.log(err.statusCode);
@@ -158,7 +158,7 @@ The SDK uses async iterators, so you can consume the responses using a `for awai
 import { TrueFoundryGatewayClient } from "truefoundry-gateway-sdk";
 
 const client = new TrueFoundryGatewayClient({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
-const response = await client.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
+const response = await client.private.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
 for await (const item of response) {
     console.log(item);
 }
@@ -172,7 +172,7 @@ List endpoints are paginated. The SDK provides an iterator so that you can simpl
 import { TrueFoundryGatewayClient } from "truefoundry-gateway-sdk";
 
 const client = new TrueFoundryGatewayClient({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
-const pageableResponse = await client.agents.sessions.list({
+const pageableResponse = await client.private.agents.draftSessions.list({
     agentName: "agent_name",
     limit: 1,
     order: "asc",
@@ -185,7 +185,7 @@ for await (const item of pageableResponse) {
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.agents.sessions.list({
+let page = await client.private.agents.draftSessions.list({
     agentName: "agent_name",
     limit: 1,
     order: "asc",
@@ -208,9 +208,9 @@ const response = page.response;
 This SDK supports direct imports of subpackage clients, which allows JavaScript bundlers to tree-shake and include only the imported subpackage code. This results in much smaller bundle sizes.
 
 ```typescript
-import { AgentsClient } from 'truefoundry-gateway-sdk/agents';
+import { PrivateClient } from 'truefoundry-gateway-sdk/private_';
 
-const client = new AgentsClient({...});
+const client = new PrivateClient({...});
 ```
 
 ### Additional Headers
@@ -227,7 +227,7 @@ const client = new TrueFoundryGatewayClient({
     }
 });
 
-const response = await client.agents.sessions.createTurn(..., {
+const response = await client.private.agents.sessions.createTurn(..., {
     headers: {
         'X-Custom-Header': 'custom value'
     }
@@ -239,7 +239,7 @@ const response = await client.agents.sessions.createTurn(..., {
 If you would like to send additional query string parameters as part of the request, use the `queryParams` request option.
 
 ```typescript
-const response = await client.agents.sessions.createTurn(..., {
+const response = await client.private.agents.sessions.createTurn(..., {
     queryParams: {
         'customQueryParamKey': 'custom query param value'
     }
@@ -269,7 +269,7 @@ Which status codes are retried depends on the `retryStatusCodes` generator confi
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.agents.sessions.createTurn(..., {
+const response = await client.private.agents.sessions.createTurn(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -279,7 +279,7 @@ const response = await client.agents.sessions.createTurn(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.agents.sessions.createTurn(..., {
+const response = await client.private.agents.sessions.createTurn(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -290,7 +290,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.agents.sessions.createTurn(..., {
+const response = await client.private.agents.sessions.createTurn(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request
@@ -302,7 +302,7 @@ The SDK provides access to raw response data, including headers, through the `.w
 The `.withRawResponse()` method returns a promise that results to an object with a `data` and a `rawResponse` property.
 
 ```typescript
-const { data, rawResponse } = await client.agents.sessions.createTurn(...).withRawResponse();
+const { data, rawResponse } = await client.private.agents.sessions.createTurn(...).withRawResponse();
 
 console.log(data);
 console.log(rawResponse.headers['X-My-Header']);

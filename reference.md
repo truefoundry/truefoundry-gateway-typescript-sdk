@@ -1,6 +1,6 @@
 # Reference
-## Agents Sessions
-<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;TrueFoundryGateway.Session, TrueFoundryGateway.ListSessionsResponse&gt;</code></summary>
+## Private Agents DraftSessions
+<details><summary><code>client.private.agents.draftSessions.<a href="/src/api/resources/private/resources/agents/resources/draftSessions/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;TrueFoundryGateway.DraftSession, TrueFoundryGateway.DraftSessionsListResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -12,7 +12,7 @@
 <dl>
 <dd>
 
-List sessions for an agent (newest first by default), keyset-paginated. Pass `page_token` to fetch the next page, keeping the other query params constant.
+List the caller-owned draft sessions (newest first by default), keyset-paginated. Optionally filter by `agent_name`. Pass `page_token` to fetch the next page, keeping the other query params constant.
 </dd>
 </dl>
 </dd>
@@ -27,7 +27,7 @@ List sessions for an agent (newest first by default), keyset-paginated. Pass `pa
 <dd>
 
 ```typescript
-const pageableResponse = await client.agents.sessions.list({
+const pageableResponse = await client.private.agents.draftSessions.list({
     agentName: "agent_name",
     limit: 1,
     order: "asc",
@@ -40,7 +40,7 @@ for await (const item of pageableResponse) {
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.agents.sessions.list({
+let page = await client.private.agents.draftSessions.list({
     agentName: "agent_name",
     limit: 1,
     order: "asc",
@@ -69,7 +69,300 @@ const response = page.response;
 <dl>
 <dd>
 
-**request:** `TrueFoundryGateway.agents.SessionsListRequest` 
+**request:** `TrueFoundryGateway.private_.agents.DraftSessionsListRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DraftSessionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.private.agents.draftSessions.<a href="/src/api/resources/private/resources/agents/resources/draftSessions/client/Client.ts">create</a>({ ...params }) -> TrueFoundryGateway.DraftSessionsCreateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a draft session holding an inline agent spec, optionally linked to a saved agent. Owner is the token subject.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.private.agents.draftSessions.create({
+    agentSpec: {
+        model: {
+            name: "name"
+        }
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `TrueFoundryGateway.private_.agents.CreateDraftSessionRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DraftSessionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.private.agents.draftSessions.<a href="/src/api/resources/private/resources/agents/resources/draftSessions/client/Client.ts">get</a>(draftSessionId) -> TrueFoundryGateway.DraftSessionsGetResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Get a draft session by id. Owner-only.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.private.agents.draftSessions.get("draftSessionId");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**draftSessionId:** `string` — Draft session identifier.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DraftSessionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.private.agents.draftSessions.<a href="/src/api/resources/private/resources/agents/resources/draftSessions/client/Client.ts">update</a>(draftSessionId, { ...params }) -> TrueFoundryGateway.DraftSessionsUpdateResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a draft session's inline spec. Owner-only. An empty body is a valid no-op that refreshes `updated_at`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.private.agents.draftSessions.update("draftSessionId");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**draftSessionId:** `string` — Draft session identifier.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `TrueFoundryGateway.private_.agents.UpdateDraftSessionRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DraftSessionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Private Agents Sessions
+<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;TrueFoundryGateway.Session, TrueFoundryGateway.ListSessionsResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List sessions for an agent (newest first by default), keyset-paginated. Pass `page_token` to fetch the next page, keeping the other query params constant.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.private.agents.sessions.list({
+    agentName: "agent_name",
+    limit: 1,
+    order: "asc",
+    pageToken: "page_token",
+    startTimestamp: "start_timestamp",
+    endTimestamp: "end_timestamp"
+});
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.private.agents.sessions.list({
+    agentName: "agent_name",
+    limit: 1,
+    order: "asc",
+    pageToken: "page_token",
+    startTimestamp: "start_timestamp",
+    endTimestamp: "end_timestamp"
+});
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `TrueFoundryGateway.private_.agents.SessionsListRequest` 
     
 </dd>
 </dl>
@@ -89,7 +382,7 @@ const response = page.response;
 </dl>
 </details>
 
-<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">create</a>({ ...params }) -> TrueFoundryGateway.GetSessionResponse</code></summary>
+<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">create</a>({ ...params }) -> TrueFoundryGateway.GetSessionResponse</code></summary>
 <dl>
 <dd>
 
@@ -116,7 +409,7 @@ Create a session for an existing named agent.
 <dd>
 
 ```typescript
-await client.agents.sessions.create({
+await client.private.agents.sessions.create({
     agentName: "agent_name"
 });
 
@@ -134,7 +427,7 @@ await client.agents.sessions.create({
 <dl>
 <dd>
 
-**request:** `TrueFoundryGateway.agents.CreateSessionRequest` 
+**request:** `TrueFoundryGateway.private_.agents.CreateSessionRequest` 
     
 </dd>
 </dl>
@@ -154,7 +447,7 @@ await client.agents.sessions.create({
 </dl>
 </details>
 
-<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">get</a>(sessionId) -> TrueFoundryGateway.GetSessionResponse</code></summary>
+<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">get</a>(sessionId) -> TrueFoundryGateway.GetSessionResponse</code></summary>
 <dl>
 <dd>
 
@@ -181,7 +474,7 @@ Get a session by id. Visible to the session owner or a manager of the session ag
 <dd>
 
 ```typescript
-await client.agents.sessions.get("sessionId");
+await client.private.agents.sessions.get("sessionId");
 
 ```
 </dd>
@@ -217,7 +510,7 @@ await client.agents.sessions.get("sessionId");
 </dl>
 </details>
 
-<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">cancel</a>(sessionId, { ...params }) -> TrueFoundryGateway.CancelSessionResponse</code></summary>
+<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">cancel</a>(sessionId, { ...params }) -> TrueFoundryGateway.CancelSessionResponse</code></summary>
 <dl>
 <dd>
 
@@ -244,7 +537,7 @@ Cancel the running last turn for a session.
 <dd>
 
 ```typescript
-await client.agents.sessions.cancel("01arz3ndektsv4rrffq69g5fav.g");
+await client.private.agents.sessions.cancel("01arz3ndektsv4rrffq69g5fav.g");
 
 ```
 </dd>
@@ -268,7 +561,7 @@ await client.agents.sessions.cancel("01arz3ndektsv4rrffq69g5fav.g");
 <dl>
 <dd>
 
-**request:** `TrueFoundryGateway.agents.CancelSessionRequest` 
+**request:** `TrueFoundryGateway.private_.agents.CancelSessionRequest` 
     
 </dd>
 </dl>
@@ -288,7 +581,7 @@ await client.agents.sessions.cancel("01arz3ndektsv4rrffq69g5fav.g");
 </dl>
 </details>
 
-<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">listTurns</a>(sessionId, { ...params }) -> core.Page&lt;TrueFoundryGateway.Turn, TrueFoundryGateway.ListTurnsResponse&gt;</code></summary>
+<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">listTurns</a>(sessionId, { ...params }) -> core.Page&lt;TrueFoundryGateway.Turn, TrueFoundryGateway.ListTurnsResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -315,7 +608,7 @@ List turns for a session (newest first). Pagination walks the ancestor chain fro
 <dd>
 
 ```typescript
-const pageableResponse = await client.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g", {
+const pageableResponse = await client.private.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g", {
     pageToken: "page_token",
     limit: 1
 });
@@ -324,7 +617,7 @@ for await (const item of pageableResponse) {
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g", {
+let page = await client.private.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g", {
     pageToken: "page_token",
     limit: 1
 });
@@ -357,7 +650,7 @@ const response = page.response;
 <dl>
 <dd>
 
-**request:** `TrueFoundryGateway.agents.SessionsListTurnsRequest` 
+**request:** `TrueFoundryGateway.private_.agents.SessionsListTurnsRequest` 
     
 </dd>
 </dl>
@@ -377,7 +670,7 @@ const response = page.response;
 </dl>
 </details>
 
-<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">createTurn</a>(sessionId, { ...params }) -> core.Stream&lt;TrueFoundryGateway.TurnStreamingEvent&gt;</code></summary>
+<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">createTurn</a>(sessionId, { ...params }) -> core.Stream&lt;TrueFoundryGateway.TurnStreamingEvent&gt;</code></summary>
 <dl>
 <dd>
 
@@ -405,7 +698,7 @@ Use `previous_turn_id` to chain to the session's last turn (defaults to `auto`).
 <dd>
 
 ```typescript
-const response = await client.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
+const response = await client.private.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
 for await (const item of response) {
     console.log(item);
 }
@@ -432,7 +725,7 @@ for await (const item of response) {
 <dl>
 <dd>
 
-**request:** `TrueFoundryGateway.agents.CreateTurnRequest` 
+**request:** `TrueFoundryGateway.private_.agents.CreateTurnRequest` 
     
 </dd>
 </dl>
@@ -452,7 +745,7 @@ for await (const item of response) {
 </dl>
 </details>
 
-<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">getTurn</a>(sessionId, turnId) -> TrueFoundryGateway.GetTurnResponse</code></summary>
+<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">getTurn</a>(sessionId, turnId) -> TrueFoundryGateway.GetTurnResponse</code></summary>
 <dl>
 <dd>
 
@@ -479,7 +772,7 @@ Get a single turn by ID from Redis.
 <dd>
 
 ```typescript
-await client.agents.sessions.getTurn("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd");
+await client.private.agents.sessions.getTurn("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd");
 
 ```
 </dd>
@@ -523,7 +816,7 @@ await client.agents.sessions.getTurn("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndek
 </dl>
 </details>
 
-<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">subscribeToTurn</a>(sessionId, turnId, { ...params }) -> core.Stream&lt;TrueFoundryGateway.TurnStreamingEvent&gt;</code></summary>
+<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">subscribeToTurn</a>(sessionId, turnId, { ...params }) -> core.Stream&lt;TrueFoundryGateway.TurnStreamingEvent&gt;</code></summary>
 <dl>
 <dd>
 
@@ -550,7 +843,7 @@ Subscribe to the live SSE stream for a turn. Pass after_sequence_number to resum
 <dd>
 
 ```typescript
-const response = await client.agents.sessions.subscribeToTurn("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd");
+const response = await client.private.agents.sessions.subscribeToTurn("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd");
 for await (const item of response) {
     console.log(item);
 }
@@ -585,7 +878,7 @@ for await (const item of response) {
 <dl>
 <dd>
 
-**request:** `TrueFoundryGateway.agents.SubscribeTurnRequest` 
+**request:** `TrueFoundryGateway.private_.agents.SubscribeTurnRequest` 
     
 </dd>
 </dl>
@@ -605,7 +898,7 @@ for await (const item of response) {
 </dl>
 </details>
 
-<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">listTurnEvents</a>(sessionId, turnId, { ...params }) -> core.Page&lt;TrueFoundryGateway.TurnEvent, TrueFoundryGateway.ListEventsResponse&gt;</code></summary>
+<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">listTurnEvents</a>(sessionId, turnId, { ...params }) -> core.Page&lt;TrueFoundryGateway.TurnEvent, TrueFoundryGateway.ListEventsResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -632,7 +925,7 @@ Paginated list of turn events from the Redis events stream.
 <dd>
 
 ```typescript
-const pageableResponse = await client.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
+const pageableResponse = await client.private.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
     pageToken: "page_token",
     limit: 1,
     order: "asc"
@@ -642,7 +935,7 @@ for await (const item of pageableResponse) {
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
+let page = await client.private.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
     pageToken: "page_token",
     limit: 1,
     order: "asc"
@@ -684,7 +977,7 @@ const response = page.response;
 <dl>
 <dd>
 
-**request:** `TrueFoundryGateway.agents.SessionsListTurnEventsRequest` 
+**request:** `TrueFoundryGateway.private_.agents.SessionsListTurnEventsRequest` 
     
 </dd>
 </dl>
@@ -693,299 +986,6 @@ const response = page.response;
 <dd>
 
 **requestOptions:** `SessionsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## Internal Agents DraftSessions
-<details><summary><code>client.internal.agents.draftSessions.<a href="/src/api/resources/internal/resources/agents/resources/draftSessions/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;TrueFoundryGateway.DraftSession, TrueFoundryGateway.DraftSessionsListResponse&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-List the caller-owned draft sessions (newest first by default), keyset-paginated. Optionally filter by `agent_name`. Pass `page_token` to fetch the next page, keeping the other query params constant.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-const pageableResponse = await client.internal.agents.draftSessions.list({
-    agentName: "agent_name",
-    limit: 1,
-    order: "asc",
-    pageToken: "page_token",
-    startTimestamp: "start_timestamp",
-    endTimestamp: "end_timestamp"
-});
-for await (const item of pageableResponse) {
-    console.log(item);
-}
-
-// Or you can manually iterate page-by-page
-let page = await client.internal.agents.draftSessions.list({
-    agentName: "agent_name",
-    limit: 1,
-    order: "asc",
-    pageToken: "page_token",
-    startTimestamp: "start_timestamp",
-    endTimestamp: "end_timestamp"
-});
-while (page.hasNextPage()) {
-    page = page.getNextPage();
-}
-
-// You can also access the underlying response
-const response = page.response;
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `TrueFoundryGateway.internal.agents.DraftSessionsListRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `DraftSessionsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.internal.agents.draftSessions.<a href="/src/api/resources/internal/resources/agents/resources/draftSessions/client/Client.ts">create</a>({ ...params }) -> TrueFoundryGateway.DraftSessionsCreateResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Create a draft session holding an inline agent spec, optionally linked to a saved agent. Owner is the token subject.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.internal.agents.draftSessions.create({
-    agentSpec: {
-        model: {
-            name: "name"
-        }
-    }
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `TrueFoundryGateway.internal.agents.CreateDraftSessionRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `DraftSessionsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.internal.agents.draftSessions.<a href="/src/api/resources/internal/resources/agents/resources/draftSessions/client/Client.ts">get</a>(draftSessionId) -> TrueFoundryGateway.DraftSessionsGetResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get a draft session by id. Owner-only.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.internal.agents.draftSessions.get("draftSessionId");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**draftSessionId:** `string` — Draft session identifier.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `DraftSessionsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.internal.agents.draftSessions.<a href="/src/api/resources/internal/resources/agents/resources/draftSessions/client/Client.ts">update</a>(draftSessionId, { ...params }) -> TrueFoundryGateway.DraftSessionsUpdateResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Update a draft session's inline spec. Owner-only. An empty body is a valid no-op that refreshes `updated_at`.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.internal.agents.draftSessions.update("draftSessionId");
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**draftSessionId:** `string` — Draft session identifier.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `TrueFoundryGateway.internal.agents.UpdateDraftSessionRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `DraftSessionsClient.RequestOptions` 
     
 </dd>
 </dl>

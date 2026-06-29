@@ -1,2 +1,1 @@
-export * as agents from "./agents/index.js";
-export * as internal from "./internal/index.js";
+export * as private_ from "./private/index.js";
