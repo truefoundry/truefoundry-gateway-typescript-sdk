@@ -43,8 +43,17 @@ export class Turn implements TrueFoundryGateway.Turn {
         return this.#state;
     }
 
+    // Terminal states are listed explicitly (not `status !== "running"`) so a newly added
+    // non-terminal status keeps polling by default; new terminal states must be added here.
     private isTerminal(state: TrueFoundryGateway.TurnState): boolean {
-        return state.status !== "running";
+        switch (state.status) {
+            case "done":
+            case "cancelled":
+            case "error":
+                return true;
+            default:
+                return false;
+        }
     }
 
     // Refetch from the server, update #state in place, and return self.
