@@ -2,8 +2,6 @@
 # hand-maintained top-level src/index.ts and agent/ folder live at stable
 # paths so they are not overwritten on SDK regeneration.
 src/agent/
-src/core/stream/
 src/index.ts
 tests/unit/agent/
-tests/unit/stream/
 .github/workflows/ci.yml
