@@ -3,19 +3,19 @@
 import type * as TrueFoundryGateway from "../../../../../../../../../api/index.js";
 import * as core from "../../../../../../../../../core/index.js";
 import type * as serializers from "../../../../../../../../index.js";
-import { CreateDraftSessionRequestAgentSpec } from "../../types/CreateDraftSessionRequestAgentSpec.js";
+import { AgentSpec } from "../../../../../../../../types/AgentSpec.js";
 
 export const CreateDraftSessionRequest: core.serialization.Schema<
     serializers.private_.agents.CreateDraftSessionRequest.Raw,
     TrueFoundryGateway.private_.agents.CreateDraftSessionRequest
 > = core.serialization.object({
-    agentSpec: core.serialization.property("agent_spec", CreateDraftSessionRequestAgentSpec),
+    agentSpec: core.serialization.property("agent_spec", AgentSpec),
     agentName: core.serialization.property("agent_name", core.serialization.string().optional()),
 });
 
 export declare namespace CreateDraftSessionRequest {
     export interface Raw {
-        agent_spec: CreateDraftSessionRequestAgentSpec.Raw;
+        agent_spec: AgentSpec.Raw;
         agent_name?: string | null;
     }
 }

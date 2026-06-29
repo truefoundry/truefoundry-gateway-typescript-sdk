@@ -2,6 +2,9 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
+/**
+ * Agent Definition
+ */
 export interface AgentSpec {
     model: TrueFoundryGateway.Model;
     instructions?: string;

@@ -13,8 +13,7 @@ import type * as TrueFoundryGateway from "../../../../../../../../index.js";
  *     }
  */
 export interface CreateDraftSessionRequest {
-    /** Agent Definition */
-    agentSpec: TrueFoundryGateway.private_.agents.CreateDraftSessionRequestAgentSpec;
+    agentSpec: TrueFoundryGateway.AgentSpec;
     /** Optionally link the draft to an existing saved agent in the tenant. Omit for a standalone draft. */
     agentName?: string;
 }
