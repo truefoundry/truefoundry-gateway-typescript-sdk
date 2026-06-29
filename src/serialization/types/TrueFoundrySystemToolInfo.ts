@@ -4,15 +4,15 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 
-export const TrueFoundrySystemToolCallInfo: core.serialization.ObjectSchema<
-    serializers.TrueFoundrySystemToolCallInfo.Raw,
-    TrueFoundryGateway.TrueFoundrySystemToolCallInfo
+export const TrueFoundrySystemToolInfo: core.serialization.ObjectSchema<
+    serializers.TrueFoundrySystemToolInfo.Raw,
+    TrueFoundryGateway.TrueFoundrySystemToolInfo
 > = core.serialization.object({
     type: core.serialization.stringLiteral("truefoundry-system"),
     name: core.serialization.string(),
 });
 
-export declare namespace TrueFoundrySystemToolCallInfo {
+export declare namespace TrueFoundrySystemToolInfo {
     export interface Raw {
         type: "truefoundry-system";
         name: string;

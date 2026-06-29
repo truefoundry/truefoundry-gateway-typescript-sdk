@@ -4,14 +4,14 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 import { ChatCompletionChunkDeltaToolCall } from "./ChatCompletionChunkDeltaToolCall.js";
-import { ExtendedChunkDeltaToolCallToolInfo } from "./ExtendedChunkDeltaToolCallToolInfo.js";
+import { ToolInfo } from "./ToolInfo.js";
 
 export const ExtendedChunkDeltaToolCall: core.serialization.ObjectSchema<
     serializers.ExtendedChunkDeltaToolCall.Raw,
     TrueFoundryGateway.ExtendedChunkDeltaToolCall
 > = core.serialization
     .object({
-        toolInfo: core.serialization.property("tool_info", ExtendedChunkDeltaToolCallToolInfo.optional()),
+        toolInfo: core.serialization.property("tool_info", ToolInfo.optional()),
         providerSpecificFields: core.serialization.property(
             "provider_specific_fields",
             core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
@@ -21,7 +21,7 @@ export const ExtendedChunkDeltaToolCall: core.serialization.ObjectSchema<
 
 export declare namespace ExtendedChunkDeltaToolCall {
     export interface Raw extends ChatCompletionChunkDeltaToolCall.Raw {
-        tool_info?: ExtendedChunkDeltaToolCallToolInfo.Raw | null;
+        tool_info?: ToolInfo.Raw | null;
         provider_specific_fields?: Record<string, unknown> | null;
     }
 }

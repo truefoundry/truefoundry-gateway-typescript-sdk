@@ -3,12 +3,12 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { McpToolCallInfo } from "./McpToolCallInfo.js";
-import { TrueFoundrySystemToolCallInfo } from "./TrueFoundrySystemToolCallInfo.js";
+import { McpToolInfo } from "./McpToolInfo.js";
+import { TrueFoundrySystemToolInfo } from "./TrueFoundrySystemToolInfo.js";
 
 export const ToolInfo: core.serialization.Schema<serializers.ToolInfo.Raw, TrueFoundryGateway.ToolInfo> =
-    core.serialization.undiscriminatedUnion([TrueFoundrySystemToolCallInfo, McpToolCallInfo]);
+    core.serialization.undiscriminatedUnion([TrueFoundrySystemToolInfo, McpToolInfo]);
 
 export declare namespace ToolInfo {
-    export type Raw = TrueFoundrySystemToolCallInfo.Raw | McpToolCallInfo.Raw;
+    export type Raw = TrueFoundrySystemToolInfo.Raw | McpToolInfo.Raw;
 }

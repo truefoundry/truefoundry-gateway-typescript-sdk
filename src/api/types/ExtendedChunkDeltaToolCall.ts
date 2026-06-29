@@ -3,6 +3,6 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface ExtendedChunkDeltaToolCall extends TrueFoundryGateway.ChatCompletionChunkDeltaToolCall {
-    toolInfo?: TrueFoundryGateway.ExtendedChunkDeltaToolCallToolInfo;
+    toolInfo?: TrueFoundryGateway.ToolInfo;
     providerSpecificFields?: Record<string, unknown>;
 }
