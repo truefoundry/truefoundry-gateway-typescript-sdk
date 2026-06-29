@@ -1,4 +1,4 @@
-import { type DeltaEvents, isEventDelta, mergeEventDelta } from "../../../src/agent/eventDelta.js";
+import { type DeltaEvents, isEventDelta, mergeEventDelta } from "../../../src/agents/eventDelta.js";
 import type * as TrueFoundryGateway from "../../../src/api/index.js";
 
 const EVENT_ID = "0f3a9c2b-7d41-4e8a-b2c6-1a5f9e3d2b48";

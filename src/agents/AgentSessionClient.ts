@@ -1,6 +1,6 @@
 import type * as TrueFoundryGateway from "../api/index.js";
-import type { SessionsClient } from "../api/resources/agents/resources/sessions/client/Client.js";
-import { TrueFoundryGatewayClient } from "../Client.js";
+import type { SessionsClient } from "../api/resources/private/resources/agents/resources/sessions/client/Client.js";
+import { TrueFoundryGatewayClient } from "../CustomClient.js";
 import * as core from "../core/index.js";
 import { AgentSession } from "./AgentSession.js";
 
