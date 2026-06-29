@@ -38,7 +38,6 @@ export * from "./ModelMessageEventContentOneItem.js";
 export * from "./ModelMessageUsage.js";
 export * from "./ModelMessageUsageInputTokensBreakdown.js";
 export * from "./ModelParams.js";
-export * from "./ModelParamsReasoningEffort.js";
 export * from "./RawToolCall.js";
 export * from "./RequestErrorResponse.js";
 export * from "./RequestErrorResponseError.js";

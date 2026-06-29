@@ -3,7 +3,6 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { ModelParamsReasoningEffort } from "./ModelParamsReasoningEffort.js";
 
 export const ModelParams: core.serialization.ObjectSchema<serializers.ModelParams.Raw, TrueFoundryGateway.ModelParams> =
     core.serialization.object({
@@ -12,7 +11,7 @@ export const ModelParams: core.serialization.ObjectSchema<serializers.ModelParam
         topP: core.serialization.property("top_p", core.serialization.number().optional()),
         topK: core.serialization.property("top_k", core.serialization.number().optional()),
         parallelToolCalls: core.serialization.property("parallel_tool_calls", core.serialization.boolean().optional()),
-        reasoningEffort: core.serialization.property("reasoning_effort", ModelParamsReasoningEffort.optional()),
+        reasoningEffort: core.serialization.property("reasoning_effort", core.serialization.string().optional()),
     });
 
 export declare namespace ModelParams {
@@ -22,6 +21,6 @@ export declare namespace ModelParams {
         top_p?: number | null;
         top_k?: number | null;
         parallel_tool_calls?: boolean | null;
-        reasoning_effort?: ModelParamsReasoningEffort.Raw | null;
+        reasoning_effort?: string | null;
     }
 }
