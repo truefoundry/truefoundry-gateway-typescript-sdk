@@ -47,18 +47,18 @@ export class SessionsClient {
     public async list(
         request: TrueFoundryGateway.agents.SessionsListRequest,
         requestOptions?: SessionsClient.RequestOptions,
-    ): Promise<core.Page<TrueFoundryGateway.Session, TrueFoundryGateway.agents.SessionsListResponse>> {
+    ): Promise<core.Page<TrueFoundryGateway.Session, TrueFoundryGateway.ListSessionsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (
                 request: TrueFoundryGateway.agents.SessionsListRequest,
-            ): Promise<core.WithRawResponse<TrueFoundryGateway.agents.SessionsListResponse>> => {
+            ): Promise<core.WithRawResponse<TrueFoundryGateway.ListSessionsResponse>> => {
                 const { agentName, limit = 10, order, pageToken, startTimestamp, endTimestamp } = request;
                 const _queryParams: Record<string, unknown> = {
                     agent_name: agentName,
                     limit,
                     order:
                         order != null
-                            ? serializers.agents.SessionsListRequestOrder.jsonOrThrow(order, {
+                            ? serializers.Order.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,
                                   allowUnrecognizedEnumValues: true,
@@ -96,7 +96,7 @@ export class SessionsClient {
                 });
                 if (_response.ok) {
                     return {
-                        data: serializers.agents.SessionsListResponse.parseOrThrow(_response.body, {
+                        data: serializers.ListSessionsResponse.parseOrThrow(_response.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -175,7 +175,7 @@ export class SessionsClient {
             },
         );
         const dataWithRawResponse = await list(request).withRawResponse();
-        return new core.Page<TrueFoundryGateway.Session, TrueFoundryGateway.agents.SessionsListResponse>({
+        return new core.Page<TrueFoundryGateway.Session, TrueFoundryGateway.ListSessionsResponse>({
             response: dataWithRawResponse.data,
             rawResponse: dataWithRawResponse.rawResponse,
             hasNextPage: (response) =>
@@ -209,14 +209,14 @@ export class SessionsClient {
     public create(
         request: TrueFoundryGateway.agents.CreateSessionRequest,
         requestOptions?: SessionsClient.RequestOptions,
-    ): core.HttpResponsePromise<TrueFoundryGateway.agents.SessionsCreateResponse> {
+    ): core.HttpResponsePromise<TrueFoundryGateway.GetSessionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
         request: TrueFoundryGateway.agents.CreateSessionRequest,
         requestOptions?: SessionsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<TrueFoundryGateway.agents.SessionsCreateResponse>> {
+    ): Promise<core.WithRawResponse<TrueFoundryGateway.GetSessionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -248,7 +248,7 @@ export class SessionsClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.agents.SessionsCreateResponse.parseOrThrow(_response.body, {
+                data: serializers.GetSessionResponse.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
@@ -355,14 +355,14 @@ export class SessionsClient {
     public get(
         sessionId: string,
         requestOptions?: SessionsClient.RequestOptions,
-    ): core.HttpResponsePromise<TrueFoundryGateway.agents.SessionsGetResponse> {
+    ): core.HttpResponsePromise<TrueFoundryGateway.GetSessionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__get(sessionId, requestOptions));
     }
 
     private async __get(
         sessionId: string,
         requestOptions?: SessionsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<TrueFoundryGateway.agents.SessionsGetResponse>> {
+    ): Promise<core.WithRawResponse<TrueFoundryGateway.GetSessionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -386,7 +386,7 @@ export class SessionsClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.agents.SessionsGetResponse.parseOrThrow(_response.body, {
+                data: serializers.GetSessionResponse.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
@@ -602,11 +602,11 @@ export class SessionsClient {
         sessionId: string,
         request: TrueFoundryGateway.agents.SessionsListTurnsRequest = {},
         requestOptions?: SessionsClient.RequestOptions,
-    ): Promise<core.Page<TrueFoundryGateway.Turn, TrueFoundryGateway.agents.SessionsListTurnsResponse>> {
+    ): Promise<core.Page<TrueFoundryGateway.Turn, TrueFoundryGateway.ListTurnsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (
                 request: TrueFoundryGateway.agents.SessionsListTurnsRequest,
-            ): Promise<core.WithRawResponse<TrueFoundryGateway.agents.SessionsListTurnsResponse>> => {
+            ): Promise<core.WithRawResponse<TrueFoundryGateway.ListTurnsResponse>> => {
                 const { pageToken, limit = 10 } = request;
                 const _queryParams: Record<string, unknown> = {
                     page_token: pageToken,
@@ -639,7 +639,7 @@ export class SessionsClient {
                 });
                 if (_response.ok) {
                     return {
-                        data: serializers.agents.SessionsListTurnsResponse.parseOrThrow(_response.body, {
+                        data: serializers.ListTurnsResponse.parseOrThrow(_response.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -690,7 +690,7 @@ export class SessionsClient {
             },
         );
         const dataWithRawResponse = await list(request).withRawResponse();
-        return new core.Page<TrueFoundryGateway.Turn, TrueFoundryGateway.agents.SessionsListTurnsResponse>({
+        return new core.Page<TrueFoundryGateway.Turn, TrueFoundryGateway.ListTurnsResponse>({
             response: dataWithRawResponse.data,
             rawResponse: dataWithRawResponse.rawResponse,
             hasNextPage: (response) =>
@@ -841,7 +841,7 @@ export class SessionsClient {
         sessionId: string,
         turnId: string,
         requestOptions?: SessionsClient.RequestOptions,
-    ): core.HttpResponsePromise<TrueFoundryGateway.agents.SessionsGetTurnResponse> {
+    ): core.HttpResponsePromise<TrueFoundryGateway.GetTurnResponse> {
         return core.HttpResponsePromise.fromPromise(this.__getTurn(sessionId, turnId, requestOptions));
     }
 
@@ -849,7 +849,7 @@ export class SessionsClient {
         sessionId: string,
         turnId: string,
         requestOptions?: SessionsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<TrueFoundryGateway.agents.SessionsGetTurnResponse>> {
+    ): Promise<core.WithRawResponse<TrueFoundryGateway.GetTurnResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -873,7 +873,7 @@ export class SessionsClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.agents.SessionsGetTurnResponse.parseOrThrow(_response.body, {
+                data: serializers.GetTurnResponse.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
@@ -1082,11 +1082,11 @@ export class SessionsClient {
         turnId: string,
         request: TrueFoundryGateway.agents.SessionsListTurnEventsRequest = {},
         requestOptions?: SessionsClient.RequestOptions,
-    ): Promise<core.Page<TrueFoundryGateway.TurnEvent, TrueFoundryGateway.agents.SessionsListTurnEventsResponse>> {
+    ): Promise<core.Page<TrueFoundryGateway.TurnEvent, TrueFoundryGateway.ListEventsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (
                 request: TrueFoundryGateway.agents.SessionsListTurnEventsRequest,
-            ): Promise<core.WithRawResponse<TrueFoundryGateway.agents.SessionsListTurnEventsResponse>> => {
+            ): Promise<core.WithRawResponse<TrueFoundryGateway.ListEventsResponse>> => {
                 const { pageToken, limit = 25, order } = request;
                 const _queryParams: Record<string, unknown> = {
                     page_token: pageToken,
@@ -1128,7 +1128,7 @@ export class SessionsClient {
                 });
                 if (_response.ok) {
                     return {
-                        data: serializers.agents.SessionsListTurnEventsResponse.parseOrThrow(_response.body, {
+                        data: serializers.ListEventsResponse.parseOrThrow(_response.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
                             allowUnrecognizedEnumValues: true,
@@ -1190,7 +1190,7 @@ export class SessionsClient {
             },
         );
         const dataWithRawResponse = await list(request).withRawResponse();
-        return new core.Page<TrueFoundryGateway.TurnEvent, TrueFoundryGateway.agents.SessionsListTurnEventsResponse>({
+        return new core.Page<TrueFoundryGateway.TurnEvent, TrueFoundryGateway.ListEventsResponse>({
             response: dataWithRawResponse.data,
             rawResponse: dataWithRawResponse.rawResponse,
             hasNextPage: (response) =>

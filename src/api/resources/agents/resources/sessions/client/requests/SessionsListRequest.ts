@@ -16,7 +16,7 @@ import type * as TrueFoundryGateway from "../../../../../../index.js";
 export interface SessionsListRequest {
     agentName: string;
     limit?: number;
-    order?: TrueFoundryGateway.agents.SessionsListRequestOrder;
+    order?: TrueFoundryGateway.Order;
     pageToken?: string;
     startTimestamp?: string;
     endTimestamp?: string;

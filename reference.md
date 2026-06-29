@@ -1,6 +1,6 @@
 # Reference
 ## Agents Sessions
-<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;TrueFoundryGateway.Session, TrueFoundryGateway.SessionsListResponse&gt;</code></summary>
+<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;TrueFoundryGateway.Session, TrueFoundryGateway.ListSessionsResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -89,7 +89,7 @@ const response = page.response;
 </dl>
 </details>
 
-<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">create</a>({ ...params }) -> TrueFoundryGateway.SessionsCreateResponse</code></summary>
+<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">create</a>({ ...params }) -> TrueFoundryGateway.GetSessionResponse</code></summary>
 <dl>
 <dd>
 
@@ -154,7 +154,7 @@ await client.agents.sessions.create({
 </dl>
 </details>
 
-<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">get</a>(sessionId) -> TrueFoundryGateway.SessionsGetResponse</code></summary>
+<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">get</a>(sessionId) -> TrueFoundryGateway.GetSessionResponse</code></summary>
 <dl>
 <dd>
 
@@ -288,7 +288,7 @@ await client.agents.sessions.cancel("01arz3ndektsv4rrffq69g5fav.g");
 </dl>
 </details>
 
-<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">listTurns</a>(sessionId, { ...params }) -> core.Page&lt;TrueFoundryGateway.Turn, TrueFoundryGateway.SessionsListTurnsResponse&gt;</code></summary>
+<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">listTurns</a>(sessionId, { ...params }) -> core.Page&lt;TrueFoundryGateway.Turn, TrueFoundryGateway.ListTurnsResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -452,7 +452,7 @@ for await (const item of response) {
 </dl>
 </details>
 
-<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">getTurn</a>(sessionId, turnId) -> TrueFoundryGateway.SessionsGetTurnResponse</code></summary>
+<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">getTurn</a>(sessionId, turnId) -> TrueFoundryGateway.GetTurnResponse</code></summary>
 <dl>
 <dd>
 
@@ -605,7 +605,7 @@ for await (const item of response) {
 </dl>
 </details>
 
-<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">listTurnEvents</a>(sessionId, turnId, { ...params }) -> core.Page&lt;TrueFoundryGateway.TurnEvent, TrueFoundryGateway.SessionsListTurnEventsResponse&gt;</code></summary>
+<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">listTurnEvents</a>(sessionId, turnId, { ...params }) -> core.Page&lt;TrueFoundryGateway.TurnEvent, TrueFoundryGateway.ListEventsResponse&gt;</code></summary>
 <dl>
 <dd>
 
