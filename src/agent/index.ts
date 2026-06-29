@@ -1,14 +1,4 @@
-export { AgentSessionClient } from "./AgentSessionClient.js";
-export { isEventDelta, mergeEventDelta } from "./eventDelta.js";
-export type { AgentSession } from "./AgentSession.js";
-export type { DeltaEvents } from "./eventDelta.js";
-export type { PreparedTurn } from "./PreparedTurn.js";
-export type { Turn } from "./Turn.js";
-export type { TurnStreamEnvelope } from "./TurnStreamEnvelope.js";
-
 export type {
-    TurnEvent,
-    TurnStreamingEvent,
     ActionRequiredEvent,
     McpAuthRequiredEvent,
     McpInitializeEvent,
@@ -26,6 +16,7 @@ export type {
     TurnCreatedEvent,
     TurnDoneEvent,
     TurnDoneEventState,
+    TurnEvent,
     TurnInputItem,
     TurnState,
     TurnStateCancelled,
@@ -33,6 +24,14 @@ export type {
     TurnStateDone,
     TurnStateError,
     TurnStateRunning,
+    TurnStreamingEvent,
     UserToolApprovalEvent,
     UserToolResponseEvent,
 } from "../api/index.js";
+export type { AgentSession } from "./AgentSession.js";
+export { AgentSessionClient } from "./AgentSessionClient.js";
+export type { DeltaEvents } from "./eventDelta.js";
+export { isEventDelta, mergeEventDelta } from "./eventDelta.js";
+export type { PreparedTurn } from "./PreparedTurn.js";
+export type { Turn } from "./Turn.js";
+export type { TurnStreamEnvelope } from "./TurnStreamEnvelope.js";

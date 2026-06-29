@@ -1,9 +1,5 @@
+import { type DeltaEvents, isEventDelta, mergeEventDelta } from "../../../src/agent/eventDelta.js";
 import type * as TrueFoundryGateway from "../../../src/api/index.js";
-import {
-    isEventDelta,
-    mergeEventDelta,
-    type DeltaEvents,
-} from "../../../src/agent/eventDelta.js";
 
 const EVENT_ID = "0f3a9c2b-7d41-4e8a-b2c6-1a5f9e3d2b48";
 const THREAD_ID = "thread-1";
@@ -170,7 +166,7 @@ describe("mergeEventDelta / toolCalls", () => {
         );
 
         expect(base.toolCalls).toHaveLength(1);
-        expect(base.toolCalls![0]).toMatchObject({
+        expect(base.toolCalls?.[0]).toMatchObject({
             id: "call_1",
             type: "function",
             function: { name: "get_weather", arguments: '{"a":1}' },
@@ -199,8 +195,8 @@ describe("mergeEventDelta / toolCalls", () => {
             }),
         );
 
-        expect(base.toolCalls![0]!.function.arguments).toBe("13");
-        expect(base.toolCalls![1]!.function.arguments).toBe("24");
+        expect(base.toolCalls?.[0]?.function.arguments).toBe("13");
+        expect(base.toolCalls?.[1]?.function.arguments).toBe("24");
     });
 
     it("copies toolInfo and merges providerSpecificFields", () => {
@@ -227,8 +223,8 @@ describe("mergeEventDelta / toolCalls", () => {
             }),
         );
 
-        expect(base.toolCalls![0]!.toolInfo).toEqual(toolInfo);
-        expect(base.toolCalls![0]!.providerSpecificFields).toEqual({ a: 1, b: 2 });
+        expect(base.toolCalls?.[0]?.toolInfo).toEqual(toolInfo);
+        expect(base.toolCalls?.[0]?.providerSpecificFields).toEqual({ a: 1, b: 2 });
     });
 });
 
