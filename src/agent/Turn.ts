@@ -15,7 +15,7 @@ const MIN_POLL_INTERVAL_MS = 3000;
 
 // Output of listTurns / getTurn (and what PreparedTurn mints once started): a started turn that
 // owns all data AND behavior. Identity fields are immutable readonly; the volatile field
-// (state) is getter-backed and updated in place by getState()/waitForCompletion().
+// (state) is getter-backed and updated in place by syncState()/waitForCompletion().
 export class Turn implements TrueFoundryGateway.Turn {
     readonly id: string;
     readonly sessionId: string;
@@ -48,7 +48,7 @@ export class Turn implements TrueFoundryGateway.Turn {
     }
 
     // Refetch only when the cached state is non-terminal; updates #state in place and returns it.
-    async getState(requestOptions?: RequestOptions): Promise<TrueFoundryGateway.TurnState> {
+    async syncState(requestOptions?: RequestOptions): Promise<TrueFoundryGateway.TurnState> {
         if (this.isTerminal(this.#state)) return this.#state;
         const response = await this.#client.agents.sessions.getTurn(this.sessionId, this.id, requestOptions);
         this.#state = response.data.state;
@@ -65,7 +65,7 @@ export class Turn implements TrueFoundryGateway.Turn {
         }
         while (!this.isTerminal(this.#state)) {
             await new Promise((r) => setTimeout(r, pollIntervalMs));
-            await this.getState(requestOptions);
+            await this.syncState(requestOptions);
         }
         return this.#state;
     }

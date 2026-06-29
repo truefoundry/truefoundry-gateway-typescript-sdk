@@ -80,8 +80,8 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
     ): AsyncIterable<TurnStreamEnvelope> {
         yield* this.mustGetTurn().stream(opts, requestOptions);
     }
-    async getState(requestOptions?: RequestOptions): Promise<TrueFoundryGateway.TurnState> {
-        return this.mustGetTurn().getState(requestOptions);
+    async syncState(requestOptions?: RequestOptions): Promise<TrueFoundryGateway.TurnState> {
+        return this.mustGetTurn().syncState(requestOptions);
     }
     async waitForCompletion(
         opts?: { pollIntervalMs?: number },
