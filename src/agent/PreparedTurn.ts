@@ -11,8 +11,8 @@ import { parseSequenceNumber, type TurnStreamData } from "./TurnStreamData.js";
 type RequestOptions = SessionsClient.RequestOptions;
 
 export interface PreparedTurnInit {
-    input?: TrueFoundryGateway.agents.CreateTurnRequestInputItem[];
-    previousTurnId?: TrueFoundryGateway.agents.CreateTurnRequestPreviousTurnId;
+    input?: TrueFoundryGateway.TurnInputItem[];
+    previousTurnId?: TrueFoundryGateway.PreviousTurnIdInput;
 }
 
 // Output of prepareTurn: not yet started (no HTTP). execute() fires the createTurn POST and mints
@@ -22,7 +22,7 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
     readonly sessionId: string; // always known from the parent session
     readonly #client: TrueFoundryGatewayClient;
     readonly #input?: TrueFoundryGateway.TurnInputItem[];
-    readonly #previousTurnIdInput?: TrueFoundryGateway.agents.CreateTurnRequestPreviousTurnId; // server defaults to 'auto'
+    readonly #previousTurnIdInput?: TrueFoundryGateway.PreviousTurnIdInput; // server defaults to 'auto'
     #start?: Promise<core.Stream<TrueFoundryGateway.TurnStreamingEvent>>; // in-flight createTurn; also the one-shot latch
     #turn?: Turn; // the real Turn, created once started
 
@@ -124,8 +124,7 @@ export class PreparedTurn implements Partial<TrueFoundryGateway.Turn> {
         for await (const { data: event, id } of sse.withMetadata()) {
             if (event.type === "turn.created" && this.#turn == null)
                 this.adoptTurn(event); // ctor seeds #state = running
-            else if (this.#turn != null && event.type === "turn.done")
-                this.replaceTurnState(event.state); // rebuild the inner Turn with the terminal state (state changes are rare)
+            else if (this.#turn != null && event.type === "turn.done") this.replaceTurnState(event.state); // rebuild the inner Turn with the terminal state (state changes are rare)
             yield { sequenceNumber: parseSequenceNumber(id), event };
         }
     }

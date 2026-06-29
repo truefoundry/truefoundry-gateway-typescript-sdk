@@ -29,8 +29,8 @@ export class AgentSession implements TrueFoundryGateway.Session {
     }
 
     prepareTurn(opts?: {
-        input?: TrueFoundryGateway.agents.CreateTurnRequestInputItem[];
-        previousTurnId?: TrueFoundryGateway.agents.CreateTurnRequestPreviousTurnId;
+        input?: TrueFoundryGateway.TurnInputItem[];
+        previousTurnId?: TrueFoundryGateway.PreviousTurnIdInput;
     }): PreparedTurn {
         return new PreparedTurn({ input: opts?.input, previousTurnId: opts?.previousTurnId }, this, this.#client);
     }
