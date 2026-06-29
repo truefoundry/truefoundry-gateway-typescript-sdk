@@ -6,6 +6,6 @@
 //
 // Fern-generated exports (sync from regen):
 export * as TruefoundryGateway from "./api/index.js";
-export { TrueFoundryGatewayClient } from "./CustomClient.js";
+export { TrueFoundryGatewayClient } from "./Client.js";
 export { TrueFoundryGatewayError, TrueFoundryGatewayTimeoutError } from "./errors/index.js";
 export * from "./exports.js";
