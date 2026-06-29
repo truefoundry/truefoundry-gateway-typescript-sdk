@@ -16,7 +16,7 @@ import type * as TrueFoundryGateway from "../../../../../../../../index.js";
 export interface DraftSessionsListRequest {
     agentName?: string;
     limit?: number;
-    order?: TrueFoundryGateway.internal.agents.DraftSessionsListRequestOrder;
+    order?: TrueFoundryGateway.Order;
     pageToken?: string;
     startTimestamp?: string;
     endTimestamp?: string;

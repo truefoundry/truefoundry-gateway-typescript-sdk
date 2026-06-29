@@ -62,7 +62,7 @@ export class DraftSessionsClient {
                     limit,
                     order:
                         order != null
-                            ? serializers.internal.agents.DraftSessionsListRequestOrder.jsonOrThrow(order, {
+                            ? serializers.Order.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,
                                   allowUnrecognizedEnumValues: true,

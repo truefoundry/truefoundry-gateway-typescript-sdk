@@ -501,26 +501,6 @@ describe("SessionsClient", () => {
             .post("/v1/agents/sessions/sessionId/cancel")
             .jsonBody(rawRequestBody)
             .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.agents.sessions.cancel("sessionId");
-        }).rejects.toThrow(TrueFoundryGateway.NotFoundError);
-    });
-
-    test("cancel (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
-        const rawResponseBody = { error: { message: "message" } };
-
-        server
-            .mockEndpoint()
-            .post("/v1/agents/sessions/sessionId/cancel")
-            .jsonBody(rawRequestBody)
-            .respondWith()
             .statusCode(412)
             .jsonBody(rawResponseBody)
             .build();
@@ -530,7 +510,7 @@ describe("SessionsClient", () => {
         }).rejects.toThrow(TrueFoundryGateway.PreconditionFailedError);
     });
 
-    test("cancel (5)", async () => {
+    test("cancel (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
@@ -652,6 +632,25 @@ describe("SessionsClient", () => {
         await expect(async () => {
             return await client.agents.sessions.listTurns("sessionId");
         }).rejects.toThrow(TrueFoundryGateway.NotFoundError);
+    });
+
+    test("list_turns (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { error: { message: "message" } };
+
+        server
+            .mockEndpoint()
+            .get("/v1/agents/sessions/sessionId/turns")
+            .respondWith()
+            .statusCode(412)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.agents.sessions.listTurns("sessionId");
+        }).rejects.toThrow(TrueFoundryGateway.PreconditionFailedError);
     });
 
     test("create_turn (1)", async () => {
@@ -778,6 +777,26 @@ describe("SessionsClient", () => {
         await expect(async () => {
             return await client.agents.sessions.createTurn("sessionId");
         }).rejects.toThrow(TrueFoundryGateway.NotFoundError);
+    });
+
+    test("create_turn (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new TrueFoundryGatewayClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {};
+        const rawResponseBody = { error: { message: "message" } };
+
+        server
+            .mockEndpoint()
+            .post("/v1/agents/sessions/sessionId/turns")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(412)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.agents.sessions.createTurn("sessionId");
+        }).rejects.toThrow(TrueFoundryGateway.PreconditionFailedError);
     });
 
     test("get_turn (1)", async () => {
@@ -1067,7 +1086,7 @@ describe("SessionsClient", () => {
 
         server
             .mockEndpoint({ once: false })
-            .get("/v1/agents/sessions/01arz3ndektsv4rrffq69g5fav.g/turns/01arz3ndektsv4rrffq69g5fav.g.ab12cd/events")
+            .get("/v1/agents/sessions/sessionId/turns/01arz3ndektsv4rrffq69g5fav.g.ab12cd/events")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
@@ -1118,15 +1137,11 @@ describe("SessionsClient", () => {
                 limit: 1,
             },
         };
-        const page = await client.agents.sessions.listTurnEvents(
-            "01arz3ndektsv4rrffq69g5fav.g",
-            "01arz3ndektsv4rrffq69g5fav.g.ab12cd",
-            {
-                pageToken: "page_token",
-                limit: 1,
-                order: "asc",
-            },
-        );
+        const page = await client.agents.sessions.listTurnEvents("sessionId", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
+            order: "asc",
+            pageToken: "page_token",
+            limit: 1,
+        });
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);

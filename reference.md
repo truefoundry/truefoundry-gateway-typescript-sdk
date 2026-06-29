@@ -217,7 +217,7 @@ await client.agents.sessions.get("sessionId");
 </dl>
 </details>
 
-<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">cancel</a>(sessionId, { ...params }) -> TrueFoundryGateway.SessionsCancelResponse</code></summary>
+<details><summary><code>client.agents.sessions.<a href="/src/api/resources/agents/resources/sessions/client/Client.ts">cancel</a>(sessionId, { ...params }) -> TrueFoundryGateway.CancelSessionResponse</code></summary>
 <dl>
 <dd>
 
@@ -632,20 +632,20 @@ Paginated list of turn events from the Redis events stream.
 <dd>
 
 ```typescript
-const pageableResponse = await client.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
+const pageableResponse = await client.agents.sessions.listTurnEvents("sessionId", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
+    order: "asc",
     pageToken: "page_token",
-    limit: 1,
-    order: "asc"
+    limit: 1
 });
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
+let page = await client.agents.sessions.listTurnEvents("sessionId", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
+    order: "asc",
     pageToken: "page_token",
-    limit: 1,
-    order: "asc"
+    limit: 1
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();

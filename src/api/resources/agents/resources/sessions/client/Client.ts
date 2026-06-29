@@ -457,7 +457,6 @@ export class SessionsClient {
      * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link TrueFoundryGateway.BadRequestError}
-     * @throws {@link TrueFoundryGateway.NotFoundError}
      * @throws {@link TrueFoundryGateway.PreconditionFailedError}
      * @throws {@link TrueFoundryGateway.FailedDependencyError}
      *
@@ -468,7 +467,7 @@ export class SessionsClient {
         sessionId: string,
         request: TrueFoundryGateway.agents.CancelSessionRequest = {},
         requestOptions?: SessionsClient.RequestOptions,
-    ): core.HttpResponsePromise<TrueFoundryGateway.agents.SessionsCancelResponse> {
+    ): core.HttpResponsePromise<TrueFoundryGateway.CancelSessionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__cancel(sessionId, request, requestOptions));
     }
 
@@ -476,7 +475,7 @@ export class SessionsClient {
         sessionId: string,
         request: TrueFoundryGateway.agents.CancelSessionRequest = {},
         requestOptions?: SessionsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<TrueFoundryGateway.agents.SessionsCancelResponse>> {
+    ): Promise<core.WithRawResponse<TrueFoundryGateway.CancelSessionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -508,7 +507,7 @@ export class SessionsClient {
         });
         if (_response.ok) {
             return {
-                data: serializers.agents.SessionsCancelResponse.parseOrThrow(_response.body, {
+                data: serializers.CancelSessionResponse.parseOrThrow(_response.body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
@@ -523,17 +522,6 @@ export class SessionsClient {
             switch (_response.error.statusCode) {
                 case 400:
                     throw new TrueFoundryGateway.BadRequestError(
-                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
-                case 404:
-                    throw new TrueFoundryGateway.NotFoundError(
                         serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -591,6 +579,7 @@ export class SessionsClient {
      *
      * @throws {@link TrueFoundryGateway.BadRequestError}
      * @throws {@link TrueFoundryGateway.NotFoundError}
+     * @throws {@link TrueFoundryGateway.PreconditionFailedError}
      *
      * @example
      *     await client.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g", {
@@ -664,6 +653,17 @@ export class SessionsClient {
                             );
                         case 404:
                             throw new TrueFoundryGateway.NotFoundError(
+                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                                    unrecognizedObjectKeys: "passthrough",
+                                    allowUnrecognizedUnionMembers: true,
+                                    allowUnrecognizedEnumValues: true,
+                                    skipValidation: true,
+                                    breadcrumbsPrefix: ["response"],
+                                }),
+                                _response.rawResponse,
+                            );
+                        case 412:
+                            throw new TrueFoundryGateway.PreconditionFailedError(
                                 serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
                                     unrecognizedObjectKeys: "passthrough",
                                     allowUnrecognizedUnionMembers: true,
@@ -798,6 +798,17 @@ export class SessionsClient {
                     );
                 case 404:
                     throw new TrueFoundryGateway.NotFoundError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                case 412:
+                    throw new TrueFoundryGateway.PreconditionFailedError(
                         serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,
@@ -1071,10 +1082,10 @@ export class SessionsClient {
      * @throws {@link TrueFoundryGateway.PreconditionFailedError}
      *
      * @example
-     *     await client.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
+     *     await client.agents.sessions.listTurnEvents("sessionId", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
+     *         order: "asc",
      *         pageToken: "page_token",
-     *         limit: 1,
-     *         order: "asc"
+     *         limit: 1
      *     })
      */
     public async listTurnEvents(
@@ -1087,10 +1098,8 @@ export class SessionsClient {
             async (
                 request: TrueFoundryGateway.agents.SessionsListTurnEventsRequest,
             ): Promise<core.WithRawResponse<TrueFoundryGateway.ListEventsResponse>> => {
-                const { pageToken, limit = 25, order } = request;
+                const { order, pageToken, limit = 25 } = request;
                 const _queryParams: Record<string, unknown> = {
-                    page_token: pageToken,
-                    limit,
                     order:
                         order != null
                             ? serializers.agents.SessionsListTurnEventsRequestOrder.jsonOrThrow(order, {
@@ -1100,6 +1109,8 @@ export class SessionsClient {
                                   omitUndefined: true,
                               })
                             : undefined,
+                    page_token: pageToken,
+                    limit,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
