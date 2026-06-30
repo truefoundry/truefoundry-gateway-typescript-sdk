@@ -47,14 +47,28 @@ export class Stream<T> implements AsyncIterable<T> {
     private stream: ReadableStream;
 
     private parse: (val: unknown) => Promise<T>;
-    private readonly eventShape: Stream.JsonEvent | Stream.SseEvent;
+    /**
+     * The prefix to use for each message. For example,
+     * for SSE, the prefix is "data: ".
+     */
+    private prefix: string | undefined;
+    private messageTerminator: string;
+    private streamTerminator: string | undefined;
+    private eventDiscriminator: string | undefined;
     private controller: AbortController = new AbortController();
     private decoder: TextDecoder | undefined;
 
     constructor({ stream, parse, eventShape, signal }: Stream.Args & { parse: (val: unknown) => Promise<T> }) {
         this.stream = stream;
         this.parse = parse;
-        this.eventShape = eventShape;
+        if (eventShape.type === "sse") {
+            this.prefix = DATA_PREFIX;
+            this.messageTerminator = "\n";
+            this.streamTerminator = eventShape.streamTerminator;
+            this.eventDiscriminator = eventShape.eventDiscriminator;
+        } else {
+            this.messageTerminator = eventShape.messageTerminator;
+        }
         signal?.addEventListener("abort", () => this.controller.abort());
 
         // Initialize shared TextDecoder
@@ -64,86 +78,76 @@ export class Stream<T> implements AsyncIterable<T> {
     }
 
     private async *iterMessages(): AsyncGenerator<ServerSentEvent<T>, void> {
-        if (this.eventShape.type === "json") {
-            yield* this.iterJsonMessages();
-        } else if (this.eventShape.eventDiscriminator != null) {
+        if (this.eventDiscriminator != null) {
             yield* this.iterSseEvents();
         } else {
             yield* this.iterDataMessages();
         }
     }
 
-    private async *iterJsonMessages(): AsyncGenerator<ServerSentEvent<T>, void> {
-        const { messageTerminator } = this.eventShape as Stream.JsonEvent;
-        const stream = readableStreamAsyncIterable<any>(this.stream);
-        let buf = "";
-        for await (const chunk of stream) {
-            buf += this.decodeChunk(chunk);
-
-            let terminatorIndex: number;
-            while ((terminatorIndex = buf.indexOf(messageTerminator)) >= 0) {
-                const line = buf.slice(0, terminatorIndex).replace(/\r$/, "");
-                buf = buf.slice(terminatorIndex + messageTerminator.length);
-
-                if (!line.trim()) {
-                    continue;
-                }
-
-                const data = await this.parse(fromJson(line));
-                yield { data, id: undefined, retry: undefined, event: undefined };
-            }
-        }
-    }
-
     private async *iterDataMessages(): AsyncGenerator<ServerSentEvent<T>, void> {
         const stream = readableStreamAsyncIterable<any>(this.stream);
         let buf = "";
-        let dataValue: string | undefined;
         let lastId: string | undefined;
         let lastRetry: number | undefined;
+        let dataValue: string | undefined;
 
         for await (const chunk of stream) {
             buf += this.decodeChunk(chunk);
 
             let terminatorIndex: number;
-            while ((terminatorIndex = buf.indexOf("\n")) >= 0) {
-                const line = buf.slice(0, terminatorIndex).replace(/\r$/, "");
-                buf = buf.slice(terminatorIndex + 1);
+            while ((terminatorIndex = buf.indexOf(this.messageTerminator)) >= 0) {
+                const line = buf.slice(0, terminatorIndex);
+                buf = buf.slice(terminatorIndex + this.messageTerminator.length);
 
                 if (!line.trim()) {
-                    if (dataValue != null) {
-                        const data = await this.dispatchDataMessage(dataValue);
-                        if (data == null) {
+                    if (this.prefix != null && dataValue != null) {
+                        if (this.streamTerminator != null && dataValue.includes(this.streamTerminator)) {
                             return;
                         }
+                        const data = await this.parse(fromJson(dataValue));
                         yield { data, id: lastId, retry: lastRetry, event: undefined };
+                        dataValue = undefined;
                     }
-                    dataValue = undefined;
                     continue;
                 }
 
-                if (line.startsWith(EVENT_PREFIX)) {
-                } else if (line.startsWith(DATA_PREFIX)) {
-                    const val = line.slice(DATA_PREFIX.length).trim();
-                    dataValue = dataValue != null ? `${dataValue}\n${val}` : val;
-                } else if (line.startsWith(ID_PREFIX)) {
+                if (line.startsWith(ID_PREFIX)) {
                     const idValue = line.slice(ID_PREFIX.length).trim();
                     if (!idValue.includes("\0")) {
                         lastId = idValue;
                     }
-                } else if (line.startsWith(RETRY_PREFIX)) {
+                    continue;
+                }
+                if (line.startsWith(RETRY_PREFIX)) {
                     const retryValue = line.slice(RETRY_PREFIX.length).trim();
                     const parsed = parseInt(retryValue, 10);
                     if (!Number.isNaN(parsed) && String(parsed) === retryValue) {
                         lastRetry = parsed;
                     }
+                    continue;
+                }
+
+                if (this.prefix != null) {
+                    const prefixIndex = line.indexOf(this.prefix);
+                    if (prefixIndex === -1) {
+                        continue;
+                    }
+                    const val = line.slice(prefixIndex + this.prefix.length).trim();
+                    dataValue = dataValue != null ? `${dataValue}\n${val}` : val;
+                } else {
+                    if (this.streamTerminator != null && line.includes(this.streamTerminator)) {
+                        return;
+                    }
+                    const data = await this.parse(fromJson(line));
+                    yield { data, id: lastId, retry: lastRetry, event: undefined };
                 }
             }
         }
 
-        if (dataValue != null) {
-            const data = await this.dispatchDataMessage(dataValue);
-            if (data != null) {
+        if (this.prefix != null && dataValue != null) {
+            if (this.streamTerminator == null || !dataValue.includes(this.streamTerminator)) {
+                const data = await this.parse(fromJson(dataValue));
                 yield { data, id: lastId, retry: lastRetry, event: undefined };
             }
         }
@@ -207,23 +211,10 @@ export class Stream<T> implements AsyncIterable<T> {
     }
 
     /**
-     * Parses a single SSE data payload for the non-discriminator path.
-     * Returns null when the payload is a stream terminator.
-     */
-    private async dispatchDataMessage(dataValue: string): Promise<T | null> {
-        const { streamTerminator } = this.eventShape as Stream.SseEvent;
-        if (streamTerminator != null && dataValue.includes(streamTerminator)) {
-            return null;
-        }
-        return this.parse(fromJson(dataValue));
-    }
-
-    /**
      * Parses and returns a single SSE event, or returns null if the event is a stream terminator.
      */
     private async dispatchSseEvent(dataValue: string, eventType: string | undefined): Promise<T | null> {
-        const { streamTerminator } = this.eventShape as Stream.SseEvent;
-        if (streamTerminator != null && dataValue.includes(streamTerminator)) {
+        if (this.streamTerminator != null && dataValue.includes(this.streamTerminator)) {
             return null;
         }
         return this.parse(this.injectDiscriminator(fromJson(dataValue), eventType));
@@ -239,18 +230,17 @@ export class Stream<T> implements AsyncIterable<T> {
     }
 
     private injectDiscriminator(parsed: unknown, eventType: string | undefined): unknown {
-        const eventDiscriminator = (this.eventShape as Stream.SseEvent).eventDiscriminator;
-        if (eventDiscriminator == null || eventType == null) {
+        if (this.eventDiscriminator == null || eventType == null) {
             return parsed;
         }
         if (parsed == null || typeof parsed !== "object" || Array.isArray(parsed)) {
             return parsed;
         }
         const obj = parsed as Record<string, unknown>;
-        if (eventDiscriminator in obj) {
+        if (this.eventDiscriminator in obj) {
             return parsed;
         }
-        return { [eventDiscriminator]: eventType, ...obj };
+        return { [this.eventDiscriminator]: eventType, ...obj };
     }
 
     async *[Symbol.asyncIterator](): AsyncIterator<T, void, unknown> {

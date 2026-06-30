@@ -3,21 +3,21 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { AgentSpecMessagesItem } from "./AgentSpecMessagesItem.js";
+import { AgentSpecUserMessage } from "./AgentSpecUserMessage.js";
 import { McpServer } from "./McpServer.js";
 import { Model } from "./Model.js";
 import { ResponseFormat } from "./ResponseFormat.js";
 import { RuntimeConfig } from "./RuntimeConfig.js";
-import { Skill } from "./Skill.js";
+import { SkillMount } from "./SkillMount.js";
 
 export const AgentSpec: core.serialization.ObjectSchema<serializers.AgentSpec.Raw, TrueFoundryGateway.AgentSpec> =
     core.serialization.object({
         model: Model,
         instructions: core.serialization.string().optional(),
-        messages: core.serialization.list(AgentSpecMessagesItem).optional(),
+        messages: core.serialization.list(AgentSpecUserMessage).optional(),
         mcpServers: core.serialization.property("mcp_servers", core.serialization.list(McpServer).optional()),
         responseFormat: core.serialization.property("response_format", ResponseFormat.optional()),
-        skills: core.serialization.list(Skill).optional(),
+        skills: core.serialization.list(SkillMount).optional(),
         config: RuntimeConfig.optional(),
         variables: core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
     });
@@ -26,10 +26,10 @@ export declare namespace AgentSpec {
     export interface Raw {
         model: Model.Raw;
         instructions?: string | null;
-        messages?: AgentSpecMessagesItem.Raw[] | null;
+        messages?: AgentSpecUserMessage.Raw[] | null;
         mcp_servers?: McpServer.Raw[] | null;
         response_format?: ResponseFormat.Raw | null;
-        skills?: Skill.Raw[] | null;
+        skills?: SkillMount.Raw[] | null;
         config?: RuntimeConfig.Raw | null;
         variables?: Record<string, string> | null;
     }

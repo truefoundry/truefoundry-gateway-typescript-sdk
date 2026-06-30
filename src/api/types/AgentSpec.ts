@@ -2,13 +2,16 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
+/**
+ * Agent Definition
+ */
 export interface AgentSpec {
     model: TrueFoundryGateway.Model;
     instructions?: string;
-    messages?: TrueFoundryGateway.AgentSpecMessagesItem[];
+    messages?: TrueFoundryGateway.AgentSpecUserMessage[];
     mcpServers?: TrueFoundryGateway.McpServer[];
     responseFormat?: TrueFoundryGateway.ResponseFormat;
-    skills?: TrueFoundryGateway.Skill[];
+    skills?: TrueFoundryGateway.SkillMount[];
     config?: TrueFoundryGateway.RuntimeConfig;
     variables?: Record<string, string>;
 }
