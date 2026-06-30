@@ -2,4 +2,4 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export type UserMessageContent = string | TrueFoundryGateway.UserMessageContentOneItem[];
+export type UserMessageContent = string | TrueFoundryGateway.UserMessageContentItem[];

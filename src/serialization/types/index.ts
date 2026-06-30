@@ -100,6 +100,6 @@ export * from "./TurnStateRunning.js";
 export * from "./TurnStreamingEvent.js";
 export * from "./UserMessage.js";
 export * from "./UserMessageContent.js";
-export * from "./UserMessageContentOneItem.js";
+export * from "./UserMessageContentItem.js";
 export * from "./UserToolApprovalEvent.js";
 export * from "./UserToolResponseEvent.js";

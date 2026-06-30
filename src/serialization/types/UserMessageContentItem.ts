@@ -6,11 +6,11 @@ import type * as serializers from "../index.js";
 import { FileContent } from "./FileContent.js";
 import { TextContent } from "./TextContent.js";
 
-export const UserMessageContentOneItem: core.serialization.Schema<
-    serializers.UserMessageContentOneItem.Raw,
-    TrueFoundryGateway.UserMessageContentOneItem
+export const UserMessageContentItem: core.serialization.Schema<
+    serializers.UserMessageContentItem.Raw,
+    TrueFoundryGateway.UserMessageContentItem
 > = core.serialization.undiscriminatedUnion([TextContent, FileContent]);
 
-export declare namespace UserMessageContentOneItem {
+export declare namespace UserMessageContentItem {
     export type Raw = TextContent.Raw | FileContent.Raw;
 }
