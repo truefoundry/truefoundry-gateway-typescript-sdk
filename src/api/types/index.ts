@@ -68,7 +68,7 @@ export * from "./SandboxCreatedEvent.js";
 export * from "./Session.js";
 export * from "./SkillMount.js";
 export * from "./Subject.js";
-export * from "./TextContentPart.js";
+export * from "./TextContent.js";
 export * from "./ThreadCreatedEvent.js";
 export * from "./ThreadDoneEvent.js";
 export * from "./ThreadState.js";
