@@ -5,15 +5,15 @@
     "generatorConfig": {
         "packageJson": {
             "exports": {
-                "./agent": {
-                    "types": "./dist/cjs/agent/index.d.ts",
+                "./agents": {
+                    "types": "./dist/cjs/agents/index.d.ts",
                     "import": {
-                        "types": "./dist/esm/agent/index.d.mts",
-                        "default": "./dist/esm/agent/index.mjs"
+                        "types": "./dist/esm/agents/index.d.mts",
+                        "default": "./dist/esm/agents/index.mjs"
                     },
                     "require": {
-                        "types": "./dist/cjs/agent/index.d.ts",
-                        "default": "./dist/cjs/agent/index.js"
+                        "types": "./dist/cjs/agents/index.d.ts",
+                        "default": "./dist/cjs/agents/index.js"
                     }
                 }
             }
@@ -38,7 +38,7 @@
         "streamType": "web",
         "useDefaultRequestParameterValues": true
     },
-    "originGitCommit": "b6b655f9319e4f5be22418bd35cc9f589827d9e3",
+    "originGitCommit": "5ecb12bf17c3ec9f95a1685d139fbda916dae81b",
     "originGitCommitIsDirty": false,
     "invokedBy": "ci",
     "requestedVersion": "0.0.0",
