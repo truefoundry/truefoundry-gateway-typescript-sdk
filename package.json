@@ -78,15 +78,15 @@
             "default": "./dist/cjs/api/resources/private/resources/agents/resources/sessions/exports.js"
         },
         "./package.json": "./package.json",
-        "./agents": {
-            "types": "./dist/cjs/agents/index.d.ts",
+        "./agent": {
+            "types": "./dist/cjs/agent/index.d.ts",
             "import": {
-                "types": "./dist/esm/agents/index.d.mts",
-                "default": "./dist/esm/agents/index.mjs"
+                "types": "./dist/esm/agent/index.d.mts",
+                "default": "./dist/esm/agent/index.mjs"
             },
             "require": {
-                "types": "./dist/cjs/agents/index.d.ts",
-                "default": "./dist/cjs/agents/index.js"
+                "types": "./dist/cjs/agent/index.d.ts",
+                "default": "./dist/cjs/agent/index.js"
             }
         }
     },
