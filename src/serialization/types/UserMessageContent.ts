@@ -3,16 +3,16 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { UserMessageContentOneItem } from "./UserMessageContentOneItem.js";
+import { UserMessageContentItem } from "./UserMessageContentItem.js";
 
 export const UserMessageContent: core.serialization.Schema<
     serializers.UserMessageContent.Raw,
     TrueFoundryGateway.UserMessageContent
 > = core.serialization.undiscriminatedUnion([
     core.serialization.string(),
-    core.serialization.list(UserMessageContentOneItem),
+    core.serialization.list(UserMessageContentItem),
 ]);
 
 export declare namespace UserMessageContent {
-    export type Raw = string | UserMessageContentOneItem.Raw[];
+    export type Raw = string | UserMessageContentItem.Raw[];
 }
