@@ -9,6 +9,10 @@ export declare namespace AgentSessionClient {
     export type RequestOptions = SessionsClient.RequestOptions;
 }
 
+/**
+ * Entry-point for the high-level agent API. Wraps TrueFoundryGateway and returns
+ * enriched AgentSession objects instead of raw response types.
+ */
 export class AgentSessionClient {
     private readonly client: TrueFoundryGateway;
 
@@ -16,6 +20,7 @@ export class AgentSessionClient {
         this.client = new TrueFoundryGateway(options);
     }
 
+    /** Create a new session for a named agent. */
     async createSession(
         opts: TrueFoundryGatewayApi.agents.CreateSessionRequest,
         requestOptions?: AgentSessionClient.RequestOptions,
@@ -24,6 +29,7 @@ export class AgentSessionClient {
         return new AgentSession(response.data, this.client);
     }
 
+    /** List sessions for an agent. */
     async listSessions(
         opts: TrueFoundryGatewayApi.agents.SessionsListRequest,
         requestOptions?: AgentSessionClient.RequestOptions,
@@ -47,6 +53,7 @@ export class AgentSessionClient {
         });
     }
 
+    /** Fetch a session by ID. */
     async getSession(
         opts: { sessionId: string },
         requestOptions?: AgentSessionClient.RequestOptions,

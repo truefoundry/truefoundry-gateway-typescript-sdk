@@ -3,10 +3,12 @@ import type * as TrueFoundryGatewayApi from "../api/index.js";
 /** Union of all streaming delta events. Expand this as more `.delta` events are added. */
 export type DeltaEvents = TrueFoundryGatewayApi.ModelMessageDeltaEvent;
 
+/** True for incremental SSE chunks (e.g. `model.message.delta`). */
 export function isEventDelta(event: TrueFoundryGatewayApi.TurnStreamingEvent): event is DeltaEvents {
     return typeof event.type === "string" && event.type.endsWith(".delta");
 }
 
+/** Apply a delta chunk to its full event in place when streaming (same `id` required). */
 export function mergeEventDelta(base: TrueFoundryGatewayApi.TurnEvent, delta: DeltaEvents): void {
     if (base.id !== delta.id) {
         throw new Error(`Cannot merge delta into a different event: base id "${base.id}" != delta id "${delta.id}".`);

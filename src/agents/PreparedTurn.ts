@@ -35,21 +35,27 @@ export class PreparedTurn implements Partial<TrueFoundryGatewayApi.Turn> {
     }
 
     // Remaining data getters delegate to the inner Turn (undefined until started).
+    /** Undefined until `execute()` has started the turn. */
     get id(): string | undefined {
         return this.#turn?.id;
     }
+
     get previousTurnId(): string | undefined {
         return this.#turn?.previousTurnId;
     }
+
     get state(): TrueFoundryGatewayApi.TurnState | undefined {
         return this.#turn?.state;
     }
+
     get createdBySubject(): TrueFoundryGatewayApi.Subject | undefined {
         return this.#turn?.createdBySubject;
     }
+
     get createdAt(): string | undefined {
         return this.#turn?.createdAt;
     }
+
     get input(): TrueFoundryGatewayApi.TurnInputItem[] | undefined {
         return this.#turn?.input ?? this.#input;
     }
@@ -58,6 +64,8 @@ export class PreparedTurn implements Partial<TrueFoundryGatewayApi.Turn> {
     // latches one-shot use), so a second execute() throws before any duplicate request can begin.
     // stream:true (default) -> live iterator over the createTurn run; stream:false -> wait for terminal TurnState.
     // The return type narrows only when `stream` is passed as a boolean literal.
+
+    /** Start the turn via createTurn. `stream: true` (default) yields SSE from that POST (not resumable; after disconnect call `stream()` to subscribeToTurn). `stream: false` polls getTurn until done, cancelled, or error. */
     execute(
         opts: { stream: false; pollIntervalMs?: number },
         requestOptions?: RequestOptions,
@@ -75,25 +83,34 @@ export class PreparedTurn implements Partial<TrueFoundryGatewayApi.Turn> {
 
     // Post-execution behaviors. Each throws via mustGetTurn() until execute() has started the turn,
     // then delegates to the inner Turn. stream() here is the re-subscribe path (subscribeToTurn).
+    /** Subscribe to live SSE via subscribeToTurn after `execute()` has started the turn. Pass `afterSequenceNumber` to resume; updates state from turn.created and turn.done. */
     async *stream(
         opts?: { afterSequenceNumber?: number },
         requestOptions?: RequestOptions,
     ): AsyncIterable<TurnStreamData> {
         yield* this.mustGetTurn().stream(opts, requestOptions);
     }
+
+    /** Refetch from the server, update state in-place and return self. */
     async refresh(requestOptions?: RequestOptions): Promise<this> {
         await this.mustGetTurn().refresh(requestOptions);
         return this;
     }
+
+    /** Poll getTurn until the turn is done, cancelled, or errored. `pollIntervalMs` minimum is 3000. */
     async waitForCompletion(
         opts?: { pollIntervalMs?: number },
         requestOptions?: RequestOptions,
     ): Promise<TrueFoundryGatewayApi.TurnState> {
         return this.mustGetTurn().waitForCompletion(opts, requestOptions);
     }
+
+    /** Cancel the running last turn for the session. */
     async cancel(requestOptions?: RequestOptions): Promise<void> {
         return this.mustGetTurn().cancel(requestOptions);
     }
+
+    /** Paginated persisted TurnEvent history (no streaming deltas). Use `stream()` for live TurnStreamingEvent SSE. */
     listEvents(
         opts?: TrueFoundryGatewayApi.agents.SessionsListTurnEventsRequest,
         requestOptions?: RequestOptions,

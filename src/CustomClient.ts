@@ -11,6 +11,7 @@ export declare namespace TrueFoundryGateway {
     export interface RequestOptions extends BaseTrueFoundryGateway.RequestOptions {}
 }
 
+/** Asynchronous client for the TrueFoundry Gateway API. */
 export class TrueFoundryGateway extends BaseTrueFoundryGateway {
     protected _agents: AgentsClient | undefined;
 
@@ -22,6 +23,7 @@ export class TrueFoundryGateway extends BaseTrueFoundryGateway {
         super(options);
     }
 
+    /** Agent sessions and turns. */
     public get agents(): AgentsClient {
         return (this._agents ??= this.private.agents);
     }

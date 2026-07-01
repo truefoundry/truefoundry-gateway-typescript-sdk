@@ -39,6 +39,7 @@ export class Turn implements TrueFoundryGatewayApi.Turn {
         this.#client = client;
     }
 
+    /** Updated by `refresh()`, `stream()`, and `waitForCompletion()`. */
     get state(): TrueFoundryGatewayApi.TurnState {
         return this.#state;
     }
@@ -63,6 +64,7 @@ export class Turn implements TrueFoundryGatewayApi.Turn {
         return this;
     }
 
+    /** Poll getTurn until the turn is done, cancelled, or errored. `pollIntervalMs` minimum is 3000. */
     async waitForCompletion(
         opts?: { pollIntervalMs?: number },
         requestOptions?: RequestOptions,
@@ -103,11 +105,13 @@ export class Turn implements TrueFoundryGatewayApi.Turn {
         if (event.type === "turn.created" || event.type === "turn.done") this.#state = event.state;
     }
 
+    /** Cancel the running last turn for the session. */
     async cancel(requestOptions?: RequestOptions): Promise<void> {
         await this.#client.agents.sessions.cancel(this.sessionId, {}, requestOptions);
     }
 
     // Expose the autogen Fern Page as-is (it is already async-iterable); no re-wrapping.
+    /** Paginated persisted TurnEvent history (no streaming deltas). Use `stream()` for live TurnStreamingEvent SSE. */
     listEvents(
         opts?: TrueFoundryGatewayApi.agents.SessionsListTurnEventsRequest,
         requestOptions?: RequestOptions,
