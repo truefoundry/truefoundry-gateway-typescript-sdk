@@ -17,12 +17,19 @@ const MIN_POLL_INTERVAL_MS = 3000;
 // owns all data AND behavior. Identity fields are immutable readonly; the volatile field
 // (state) is getter-backed and updated in place by refresh()/waitForCompletion().
 export class Turn implements TrueFoundryGatewayApi.Turn {
+    /** Unique identifier of this turn. */
     readonly id: string;
+    /** Identifier of the parent session. */
     readonly sessionId: string;
+    /** Previous turn id in the chain, if any. */
     readonly previousTurnId?: string;
+    /** Input items sent when the turn was created. */
     readonly input?: TrueFoundryGatewayApi.TurnInputItem[];
+    /** Subject that started this turn. */
     readonly createdBySubject: TrueFoundryGatewayApi.Subject;
+    /** ISO-8601 timestamp when the turn was created. */
     readonly createdAt: string;
+    /** Parent session this turn belongs to. */
     readonly session: AgentSession;
     readonly #client: TrueFoundryGateway;
     #state: TrueFoundryGatewayApi.TurnState;
@@ -39,6 +46,9 @@ export class Turn implements TrueFoundryGatewayApi.Turn {
         this.#client = client;
     }
 
+    /**
+     * @returns {TrueFoundryGatewayApi.TurnState} Updated by `refresh()`, `stream()`, and `waitForCompletion()`.
+     */
     get state(): TrueFoundryGatewayApi.TurnState {
         return this.#state;
     }
@@ -57,12 +67,25 @@ export class Turn implements TrueFoundryGatewayApi.Turn {
     }
 
     // Refetch from the server, update #state in place, and return self.
+    /**
+     * Refetch from the server, update state in-place and return self.
+     *
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {this} This turn with updated state.
+     */
     async refresh(requestOptions?: RequestOptions): Promise<this> {
         const response = await this.#client.agents.sessions.getTurn(this.sessionId, this.id, requestOptions);
         this.#state = response.data.state;
         return this;
     }
 
+    /**
+     * Poll getTurn until terminal.
+     *
+     * @param opts.pollIntervalMs - Poll interval ms while waiting. Minimum 3000.
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {TrueFoundryGatewayApi.TurnState} Terminal turn state.
+     */
     async waitForCompletion(
         opts?: { pollIntervalMs?: number },
         requestOptions?: RequestOptions,
@@ -80,6 +103,13 @@ export class Turn implements TrueFoundryGatewayApi.Turn {
 
     // Reconnect to the turn's SSE; let the server decide what to stream (no client-side guard).
     // Updates #state in place from any event that carries a state snapshot.
+    /**
+     * Reconnect to the turn's SSE. Updates state in-place from lifecycle events.
+     *
+     * @param opts.afterSequenceNumber - Sequence number to resume SSE subscription after.
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @yields {TurnStreamData} SSE stream items.
+     */
     async *stream(
         opts?: { afterSequenceNumber?: number },
         requestOptions?: RequestOptions,
@@ -103,11 +133,26 @@ export class Turn implements TrueFoundryGatewayApi.Turn {
         if (event.type === "turn.created" || event.type === "turn.done") this.#state = event.state;
     }
 
+    /**
+     * Cancel the running last turn for the session.
+     *
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {void}
+     */
     async cancel(requestOptions?: RequestOptions): Promise<void> {
         await this.#client.agents.sessions.cancel(this.sessionId, {}, requestOptions);
     }
 
     // Expose the autogen Fern Page as-is (it is already async-iterable); no re-wrapping.
+    /**
+     * Paginated turn events; use `stream()` for live SSE.
+     *
+     * @param opts.pageToken - Token from the previous response nextPageToken.
+     * @param opts.limit - Page size. Default 25.
+     * @param opts.order - Sort by creation time. Default `asc`.
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {Promise<core.Page<TrueFoundryGatewayApi.TurnEvent, TrueFoundryGatewayApi.ListEventsResponse>>} Paginated turn events.
+     */
     listEvents(
         opts?: TrueFoundryGatewayApi.agents.SessionsListTurnEventsRequest,
         requestOptions?: RequestOptions,

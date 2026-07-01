@@ -18,8 +18,10 @@ export interface PreparedTurnInit {
 // Output of prepareTurn: not yet started (no HTTP). execute() fires the createTurn POST and mints
 // a real Turn (the only place the createTurn SSE lives), then delegates everything to that inner Turn.
 export class PreparedTurn implements Partial<TrueFoundryGatewayApi.Turn> {
+    /** Parent session this prepared turn belongs to. */
     readonly session: AgentSession;
-    readonly sessionId: string; // always known from the parent session
+    /** Identifier of the parent session. */
+    readonly sessionId: string;
     readonly #client: TrueFoundryGateway;
     readonly #input?: TrueFoundryGatewayApi.TurnInputItem[];
     readonly #previousTurnIdInput?: TrueFoundryGatewayApi.PreviousTurnIdInput; // server defaults to 'auto'
@@ -35,21 +37,44 @@ export class PreparedTurn implements Partial<TrueFoundryGatewayApi.Turn> {
     }
 
     // Remaining data getters delegate to the inner Turn (undefined until started).
+    /**
+     * @returns {string | undefined} Undefined until `execute()` starts the turn.
+     */
     get id(): string | undefined {
         return this.#turn?.id;
     }
+
+    /**
+     * @returns {string | undefined} Undefined until `execute()` starts the turn.
+     */
     get previousTurnId(): string | undefined {
         return this.#turn?.previousTurnId;
     }
+
+    /**
+     * @returns {TrueFoundryGatewayApi.TurnState | undefined} Undefined until `execute()` starts the turn.
+     */
     get state(): TrueFoundryGatewayApi.TurnState | undefined {
         return this.#turn?.state;
     }
+
+    /**
+     * @returns {TrueFoundryGatewayApi.Subject | undefined} Undefined until `execute()` starts the turn.
+     */
     get createdBySubject(): TrueFoundryGatewayApi.Subject | undefined {
         return this.#turn?.createdBySubject;
     }
+
+    /**
+     * @returns {string | undefined} Undefined until `execute()` starts the turn.
+     */
     get createdAt(): string | undefined {
         return this.#turn?.createdAt;
     }
+
+    /**
+     * @returns {TrueFoundryGatewayApi.TurnInputItem[] | undefined} Staged input before execute; inner turn input after.
+     */
     get input(): TrueFoundryGatewayApi.TurnInputItem[] | undefined {
         return this.#turn?.input ?? this.#input;
     }
@@ -58,6 +83,15 @@ export class PreparedTurn implements Partial<TrueFoundryGatewayApi.Turn> {
     // latches one-shot use), so a second execute() throws before any duplicate request can begin.
     // stream:true (default) -> live iterator over the createTurn run; stream:false -> wait for terminal TurnState.
     // The return type narrows only when `stream` is passed as a boolean literal.
+
+    /**
+     * Start the turn via createTurn.
+     *
+     * @param opts.stream - Stream createTurn SSE when true. Default true.
+     * @param opts.pollIntervalMs - Poll interval ms when stream is false. Min 3000.
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {TrueFoundryGatewayApi.TurnState | AsyncIterable<TurnStreamData>} Terminal turn state when `stream: false`; SSE stream from createTurn when `stream: true`.
+     */
     execute(
         opts: { stream: false; pollIntervalMs?: number },
         requestOptions?: RequestOptions,
@@ -75,25 +109,64 @@ export class PreparedTurn implements Partial<TrueFoundryGatewayApi.Turn> {
 
     // Post-execution behaviors. Each throws via mustGetTurn() until execute() has started the turn,
     // then delegates to the inner Turn. stream() here is the re-subscribe path (subscribeToTurn).
+    /**
+     * Resubscribe via subscribeToTurn after `execute()`.
+     *
+     * @param opts.afterSequenceNumber - Sequence number to resume SSE subscription after.
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @yields {TurnStreamData} SSE stream items.
+     */
     async *stream(
         opts?: { afterSequenceNumber?: number },
         requestOptions?: RequestOptions,
     ): AsyncIterable<TurnStreamData> {
         yield* this.mustGetTurn().stream(opts, requestOptions);
     }
+
+    /**
+     * Refetch from the server, update state in-place and return self.
+     *
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {this} This prepared turn with updated state.
+     */
     async refresh(requestOptions?: RequestOptions): Promise<this> {
         await this.mustGetTurn().refresh(requestOptions);
         return this;
     }
+
+    /**
+     * Poll getTurn until terminal.
+     *
+     * @param opts.pollIntervalMs - Poll interval ms while waiting. Minimum 3000.
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {TrueFoundryGatewayApi.TurnState} Terminal turn state.
+     */
     async waitForCompletion(
         opts?: { pollIntervalMs?: number },
         requestOptions?: RequestOptions,
     ): Promise<TrueFoundryGatewayApi.TurnState> {
         return this.mustGetTurn().waitForCompletion(opts, requestOptions);
     }
+
+    /**
+     * Cancel the running last turn for the session.
+     *
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {void}
+     */
     async cancel(requestOptions?: RequestOptions): Promise<void> {
         return this.mustGetTurn().cancel(requestOptions);
     }
+
+    /**
+     * Paginated turn events; use `stream()` for live SSE.
+     *
+     * @param opts.pageToken - Token from the previous response nextPageToken.
+     * @param opts.limit - Page size. Default 25.
+     * @param opts.order - Sort by creation time. Default `asc`.
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {Promise<core.Page<TrueFoundryGatewayApi.TurnEvent, TrueFoundryGatewayApi.ListEventsResponse>>} Paginated turn events.
+     */
     listEvents(
         opts?: TrueFoundryGatewayApi.agents.SessionsListTurnEventsRequest,
         requestOptions?: RequestOptions,

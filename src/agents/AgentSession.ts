@@ -9,12 +9,21 @@ import { Turn } from "./Turn.js";
 // SessionsClient is NOT re-exported under TrueFoundryGateway.agents, so import it directly (as AgentSessionClient does).
 type RequestOptions = SessionsClient.RequestOptions;
 
+/**
+ * A session enriched with convenience methods: prepareTurn, listTurns, getTurn, cancel.
+ */
 export class AgentSession implements TrueFoundryGatewayApi.Session {
+    /** Unique identifier of this session. */
     readonly id: string;
+    /** Name of the agent for this session. */
     readonly agentName: string;
+    /** Optional user-visible title for the session. */
     readonly title?: string;
+    /** Subject that created this session. */
     readonly createdBySubject: TrueFoundryGatewayApi.Subject;
+    /** ISO-8601 timestamp when the session was created. */
     readonly createdAt: string;
+    /** ISO-8601 timestamp when the session was last updated. */
     readonly updatedAt: string;
     readonly #client: TrueFoundryGateway;
 
@@ -28,6 +37,13 @@ export class AgentSession implements TrueFoundryGatewayApi.Session {
         this.#client = client;
     }
 
+    /**
+     * Stage a turn locally; call `execute()` to start `createTurn`.
+     *
+     * @param opts.input - Turn input items passed to createTurn.
+     * @param opts.previousTurnId - Previous turn to chain from. Default `auto`.
+     * @returns {PreparedTurn} Staged turn.
+     */
     prepareTurn(opts?: {
         input?: TrueFoundryGatewayApi.TurnInputItem[];
         previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput;
@@ -35,6 +51,14 @@ export class AgentSession implements TrueFoundryGatewayApi.Session {
         return new PreparedTurn({ input: opts?.input, previousTurnId: opts?.previousTurnId }, this, this.#client);
     }
 
+    /**
+     * List turns in this session.
+     *
+     * @param opts.pageToken - Token from the previous response nextPageToken.
+     * @param opts.limit - Page size. Default 10.
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {core.Page<Turn, TrueFoundryGatewayApi.ListTurnsResponse>} Paginated turns.
+     */
     async listTurns(
         opts?: TrueFoundryGatewayApi.agents.SessionsListTurnsRequest,
         requestOptions?: RequestOptions,
@@ -60,11 +84,24 @@ export class AgentSession implements TrueFoundryGatewayApi.Session {
         });
     }
 
+    /**
+     * Fetch a turn by ID.
+     *
+     * @param opts.turnId - Unique identifier of the turn to fetch.
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {Turn} Turn data.
+     */
     async getTurn(opts: { turnId: string }, requestOptions?: RequestOptions): Promise<Turn> {
         const response = await this.#client.agents.sessions.getTurn(this.id, opts.turnId, requestOptions);
         return new Turn(response.data, this, this.#client);
     }
 
+    /**
+     * Cancel the running last turn for the session.
+     *
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {void}
+     */
     async cancel(requestOptions?: RequestOptions): Promise<void> {
         await this.#client.agents.sessions.cancel(this.id, {}, requestOptions);
     }
