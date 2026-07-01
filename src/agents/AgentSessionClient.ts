@@ -20,7 +20,13 @@ export class AgentSessionClient {
         this.client = new TrueFoundryGateway(options);
     }
 
-    /** Create a new session for a named agent. */
+    /**
+     * Create a new session for a named agent.
+     *
+     * @param opts.agentName - Name of the agent to create a session for.
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {AgentSession} Session created.
+     */
     async createSession(
         opts: TrueFoundryGatewayApi.agents.CreateSessionRequest,
         requestOptions?: AgentSessionClient.RequestOptions,
@@ -29,7 +35,18 @@ export class AgentSessionClient {
         return new AgentSession(response.data, this.client);
     }
 
-    /** List sessions for an agent. */
+    /**
+     * List sessions for an agent.
+     *
+     * @param opts.agentName - Name of the agent whose sessions to list.
+     * @param opts.limit - Page size. Default 10.
+     * @param opts.order - Sort by creation time. Default `desc`.
+     * @param opts.pageToken - Token from the previous response nextPageToken.
+     * @param opts.startTimestamp - Inclusive lower bound on createdAt (ISO-8601).
+     * @param opts.endTimestamp - Inclusive upper bound on createdAt (ISO-8601).
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {core.Page<AgentSession, TrueFoundryGatewayApi.ListSessionsResponse>} Paginated sessions.
+     */
     async listSessions(
         opts: TrueFoundryGatewayApi.agents.SessionsListRequest,
         requestOptions?: AgentSessionClient.RequestOptions,
@@ -53,7 +70,13 @@ export class AgentSessionClient {
         });
     }
 
-    /** Fetch a session by ID. */
+    /**
+     * Fetch a session by ID.
+     *
+     * @param opts.sessionId - Unique identifier of the session to fetch.
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {AgentSession} Session data.
+     */
     async getSession(
         opts: { sessionId: string },
         requestOptions?: AgentSessionClient.RequestOptions,

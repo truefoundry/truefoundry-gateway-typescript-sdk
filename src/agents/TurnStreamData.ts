@@ -1,12 +1,18 @@
 import type * as TrueFoundryGatewayApi from "../api/index.js";
 
-/** An SSE item with a TurnStreamingEvent; `sequenceNumber` is the SSE event id for resuming via `subscribeToTurn`. */
 export interface TurnStreamData {
+    /** SSE event id for resume via subscribeToTurn. */
     sequenceNumber: number;
+    /** Streaming event payload from the turn SSE stream. */
     event: TrueFoundryGatewayApi.TurnStreamingEvent;
 }
 
-/** Parse the SSE `id` field as a sequence number. */
+/**
+ * Parse the SSE `id` field as a sequence number.
+ *
+ * @param id - SSE event id string used as sequence number.
+ * @returns {number} Parsed sequence number from the SSE event id.
+ */
 export function parseSequenceNumber(id: string | undefined): number {
     if (!id) {
         throw new Error("Missing SSE sequence number id.");

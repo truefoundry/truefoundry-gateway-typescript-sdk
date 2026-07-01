@@ -23,7 +23,9 @@ export class TrueFoundryGateway extends BaseTrueFoundryGateway {
         super(options);
     }
 
-    /** Agent sessions and turns. */
+    /**
+     * @returns {AgentsClient} Low-level agents client. Prefer {@link AgentSessionClient} for the high-level API.
+     */
     public get agents(): AgentsClient {
         return (this._agents ??= this.private.agents);
     }
