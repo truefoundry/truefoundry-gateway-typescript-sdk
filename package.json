@@ -55,17 +55,6 @@
             },
             "default": "./dist/cjs/api/resources/private/resources/agents/exports.js"
         },
-        "./private_/agents/draftSessions": {
-            "import": {
-                "types": "./dist/esm/api/resources/private/resources/agents/resources/draftSessions/exports.d.mts",
-                "default": "./dist/esm/api/resources/private/resources/agents/resources/draftSessions/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/private/resources/agents/resources/draftSessions/exports.d.ts",
-                "default": "./dist/cjs/api/resources/private/resources/agents/resources/draftSessions/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/private/resources/agents/resources/draftSessions/exports.js"
-        },
         "./private_/agents/sessions": {
             "import": {
                 "types": "./dist/esm/api/resources/private/resources/agents/resources/sessions/exports.d.mts",
@@ -76,6 +65,28 @@
                 "default": "./dist/cjs/api/resources/private/resources/agents/resources/sessions/exports.js"
             },
             "default": "./dist/cjs/api/resources/private/resources/agents/resources/sessions/exports.js"
+        },
+        "./private_/agents/private_": {
+            "import": {
+                "types": "./dist/esm/api/resources/private/resources/agents/resources/private/exports.d.mts",
+                "default": "./dist/esm/api/resources/private/resources/agents/resources/private/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/private/resources/agents/resources/private/exports.d.ts",
+                "default": "./dist/cjs/api/resources/private/resources/agents/resources/private/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/private/resources/agents/resources/private/exports.js"
+        },
+        "./private_/agents/private_/draftSessions": {
+            "import": {
+                "types": "./dist/esm/api/resources/private/resources/agents/resources/private/resources/draftSessions/exports.d.mts",
+                "default": "./dist/esm/api/resources/private/resources/agents/resources/private/resources/draftSessions/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/private/resources/agents/resources/private/resources/draftSessions/exports.d.ts",
+                "default": "./dist/cjs/api/resources/private/resources/agents/resources/private/resources/draftSessions/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/private/resources/agents/resources/private/resources/draftSessions/exports.js"
         },
         "./package.json": "./package.json",
         "./agents": {
