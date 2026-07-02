@@ -1,4 +1,78 @@
 # Reference
+## Private Agents
+<details><summary><code>client.private.agents.<a href="/src/api/resources/private/resources/agents/client/Client.ts">downloadSandboxFile</a>(sandboxId, { ...params }) -> core.BinaryResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Download a file produced by an agent inside a sandbox.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.private.agents.downloadSandboxFile("sandboxId", {
+    path: "x"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandboxId:** `string` — The sandbox containing the file.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `TrueFoundryGateway.private_.AgentsDownloadSandboxFileRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AgentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Private Agents DraftSessions
 <details><summary><code>client.private.agents.draftSessions.<a href="/src/api/resources/private/resources/agents/resources/draftSessions/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;TrueFoundryGateway.DraftSession, TrueFoundryGateway.ListDraftSessionsResponse&gt;</code></summary>
 <dl>
