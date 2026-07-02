@@ -76,7 +76,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { error: { message: "message" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -114,7 +114,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { error: { message: "message" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -240,7 +240,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { agent_spec: { model: { name: "x" } } };
-        const rawResponseBody = { error: { message: "message" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -292,7 +292,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = { agent_spec: { model: { name: "x" } } };
-        const rawResponseBody = { error: { message: "message" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -470,7 +470,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { error: { message: "message" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -571,7 +571,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
-        const rawResponseBody = { error: { message: "message" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
@@ -611,7 +611,7 @@ describe("DraftSessionsClient", () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
-        const rawResponseBody = { error: { message: "message" } };
+        const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()

@@ -111,16 +111,7 @@ export class DraftSessionsClient {
                 if (_response.error.reason === "status-code") {
                     switch (_response.error.statusCode) {
                         case 400:
-                            throw new TrueFoundryGateway.BadRequestError(
-                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
-                                    unrecognizedObjectKeys: "passthrough",
-                                    allowUnrecognizedUnionMembers: true,
-                                    allowUnrecognizedEnumValues: true,
-                                    skipValidation: true,
-                                    breadcrumbsPrefix: ["response"],
-                                }),
-                                _response.rawResponse,
-                            );
+                            throw new TrueFoundryGateway.BadRequestError(_response.error.body, _response.rawResponse);
                         case 401:
                             throw new TrueFoundryGateway.UnauthorizedError(
                                 serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
@@ -133,16 +124,7 @@ export class DraftSessionsClient {
                                 _response.rawResponse,
                             );
                         case 404:
-                            throw new TrueFoundryGateway.NotFoundError(
-                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
-                                    unrecognizedObjectKeys: "passthrough",
-                                    allowUnrecognizedUnionMembers: true,
-                                    allowUnrecognizedEnumValues: true,
-                                    skipValidation: true,
-                                    breadcrumbsPrefix: ["response"],
-                                }),
-                                _response.rawResponse,
-                            );
+                            throw new TrueFoundryGateway.NotFoundError(_response.error.body, _response.rawResponse);
                         case 422:
                             throw new TrueFoundryGateway.UnprocessableEntityError(
                                 serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
@@ -261,16 +243,7 @@ export class DraftSessionsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
-                    throw new TrueFoundryGateway.BadRequestError(
-                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new TrueFoundryGateway.BadRequestError(_response.error.body, _response.rawResponse);
                 case 401:
                     throw new TrueFoundryGateway.UnauthorizedError(
                         serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
@@ -283,16 +256,7 @@ export class DraftSessionsClient {
                         _response.rawResponse,
                     );
                 case 404:
-                    throw new TrueFoundryGateway.NotFoundError(
-                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new TrueFoundryGateway.NotFoundError(_response.error.body, _response.rawResponse);
                 case 422:
                     throw new TrueFoundryGateway.UnprocessableEntityError(
                         serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
@@ -398,16 +362,7 @@ export class DraftSessionsClient {
                         _response.rawResponse,
                     );
                 case 404:
-                    throw new TrueFoundryGateway.NotFoundError(
-                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new TrueFoundryGateway.NotFoundError(_response.error.body, _response.rawResponse);
                 default:
                     throw new errors.TrueFoundryGatewayError({
                         statusCode: _response.error.statusCode,
@@ -498,16 +453,7 @@ export class DraftSessionsClient {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
-                    throw new TrueFoundryGateway.BadRequestError(
-                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new TrueFoundryGateway.BadRequestError(_response.error.body, _response.rawResponse);
                 case 401:
                     throw new TrueFoundryGateway.UnauthorizedError(
                         serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
@@ -520,16 +466,7 @@ export class DraftSessionsClient {
                         _response.rawResponse,
                     );
                 case 404:
-                    throw new TrueFoundryGateway.NotFoundError(
-                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        _response.rawResponse,
-                    );
+                    throw new TrueFoundryGateway.NotFoundError(_response.error.body, _response.rawResponse);
                 case 422:
                     throw new TrueFoundryGateway.UnprocessableEntityError(
                         serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {

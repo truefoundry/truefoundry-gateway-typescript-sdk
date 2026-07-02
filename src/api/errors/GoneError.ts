@@ -3,11 +3,11 @@
 import type * as core from "../../core/index.js";
 import * as errors from "../../errors/index.js";
 
-export class NotFoundError extends errors.TrueFoundryGatewayError {
+export class GoneError extends errors.TrueFoundryGatewayError {
     constructor(body?: unknown, rawResponse?: core.RawResponse) {
         super({
-            message: "NotFoundError",
-            statusCode: 404,
+            message: "GoneError",
+            statusCode: 410,
             body: body,
             rawResponse: rawResponse,
         });
@@ -16,6 +16,6 @@ export class NotFoundError extends errors.TrueFoundryGatewayError {
             Error.captureStackTrace(this, this.constructor);
         }
 
-        this.name = "NotFoundError";
+        this.name = "GoneError";
     }
 }
