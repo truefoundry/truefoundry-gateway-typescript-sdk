@@ -8,7 +8,7 @@ import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStat
 import * as errors from "../../../../../../errors/index.js";
 import * as serializers from "../../../../../../serialization/index.js";
 import * as TrueFoundryGateway from "../../../../../index.js";
-import { DraftSessionsClient } from "../resources/draftSessions/client/Client.js";
+import { PrivateClient } from "../resources/private/client/Client.js";
 import { SessionsClient } from "../resources/sessions/client/Client.js";
 
 export declare namespace AgentsClient {
@@ -19,19 +19,19 @@ export declare namespace AgentsClient {
 
 export class AgentsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<AgentsClient.Options>;
-    protected _draftSessions: DraftSessionsClient | undefined;
     protected _sessions: SessionsClient | undefined;
+    protected _private: PrivateClient | undefined;
 
     constructor(options: AgentsClient.Options) {
         this._options = normalizeClientOptionsWithAuth(options);
     }
 
-    public get draftSessions(): DraftSessionsClient {
-        return (this._draftSessions ??= new DraftSessionsClient(this._options));
-    }
-
     public get sessions(): SessionsClient {
         return (this._sessions ??= new SessionsClient(this._options));
+    }
+
+    public get private(): PrivateClient {
+        return (this._private ??= new PrivateClient(this._options));
     }
 
     /**
@@ -41,6 +41,7 @@ export class AgentsClient {
      * @throws {@link TrueFoundryGateway.ForbiddenError}
      * @throws {@link TrueFoundryGateway.NotFoundError}
      * @throws {@link TrueFoundryGateway.GoneError}
+     * @throws {@link TrueFoundryGateway.PreconditionFailedError}
      * @throws {@link TrueFoundryGateway.ContentTooLargeError}
      * @throws {@link TrueFoundryGateway.BadGatewayError}
      */
@@ -128,6 +129,17 @@ export class AgentsClient {
                     );
                 case 410:
                     throw new TrueFoundryGateway.GoneError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                case 412:
+                    throw new TrueFoundryGateway.PreconditionFailedError(
                         serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
                             unrecognizedObjectKeys: "passthrough",
                             allowUnrecognizedUnionMembers: true,

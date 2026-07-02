@@ -562,7 +562,7 @@ List endpoints are paginated. The SDK provides an iterator so that you can simpl
 import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
 const client = new TrueFoundryGateway({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
-const pageableResponse = await client.private.agents.draftSessions.list({
+const pageableResponse = await client.private.agents.sessions.list({
     agentName: "agent_name",
     limit: 1,
     order: "asc",
@@ -575,7 +575,7 @@ for await (const item of pageableResponse) {
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.private.agents.draftSessions.list({
+let page = await client.private.agents.sessions.list({
     agentName: "agent_name",
     limit: 1,
     order: "asc",
