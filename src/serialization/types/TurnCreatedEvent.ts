@@ -4,6 +4,7 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 import { Subject } from "./Subject.js";
+import { TurnInputItem } from "./TurnInputItem.js";
 import { TurnStateRunning } from "./TurnStateRunning.js";
 
 export const TurnCreatedEvent: core.serialization.ObjectSchema<
@@ -14,6 +15,7 @@ export const TurnCreatedEvent: core.serialization.ObjectSchema<
     id: core.serialization.string(),
     turnId: core.serialization.property("turn_id", core.serialization.string()),
     previousTurnId: core.serialization.property("previous_turn_id", core.serialization.string().optional()),
+    input: core.serialization.list(TurnInputItem).optional(),
     state: TurnStateRunning,
     createdBy: core.serialization.property("created_by", Subject),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
@@ -26,6 +28,7 @@ export declare namespace TurnCreatedEvent {
         id: string;
         turn_id: string;
         previous_turn_id?: string | null;
+        input?: TurnInputItem.Raw[] | null;
         state: TurnStateRunning.Raw;
         created_by: Subject.Raw;
         created_at: string;

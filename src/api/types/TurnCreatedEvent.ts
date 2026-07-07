@@ -8,6 +8,7 @@ export interface TurnCreatedEvent {
     id: string;
     turnId: string;
     previousTurnId?: string;
+    input?: TrueFoundryGateway.TurnInputItem[];
     state: TrueFoundryGateway.TurnStateRunning;
     createdBy: TrueFoundryGateway.Subject;
     createdAt: string;

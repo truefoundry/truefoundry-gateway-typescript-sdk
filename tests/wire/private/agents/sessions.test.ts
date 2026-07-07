@@ -530,6 +530,129 @@ describe("SessionsClient", () => {
         }).rejects.toThrow(TrueFoundryGatewayTypes.FailedDependencyError);
     });
 
+    test("list_events (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            data: [
+                {
+                    turn_id: "turn_id",
+                    event: {
+                        type: "turn.created",
+                        id: "id",
+                        turn_id: "turn_id",
+                        state: { status: "running" },
+                        created_by: { subject_id: "subject_id", subject_type: "subject_type" },
+                        created_at: "created_at",
+                    },
+                },
+            ],
+            pagination: { next_page_token: "next_page_token", previous_page_token: "previous_page_token", limit: 1 },
+        };
+
+        server
+            .mockEndpoint({ once: false })
+            .get("/v1/agents/sessions/01arz3ndektsv4rrffq69g5fav.g/events")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const expected = {
+            data: [
+                {
+                    turnId: "turn_id",
+                    event: {
+                        type: "turn.created",
+                        id: "id",
+                        turnId: "turn_id",
+                        state: {
+                            status: "running",
+                        },
+                        createdBy: {
+                            subjectId: "subject_id",
+                            subjectType: "subject_type",
+                        },
+                        createdAt: "created_at",
+                    },
+                },
+            ],
+            pagination: {
+                nextPageToken: "next_page_token",
+                previousPageToken: "previous_page_token",
+                limit: 1,
+            },
+        };
+        const page = await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g", {
+            pageToken: "page_token",
+            lastTurnId: "last_turn_id",
+            limit: 1,
+        });
+
+        expect(expected.data).toEqual(page.data);
+        expect(page.hasNextPage()).toBe(true);
+        const nextPage = await page.getNextPage();
+        expect(expected.data).toEqual(nextPage.data);
+    });
+
+    test("list_events (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { error: { message: "message" } };
+
+        server
+            .mockEndpoint()
+            .get("/v1/agents/sessions/sessionId/events")
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.private.agents.sessions.listEvents("sessionId");
+        }).rejects.toThrow(TrueFoundryGatewayTypes.BadRequestError);
+    });
+
+    test("list_events (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { error: { message: "message" } };
+
+        server
+            .mockEndpoint()
+            .get("/v1/agents/sessions/sessionId/events")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.private.agents.sessions.listEvents("sessionId");
+        }).rejects.toThrow(TrueFoundryGatewayTypes.NotFoundError);
+    });
+
+    test("list_events (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { error: { message: "message" } };
+
+        server
+            .mockEndpoint()
+            .get("/v1/agents/sessions/sessionId/events")
+            .respondWith()
+            .statusCode(412)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.private.agents.sessions.listEvents("sessionId");
+        }).rejects.toThrow(TrueFoundryGatewayTypes.PreconditionFailedError);
+    });
+
     test("list_turns (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
@@ -1192,6 +1315,25 @@ describe("SessionsClient", () => {
     });
 
     test("list_turn_events (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { error: { message: "message" } };
+
+        server
+            .mockEndpoint()
+            .get("/v1/agents/sessions/sessionId/turns/turnId/events")
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.private.agents.sessions.listTurnEvents("sessionId", "turnId");
+        }).rejects.toThrow(TrueFoundryGatewayTypes.ConflictError);
+    });
+
+    test("list_turn_events (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
