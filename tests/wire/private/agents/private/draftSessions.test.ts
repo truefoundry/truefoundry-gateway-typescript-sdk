@@ -158,7 +158,7 @@ describe("DraftSessionsClient", () => {
                 agent_spec: {
                     model: { name: "name" },
                     instructions: "instructions",
-                    messages: [{ role: "user", content: "content" }],
+                    messages: [{ type: "user.message", content: "content" }],
                     mcp_servers: [{ name: "name" }],
                     response_format: { type: "text" },
                     skills: [{ fqn: "fqn" }],
@@ -202,7 +202,7 @@ describe("DraftSessionsClient", () => {
                     instructions: "instructions",
                     messages: [
                         {
-                            role: "user",
+                            type: "user.message",
                             content: "content",
                         },
                     ],
@@ -376,7 +376,7 @@ describe("DraftSessionsClient", () => {
                 agent_spec: {
                     model: { name: "name" },
                     instructions: "instructions",
-                    messages: [{ role: "user", content: "content" }],
+                    messages: [{ type: "user.message", content: "content" }],
                     mcp_servers: [{ name: "name" }],
                     response_format: { type: "text" },
                     skills: [{ fqn: "fqn" }],
@@ -413,7 +413,7 @@ describe("DraftSessionsClient", () => {
                     instructions: "instructions",
                     messages: [
                         {
-                            role: "user",
+                            type: "user.message",
                             content: "content",
                         },
                     ],
@@ -495,7 +495,7 @@ describe("DraftSessionsClient", () => {
                 agent_spec: {
                     model: { name: "name" },
                     instructions: "instructions",
-                    messages: [{ role: "user", content: "content" }],
+                    messages: [{ type: "user.message", content: "content" }],
                     mcp_servers: [{ name: "name" }],
                     response_format: { type: "text" },
                     skills: [{ fqn: "fqn" }],
@@ -533,7 +533,7 @@ describe("DraftSessionsClient", () => {
                     instructions: "instructions",
                     messages: [
                         {
-                            role: "user",
+                            type: "user.message",
                             content: "content",
                         },
                     ],
