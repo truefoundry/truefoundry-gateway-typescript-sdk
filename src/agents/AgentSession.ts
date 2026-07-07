@@ -10,7 +10,7 @@ import { Turn } from "./Turn.js";
 type RequestOptions = SessionsClient.RequestOptions;
 
 /**
- * A session enriched with convenience methods: prepareTurn, listTurns, getTurn, cancel.
+ * A session enriched with convenience methods: prepareTurn, listTurns, getTurn, listEvents, cancel.
  */
 export class AgentSession implements TrueFoundryGatewayApi.Session {
     /** Unique identifier of this session. */
@@ -104,5 +104,21 @@ export class AgentSession implements TrueFoundryGatewayApi.Session {
      */
     async cancel(requestOptions?: RequestOptions): Promise<void> {
         await this.#client.agents.sessions.cancel(this.id, {}, requestOptions);
+    }
+
+    /**
+     * Paginated session events across turns (newest first); subscribe to a running turn for live events.
+     *
+     * @param opts.pageToken - Token from the previous response nextPageToken.
+     * @param opts.lastTurnId - Newest turn in the listing window (initial load only). Omit to use the session last turn.
+     * @param opts.limit - Page size. Default 100.
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {Promise<core.Page<TrueFoundryGatewayApi.SessionEventItem, TrueFoundryGatewayApi.ListSessionEventsResponse>>} Paginated session events.
+     */
+    listEvents(
+        opts?: TrueFoundryGatewayApi.agents.SessionsListEventsRequest,
+        requestOptions?: RequestOptions,
+    ): Promise<core.Page<TrueFoundryGatewayApi.SessionEventItem, TrueFoundryGatewayApi.ListSessionEventsResponse>> {
+        return this.#client.agents.sessions.listEvents(this.id, opts, requestOptions);
     }
 }
