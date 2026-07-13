@@ -23,7 +23,7 @@ export abstract class BaseAgentSession {
     readonly createdAt: string;
     /** ISO-8601 timestamp when the session was last updated. */
     readonly updatedAt: string;
-    readonly #client: TrueFoundryGateway;
+    protected readonly client: TrueFoundryGateway;
 
     constructor(
         session: TrueFoundryGatewayApi.Session | TrueFoundryGatewayApi.DraftSession,
@@ -34,7 +34,7 @@ export abstract class BaseAgentSession {
         this.createdBySubject = session.createdBySubject;
         this.createdAt = session.createdAt;
         this.updatedAt = session.updatedAt;
-        this.#client = client;
+        this.client = client;
     }
 
     /**
@@ -48,7 +48,7 @@ export abstract class BaseAgentSession {
         input?: TrueFoundryGatewayApi.TurnInputItem[];
         previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput;
     }): PreparedTurn {
-        return new PreparedTurn({ input: opts?.input, previousTurnId: opts?.previousTurnId }, this, this.#client);
+        return new PreparedTurn({ input: opts?.input, previousTurnId: opts?.previousTurnId }, this, this.client);
     }
 
     /**
@@ -63,7 +63,7 @@ export abstract class BaseAgentSession {
         opts?: TrueFoundryGatewayApi.agents.SessionsListTurnsRequest,
         requestOptions?: RequestOptions,
     ): Promise<core.Page<Turn, TrueFoundryGatewayApi.ListTurnsResponse>> {
-        const client = this.#client;
+        const client = this.client;
         const sessionId = this.id;
         const page = await client.agents.sessions.listTurns(sessionId, opts, requestOptions);
         return new core.Page({
@@ -92,8 +92,8 @@ export abstract class BaseAgentSession {
      * @returns {Turn} Turn data.
      */
     async getTurn(opts: { turnId: string }, requestOptions?: RequestOptions): Promise<Turn> {
-        const response = await this.#client.agents.sessions.getTurn(this.id, opts.turnId, requestOptions);
-        return new Turn(response.data, this, this.#client);
+        const response = await this.client.agents.sessions.getTurn(this.id, opts.turnId, requestOptions);
+        return new Turn(response.data, this, this.client);
     }
 
     /**
@@ -103,7 +103,7 @@ export abstract class BaseAgentSession {
      * @returns {void}
      */
     async cancel(requestOptions?: RequestOptions): Promise<void> {
-        await this.#client.agents.sessions.cancel(this.id, {}, requestOptions);
+        await this.client.agents.sessions.cancel(this.id, {}, requestOptions);
     }
 
     /**
@@ -119,7 +119,7 @@ export abstract class BaseAgentSession {
         opts?: TrueFoundryGatewayApi.agents.SessionsListEventsRequest,
         requestOptions?: RequestOptions,
     ): Promise<core.Page<TrueFoundryGatewayApi.SessionEventItem, TrueFoundryGatewayApi.ListSessionEventsResponse>> {
-        return this.#client.agents.sessions.listEvents(this.id, opts, requestOptions);
+        return this.client.agents.sessions.listEvents(this.id, opts, requestOptions);
     }
 }
 
