@@ -12,11 +12,9 @@ type RequestOptions = SessionsClient.RequestOptions;
 /**
  * A session enriched with convenience methods: prepareTurn, listTurns, getTurn, listEvents, cancel.
  */
-export class AgentSession implements TrueFoundryGatewayApi.Session {
+export abstract class BaseAgentSession {
     /** Unique identifier of this session. */
     readonly id: string;
-    /** Name of the agent for this session. */
-    readonly agentName: string;
     /** Optional user-visible title for the session. */
     readonly title?: string;
     /** Subject that created this session. */
@@ -27,9 +25,11 @@ export class AgentSession implements TrueFoundryGatewayApi.Session {
     readonly updatedAt: string;
     readonly #client: TrueFoundryGateway;
 
-    constructor(session: TrueFoundryGatewayApi.Session, client: TrueFoundryGateway) {
+    constructor(
+        session: TrueFoundryGatewayApi.Session | TrueFoundryGatewayApi.DraftSession,
+        client: TrueFoundryGateway,
+    ) {
         this.id = session.id;
-        this.agentName = session.agentName;
         this.title = session.title;
         this.createdBySubject = session.createdBySubject;
         this.createdAt = session.createdAt;
@@ -120,5 +120,13 @@ export class AgentSession implements TrueFoundryGatewayApi.Session {
         requestOptions?: RequestOptions,
     ): Promise<core.Page<TrueFoundryGatewayApi.SessionEventItem, TrueFoundryGatewayApi.ListSessionEventsResponse>> {
         return this.#client.agents.sessions.listEvents(this.id, opts, requestOptions);
+    }
+}
+
+export class AgentSession extends BaseAgentSession implements TrueFoundryGatewayApi.Session {
+    readonly agentName: string;
+    constructor(session: TrueFoundryGatewayApi.Session, client: TrueFoundryGateway) {
+        super(session, client);
+        this.agentName = session.agentName;
     }
 }
