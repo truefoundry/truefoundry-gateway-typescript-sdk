@@ -1,7 +1,7 @@
 {
-    "cliVersion": "5.56.0",
+    "cliVersion": "5.69.0",
     "generatorName": "fernapi/fern-typescript-node-sdk",
-    "generatorVersion": "3.73.4",
+    "generatorVersion": "3.80.1",
     "generatorConfig": {
         "packageJson": {
             "exports": {
@@ -14,6 +14,17 @@
                     "require": {
                         "types": "./dist/cjs/agents/index.d.ts",
                         "default": "./dist/cjs/agents/index.js"
+                    }
+                },
+                "./agents/private": {
+                    "types": "./dist/cjs/agents/private/index.d.ts",
+                    "import": {
+                        "types": "./dist/esm/agents/private/index.d.mts",
+                        "default": "./dist/esm/agents/private/index.mjs"
+                    },
+                    "require": {
+                        "types": "./dist/cjs/agents/private/index.d.ts",
+                        "default": "./dist/cjs/agents/private/index.js"
                     }
                 }
             }
@@ -38,7 +49,7 @@
         "streamType": "web",
         "useDefaultRequestParameterValues": true
     },
-    "originGitCommit": "37bf5c036c7f06b3bf4abc504cda3d9531ac83fa",
+    "originGitCommit": "2f9deee63b00cdca65af0e1f8acf738afd0bd208",
     "originGitCommitIsDirty": false,
     "invokedBy": "ci",
     "requestedVersion": "0.0.0",

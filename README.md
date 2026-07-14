@@ -95,7 +95,7 @@ Instantiate and use the client with the following:
 ```typescript
 import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
-const client = new TrueFoundryGateway({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
+const client = new TrueFoundryGateway({ baseUrl: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
 const response = await client.private.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
 for await (const item of response) {
     console.log(item);
@@ -158,7 +158,7 @@ The SDK uses async iterators, so you can consume the responses using a `for awai
 ```typescript
 import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
-const client = new TrueFoundryGateway({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
+const client = new TrueFoundryGateway({ baseUrl: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
 const response = await client.private.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
 for await (const item of response) {
     console.log(item);
@@ -561,7 +561,7 @@ List endpoints are paginated. The SDK provides an iterator so that you can simpl
 ```typescript
 import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
-const client = new TrueFoundryGateway({ environment: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
+const client = new TrueFoundryGateway({ baseUrl: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
 const pageableResponse = await client.private.agents.sessions.list({
     agentName: "agent_name",
     limit: 1,
