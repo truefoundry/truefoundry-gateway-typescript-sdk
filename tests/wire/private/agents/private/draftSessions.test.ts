@@ -12,11 +12,16 @@ describe("DraftSessionsClient", () => {
         const rawResponseBody = {
             data: [
                 {
+                    type: "session/draft",
                     id: "id",
                     agent_spec: { model: { name: "name" } },
                     agent_name: "agent_name",
                     title: "title",
-                    created_by_subject: { subject_id: "subject_id", subject_type: "subject_type" },
+                    created_by_subject: {
+                        subject_id: "subject_id",
+                        subject_type: "subject_type",
+                        subject_slug: "subject_slug",
+                    },
                     created_at: "created_at",
                     updated_at: "updated_at",
                 },
@@ -35,6 +40,7 @@ describe("DraftSessionsClient", () => {
         const expected = {
             data: [
                 {
+                    type: "session/draft",
                     id: "id",
                     agentSpec: {
                         model: {
@@ -46,6 +52,7 @@ describe("DraftSessionsClient", () => {
                     createdBySubject: {
                         subjectId: "subject_id",
                         subjectType: "subject_type",
+                        subjectSlug: "subject_slug",
                     },
                     createdAt: "created_at",
                     updatedAt: "updated_at",
@@ -154,6 +161,7 @@ describe("DraftSessionsClient", () => {
         const rawRequestBody = { agent_spec: { model: { name: "name" } } };
         const rawResponseBody = {
             data: {
+                type: "session/draft",
                 id: "id",
                 agent_spec: {
                     model: { name: "name" },
@@ -194,6 +202,7 @@ describe("DraftSessionsClient", () => {
         });
         expect(response).toEqual({
             data: {
+                type: "session/draft",
                 id: "id",
                 agentSpec: {
                     model: {
@@ -372,6 +381,7 @@ describe("DraftSessionsClient", () => {
 
         const rawResponseBody = {
             data: {
+                type: "session/draft",
                 id: "id",
                 agent_spec: {
                     model: { name: "name" },
@@ -405,6 +415,7 @@ describe("DraftSessionsClient", () => {
         const response = await client.private.agents.private.draftSessions.get("draftSessionId");
         expect(response).toEqual({
             data: {
+                type: "session/draft",
                 id: "id",
                 agentSpec: {
                     model: {
@@ -491,6 +502,7 @@ describe("DraftSessionsClient", () => {
         const rawRequestBody = {};
         const rawResponseBody = {
             data: {
+                type: "session/draft",
                 id: "id",
                 agent_spec: {
                     model: { name: "name" },
@@ -525,6 +537,7 @@ describe("DraftSessionsClient", () => {
         const response = await client.private.agents.private.draftSessions.update("draftSessionId");
         expect(response).toEqual({
             data: {
+                type: "session/draft",
                 id: "id",
                 agentSpec: {
                     model: {

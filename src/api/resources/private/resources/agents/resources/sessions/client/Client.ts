@@ -5,7 +5,7 @@ import {
     type NormalizedClientOptionsWithAuth,
     normalizeClientOptionsWithAuth,
 } from "../../../../../../../../BaseClient.js";
-import { mergeHeaders } from "../../../../../../../../core/headers.js";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../../../core/headers.js";
 import * as core from "../../../../../../../../core/index.js";
 import { mergeAdditionalBodyParameters } from "../../../../../../../../core/requestBody.js";
 import { handleNonStatusCodeError } from "../../../../../../../../errors/handleNonStatusCodeError.js";
@@ -221,10 +221,12 @@ export class SessionsClient {
         request: TrueFoundryGateway.private_.agents.CreateSessionRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.WithRawResponse<TrueFoundryGateway.GetSessionResponse>> {
+        const { tfyMetadata, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
+            mergeOnlyDefinedHeaders({ "x-tfy-metadata": tfyMetadata }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -239,7 +241,7 @@ export class SessionsClient {
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: mergeAdditionalBodyParameters(
-                serializers.private_.agents.CreateSessionRequest.jsonOrThrow(request, {
+                serializers.private_.agents.CreateSessionRequest.jsonOrThrow(_body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
@@ -578,141 +580,6 @@ export class SessionsClient {
             "POST",
             "/v1/agents/sessions/{sessionId}/cancel",
         );
-    }
-
-    /**
-     * List session events as `{ turn_id, event }` across a turn hierarchy (newest first). Each turn contributes turn.created, content events (model.message, tool.call, …), and turn.done; streaming deltas are not included. `last_turn_id` (initial load only) sets the newest turn in the window plus its ancestors; omit to use the session last turn. If that turn is still running, it is excluded — listing anchors on its parent so persisted events are returned without overlapping the live stream; subscribe to the running turn for live events. An empty `data` array is returned when the anchor is a running first turn with no parent. Use `page_token` to paginate backward toward older events; chains longer than the stored ancestor window are walked via spill to the session root.
-     *
-     * @param {string} sessionId
-     * @param {TrueFoundryGateway.private_.agents.SessionsListEventsRequest} request
-     * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link TrueFoundryGateway.BadRequestError}
-     * @throws {@link TrueFoundryGateway.NotFoundError}
-     * @throws {@link TrueFoundryGateway.PreconditionFailedError}
-     *
-     * @example
-     *     await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g", {
-     *         pageToken: "page_token",
-     *         lastTurnId: "last_turn_id",
-     *         limit: 1
-     *     })
-     */
-    public async listEvents(
-        sessionId: string,
-        request: TrueFoundryGateway.private_.agents.SessionsListEventsRequest = {},
-        requestOptions?: SessionsClient.RequestOptions,
-    ): Promise<core.Page<TrueFoundryGateway.SessionEventItem, TrueFoundryGateway.ListSessionEventsResponse>> {
-        const list = core.HttpResponsePromise.interceptFunction(
-            async (
-                request: TrueFoundryGateway.private_.agents.SessionsListEventsRequest,
-            ): Promise<core.WithRawResponse<TrueFoundryGateway.ListSessionEventsResponse>> => {
-                const { pageToken, lastTurnId, limit = 100 } = request;
-                const _queryParams: Record<string, unknown> = {
-                    page_token: pageToken,
-                    last_turn_id: lastTurnId,
-                    limit,
-                };
-                const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-                const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-                    _authRequest.headers,
-                    this._options?.headers,
-                    requestOptions?.headers,
-                );
-                const _response = await (this._options.fetcher ?? core.fetcher)({
-                    url: core.url.join(
-                        (await core.Supplier.get(this._options.baseUrl)) ??
-                            (await core.Supplier.get(this._options.environment)),
-                        `v1/agents/sessions/${core.url.encodePathParam(sessionId)}/events`,
-                    ),
-                    method: "GET",
-                    headers: _headers,
-                    queryString: core.url
-                        .queryBuilder()
-                        .addMany(_queryParams)
-                        .mergeAdditional(requestOptions?.queryParams)
-                        .build(),
-                    timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-                    maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-                    abortSignal: requestOptions?.abortSignal,
-                    fetchFn: this._options?.fetch,
-                    logging: this._options.logging,
-                });
-                if (_response.ok) {
-                    return {
-                        data: serializers.ListSessionEventsResponse.parseOrThrow(_response.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                        rawResponse: _response.rawResponse,
-                    };
-                }
-                if (_response.error.reason === "status-code") {
-                    switch (_response.error.statusCode) {
-                        case 400:
-                            throw new TrueFoundryGateway.BadRequestError(
-                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
-                                    unrecognizedObjectKeys: "passthrough",
-                                    allowUnrecognizedUnionMembers: true,
-                                    allowUnrecognizedEnumValues: true,
-                                    skipValidation: true,
-                                    breadcrumbsPrefix: ["response"],
-                                }),
-                                _response.rawResponse,
-                            );
-                        case 404:
-                            throw new TrueFoundryGateway.NotFoundError(
-                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
-                                    unrecognizedObjectKeys: "passthrough",
-                                    allowUnrecognizedUnionMembers: true,
-                                    allowUnrecognizedEnumValues: true,
-                                    skipValidation: true,
-                                    breadcrumbsPrefix: ["response"],
-                                }),
-                                _response.rawResponse,
-                            );
-                        case 412:
-                            throw new TrueFoundryGateway.PreconditionFailedError(
-                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
-                                    unrecognizedObjectKeys: "passthrough",
-                                    allowUnrecognizedUnionMembers: true,
-                                    allowUnrecognizedEnumValues: true,
-                                    skipValidation: true,
-                                    breadcrumbsPrefix: ["response"],
-                                }),
-                                _response.rawResponse,
-                            );
-                        default:
-                            throw new errors.TrueFoundryGatewayError({
-                                statusCode: _response.error.statusCode,
-                                body: _response.error.body,
-                                rawResponse: _response.rawResponse,
-                            });
-                    }
-                }
-                return handleNonStatusCodeError(
-                    _response.error,
-                    _response.rawResponse,
-                    "GET",
-                    "/v1/agents/sessions/{sessionId}/events",
-                );
-            },
-        );
-        const dataWithRawResponse = await list(request).withRawResponse();
-        return new core.Page<TrueFoundryGateway.SessionEventItem, TrueFoundryGateway.ListSessionEventsResponse>({
-            response: dataWithRawResponse.data,
-            rawResponse: dataWithRawResponse.rawResponse,
-            hasNextPage: (response) =>
-                response?.pagination.nextPageToken != null &&
-                !(typeof response?.pagination.nextPageToken === "string" && response?.pagination.nextPageToken === ""),
-            getItems: (response) => response?.data ?? [],
-            loadPage: (response) => {
-                return list(core.setObjectProperty(request, "pageToken", response?.pagination.nextPageToken));
-            },
-        });
     }
 
     /**
@@ -1408,6 +1275,141 @@ export class SessionsClient {
         );
         const dataWithRawResponse = await list(request).withRawResponse();
         return new core.Page<TrueFoundryGateway.TurnEvent, TrueFoundryGateway.ListEventsResponse>({
+            response: dataWithRawResponse.data,
+            rawResponse: dataWithRawResponse.rawResponse,
+            hasNextPage: (response) =>
+                response?.pagination.nextPageToken != null &&
+                !(typeof response?.pagination.nextPageToken === "string" && response?.pagination.nextPageToken === ""),
+            getItems: (response) => response?.data ?? [],
+            loadPage: (response) => {
+                return list(core.setObjectProperty(request, "pageToken", response?.pagination.nextPageToken));
+            },
+        });
+    }
+
+    /**
+     * List session events as `{ turn_id, event }` across a turn hierarchy (newest first). Each turn contributes turn.created, content events (model.message, tool.call, …), and turn.done; streaming deltas are not included. `last_turn_id` (initial load only) sets the newest turn in the window plus its ancestors; omit to use the session last turn. If that turn is still running, it is excluded — listing anchors on its parent so persisted events are returned without overlapping the live stream; subscribe to the running turn for live events. An empty `data` array is returned when the anchor is a running first turn with no parent. Use `page_token` to paginate backward toward older events; chains longer than the stored ancestor window are walked via spill to the session root.
+     *
+     * @param {string} sessionId
+     * @param {TrueFoundryGateway.private_.agents.SessionsListEventsRequest} request
+     * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link TrueFoundryGateway.BadRequestError}
+     * @throws {@link TrueFoundryGateway.NotFoundError}
+     * @throws {@link TrueFoundryGateway.PreconditionFailedError}
+     *
+     * @example
+     *     await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g", {
+     *         pageToken: "page_token",
+     *         lastTurnId: "last_turn_id",
+     *         limit: 1
+     *     })
+     */
+    public async listEvents(
+        sessionId: string,
+        request: TrueFoundryGateway.private_.agents.SessionsListEventsRequest = {},
+        requestOptions?: SessionsClient.RequestOptions,
+    ): Promise<core.Page<TrueFoundryGateway.SessionEventItem, TrueFoundryGateway.ListSessionEventsResponse>> {
+        const list = core.HttpResponsePromise.interceptFunction(
+            async (
+                request: TrueFoundryGateway.private_.agents.SessionsListEventsRequest,
+            ): Promise<core.WithRawResponse<TrueFoundryGateway.ListSessionEventsResponse>> => {
+                const { pageToken, lastTurnId, limit = 100 } = request;
+                const _queryParams: Record<string, unknown> = {
+                    page_token: pageToken,
+                    last_turn_id: lastTurnId,
+                    limit,
+                };
+                const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+                const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+                    _authRequest.headers,
+                    this._options?.headers,
+                    requestOptions?.headers,
+                );
+                const _response = await (this._options.fetcher ?? core.fetcher)({
+                    url: core.url.join(
+                        (await core.Supplier.get(this._options.baseUrl)) ??
+                            (await core.Supplier.get(this._options.environment)),
+                        `v1/agents/sessions/${core.url.encodePathParam(sessionId)}/events`,
+                    ),
+                    method: "GET",
+                    headers: _headers,
+                    queryString: core.url
+                        .queryBuilder()
+                        .addMany(_queryParams)
+                        .mergeAdditional(requestOptions?.queryParams)
+                        .build(),
+                    timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+                    maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+                    abortSignal: requestOptions?.abortSignal,
+                    fetchFn: this._options?.fetch,
+                    logging: this._options.logging,
+                });
+                if (_response.ok) {
+                    return {
+                        data: serializers.ListSessionEventsResponse.parseOrThrow(_response.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        rawResponse: _response.rawResponse,
+                    };
+                }
+                if (_response.error.reason === "status-code") {
+                    switch (_response.error.statusCode) {
+                        case 400:
+                            throw new TrueFoundryGateway.BadRequestError(
+                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                                    unrecognizedObjectKeys: "passthrough",
+                                    allowUnrecognizedUnionMembers: true,
+                                    allowUnrecognizedEnumValues: true,
+                                    skipValidation: true,
+                                    breadcrumbsPrefix: ["response"],
+                                }),
+                                _response.rawResponse,
+                            );
+                        case 404:
+                            throw new TrueFoundryGateway.NotFoundError(
+                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                                    unrecognizedObjectKeys: "passthrough",
+                                    allowUnrecognizedUnionMembers: true,
+                                    allowUnrecognizedEnumValues: true,
+                                    skipValidation: true,
+                                    breadcrumbsPrefix: ["response"],
+                                }),
+                                _response.rawResponse,
+                            );
+                        case 412:
+                            throw new TrueFoundryGateway.PreconditionFailedError(
+                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                                    unrecognizedObjectKeys: "passthrough",
+                                    allowUnrecognizedUnionMembers: true,
+                                    allowUnrecognizedEnumValues: true,
+                                    skipValidation: true,
+                                    breadcrumbsPrefix: ["response"],
+                                }),
+                                _response.rawResponse,
+                            );
+                        default:
+                            throw new errors.TrueFoundryGatewayError({
+                                statusCode: _response.error.statusCode,
+                                body: _response.error.body,
+                                rawResponse: _response.rawResponse,
+                            });
+                    }
+                }
+                return handleNonStatusCodeError(
+                    _response.error,
+                    _response.rawResponse,
+                    "GET",
+                    "/v1/agents/sessions/{sessionId}/events",
+                );
+            },
+        );
+        const dataWithRawResponse = await list(request).withRawResponse();
+        return new core.Page<TrueFoundryGateway.SessionEventItem, TrueFoundryGateway.ListSessionEventsResponse>({
             response: dataWithRawResponse.data,
             rawResponse: dataWithRawResponse.rawResponse,
             hasNextPage: (response) =>

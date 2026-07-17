@@ -362,97 +362,6 @@ await client.private.agents.sessions.cancel("01arz3ndektsv4rrffq69g5fav.g");
 </dl>
 </details>
 
-<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">listEvents</a>(sessionId, { ...params }) -> core.Page&lt;TrueFoundryGateway.SessionEventItem, TrueFoundryGateway.ListSessionEventsResponse&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-List session events as `{ turn_id, event }` across a turn hierarchy (newest first). Each turn contributes turn.created, content events (model.message, tool.call, …), and turn.done; streaming deltas are not included. `last_turn_id` (initial load only) sets the newest turn in the window plus its ancestors; omit to use the session last turn. If that turn is still running, it is excluded — listing anchors on its parent so persisted events are returned without overlapping the live stream; subscribe to the running turn for live events. An empty `data` array is returned when the anchor is a running first turn with no parent. Use `page_token` to paginate backward toward older events; chains longer than the stored ancestor window are walked via spill to the session root.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-const pageableResponse = await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g", {
-    pageToken: "page_token",
-    lastTurnId: "last_turn_id",
-    limit: 1
-});
-for await (const item of pageableResponse) {
-    console.log(item);
-}
-
-// Or you can manually iterate page-by-page
-let page = await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g", {
-    pageToken: "page_token",
-    lastTurnId: "last_turn_id",
-    limit: 1
-});
-while (page.hasNextPage()) {
-    page = page.getNextPage();
-}
-
-// You can also access the underlying response
-const response = page.response;
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**sessionId:** `string` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `TrueFoundryGateway.private_.agents.SessionsListEventsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SessionsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">listTurns</a>(sessionId, { ...params }) -> core.Page&lt;TrueFoundryGateway.Turn, TrueFoundryGateway.ListTurnsResponse&gt;</code></summary>
 <dl>
 <dd>
@@ -869,6 +778,97 @@ const response = page.response;
 </dl>
 </details>
 
+<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">listEvents</a>(sessionId, { ...params }) -> core.Page&lt;TrueFoundryGateway.SessionEventItem, TrueFoundryGateway.ListSessionEventsResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List session events as `{ turn_id, event }` across a turn hierarchy (newest first). Each turn contributes turn.created, content events (model.message, tool.call, …), and turn.done; streaming deltas are not included. `last_turn_id` (initial load only) sets the newest turn in the window plus its ancestors; omit to use the session last turn. If that turn is still running, it is excluded — listing anchors on its parent so persisted events are returned without overlapping the live stream; subscribe to the running turn for live events. An empty `data` array is returned when the anchor is a running first turn with no parent. Use `page_token` to paginate backward toward older events; chains longer than the stored ancestor window are walked via spill to the session root.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g", {
+    pageToken: "page_token",
+    lastTurnId: "last_turn_id",
+    limit: 1
+});
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g", {
+    pageToken: "page_token",
+    lastTurnId: "last_turn_id",
+    limit: 1
+});
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sessionId:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `TrueFoundryGateway.private_.agents.SessionsListEventsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SessionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Private Agents Private DraftSessions
 <details><summary><code>client.private.agents.private.draftSessions.<a href="/src/api/resources/private/resources/agents/resources/private/resources/draftSessions/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;TrueFoundryGateway.DraftSession, TrueFoundryGateway.ListDraftSessionsResponse&gt;</code></summary>
 <dl>
@@ -1151,6 +1151,96 @@ await client.private.agents.private.draftSessions.update("draftSessionId");
 <dd>
 
 **requestOptions:** `DraftSessionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Private Agents Private Sessions
+<details><summary><code>client.private.agents.private.sessions.<a href="/src/api/resources/private/resources/agents/resources/private/resources/sessions/client/Client.ts">listOwnedSessions</a>({ ...params }) -> core.Page&lt;TrueFoundryGateway.ListOwnedSessionsResponseDataItem, TrueFoundryGateway.ListOwnedSessionsResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List all sessions owned by the caller, spanning both saved sessions and drafts (newest first by default), keyset-paginated. Optionally filter by `agent_name`. Pass `page_token` to fetch the next page, keeping the other query params constant.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.private.agents.private.sessions.listOwnedSessions({
+    agentName: "agent_name",
+    limit: 1,
+    order: "asc",
+    pageToken: "page_token",
+    startTimestamp: "start_timestamp",
+    endTimestamp: "end_timestamp"
+});
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.private.agents.private.sessions.listOwnedSessions({
+    agentName: "agent_name",
+    limit: 1,
+    order: "asc",
+    pageToken: "page_token",
+    startTimestamp: "start_timestamp",
+    endTimestamp: "end_timestamp"
+});
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `TrueFoundryGateway.private_.agents.private_.SessionsListOwnedSessionsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SessionsClient.RequestOptions` 
     
 </dd>
 </dl>

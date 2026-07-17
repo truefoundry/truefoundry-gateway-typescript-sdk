@@ -8,13 +8,13 @@ export const Subject: core.serialization.ObjectSchema<serializers.Subject.Raw, T
     core.serialization.object({
         subjectId: core.serialization.property("subject_id", core.serialization.string()),
         subjectType: core.serialization.property("subject_type", core.serialization.string()),
-        subjectSlug: core.serialization.property("subject_slug", core.serialization.string().optional()),
+        subjectSlug: core.serialization.property("subject_slug", core.serialization.string()),
     });
 
 export declare namespace Subject {
     export interface Raw {
         subject_id: string;
         subject_type: string;
-        subject_slug?: string | null;
+        subject_slug: string;
     }
 }

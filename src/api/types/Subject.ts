@@ -3,5 +3,5 @@
 export interface Subject {
     subjectId: string;
     subjectType: string;
-    subjectSlug?: string;
+    subjectSlug: string;
 }

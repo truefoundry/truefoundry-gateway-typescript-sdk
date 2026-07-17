@@ -10,6 +10,7 @@ export const DraftSession: core.serialization.ObjectSchema<
     serializers.DraftSession.Raw,
     TrueFoundryGateway.DraftSession
 > = core.serialization.object({
+    type: core.serialization.stringLiteral("session/draft"),
     id: core.serialization.string(),
     agentSpec: core.serialization.property("agent_spec", AgentSpec),
     agentName: core.serialization.property("agent_name", core.serialization.string().optional()),
@@ -21,6 +22,7 @@ export const DraftSession: core.serialization.ObjectSchema<
 
 export declare namespace DraftSession {
     export interface Raw {
+        type: "session/draft";
         id: string;
         agent_spec: AgentSpec.Raw;
         agent_name?: string | null;

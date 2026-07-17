@@ -7,6 +7,7 @@ import { Subject } from "./Subject.js";
 
 export const Session: core.serialization.ObjectSchema<serializers.Session.Raw, TrueFoundryGateway.Session> =
     core.serialization.object({
+        type: core.serialization.stringLiteral("session"),
         id: core.serialization.string(),
         agentName: core.serialization.property("agent_name", core.serialization.string()),
         title: core.serialization.string().optional(),
@@ -17,6 +18,7 @@ export const Session: core.serialization.ObjectSchema<serializers.Session.Raw, T
 
 export declare namespace Session {
     export interface Raw {
+        type: "session";
         id: string;
         agent_name: string;
         title?: string | null;

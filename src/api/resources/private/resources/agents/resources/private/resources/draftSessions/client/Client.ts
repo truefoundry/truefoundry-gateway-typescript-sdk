@@ -5,7 +5,7 @@ import {
     type NormalizedClientOptionsWithAuth,
     normalizeClientOptionsWithAuth,
 } from "../../../../../../../../../../BaseClient.js";
-import { mergeHeaders } from "../../../../../../../../../../core/headers.js";
+import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../../../../../core/headers.js";
 import * as core from "../../../../../../../../../../core/index.js";
 import { mergeAdditionalBodyParameters } from "../../../../../../../../../../core/requestBody.js";
 import { handleNonStatusCodeError } from "../../../../../../../../../../errors/handleNonStatusCodeError.js";
@@ -217,10 +217,12 @@ export class DraftSessionsClient {
         request: TrueFoundryGateway.private_.agents.private_.CreateDraftSessionRequest,
         requestOptions?: DraftSessionsClient.RequestOptions,
     ): Promise<core.WithRawResponse<TrueFoundryGateway.GetDraftSessionResponse>> {
+        const { tfyMetadata, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
+            mergeOnlyDefinedHeaders({ "x-tfy-metadata": tfyMetadata }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -235,7 +237,7 @@ export class DraftSessionsClient {
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: mergeAdditionalBodyParameters(
-                serializers.private_.agents.private_.CreateDraftSessionRequest.jsonOrThrow(request, {
+                serializers.private_.agents.private_.CreateDraftSessionRequest.jsonOrThrow(_body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,

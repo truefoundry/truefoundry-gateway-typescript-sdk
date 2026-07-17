@@ -6,7 +6,7 @@ import type * as serializers from "../../../../../../../../index.js";
 
 export const CreateSessionRequest: core.serialization.Schema<
     serializers.private_.agents.CreateSessionRequest.Raw,
-    TrueFoundryGateway.private_.agents.CreateSessionRequest
+    Omit<TrueFoundryGateway.private_.agents.CreateSessionRequest, "tfyMetadata">
 > = core.serialization.object({
     agentName: core.serialization.property("agent_name", core.serialization.string()),
 });

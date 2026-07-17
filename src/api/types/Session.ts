@@ -3,6 +3,7 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface Session {
+    type: "session";
     id: string;
     agentName: string;
     title?: string;

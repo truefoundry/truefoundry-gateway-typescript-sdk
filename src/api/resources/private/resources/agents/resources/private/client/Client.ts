@@ -6,6 +6,7 @@ import {
     normalizeClientOptionsWithAuth,
 } from "../../../../../../../../BaseClient.js";
 import { DraftSessionsClient } from "../resources/draftSessions/client/Client.js";
+import { SessionsClient } from "../resources/sessions/client/Client.js";
 
 export declare namespace PrivateClient {
     export type Options = BaseClientOptions;
@@ -14,6 +15,7 @@ export declare namespace PrivateClient {
 export class PrivateClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<PrivateClient.Options>;
     protected _draftSessions: DraftSessionsClient | undefined;
+    protected _sessions: SessionsClient | undefined;
 
     constructor(options: PrivateClient.Options) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -21,5 +23,9 @@ export class PrivateClient {
 
     public get draftSessions(): DraftSessionsClient {
         return (this._draftSessions ??= new DraftSessionsClient(this._options));
+    }
+
+    public get sessions(): SessionsClient {
+        return (this._sessions ??= new SessionsClient(this._options));
     }
 }
