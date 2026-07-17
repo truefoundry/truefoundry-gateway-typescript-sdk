@@ -16,53 +16,54 @@ type RequestOptions = SessionsClient.RequestOptions;
  * hold a SessionMixin and delegate prepareTurn / listTurns / getTurn / cancel / listEvents to it,
  * so the two session wrappers expose identical turn operations without duplicating logic.
  *
- * The owning wrapper passes itself in at construction so that turns created here expose the enriched
- * wrapper (with `agentName`, `title`, etc.) as `turn.session`, not the bare mixin.
+ * The owning wrapper is NOT stored on the mixin (that back-reference would form an AgentSession
+ * <-> SessionMixin cycle that outlives both and burdens GC). Instead the wrapper passes itself as
+ * the first argument to each turn-producing method, so turns still expose the enriched wrapper
+ * (with `agentName`, `title`, etc.) as `turn.session`.
  */
 export class SessionMixin {
     /** Unique identifier of the session these turn operations target. */
     readonly id: string;
     readonly #client: TrueFoundryGateway;
-    readonly #owner: AgentSession | AgentDraftSession;
 
-    constructor(id: string, client: TrueFoundryGateway, owner: AgentSession | AgentDraftSession) {
+    constructor(id: string, client: TrueFoundryGateway) {
         this.id = id;
         this.#client = client;
-        this.#owner = owner;
     }
 
     /**
      * Stage a turn locally; call `execute()` to start `createTurn`.
      *
+     * @param owner - Enriched wrapper surfaced as `turn.session` on the resulting turn.
      * @param opts.input - Turn input items passed to createTurn.
      * @param opts.previousTurnId - Previous turn to chain from. Default `auto`.
      * @returns {PreparedTurn} Staged turn.
      */
-    prepareTurn(opts?: {
-        input?: TrueFoundryGatewayApi.TurnInputItem[];
-        previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput;
-    }): PreparedTurn {
-        return new PreparedTurn(
-            { input: opts?.input, previousTurnId: opts?.previousTurnId },
-            this.#owner,
-            this.#client,
-        );
+    prepareTurn(
+        owner: AgentSession | AgentDraftSession,
+        opts?: {
+            input?: TrueFoundryGatewayApi.TurnInputItem[];
+            previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput;
+        },
+    ): PreparedTurn {
+        return new PreparedTurn({ input: opts?.input, previousTurnId: opts?.previousTurnId }, owner, this.#client);
     }
 
     /**
      * List turns in this session.
      *
+     * @param owner - Enriched wrapper surfaced as `turn.session` on each listed turn.
      * @param opts.pageToken - Token from the previous response nextPageToken.
      * @param opts.limit - Page size. Default 10.
      * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
      * @returns {core.Page<Turn, TrueFoundryGatewayApi.ListTurnsResponse>} Paginated turns.
      */
     async listTurns(
+        owner: AgentSession | AgentDraftSession,
         opts?: TrueFoundryGatewayApi.agents.SessionsListTurnsRequest,
         requestOptions?: RequestOptions,
     ): Promise<core.Page<Turn, TrueFoundryGatewayApi.ListTurnsResponse>> {
         const client = this.#client;
-        const owner = this.#owner;
         const sessionId = this.id;
         const page = await client.agents.sessions.listTurns(sessionId, opts, requestOptions);
         return new core.Page({
@@ -86,13 +87,18 @@ export class SessionMixin {
     /**
      * Fetch a turn by ID.
      *
+     * @param owner - Enriched wrapper surfaced as `turn.session` on the resulting turn.
      * @param opts.turnId - Unique identifier of the turn to fetch.
      * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
      * @returns {Turn} Turn data.
      */
-    async getTurn(opts: { turnId: string }, requestOptions?: RequestOptions): Promise<Turn> {
+    async getTurn(
+        owner: AgentSession | AgentDraftSession,
+        opts: { turnId: string },
+        requestOptions?: RequestOptions,
+    ): Promise<Turn> {
         const response = await this.#client.agents.sessions.getTurn(this.id, opts.turnId, requestOptions);
-        return new Turn(response.data, this.#owner, this.#client);
+        return new Turn(response.data, owner, this.#client);
     }
 
     /**

@@ -42,7 +42,7 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
         this.createdBySubject = session.createdBySubject;
         this.createdAt = session.createdAt;
         this.updatedAt = session.updatedAt;
-        this.#mixin = new SessionMixin(session.id, client, this);
+        this.#mixin = new SessionMixin(session.id, client);
     }
 
     /**
@@ -56,7 +56,7 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
         input?: TrueFoundryGatewayApi.TurnInputItem[];
         previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput;
     }): PreparedTurn {
-        return this.#mixin.prepareTurn(opts);
+        return this.#mixin.prepareTurn(this, opts);
     }
 
     /**
@@ -71,7 +71,7 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
         opts?: TrueFoundryGatewayApi.agents.SessionsListTurnsRequest,
         requestOptions?: RequestOptions,
     ): Promise<core.Page<Turn, TrueFoundryGatewayApi.ListTurnsResponse>> {
-        return this.#mixin.listTurns(opts, requestOptions);
+        return this.#mixin.listTurns(this, opts, requestOptions);
     }
 
     /**
@@ -82,7 +82,7 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
      * @returns {Turn} Turn data.
      */
     getTurn(opts: { turnId: string }, requestOptions?: RequestOptions): Promise<Turn> {
-        return this.#mixin.getTurn(opts, requestOptions);
+        return this.#mixin.getTurn(this, opts, requestOptions);
     }
 
     /**
