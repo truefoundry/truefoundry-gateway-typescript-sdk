@@ -2,7 +2,8 @@ import type * as TrueFoundryGatewayApi from "../api/index.js";
 import type { SessionsClient } from "../api/resources/private/resources/agents/resources/sessions/client/Client.js";
 import type { TrueFoundryGateway } from "../CustomClient.js";
 import type * as core from "../core/index.js";
-import type { OwnedSession } from "./SessionMixin.js";
+import type { AgentSession } from "./AgentSession.js";
+import type { AgentDraftSession } from "./private/AgentDraftSession.js";
 import { Turn } from "./Turn.js";
 import { parseSequenceNumber, type TurnStreamData } from "./TurnStreamData.js";
 
@@ -19,7 +20,7 @@ export interface PreparedTurnInit {
 // a real Turn (the only place the createTurn SSE lives), then delegates everything to that inner Turn.
 export class PreparedTurn implements Partial<TrueFoundryGatewayApi.Turn> {
     /** Parent session this prepared turn belongs to. */
-    readonly session: OwnedSession;
+    readonly session: AgentSession | AgentDraftSession;
     /** Identifier of the parent session. */
     readonly sessionId: string;
     readonly #client: TrueFoundryGateway;
@@ -28,7 +29,7 @@ export class PreparedTurn implements Partial<TrueFoundryGatewayApi.Turn> {
     #start?: Promise<core.Stream<TrueFoundryGatewayApi.TurnStreamingEvent>>; // in-flight createTurn; also the one-shot latch
     #turn?: Turn; // the real Turn, created once started
 
-    constructor(init: PreparedTurnInit, session: OwnedSession, client: TrueFoundryGateway) {
+    constructor(init: PreparedTurnInit, session: AgentSession | AgentDraftSession, client: TrueFoundryGateway) {
         this.session = session;
         this.sessionId = session.id;
         this.#client = client;

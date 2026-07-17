@@ -11,9 +11,6 @@ import { Turn } from "./Turn.js";
 // SessionsClient is NOT re-exported under TrueFoundryGateway.agents, so import it directly (as AgentSession does).
 type RequestOptions = SessionsClient.RequestOptions;
 
-/** The enriched session wrapper that owns a {@link SessionMixin} and is surfaced as `turn.session`. */
-export type OwnedSession = AgentSession | AgentDraftSession;
-
 /**
  * Shared turn behavior keyed by a session id. Both {@link AgentSession} and {@link AgentDraftSession}
  * hold a SessionMixin and delegate prepareTurn / listTurns / getTurn / cancel / listEvents to it,
@@ -26,9 +23,9 @@ export class SessionMixin {
     /** Unique identifier of the session these turn operations target. */
     readonly id: string;
     readonly #client: TrueFoundryGateway;
-    readonly #owner: OwnedSession;
+    readonly #owner: AgentSession | AgentDraftSession;
 
-    constructor(id: string, client: TrueFoundryGateway, owner: OwnedSession) {
+    constructor(id: string, client: TrueFoundryGateway, owner: AgentSession | AgentDraftSession) {
         this.id = id;
         this.#client = client;
         this.#owner = owner;
