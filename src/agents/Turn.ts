@@ -3,6 +3,7 @@ import type { SessionsClient } from "../api/resources/private/resources/agents/r
 import type { TrueFoundryGateway } from "../CustomClient.js";
 import type * as core from "../core/index.js";
 import type { AgentSession } from "./AgentSession.js";
+import type { AgentDraftSession } from "./private/AgentDraftSession.js";
 import { parseSequenceNumber, type TurnStreamData } from "./TurnStreamData.js";
 
 // Per-request overrides (abortSignal / timeoutInSeconds / maxRetries / headers) forwarded to every autogen call.
@@ -30,11 +31,11 @@ export class Turn implements TrueFoundryGatewayApi.Turn {
     /** ISO-8601 timestamp when the turn was created. */
     readonly createdAt: string;
     /** Parent session this turn belongs to. */
-    readonly session: AgentSession;
+    readonly session: AgentSession | AgentDraftSession;
     readonly #client: TrueFoundryGateway;
     #state: TrueFoundryGatewayApi.TurnState;
 
-    constructor(turn: TrueFoundryGatewayApi.Turn, session: AgentSession, client: TrueFoundryGateway) {
+    constructor(turn: TrueFoundryGatewayApi.Turn, session: AgentSession | AgentDraftSession, client: TrueFoundryGateway) {
         this.id = turn.id;
         this.sessionId = turn.sessionId;
         this.previousTurnId = turn.previousTurnId;
