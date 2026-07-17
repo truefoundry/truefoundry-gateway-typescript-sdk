@@ -99,17 +99,6 @@
                 "types": "./dist/cjs/agents/index.d.ts",
                 "default": "./dist/cjs/agents/index.js"
             }
-        },
-        "./agents/private": {
-            "types": "./dist/cjs/agents/private/index.d.ts",
-            "import": {
-                "types": "./dist/esm/agents/private/index.d.mts",
-                "default": "./dist/esm/agents/private/index.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/agents/private/index.d.ts",
-                "default": "./dist/cjs/agents/private/index.js"
-            }
         }
     },
     "files": [

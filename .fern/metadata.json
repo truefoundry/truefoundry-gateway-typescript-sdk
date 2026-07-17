@@ -15,17 +15,6 @@
                         "types": "./dist/cjs/agents/index.d.ts",
                         "default": "./dist/cjs/agents/index.js"
                     }
-                },
-                "./agents/private": {
-                    "types": "./dist/cjs/agents/private/index.d.ts",
-                    "import": {
-                        "types": "./dist/esm/agents/private/index.d.mts",
-                        "default": "./dist/esm/agents/private/index.mjs"
-                    },
-                    "require": {
-                        "types": "./dist/cjs/agents/private/index.d.ts",
-                        "default": "./dist/cjs/agents/private/index.js"
-                    }
                 }
             }
         },
@@ -49,7 +38,7 @@
         "streamType": "web",
         "useDefaultRequestParameterValues": true
     },
-    "originGitCommit": "2f9deee63b00cdca65af0e1f8acf738afd0bd208",
+    "originGitCommit": "2a9c9378bb0f8668f4a697b9fe2d807419b06138",
     "originGitCommitIsDirty": false,
     "invokedBy": "ci",
     "requestedVersion": "0.0.0",
