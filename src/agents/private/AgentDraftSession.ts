@@ -1,8 +1,9 @@
 import type * as TrueFoundryGatewayApi from "../../api/index.js";
 import type { SessionsClient } from "../../api/resources/private/resources/agents/resources/sessions/client/Client.js";
+import type { TrueFoundryGateway } from "../../CustomClient.js";
 import type * as core from "../../core/index.js";
 import type { PreparedTurn } from "../PreparedTurn.js";
-import type { SessionMixin } from "../SessionMixin.js";
+import { SessionMixin } from "../SessionMixin.js";
 import type { Turn } from "../Turn.js";
 
 // Per-request overrides (abortSignal / timeoutInSeconds / maxRetries / headers) forwarded to every autogen call.
@@ -33,7 +34,7 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
     readonly updatedAt: string;
     readonly #mixin: SessionMixin;
 
-    constructor(session: TrueFoundryGatewayApi.DraftSession, sessionMixin: SessionMixin) {
+    constructor(session: TrueFoundryGatewayApi.DraftSession, client: TrueFoundryGateway) {
         this.id = session.id;
         this.agentSpec = session.agentSpec;
         this.agentName = session.agentName;
@@ -41,7 +42,7 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
         this.createdBySubject = session.createdBySubject;
         this.createdAt = session.createdAt;
         this.updatedAt = session.updatedAt;
-        this.#mixin = sessionMixin;
+        this.#mixin = new SessionMixin(session.id, client, this);
     }
 
     /**

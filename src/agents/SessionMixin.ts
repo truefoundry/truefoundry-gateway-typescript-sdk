@@ -2,26 +2,36 @@ import type * as TrueFoundryGatewayApi from "../api/index.js";
 import type { SessionsClient } from "../api/resources/private/resources/agents/resources/sessions/client/Client.js";
 import type { TrueFoundryGateway } from "../CustomClient.js";
 import * as core from "../core/index.js";
+import type { AgentSession } from "./AgentSession.js";
 import { PreparedTurn } from "./PreparedTurn.js";
+import type { AgentDraftSession } from "./private/AgentDraftSession.js";
 import { Turn } from "./Turn.js";
 
 // Per-request overrides (abortSignal / timeoutInSeconds / maxRetries / headers) forwarded to every autogen call.
 // SessionsClient is NOT re-exported under TrueFoundryGateway.agents, so import it directly (as AgentSession does).
 type RequestOptions = SessionsClient.RequestOptions;
 
+/** The enriched session wrapper that owns a {@link SessionMixin} and is surfaced as `turn.session`. */
+export type OwnedSession = AgentSession | AgentDraftSession;
+
 /**
- * Shared turn behavior keyed by a session id. Both {@link AgentSession} and AgentDraftSession
+ * Shared turn behavior keyed by a session id. Both {@link AgentSession} and {@link AgentDraftSession}
  * hold a SessionMixin and delegate prepareTurn / listTurns / getTurn / cancel / listEvents to it,
  * so the two session wrappers expose identical turn operations without duplicating logic.
+ *
+ * The owning wrapper passes itself in at construction so that turns created here expose the enriched
+ * wrapper (with `agentName`, `title`, etc.) as `turn.session`, not the bare mixin.
  */
 export class SessionMixin {
     /** Unique identifier of the session these turn operations target. */
     readonly id: string;
     readonly #client: TrueFoundryGateway;
+    readonly #owner: OwnedSession;
 
-    constructor(id: string, client: TrueFoundryGateway) {
+    constructor(id: string, client: TrueFoundryGateway, owner: OwnedSession) {
         this.id = id;
         this.#client = client;
+        this.#owner = owner;
     }
 
     /**
@@ -35,7 +45,11 @@ export class SessionMixin {
         input?: TrueFoundryGatewayApi.TurnInputItem[];
         previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput;
     }): PreparedTurn {
-        return new PreparedTurn({ input: opts?.input, previousTurnId: opts?.previousTurnId }, this, this.#client);
+        return new PreparedTurn(
+            { input: opts?.input, previousTurnId: opts?.previousTurnId },
+            this.#owner,
+            this.#client,
+        );
     }
 
     /**
@@ -51,13 +65,14 @@ export class SessionMixin {
         requestOptions?: RequestOptions,
     ): Promise<core.Page<Turn, TrueFoundryGatewayApi.ListTurnsResponse>> {
         const client = this.#client;
+        const owner = this.#owner;
         const sessionId = this.id;
         const page = await client.agents.sessions.listTurns(sessionId, opts, requestOptions);
         return new core.Page({
             response: page.response,
             rawResponse: page.rawResponse,
             hasNextPage: (response) => !!response?.pagination.nextPageToken,
-            getItems: (response) => (response?.data ?? []).map((turn) => new Turn(turn, this, client)),
+            getItems: (response) => (response?.data ?? []).map((turn) => new Turn(turn, owner, client)),
             loadPage: (response) =>
                 core.HttpResponsePromise.fromPromise(
                     client.agents.sessions
@@ -80,7 +95,7 @@ export class SessionMixin {
      */
     async getTurn(opts: { turnId: string }, requestOptions?: RequestOptions): Promise<Turn> {
         const response = await this.#client.agents.sessions.getTurn(this.id, opts.turnId, requestOptions);
-        return new Turn(response.data, this, this.#client);
+        return new Turn(response.data, this.#owner, this.#client);
     }
 
     /**

@@ -170,5 +170,66 @@ describe("PrivateAgentSessionClient", () => {
             const turns = await draft.listTurns();
             expect(turns.data).toEqual([]);
         });
+
+        it("prepareTurn().session is the enriched owner, not the bare mixin", async () => {
+            const server = mockServerPool.createServer();
+            const client = newClient(server.baseUrl);
+
+            server
+                .mockEndpoint({ once: false })
+                .get("/v1/x/agents/sessions/owned-sessions")
+                .respondWith()
+                .statusCode(200)
+                .jsonBody({
+                    data: [RAW_DRAFT],
+                    pagination: { next_page_token: "", previous_page_token: "", limit: 10 },
+                })
+                .build();
+
+            const [draft] = (await client.listOwnedSessions()).data;
+            const prepared = draft.prepareTurn();
+            expect(prepared.session).toBe(draft);
+            expect(prepared.session).toBeInstanceOf(AgentDraftSession);
+            expect((prepared.session as AgentDraftSession).agentName).toBe("agent_name");
+        });
+
+        it("getTurn().session is the enriched owner with parent metadata", async () => {
+            const server = mockServerPool.createServer();
+            const client = newClient(server.baseUrl);
+
+            server
+                .mockEndpoint({ once: false })
+                .get("/v1/x/agents/sessions/owned-sessions")
+                .respondWith()
+                .statusCode(200)
+                .jsonBody({
+                    data: [RAW_SESSION],
+                    pagination: { next_page_token: "", previous_page_token: "", limit: 10 },
+                })
+                .build();
+
+            server
+                .mockEndpoint({ once: false })
+                .get("/v1/agents/sessions/session-1/turns/turn-1")
+                .respondWith()
+                .statusCode(200)
+                .jsonBody({
+                    data: {
+                        id: "turn-1",
+                        session_id: "session-1",
+                        created_by_subject: SUBJECT,
+                        created_at: "2026-01-01T00:00:00Z",
+                        state: { status: "completed", output: [] },
+                    },
+                })
+                .build();
+
+            const [session] = (await client.listOwnedSessions()).data;
+            const turn = await session.getTurn({ turnId: "turn-1" });
+            expect(turn.session).toBe(session);
+            expect(turn.session).toBeInstanceOf(AgentSession);
+            expect((turn.session as AgentSession).agentName).toBe("agent_name");
+            expect((turn.session as AgentSession).title).toBe("a session");
+        });
     });
 });

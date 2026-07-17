@@ -2,7 +2,6 @@ import type * as TrueFoundryGatewayApi from "../../api/index.js";
 import * as core from "../../core/index.js";
 import { AgentSession } from "../AgentSession.js";
 import { AgentSessionClient } from "../AgentSessionClient.js";
-import { SessionMixin } from "../SessionMixin.js";
 import { AgentDraftSession } from "./AgentDraftSession.js";
 
 /**
@@ -33,8 +32,7 @@ export class PrivateAgentSessionClient extends AgentSessionClient {
             response: page.response,
             rawResponse: page.rawResponse,
             hasNextPage: (response) => !!response?.pagination.nextPageToken,
-            getItems: (response) =>
-                (response?.data ?? []).map((draft) => new AgentDraftSession(draft, new SessionMixin(draft.id, client))),
+            getItems: (response) => (response?.data ?? []).map((draft) => new AgentDraftSession(draft, client)),
             loadPage: (response) =>
                 core.HttpResponsePromise.fromPromise(
                     client.agents.private.draftSessions
@@ -80,12 +78,11 @@ export class PrivateAgentSessionClient extends AgentSessionClient {
     private wrapOwnedSession(
         raw: TrueFoundryGatewayApi.ListOwnedSessionsResponseDataItem,
     ): AgentSession | AgentDraftSession {
-        const mixin = new SessionMixin(raw.id, this.client);
         switch (raw.type) {
             case "session/draft":
-                return new AgentDraftSession(raw, mixin);
+                return new AgentDraftSession(raw, this.client);
             case "session":
-                return new AgentSession(raw, mixin);
+                return new AgentSession(raw, this.client);
             default:
                 throw new Error(`Unknown owned session type`);
         }
