@@ -1,15 +1,59 @@
 import type * as TrueFoundryGatewayApi from "../../api/index.js";
+import type { SessionsClient } from "../../api/resources/private/resources/agents/resources/sessions/client/Client.js";
+import { TrueFoundryGateway } from "../../CustomClient.js";
 import * as core from "../../core/index.js";
 import { AgentSession } from "../AgentSession.js";
-import { AgentSessionClient } from "../AgentSessionClient.js";
 import { AgentDraftSession } from "./AgentDraftSession.js";
 
+export declare namespace PrivateAgentSessionClient {
+    export type Options = TrueFoundryGateway.Options;
+    export type RequestOptions = SessionsClient.RequestOptions;
+}
+
 /**
- * High-level client for caller-scoped ("owned") agent sessions. Extends {@link AgentSessionClient}
- * with listings that span a subject's saved sessions and drafts, returning enriched
- * {@link AgentSession} / {@link AgentDraftSession} objects instead of raw response types.
+ * High-level client for caller-scoped agent session internals: draft session create/get and listings
+ * that span a subject's saved sessions and drafts, returning enriched {@link AgentSession} /
+ * {@link AgentDraftSession} objects instead of raw response types.
  */
-export class PrivateAgentSessionClient extends AgentSessionClient {
+export class PrivateAgentSessionClient {
+    private readonly client: TrueFoundryGateway;
+
+    constructor(options: PrivateAgentSessionClient.Options) {
+        this.client = new TrueFoundryGateway(options);
+    }
+
+    /**
+     * Create a draft session holding an inline agent spec, optionally linked to a saved agent.
+     *
+     * @param opts.agentSpec - Inline agent spec held by the draft.
+     * @param opts.agentName - Optionally link the draft to an existing saved agent. Omit for a standalone draft.
+     * @param opts.tfyMetadata - Optional request metadata (x-tfy-metadata) persisted at creation.
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {AgentDraftSession} The created draft session.
+     */
+    async createDraftSession(
+        opts: TrueFoundryGatewayApi.agents.private_.CreateDraftSessionRequest,
+        requestOptions?: PrivateAgentSessionClient.RequestOptions,
+    ): Promise<AgentDraftSession> {
+        const response = await this.client.agents.private.draftSessions.create(opts, requestOptions);
+        return new AgentDraftSession(response.data, this.client);
+    }
+
+    /**
+     * Fetch a draft session by ID (owner-only).
+     *
+     * @param opts.draftSessionId - Unique identifier of the draft session to fetch.
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {AgentDraftSession} Draft session data.
+     */
+    async getDraftSession(
+        opts: { draftSessionId: string },
+        requestOptions?: PrivateAgentSessionClient.RequestOptions,
+    ): Promise<AgentDraftSession> {
+        const response = await this.client.agents.private.draftSessions.get(opts.draftSessionId, requestOptions);
+        return new AgentDraftSession(response.data, this.client);
+    }
+
     /**
      * List the caller-owned draft sessions (newest first by default).
      *
@@ -24,7 +68,7 @@ export class PrivateAgentSessionClient extends AgentSessionClient {
      */
     async listDraftSessions(
         opts: TrueFoundryGatewayApi.agents.private_.DraftSessionsListRequest = {},
-        requestOptions?: AgentSessionClient.RequestOptions,
+        requestOptions?: PrivateAgentSessionClient.RequestOptions,
     ): Promise<core.Page<AgentDraftSession, TrueFoundryGatewayApi.ListDraftSessionsResponse>> {
         const client = this.client;
         const page = await client.agents.private.draftSessions.list(opts, requestOptions);
@@ -56,7 +100,7 @@ export class PrivateAgentSessionClient extends AgentSessionClient {
      */
     async listOwnedSessions(
         opts: TrueFoundryGatewayApi.agents.private_.SessionsListOwnedSessionsRequest = {},
-        requestOptions?: AgentSessionClient.RequestOptions,
+        requestOptions?: PrivateAgentSessionClient.RequestOptions,
     ): Promise<core.Page<AgentSession | AgentDraftSession, TrueFoundryGatewayApi.ListOwnedSessionsResponse>> {
         const client = this.client;
         const page = await client.agents.private.sessions.listOwnedSessions(opts, requestOptions);

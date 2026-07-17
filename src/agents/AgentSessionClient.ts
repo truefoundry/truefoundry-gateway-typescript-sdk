@@ -14,7 +14,7 @@ export declare namespace AgentSessionClient {
  * enriched AgentSession objects instead of raw response types.
  */
 export class AgentSessionClient {
-    protected readonly client: TrueFoundryGateway;
+    private readonly client: TrueFoundryGateway;
 
     constructor(options: AgentSessionClient.Options) {
         this.client = new TrueFoundryGateway(options);
