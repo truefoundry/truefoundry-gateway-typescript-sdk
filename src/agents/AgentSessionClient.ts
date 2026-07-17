@@ -3,6 +3,7 @@ import type { SessionsClient } from "../api/resources/private/resources/agents/r
 import { TrueFoundryGateway } from "../CustomClient.js";
 import * as core from "../core/index.js";
 import { AgentSession } from "./AgentSession.js";
+import { SessionMixin } from "./SessionMixin.js";
 
 export declare namespace AgentSessionClient {
     export type Options = TrueFoundryGateway.Options;
@@ -14,7 +15,7 @@ export declare namespace AgentSessionClient {
  * enriched AgentSession objects instead of raw response types.
  */
 export class AgentSessionClient {
-    private readonly client: TrueFoundryGateway;
+    protected readonly client: TrueFoundryGateway;
 
     constructor(options: AgentSessionClient.Options) {
         this.client = new TrueFoundryGateway(options);
@@ -32,7 +33,7 @@ export class AgentSessionClient {
         requestOptions?: AgentSessionClient.RequestOptions,
     ): Promise<AgentSession> {
         const response = await this.client.agents.sessions.create(opts, requestOptions);
-        return new AgentSession(response.data, this.client);
+        return new AgentSession(response.data, new SessionMixin(response.data.id, this.client));
     }
 
     /**
@@ -57,7 +58,10 @@ export class AgentSessionClient {
             response: page.response,
             rawResponse: page.rawResponse,
             hasNextPage: (response) => !!response?.pagination.nextPageToken,
-            getItems: (response) => (response?.data ?? []).map((session) => new AgentSession(session, client)),
+            getItems: (response) =>
+                (response?.data ?? []).map(
+                    (session) => new AgentSession(session, new SessionMixin(session.id, client)),
+                ),
             loadPage: (response) =>
                 core.HttpResponsePromise.fromPromise(
                     client.agents.sessions
@@ -82,6 +86,6 @@ export class AgentSessionClient {
         requestOptions?: AgentSessionClient.RequestOptions,
     ): Promise<AgentSession> {
         const response = await this.client.agents.sessions.get(opts.sessionId, requestOptions);
-        return new AgentSession(response.data, this.client);
+        return new AgentSession(response.data, new SessionMixin(response.data.id, this.client));
     }
 }

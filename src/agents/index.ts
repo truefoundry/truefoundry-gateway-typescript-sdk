@@ -33,5 +33,8 @@ export { AgentSessionClient } from "./AgentSessionClient.js";
 export type { DeltaEvents } from "./eventDelta.js";
 export { isEventDelta, mergeEventDelta } from "./eventDelta.js";
 export type { PreparedTurn } from "./PreparedTurn.js";
+export type { AgentDraftSession } from "./private/AgentDraftSession.js";
+export { PrivateAgentSessionClient } from "./private/PrivateAgentSessionClient.js";
+export type { SessionMixin } from "./SessionMixin.js";
 export type { Turn } from "./Turn.js";
 export type { TurnStreamData } from "./TurnStreamData.js";

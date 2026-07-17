@@ -1,37 +1,41 @@
-import type * as TrueFoundryGatewayApi from "../api/index.js";
-import type { SessionsClient } from "../api/resources/private/resources/agents/resources/sessions/client/Client.js";
-import type * as core from "../core/index.js";
-import type { PreparedTurn } from "./PreparedTurn.js";
-import type { SessionMixin } from "./SessionMixin.js";
-import type { Turn } from "./Turn.js";
+import type * as TrueFoundryGatewayApi from "../../api/index.js";
+import type { SessionsClient } from "../../api/resources/private/resources/agents/resources/sessions/client/Client.js";
+import type * as core from "../../core/index.js";
+import type { PreparedTurn } from "../PreparedTurn.js";
+import type { SessionMixin } from "../SessionMixin.js";
+import type { Turn } from "../Turn.js";
 
 // Per-request overrides (abortSignal / timeoutInSeconds / maxRetries / headers) forwarded to every autogen call.
-// SessionsClient is NOT re-exported under TrueFoundryGateway.agents, so import it directly (as AgentSessionClient does).
+// SessionsClient is NOT re-exported under TrueFoundryGateway.agents, so import it directly (as AgentSession does).
 type RequestOptions = SessionsClient.RequestOptions;
 
 /**
- * A session enriched with convenience methods: prepareTurn, listTurns, getTurn, listEvents, cancel.
- * Turn operations are delegated to a shared {@link SessionMixin}.
+ * A draft session enriched with the same convenience methods as {@link AgentSession}:
+ * prepareTurn, listTurns, getTurn, listEvents, cancel. Turn operations are delegated to a
+ * shared {@link SessionMixin}, so drafts and saved sessions expose an identical turn API.
  */
-export class AgentSession implements TrueFoundryGatewayApi.Session {
-    /** Discriminant distinguishing a saved session from a draft session. */
-    readonly type: "session" = "session";
-    /** Unique identifier of this session. */
+export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
+    /** Discriminant distinguishing a draft session from a saved session. */
+    readonly type: "session/draft" = "session/draft";
+    /** Unique identifier of this draft session. */
     readonly id: string;
-    /** Name of the agent for this session. */
-    readonly agentName: string;
-    /** Optional user-visible title for the session. */
+    /** Inline agent spec held by this draft. */
+    readonly agentSpec: TrueFoundryGatewayApi.AgentSpec;
+    /** Optional saved agent this draft is linked to. */
+    readonly agentName?: string;
+    /** Optional user-visible title for the draft session. */
     readonly title?: string;
-    /** Subject that created this session. */
+    /** Subject that created this draft session. */
     readonly createdBySubject: TrueFoundryGatewayApi.Subject;
-    /** ISO-8601 timestamp when the session was created. */
+    /** ISO-8601 timestamp when the draft session was created. */
     readonly createdAt: string;
-    /** ISO-8601 timestamp when the session was last updated. */
+    /** ISO-8601 timestamp when the draft session was last updated. */
     readonly updatedAt: string;
     readonly #mixin: SessionMixin;
 
-    constructor(session: TrueFoundryGatewayApi.Session, sessionMixin: SessionMixin) {
+    constructor(session: TrueFoundryGatewayApi.DraftSession, sessionMixin: SessionMixin) {
         this.id = session.id;
+        this.agentSpec = session.agentSpec;
         this.agentName = session.agentName;
         this.title = session.title;
         this.createdBySubject = session.createdBySubject;
