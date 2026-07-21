@@ -21,8 +21,6 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
     readonly type: "session/draft" = "session/draft";
     /** Unique identifier of this draft session. */
     readonly id: string;
-    /** Inline agent spec held by this draft. */
-    readonly agentSpec: TrueFoundryGatewayApi.AgentSpec;
     /** Optional saved agent this draft is linked to. */
     readonly agentName?: string;
     /** Optional user-visible title for the draft session. */
@@ -31,37 +29,49 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
     readonly createdBySubject: TrueFoundryGatewayApi.Subject;
     /** ISO-8601 timestamp when the draft session was created. */
     readonly createdAt: string;
-    /** ISO-8601 timestamp when the draft session was last updated. */
-    readonly updatedAt: string;
     readonly #client: TrueFoundryGateway;
     readonly #mixin: SessionMixin;
+    // Volatile fields refreshed in place by update(); getter-backed to stay read-only externally.
+    #agentSpec: TrueFoundryGatewayApi.AgentSpec;
+    #updatedAt: string;
 
     constructor(session: TrueFoundryGatewayApi.DraftSession, client: TrueFoundryGateway) {
         this.id = session.id;
-        this.agentSpec = session.agentSpec;
         this.agentName = session.agentName;
         this.title = session.title;
         this.createdBySubject = session.createdBySubject;
         this.createdAt = session.createdAt;
-        this.updatedAt = session.updatedAt;
+        this.#agentSpec = session.agentSpec;
+        this.#updatedAt = session.updatedAt;
         this.#client = client;
         this.#mixin = new SessionMixin(session.id, client);
     }
 
+    /** Inline agent spec held by this draft. Updated in place by `update()`. */
+    get agentSpec(): TrueFoundryGatewayApi.AgentSpec {
+        return this.#agentSpec;
+    }
+
+    /** ISO-8601 timestamp when the draft session was last updated. Updated in place by `update()`. */
+    get updatedAt(): string {
+        return this.#updatedAt;
+    }
+
     /**
      * Update this draft session's inline agent spec (owner-only). An empty body is a valid no-op that
-     * just refreshes `updatedAt`.
+     * just refreshes `updatedAt`. Mutates `agentSpec` and `updatedAt` on this instance in place.
      *
      * @param opts.agentSpec - New inline agent spec for the draft. Omit to leave the spec unchanged.
      * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
-     * @returns {AgentDraftSession} A new wrapper reflecting the updated draft session.
+     * @returns {void}
      */
     async update(
         opts: TrueFoundryGatewayApi.agents.private_.UpdateDraftSessionRequest = {},
         requestOptions?: RequestOptions,
-    ): Promise<AgentDraftSession> {
+    ): Promise<void> {
         const response = await this.#client.agents.private.draftSessions.update(this.id, opts, requestOptions);
-        return new AgentDraftSession(response.data, this.#client);
+        this.#agentSpec = response.data.agentSpec;
+        this.#updatedAt = response.data.updatedAt;
     }
 
     /**
