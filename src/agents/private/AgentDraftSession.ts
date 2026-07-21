@@ -11,9 +11,10 @@ import type { Turn } from "../Turn.js";
 type RequestOptions = SessionsClient.RequestOptions;
 
 /**
- * A draft session enriched with the same convenience methods as {@link AgentSession}:
- * prepareTurn, listTurns, getTurn, listEvents, cancel. Turn operations are delegated to a
- * shared {@link SessionMixin}, so drafts and saved sessions expose an identical turn API.
+ * A draft session enriched with convenience methods: update (draft-specific) plus the same turn
+ * helpers as {@link AgentSession} (prepareTurn, listTurns, getTurn, listEvents, cancel). Turn
+ * operations are delegated to a shared {@link SessionMixin}, so drafts and saved sessions expose an
+ * identical turn API.
  */
 export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
     /** Discriminant distinguishing a draft session from a saved session. */
@@ -32,6 +33,7 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
     readonly createdAt: string;
     /** ISO-8601 timestamp when the draft session was last updated. */
     readonly updatedAt: string;
+    readonly #client: TrueFoundryGateway;
     readonly #mixin: SessionMixin;
 
     constructor(session: TrueFoundryGatewayApi.DraftSession, client: TrueFoundryGateway) {
@@ -42,7 +44,24 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
         this.createdBySubject = session.createdBySubject;
         this.createdAt = session.createdAt;
         this.updatedAt = session.updatedAt;
+        this.#client = client;
         this.#mixin = new SessionMixin(session.id, client);
+    }
+
+    /**
+     * Update this draft session's inline agent spec (owner-only). An empty body is a valid no-op that
+     * just refreshes `updatedAt`.
+     *
+     * @param opts.agentSpec - New inline agent spec for the draft. Omit to leave the spec unchanged.
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {AgentDraftSession} A new wrapper reflecting the updated draft session.
+     */
+    async update(
+        opts: TrueFoundryGatewayApi.agents.private_.UpdateDraftSessionRequest = {},
+        requestOptions?: RequestOptions,
+    ): Promise<AgentDraftSession> {
+        const response = await this.#client.agents.private.draftSessions.update(this.id, opts, requestOptions);
+        return new AgentDraftSession(response.data, this.#client);
     }
 
     /**
