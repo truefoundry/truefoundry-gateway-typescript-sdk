@@ -7,8 +7,8 @@ import type * as serializers from "../index.js";
 export const TurnStateCancelledReason: core.serialization.Schema<
     serializers.TurnStateCancelledReason.Raw,
     TrueFoundryGateway.TurnStateCancelledReason
-> = core.serialization.enum_(["server-execution-timeout", "client-cancelled", "cancelled-for-next-turn"]);
+> = core.serialization.enum_(["server-execution-timeout", "client-cancelled", "cancelled-for-next-turn", "abandoned"]);
 
 export declare namespace TurnStateCancelledReason {
-    export type Raw = "server-execution-timeout" | "client-cancelled" | "cancelled-for-next-turn";
+    export type Raw = "server-execution-timeout" | "client-cancelled" | "cancelled-for-next-turn" | "abandoned";
 }

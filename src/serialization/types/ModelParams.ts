@@ -3,6 +3,7 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
+import { ModelParamsCacheControl } from "./ModelParamsCacheControl.js";
 
 export const ModelParams: core.serialization.ObjectSchema<serializers.ModelParams.Raw, TrueFoundryGateway.ModelParams> =
     core.serialization.object({
@@ -12,6 +13,7 @@ export const ModelParams: core.serialization.ObjectSchema<serializers.ModelParam
         topK: core.serialization.property("top_k", core.serialization.number().optional()),
         parallelToolCalls: core.serialization.property("parallel_tool_calls", core.serialization.boolean().optional()),
         reasoningEffort: core.serialization.property("reasoning_effort", core.serialization.string().optional()),
+        cacheControl: core.serialization.property("cache_control", ModelParamsCacheControl.optional()),
     });
 
 export declare namespace ModelParams {
@@ -22,5 +24,6 @@ export declare namespace ModelParams {
         top_k?: number | null;
         parallel_tool_calls?: boolean | null;
         reasoning_effort?: string | null;
+        cache_control?: ModelParamsCacheControl.Raw | null;
     }
 }

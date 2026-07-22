@@ -3,42 +3,12 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { McpServerDisableToolsItem } from "./McpServerDisableToolsItem.js";
-import { McpServerEnableToolsItem } from "./McpServerEnableToolsItem.js";
-import { McpServerPreloadToolsItem } from "./McpServerPreloadToolsItem.js";
-import { McpServerRequireApprovalForToolsItem } from "./McpServerRequireApprovalForToolsItem.js";
+import { InlineMcpServer } from "./InlineMcpServer.js";
+import { RegistryMcpServer } from "./RegistryMcpServer.js";
 
-export const McpServer: core.serialization.ObjectSchema<serializers.McpServer.Raw, TrueFoundryGateway.McpServer> =
-    core.serialization.object({
-        name: core.serialization.string(),
-        headers: core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
-        enableTools: core.serialization.property(
-            "enable_tools",
-            core.serialization.list(McpServerEnableToolsItem).optional(),
-        ),
-        disableTools: core.serialization.property(
-            "disable_tools",
-            core.serialization.list(McpServerDisableToolsItem).optional(),
-        ),
-        preloadTools: core.serialization.property(
-            "preload_tools",
-            core.serialization.list(McpServerPreloadToolsItem).optional(),
-        ),
-        requireApprovalForTools: core.serialization.property(
-            "require_approval_for_tools",
-            core.serialization.list(McpServerRequireApprovalForToolsItem).optional(),
-        ),
-        preload: core.serialization.boolean().optional(),
-    });
+export const McpServer: core.serialization.Schema<serializers.McpServer.Raw, TrueFoundryGateway.McpServer> =
+    core.serialization.undiscriminatedUnion([RegistryMcpServer, InlineMcpServer]);
 
 export declare namespace McpServer {
-    export interface Raw {
-        name: string;
-        headers?: Record<string, string> | null;
-        enable_tools?: McpServerEnableToolsItem.Raw[] | null;
-        disable_tools?: McpServerDisableToolsItem.Raw[] | null;
-        preload_tools?: McpServerPreloadToolsItem.Raw[] | null;
-        require_approval_for_tools?: McpServerRequireApprovalForToolsItem.Raw[] | null;
-        preload?: boolean | null;
-    }
+    export type Raw = RegistryMcpServer.Raw | InlineMcpServer.Raw;
 }

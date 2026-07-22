@@ -3,6 +3,7 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
+import { SandboxNetworkPolicy } from "./SandboxNetworkPolicy.js";
 
 export const SandboxConfig: core.serialization.ObjectSchema<
     serializers.SandboxConfig.Raw,
@@ -10,11 +11,13 @@ export const SandboxConfig: core.serialization.ObjectSchema<
 > = core.serialization.object({
     enabled: core.serialization.boolean(),
     fileDownloads: core.serialization.property("file_downloads", core.serialization.boolean().optional()),
+    networkPolicy: core.serialization.property("network_policy", SandboxNetworkPolicy.optional()),
 });
 
 export declare namespace SandboxConfig {
     export interface Raw {
         enabled: boolean;
         file_downloads?: boolean | null;
+        network_policy?: SandboxNetworkPolicy.Raw | null;
     }
 }

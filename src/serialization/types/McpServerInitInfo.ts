@@ -3,6 +3,7 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
+import { McpServerInitInfoTransportType } from "./McpServerInitInfoTransportType.js";
 
 export const McpServerInitInfo: core.serialization.ObjectSchema<
     serializers.McpServerInitInfo.Raw,
@@ -11,6 +12,7 @@ export const McpServerInitInfo: core.serialization.ObjectSchema<
     id: core.serialization.string(),
     name: core.serialization.string(),
     sessionId: core.serialization.property("session_id", core.serialization.string().optional()),
+    transportType: core.serialization.property("transport_type", McpServerInitInfoTransportType.optional()),
 });
 
 export declare namespace McpServerInitInfo {
@@ -18,5 +20,6 @@ export declare namespace McpServerInitInfo {
         id: string;
         name: string;
         session_id?: string | null;
+        transport_type?: McpServerInitInfoTransportType.Raw | null;
     }
 }

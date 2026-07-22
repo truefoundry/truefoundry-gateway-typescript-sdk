@@ -4,15 +4,15 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 
-export const McpServerDisableToolsItem: core.serialization.Schema<
-    serializers.McpServerDisableToolsItem.Raw,
-    TrueFoundryGateway.McpServerDisableToolsItem
+export const RegistryMcpServerDisableToolsItem: core.serialization.Schema<
+    serializers.RegistryMcpServerDisableToolsItem.Raw,
+    TrueFoundryGateway.RegistryMcpServerDisableToolsItem
 > = core.serialization.undiscriminatedUnion([
     core.serialization.stringLiteral("@all"),
     core.serialization.stringLiteral("@read-only"),
     core.serialization.string(),
 ]);
 
-export declare namespace McpServerDisableToolsItem {
+export declare namespace RegistryMcpServerDisableToolsItem {
     export type Raw = "@all" | "@read-only" | string;
 }

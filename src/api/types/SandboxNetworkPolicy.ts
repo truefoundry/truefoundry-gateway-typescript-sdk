@@ -2,4 +2,6 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export type McpServer = TrueFoundryGateway.RegistryMcpServer | TrueFoundryGateway.InlineMcpServer;
+export interface SandboxNetworkPolicy {
+    authInject?: TrueFoundryGateway.SandboxNetworkPolicyAuthInjectItem[];
+}
