@@ -3,45 +3,20 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { InlineMcpServerDisableToolsItem } from "./InlineMcpServerDisableToolsItem.js";
-import { InlineMcpServerEnableToolsItem } from "./InlineMcpServerEnableToolsItem.js";
-import { InlineMcpServerPreloadToolsItem } from "./InlineMcpServerPreloadToolsItem.js";
-import { InlineMcpServerRequireApprovalForToolsItem } from "./InlineMcpServerRequireApprovalForToolsItem.js";
+import { BaseMcpServer } from "./BaseMcpServer.js";
 
 export const InlineMcpServer: core.serialization.ObjectSchema<
     serializers.InlineMcpServer.Raw,
     TrueFoundryGateway.InlineMcpServer
-> = core.serialization.object({
-    name: core.serialization.string(),
-    enableTools: core.serialization.property(
-        "enable_tools",
-        core.serialization.list(InlineMcpServerEnableToolsItem).optional(),
-    ),
-    disableTools: core.serialization.property(
-        "disable_tools",
-        core.serialization.list(InlineMcpServerDisableToolsItem).optional(),
-    ),
-    preloadTools: core.serialization.property(
-        "preload_tools",
-        core.serialization.list(InlineMcpServerPreloadToolsItem).optional(),
-    ),
-    requireApprovalForTools: core.serialization.property(
-        "require_approval_for_tools",
-        core.serialization.list(InlineMcpServerRequireApprovalForToolsItem).optional(),
-    ),
-    preload: core.serialization.boolean().optional(),
-    type: core.serialization.stringLiteral("inline"),
-    url: core.serialization.string(),
-});
+> = core.serialization
+    .object({
+        type: core.serialization.stringLiteral("inline"),
+        url: core.serialization.string(),
+    })
+    .extend(BaseMcpServer);
 
 export declare namespace InlineMcpServer {
-    export interface Raw {
-        name: string;
-        enable_tools?: InlineMcpServerEnableToolsItem.Raw[] | null;
-        disable_tools?: InlineMcpServerDisableToolsItem.Raw[] | null;
-        preload_tools?: InlineMcpServerPreloadToolsItem.Raw[] | null;
-        require_approval_for_tools?: InlineMcpServerRequireApprovalForToolsItem.Raw[] | null;
-        preload?: boolean | null;
+    export interface Raw extends BaseMcpServer.Raw {
         type: "inline";
         url: string;
     }

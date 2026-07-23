@@ -88,17 +88,6 @@
             },
             "default": "./dist/cjs/api/resources/private/resources/agents/resources/private/resources/draftSessions/exports.js"
         },
-        "./private_/agents/private_/sessions": {
-            "import": {
-                "types": "./dist/esm/api/resources/private/resources/agents/resources/private/resources/sessions/exports.d.mts",
-                "default": "./dist/esm/api/resources/private/resources/agents/resources/private/resources/sessions/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/private/resources/agents/resources/private/resources/sessions/exports.d.ts",
-                "default": "./dist/cjs/api/resources/private/resources/agents/resources/private/resources/sessions/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/private/resources/agents/resources/private/resources/sessions/exports.js"
-        },
         "./package.json": "./package.json",
         "./agents": {
             "types": "./dist/cjs/agents/index.d.ts",

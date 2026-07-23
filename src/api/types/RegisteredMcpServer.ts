@@ -2,12 +2,6 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export interface RegisteredMcpServer {
-    name: string;
-    enableTools?: TrueFoundryGateway.RegisteredMcpServerEnableToolsItem[];
-    disableTools?: TrueFoundryGateway.RegisteredMcpServerDisableToolsItem[];
-    preloadTools?: TrueFoundryGateway.RegisteredMcpServerPreloadToolsItem[];
-    requireApprovalForTools?: TrueFoundryGateway.RegisteredMcpServerRequireApprovalForToolsItem[];
-    preload?: boolean;
+export interface RegisteredMcpServer extends TrueFoundryGateway.BaseMcpServer {
     type: "truefoundry-mcp-registry";
 }
