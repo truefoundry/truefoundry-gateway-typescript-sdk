@@ -61,7 +61,7 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
      * Update this draft session's inline agent spec (owner-only). An empty body is a valid no-op that
      * just refreshes `updatedAt`. Mutates `agentSpec` and `updatedAt` on this instance in place.
      *
-     * @param opts.agentSpec - New inline agent spec for the draft. Omit to leave the spec unchanged.
+     * @param request.agentSpec - New inline agent spec for the draft. Omit to leave the spec unchanged.
      * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
      * @returns {void}
      */
@@ -91,8 +91,8 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
     /**
      * List turns in this session.
      *
-     * @param opts.pageToken - Token from the previous response nextPageToken.
-     * @param opts.limit - Page size. Default 10.
+     * @param request.pageToken - Token from the previous response nextPageToken.
+     * @param request.limit - Page size. Default 10, max 25.
      * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
      * @returns {core.Page<Turn, TrueFoundryGatewayApi.ListTurnsResponse>} Paginated turns.
      */
@@ -127,9 +127,9 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
     /**
      * Paginated session events across turns (newest first); subscribe to a running turn for live events.
      *
-     * @param opts.pageToken - Token from the previous response nextPageToken.
-     * @param opts.lastTurnId - Newest turn in the listing window (initial load only). Omit to use the session last turn.
-     * @param opts.limit - Page size. Default 100.
+     * @param request.pageToken - Token from the previous response nextPageToken.
+     * @param request.lastTurnId - Newest turn in the listing window (initial load only). Omit to use the session last turn.
+     * @param request.limit - Page size. Default 100.
      * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
      * @returns {Promise<core.Page<TrueFoundryGatewayApi.SessionEventItem, TrueFoundryGatewayApi.ListSessionEventsResponse>>} Paginated session events.
      */

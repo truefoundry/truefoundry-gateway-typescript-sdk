@@ -35,8 +35,8 @@ export class SessionMixin {
      * Stage a turn locally; call `execute()` to start `createTurn`.
      *
      * @param owner - Enriched wrapper surfaced as `turn.session` on the resulting turn.
-     * @param opts.input - Turn input items passed to createTurn.
-     * @param opts.previousTurnId - Previous turn to chain from. Default `auto`.
+     * @param request.input - Turn input items passed to createTurn.
+     * @param request.previousTurnId - Previous turn to chain from. Default `auto`.
      * @returns {PreparedTurn} Staged turn.
      */
     prepareTurn(
@@ -57,8 +57,8 @@ export class SessionMixin {
      * List turns in this session.
      *
      * @param owner - Enriched wrapper surfaced as `turn.session` on each listed turn.
-     * @param opts.pageToken - Token from the previous response nextPageToken.
-     * @param opts.limit - Page size. Default 10.
+     * @param request.pageToken - Token from the previous response nextPageToken.
+     * @param request.limit - Page size. Default 10, max 25.
      * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
      * @returns {core.Page<Turn, TrueFoundryGatewayApi.ListTurnsResponse>} Paginated turns.
      */
@@ -80,7 +80,7 @@ export class SessionMixin {
                     client.agents.sessions
                         .listTurns(
                             sessionId,
-                            { ...opts, pageToken: response?.pagination.nextPageToken },
+                            { ...request, pageToken: response?.pagination.nextPageToken },
                             requestOptions,
                         )
                         .then((nextPage) => ({ data: nextPage.response, rawResponse: nextPage.rawResponse })),
@@ -92,7 +92,7 @@ export class SessionMixin {
      * Fetch a turn by ID.
      *
      * @param owner - Enriched wrapper surfaced as `turn.session` on the resulting turn.
-     * @param opts.turnId - Unique identifier of the turn to fetch.
+     * @param request.turnId - Unique identifier of the turn to fetch.
      * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
      * @returns {Turn} Turn data.
      */
@@ -118,9 +118,9 @@ export class SessionMixin {
     /**
      * Paginated session events across turns (newest first); subscribe to a running turn for live events.
      *
-     * @param opts.pageToken - Token from the previous response nextPageToken.
-     * @param opts.lastTurnId - Newest turn in the listing window (initial load only). Omit to use the session last turn.
-     * @param opts.limit - Page size. Default 100.
+     * @param request.pageToken - Token from the previous response nextPageToken.
+     * @param request.lastTurnId - Newest turn in the listing window (initial load only). Omit to use the session last turn.
+     * @param request.limit - Page size. Default 100.
      * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
      * @returns {Promise<core.Page<TrueFoundryGatewayApi.SessionEventItem, TrueFoundryGatewayApi.ListSessionEventsResponse>>} Paginated session events.
      */

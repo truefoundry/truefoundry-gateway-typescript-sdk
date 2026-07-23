@@ -23,7 +23,8 @@ export class AgentSessionClient {
     /**
      * Create a new session for a named agent.
      *
-     * @param opts.agentName - Name of the agent to create a session for.
+     * @param request.agentName - Name of an existing agent in the tenant.
+     * @param request.tfyMetadata - Optional request metadata (x-tfy-metadata) persisted at creation.
      * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
      * @returns {AgentSession} Session created.
      */
@@ -38,12 +39,12 @@ export class AgentSessionClient {
     /**
      * List sessions for an agent.
      *
-     * @param opts.agentName - Name of the agent whose sessions to list.
-     * @param opts.limit - Page size. Default 10.
-     * @param opts.order - Sort by creation time. Default `desc`.
-     * @param opts.pageToken - Token from the previous response nextPageToken.
-     * @param opts.startTimestamp - Inclusive lower bound on createdAt (ISO-8601).
-     * @param opts.endTimestamp - Inclusive upper bound on createdAt (ISO-8601).
+     * @param request.agentName - Name of the agent whose sessions to list.
+     * @param request.limit - Page size. Default 10.
+     * @param request.order - Sort by creation time. Default `desc`.
+     * @param request.pageToken - Token from the previous response nextPageToken.
+     * @param request.startTimestamp - Inclusive lower bound on createdAt (ISO-8601).
+     * @param request.endTimestamp - Inclusive upper bound on createdAt (ISO-8601).
      * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
      * @returns {core.Page<AgentSession, TrueFoundryGatewayApi.ListSessionsResponse>} Paginated sessions.
      */
@@ -73,7 +74,7 @@ export class AgentSessionClient {
     /**
      * Fetch a session by ID.
      *
-     * @param opts.sessionId - Unique identifier of the session to fetch.
+     * @param request.sessionId - Unique identifier of the session to fetch.
      * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
      * @returns {AgentSession} Session data.
      */

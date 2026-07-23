@@ -25,9 +25,9 @@ export class PrivateAgentSessionClient {
     /**
      * Create a draft session holding an inline agent spec, optionally linked to a saved agent.
      *
-     * @param opts.agentSpec - Inline agent spec held by the draft.
-     * @param opts.agentName - Optionally link the draft to an existing saved agent. Omit for a standalone draft.
-     * @param opts.tfyMetadata - Optional request metadata (x-tfy-metadata) persisted at creation.
+     * @param request.agentSpec - Inline agent spec held by the draft.
+     * @param request.agentName - Optionally link the draft to an existing saved agent. Omit for a standalone draft.
+     * @param request.tfyMetadata - Optional request metadata (x-tfy-metadata) persisted at creation.
      * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
      * @returns {AgentDraftSession} The created draft session.
      */
@@ -42,7 +42,7 @@ export class PrivateAgentSessionClient {
     /**
      * Fetch a draft session by ID (owner-only).
      *
-     * @param opts.draftSessionId - Unique identifier of the draft session to fetch.
+     * @param request.draftSessionId - Unique identifier of the draft session to fetch.
      * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
      * @returns {AgentDraftSession} Draft session data.
      */
@@ -57,12 +57,12 @@ export class PrivateAgentSessionClient {
     /**
      * List the caller-owned draft sessions (newest first by default).
      *
-     * @param opts.agentName - Filter to drafts linked to this saved agent. Omit for all owned drafts.
-     * @param opts.limit - Page size. Default 10.
-     * @param opts.order - Sort by creation time. Default `desc`.
-     * @param opts.pageToken - Token from the previous response nextPageToken.
-     * @param opts.startTimestamp - Inclusive lower bound on createdAt (ISO-8601).
-     * @param opts.endTimestamp - Inclusive upper bound on createdAt (ISO-8601).
+     * @param request.agentName - Filter to drafts linked to this saved agent. Omit for all owned drafts.
+     * @param request.limit - Page size. Default 10.
+     * @param request.order - Sort by creation time. Default `desc`.
+     * @param request.pageToken - Token from the previous response nextPageToken.
+     * @param request.startTimestamp - Inclusive lower bound on createdAt (ISO-8601).
+     * @param request.endTimestamp - Inclusive upper bound on createdAt (ISO-8601).
      * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
      * @returns {core.Page<AgentDraftSession, TrueFoundryGatewayApi.ListDraftSessionsResponse>} Paginated draft sessions.
      */
@@ -80,7 +80,7 @@ export class PrivateAgentSessionClient {
             loadPage: (response) =>
                 core.HttpResponsePromise.fromPromise(
                     client.agents.private.draftSessions
-                        .list({ ...opts, pageToken: response?.pagination.nextPageToken }, requestOptions)
+                        .list({ ...request, pageToken: response?.pagination.nextPageToken }, requestOptions)
                         .then((nextPage) => ({ data: nextPage.response, rawResponse: nextPage.rawResponse })),
                 ),
         });
@@ -89,12 +89,12 @@ export class PrivateAgentSessionClient {
     /**
      * List all sessions owned by the caller, spanning both saved sessions and drafts (newest first by default).
      *
-     * @param opts.agentName - Filter to sessions linked to this saved agent. Omit for all owned sessions.
-     * @param opts.limit - Page size. Default 10.
-     * @param opts.order - Sort by creation time. Default `desc`.
-     * @param opts.pageToken - Token from the previous response nextPageToken.
-     * @param opts.startTimestamp - Inclusive lower bound on createdAt (ISO-8601).
-     * @param opts.endTimestamp - Inclusive upper bound on createdAt (ISO-8601).
+     * @param request.agentName - Filter to sessions linked to this saved agent. Omit for all owned sessions.
+     * @param request.limit - Page size. Default 10.
+     * @param request.order - Sort by creation time. Default `desc`.
+     * @param request.pageToken - Token from the previous response nextPageToken.
+     * @param request.startTimestamp - Inclusive lower bound on createdAt (ISO-8601).
+     * @param request.endTimestamp - Inclusive upper bound on createdAt (ISO-8601).
      * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
      * @returns {core.Page<AgentSession | AgentDraftSession, TrueFoundryGatewayApi.ListOwnedSessionsResponse>} Paginated owned sessions.
      */
@@ -111,8 +111,11 @@ export class PrivateAgentSessionClient {
             getItems: (response) => (response?.data ?? []).map((raw) => this.wrapOwnedSession(raw)),
             loadPage: (response) =>
                 core.HttpResponsePromise.fromPromise(
-                    client.agents.private.sessions
-                        .listOwnedSessions({ ...opts, pageToken: response?.pagination.nextPageToken }, requestOptions)
+                    client.agents.private
+                        .listOwnedSessions(
+                            { ...request, pageToken: response?.pagination.nextPageToken },
+                            requestOptions,
+                        )
                         .then((nextPage) => ({ data: nextPage.response, rawResponse: nextPage.rawResponse })),
                 ),
         });
@@ -135,7 +138,8 @@ export class PrivateAgentSessionClient {
     /**
      * Download a sandbox file by ID.
      *
-     * @param opts.sandboxId - Unique identifier of the sandbox file to download.
+     * @param sandboxId - Unique identifier of the sandbox file to download.
+     * @param request.path - Absolute path of the file inside the sandbox.
      * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
      * @returns {core.BinaryResponse} The downloaded sandbox file.
      */
