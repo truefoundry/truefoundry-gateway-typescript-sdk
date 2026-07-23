@@ -4,11 +4,11 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 import { InlineMcpServer } from "./InlineMcpServer.js";
-import { RegistryMcpServer } from "./RegistryMcpServer.js";
+import { RegisteredMcpServer } from "./RegisteredMcpServer.js";
 
 export const McpServer: core.serialization.Schema<serializers.McpServer.Raw, TrueFoundryGateway.McpServer> =
-    core.serialization.undiscriminatedUnion([RegistryMcpServer, InlineMcpServer]);
+    core.serialization.undiscriminatedUnion([RegisteredMcpServer, InlineMcpServer]);
 
 export declare namespace McpServer {
-    export type Raw = RegistryMcpServer.Raw | InlineMcpServer.Raw;
+    export type Raw = RegisteredMcpServer.Raw | InlineMcpServer.Raw;
 }
