@@ -50,7 +50,7 @@ describe("PrivateAgentSessionClient", () => {
 
             server
                 .mockEndpoint({ once: false })
-                .get("/v1/x/agents/sessions/owned-sessions")
+                .get("/v1/x/agents/owned-sessions")
                 .respondWith()
                 .statusCode(200)
                 .jsonBody({
@@ -81,7 +81,7 @@ describe("PrivateAgentSessionClient", () => {
 
             server
                 .mockEndpoint({ once: false })
-                .get("/v1/x/agents/sessions/owned-sessions")
+                .get("/v1/x/agents/owned-sessions")
                 .respondWith()
                 .statusCode(200)
                 .jsonBody({
@@ -127,7 +127,7 @@ describe("PrivateAgentSessionClient", () => {
 
             server
                 .mockEndpoint({ once: false })
-                .get("/v1/x/agents/sessions/owned-sessions")
+                .get("/v1/x/agents/owned-sessions")
                 .respondWith()
                 .statusCode(200)
                 .jsonBody({
@@ -146,7 +146,7 @@ describe("PrivateAgentSessionClient", () => {
 
             server
                 .mockEndpoint({ once: false })
-                .get("/v1/x/agents/sessions/owned-sessions")
+                .get("/v1/x/agents/owned-sessions")
                 .respondWith()
                 .statusCode(200)
                 .jsonBody({
@@ -177,7 +177,7 @@ describe("PrivateAgentSessionClient", () => {
 
             server
                 .mockEndpoint({ once: false })
-                .get("/v1/x/agents/sessions/owned-sessions")
+                .get("/v1/x/agents/owned-sessions")
                 .respondWith()
                 .statusCode(200)
                 .jsonBody({
@@ -199,7 +199,7 @@ describe("PrivateAgentSessionClient", () => {
 
             server
                 .mockEndpoint({ once: false })
-                .get("/v1/x/agents/sessions/owned-sessions")
+                .get("/v1/x/agents/owned-sessions")
                 .respondWith()
                 .statusCode(200)
                 .jsonBody({
