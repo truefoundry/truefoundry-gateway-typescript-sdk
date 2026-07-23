@@ -96,7 +96,9 @@ Instantiate and use the client with the following:
 import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
 const client = new TrueFoundryGateway({ baseUrl: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
-const response = await client.private.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
+const response = await client.private.agents.sessions.createTurn({
+    sessionId: "01arz3ndektsv4rrffq69g5fav.g"
+});
 for await (const item of response) {
     console.log(item);
 }
@@ -159,7 +161,9 @@ The SDK uses async iterators, so you can consume the responses using a `for awai
 import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
 const client = new TrueFoundryGateway({ baseUrl: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
-const response = await client.private.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
+const response = await client.private.agents.sessions.createTurn({
+    sessionId: "01arz3ndektsv4rrffq69g5fav.g"
+});
 for await (const item of response) {
     console.log(item);
 }
@@ -563,12 +567,7 @@ import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
 const client = new TrueFoundryGateway({ baseUrl: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
 const pageableResponse = await client.private.agents.sessions.list({
-    agentName: "agent_name",
-    limit: 1,
-    order: "asc",
-    pageToken: "page_token",
-    startTimestamp: "start_timestamp",
-    endTimestamp: "end_timestamp"
+    agentName: "agent_name"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -576,12 +575,7 @@ for await (const item of pageableResponse) {
 
 // Or you can manually iterate page-by-page
 let page = await client.private.agents.sessions.list({
-    agentName: "agent_name",
-    limit: 1,
-    order: "asc",
-    pageToken: "page_token",
-    startTimestamp: "start_timestamp",
-    endTimestamp: "end_timestamp"
+    agentName: "agent_name"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();

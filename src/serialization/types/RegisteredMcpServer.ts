@@ -8,14 +8,8 @@ import { BaseMcpServer } from "./BaseMcpServer.js";
 export const RegisteredMcpServer: core.serialization.ObjectSchema<
     serializers.RegisteredMcpServer.Raw,
     TrueFoundryGateway.RegisteredMcpServer
-> = core.serialization
-    .object({
-        type: core.serialization.stringLiteral("truefoundry-mcp-registry"),
-    })
-    .extend(BaseMcpServer);
+> = core.serialization.object({}).extend(BaseMcpServer);
 
 export declare namespace RegisteredMcpServer {
-    export interface Raw extends BaseMcpServer.Raw {
-        type: "truefoundry-mcp-registry";
-    }
+    export interface Raw extends BaseMcpServer.Raw {}
 }

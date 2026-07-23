@@ -2,4 +2,16 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export type ListOwnedSessionsResponseDataItem = TrueFoundryGateway.Session | TrueFoundryGateway.DraftSession;
+export type ListOwnedSessionsResponseDataItem =
+    | TrueFoundryGateway.ListOwnedSessionsResponseDataItem.Session
+    | TrueFoundryGateway.ListOwnedSessionsResponseDataItem.SessionDraft;
+
+export namespace ListOwnedSessionsResponseDataItem {
+    export interface Session extends TrueFoundryGateway.Session {
+        type: "session";
+    }
+
+    export interface SessionDraft extends TrueFoundryGateway.DraftSession {
+        type: "session/draft";
+    }
+}

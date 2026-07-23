@@ -3,10 +3,9 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface TurnDoneEvent {
-    type: "turn.done";
     /** Unique identifier for the event */
     id: string;
     state: TrueFoundryGateway.TurnDoneEventState;
     createdAt: string;
-    threadId?: string | null;
+    threadId: string | null;
 }

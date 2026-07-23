@@ -9,8 +9,34 @@ import { TurnStateError } from "./TurnStateError.js";
 import { TurnStateRunning } from "./TurnStateRunning.js";
 
 export const TurnState: core.serialization.Schema<serializers.TurnState.Raw, TrueFoundryGateway.TurnState> =
-    core.serialization.undiscriminatedUnion([TurnStateRunning, TurnStateDone, TurnStateCancelled, TurnStateError]);
+    core.serialization
+        .union("status", {
+            running: TurnStateRunning,
+            done: TurnStateDone,
+            cancelled: TurnStateCancelled,
+            error: TurnStateError,
+        })
+        .transform<TrueFoundryGateway.TurnState>({
+            transform: (value) => value,
+            untransform: (value) => value,
+        });
 
 export declare namespace TurnState {
-    export type Raw = TurnStateRunning.Raw | TurnStateDone.Raw | TurnStateCancelled.Raw | TurnStateError.Raw;
+    export type Raw = TurnState.Running | TurnState.Done | TurnState.Cancelled | TurnState.Error;
+
+    export interface Running extends TurnStateRunning.Raw {
+        status: "running";
+    }
+
+    export interface Done extends TurnStateDone.Raw {
+        status: "done";
+    }
+
+    export interface Cancelled extends TurnStateCancelled.Raw {
+        status: "cancelled";
+    }
+
+    export interface Error extends TurnStateError.Raw {
+        status: "error";
+    }
 }

@@ -2,4 +2,14 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export type ToolInfo = TrueFoundryGateway.TrueFoundrySystemToolInfo | TrueFoundryGateway.McpToolInfo;
+export type ToolInfo = TrueFoundryGateway.ToolInfo.TruefoundrySystem | TrueFoundryGateway.ToolInfo.Mcp;
+
+export namespace ToolInfo {
+    export interface TruefoundrySystem extends TrueFoundryGateway.TrueFoundrySystemToolInfo {
+        type: "truefoundry-system";
+    }
+
+    export interface Mcp extends TrueFoundryGateway.McpToolInfo {
+        type: "mcp";
+    }
+}

@@ -11,27 +11,25 @@ export const TurnCreatedEvent: core.serialization.ObjectSchema<
     serializers.TurnCreatedEvent.Raw,
     TrueFoundryGateway.TurnCreatedEvent
 > = core.serialization.object({
-    type: core.serialization.stringLiteral("turn.created"),
     id: core.serialization.string(),
     turnId: core.serialization.property("turn_id", core.serialization.string()),
-    previousTurnId: core.serialization.property("previous_turn_id", core.serialization.string().optionalNullable()),
+    previousTurnId: core.serialization.property("previous_turn_id", core.serialization.string().nullable()),
     input: core.serialization.list(TurnInputItem).optional(),
     state: TurnStateRunning,
     createdBy: core.serialization.property("created_by", Subject),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
-    threadId: core.serialization.property("thread_id", core.serialization.string().optionalNullable()),
+    threadId: core.serialization.property("thread_id", core.serialization.string().nullable()),
 });
 
 export declare namespace TurnCreatedEvent {
     export interface Raw {
-        type: "turn.created";
         id: string;
         turn_id: string;
-        previous_turn_id?: (string | null | undefined) | null;
+        previous_turn_id?: string | null;
         input?: TurnInputItem.Raw[] | null;
         state: TurnStateRunning.Raw;
         created_by: Subject.Raw;
         created_at: string;
-        thread_id?: (string | null | undefined) | null;
+        thread_id?: string | null;
     }
 }

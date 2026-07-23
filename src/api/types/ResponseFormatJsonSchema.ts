@@ -3,6 +3,5 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface ResponseFormatJsonSchema {
-    type: "json_schema";
     jsonSchema: TrueFoundryGateway.ResponseFormatJsonSchemaJsonSchema;
 }

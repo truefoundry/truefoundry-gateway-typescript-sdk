@@ -2,4 +2,14 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export type ThreadState = TrueFoundryGateway.ThreadStateDone | TrueFoundryGateway.ThreadStateError;
+export type ThreadState = TrueFoundryGateway.ThreadState.Done | TrueFoundryGateway.ThreadState.Error;
+
+export namespace ThreadState {
+    export interface Done extends TrueFoundryGateway.ThreadStateDone {
+        status: "done";
+    }
+
+    export interface Error extends TrueFoundryGateway.ThreadStateError {
+        status: "error";
+    }
+}

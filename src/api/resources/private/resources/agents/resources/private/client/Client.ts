@@ -45,14 +45,7 @@ export class PrivateClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.private.listOwnedSessions({
-     *         agentName: "agent_name",
-     *         limit: 1,
-     *         order: "asc",
-     *         pageToken: "page_token",
-     *         startTimestamp: "start_timestamp",
-     *         endTimestamp: "end_timestamp"
-     *     })
+     *     await client.private.agents.private.listOwnedSessions()
      */
     public async listOwnedSessions(
         request: TrueFoundryGateway.private_.agents.ListOwnedSessionsPrivateRequest = {},
@@ -69,7 +62,7 @@ export class PrivateClient {
                     agent_name: agentName,
                     limit,
                     order:
-                        order !== undefined
+                        order != null
                             ? serializers.ListOwnedSessionsOrder.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,
@@ -211,19 +204,17 @@ export class PrivateClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      */
     public downloadSandboxFile(
-        sandboxId: string,
         request: TrueFoundryGateway.private_.agents.DownloadSandboxFilePrivateRequest,
         requestOptions?: PrivateClient.RequestOptions,
     ): core.HttpResponsePromise<core.BinaryResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__downloadSandboxFile(sandboxId, request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__downloadSandboxFile(request, requestOptions));
     }
 
     private async __downloadSandboxFile(
-        sandboxId: string,
         request: TrueFoundryGateway.private_.agents.DownloadSandboxFilePrivateRequest,
         requestOptions?: PrivateClient.RequestOptions,
     ): Promise<core.WithRawResponse<core.BinaryResponse>> {
-        const { path } = request;
+        const { sandboxId, path } = request;
         const _queryParams: Record<string, unknown> = {
             path,
         };

@@ -3,6 +3,20 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export type TurnDoneEventState =
-    | TrueFoundryGateway.TurnStateDone
-    | TrueFoundryGateway.TurnStateCancelled
-    | TrueFoundryGateway.TurnStateError;
+    | TrueFoundryGateway.TurnDoneEventState.Done
+    | TrueFoundryGateway.TurnDoneEventState.Cancelled
+    | TrueFoundryGateway.TurnDoneEventState.Error;
+
+export namespace TurnDoneEventState {
+    export interface Done extends TrueFoundryGateway.TurnStateDone {
+        status: "done";
+    }
+
+    export interface Cancelled extends TrueFoundryGateway.TurnStateCancelled {
+        status: "cancelled";
+    }
+
+    export interface Error extends TrueFoundryGateway.TurnStateError {
+        status: "error";
+    }
+}

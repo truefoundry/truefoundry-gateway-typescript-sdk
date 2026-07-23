@@ -11,14 +11,12 @@ export const McpAuthRequiredEvent: core.serialization.ObjectSchema<
     TrueFoundryGateway.McpAuthRequiredEvent
 > = core.serialization
     .object({
-        type: core.serialization.stringLiteral("mcp.auth_required"),
         mcpServers: core.serialization.property("mcp_servers", core.serialization.list(McpServerAuthInfo)),
     })
     .extend(BaseMcpAuthRequiredEvent);
 
 export declare namespace McpAuthRequiredEvent {
     export interface Raw extends BaseMcpAuthRequiredEvent.Raw {
-        type: "mcp.auth_required";
         mcp_servers: McpServerAuthInfo.Raw[];
     }
 }

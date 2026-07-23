@@ -7,7 +7,6 @@ export interface ModelMessageDeltaEvent {
     refusal?: string | null;
     toolCalls?: TrueFoundryGateway.ExtendedChunkDeltaToolCall[];
     reasoningContent?: string;
-    type: "model.message.delta";
     /** Unique identifier for the event */
     id: string;
     threadId: string;

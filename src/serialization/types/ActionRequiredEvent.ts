@@ -10,12 +10,32 @@ import { ToolResponseRequiredEvent } from "./ToolResponseRequiredEvent.js";
 export const ActionRequiredEvent: core.serialization.Schema<
     serializers.ActionRequiredEvent.Raw,
     TrueFoundryGateway.ActionRequiredEvent
-> = core.serialization.undiscriminatedUnion([
-    ToolApprovalRequiredEvent,
-    ToolResponseRequiredEvent,
-    McpAuthRequiredEvent,
-]);
+> = core.serialization
+    .union("type", {
+        "tool.approval_required": ToolApprovalRequiredEvent,
+        "tool.response_required": ToolResponseRequiredEvent,
+        "mcp.auth_required": McpAuthRequiredEvent,
+    })
+    .transform<TrueFoundryGateway.ActionRequiredEvent>({
+        transform: (value) => value,
+        untransform: (value) => value,
+    });
 
 export declare namespace ActionRequiredEvent {
-    export type Raw = ToolApprovalRequiredEvent.Raw | ToolResponseRequiredEvent.Raw | McpAuthRequiredEvent.Raw;
+    export type Raw =
+        | ActionRequiredEvent.ToolApprovalRequired
+        | ActionRequiredEvent.ToolResponseRequired
+        | ActionRequiredEvent.McpAuthRequired;
+
+    export interface ToolApprovalRequired extends ToolApprovalRequiredEvent.Raw {
+        type: "tool.approval_required";
+    }
+
+    export interface ToolResponseRequired extends ToolResponseRequiredEvent.Raw {
+        type: "tool.response_required";
+    }
+
+    export interface McpAuthRequired extends McpAuthRequiredEvent.Raw {
+        type: "mcp.auth_required";
+    }
 }

@@ -8,8 +8,29 @@ import { UserToolApprovalEvent } from "./UserToolApprovalEvent.js";
 import { UserToolResponseEvent } from "./UserToolResponseEvent.js";
 
 export const TurnInputItem: core.serialization.Schema<serializers.TurnInputItem.Raw, TrueFoundryGateway.TurnInputItem> =
-    core.serialization.undiscriminatedUnion([UserMessage, UserToolApprovalEvent, UserToolResponseEvent]);
+    core.serialization
+        .union("type", {
+            "user.message": UserMessage,
+            "user.tool_approval": UserToolApprovalEvent,
+            "user.tool_response": UserToolResponseEvent,
+        })
+        .transform<TrueFoundryGateway.TurnInputItem>({
+            transform: (value) => value,
+            untransform: (value) => value,
+        });
 
 export declare namespace TurnInputItem {
-    export type Raw = UserMessage.Raw | UserToolApprovalEvent.Raw | UserToolResponseEvent.Raw;
+    export type Raw = TurnInputItem.UserMessage | TurnInputItem.UserToolApproval | TurnInputItem.UserToolResponse;
+
+    export interface UserMessage extends UserMessage.Raw {
+        type: "user.message";
+    }
+
+    export interface UserToolApproval extends UserToolApprovalEvent.Raw {
+        type: "user.tool_approval";
+    }
+
+    export interface UserToolResponse extends UserToolResponseEvent.Raw {
+        type: "user.tool_response";
+    }
 }

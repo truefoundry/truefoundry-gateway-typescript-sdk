@@ -9,13 +9,11 @@ export const ResponseFormatJsonSchema: core.serialization.ObjectSchema<
     serializers.ResponseFormatJsonSchema.Raw,
     TrueFoundryGateway.ResponseFormatJsonSchema
 > = core.serialization.object({
-    type: core.serialization.stringLiteral("json_schema"),
     jsonSchema: core.serialization.property("json_schema", ResponseFormatJsonSchemaJsonSchema),
 });
 
 export declare namespace ResponseFormatJsonSchema {
     export interface Raw {
-        type: "json_schema";
         json_schema: ResponseFormatJsonSchemaJsonSchema.Raw;
     }
 }

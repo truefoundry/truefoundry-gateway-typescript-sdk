@@ -8,15 +8,15 @@ import { TurnInputItem } from "../../../../../../../../types/TurnInputItem.js";
 
 export const CreateTurnRequest: core.serialization.Schema<
     serializers.private_.agents.CreateTurnRequest.Raw,
-    TrueFoundryGateway.private_.agents.CreateTurnRequest
+    Omit<TrueFoundryGateway.private_.agents.CreateTurnRequest, "sessionId">
 > = core.serialization.object({
     input: core.serialization.list(TurnInputItem).optional(),
-    previousTurnId: core.serialization.property("previous_turn_id", PreviousTurnIdInput.optional()),
+    previousTurnId: core.serialization.property("previous_turn_id", PreviousTurnIdInput.optionalNullable()),
 });
 
 export declare namespace CreateTurnRequest {
     export interface Raw {
         input?: TurnInputItem.Raw[] | null;
-        previous_turn_id?: PreviousTurnIdInput.Raw | null;
+        previous_turn_id?: (PreviousTurnIdInput.Raw | null | undefined) | null;
     }
 }

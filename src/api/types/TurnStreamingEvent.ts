@@ -3,15 +3,65 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export type TurnStreamingEvent =
-    | TrueFoundryGateway.ModelMessageEvent
-    | TrueFoundryGateway.ModelMessageDeltaEvent
-    | TrueFoundryGateway.ToolResponseEvent
-    | TrueFoundryGateway.ThreadCreatedEvent
-    | TrueFoundryGateway.ThreadDoneEvent
-    | TrueFoundryGateway.McpAuthRequiredEvent
-    | TrueFoundryGateway.McpInitializeEvent
-    | TrueFoundryGateway.SandboxCreatedEvent
-    | TrueFoundryGateway.ToolApprovalRequiredEvent
-    | TrueFoundryGateway.ToolResponseRequiredEvent
-    | TrueFoundryGateway.TurnCreatedEvent
-    | TrueFoundryGateway.TurnDoneEvent;
+    | TrueFoundryGateway.TurnStreamingEvent.ModelMessage
+    | TrueFoundryGateway.TurnStreamingEvent.ModelMessageDelta
+    | TrueFoundryGateway.TurnStreamingEvent.ToolResponse
+    | TrueFoundryGateway.TurnStreamingEvent.ThreadCreated
+    | TrueFoundryGateway.TurnStreamingEvent.ThreadDone
+    | TrueFoundryGateway.TurnStreamingEvent.McpAuthRequired
+    | TrueFoundryGateway.TurnStreamingEvent.McpInitialize
+    | TrueFoundryGateway.TurnStreamingEvent.SandboxCreated
+    | TrueFoundryGateway.TurnStreamingEvent.ToolApprovalRequired
+    | TrueFoundryGateway.TurnStreamingEvent.ToolResponseRequired
+    | TrueFoundryGateway.TurnStreamingEvent.TurnCreated
+    | TrueFoundryGateway.TurnStreamingEvent.TurnDone;
+
+export namespace TurnStreamingEvent {
+    export interface ModelMessage extends TrueFoundryGateway.ModelMessageEvent {
+        type: "model.message";
+    }
+
+    export interface ModelMessageDelta extends TrueFoundryGateway.ModelMessageDeltaEvent {
+        type: "model.message.delta";
+    }
+
+    export interface ToolResponse extends TrueFoundryGateway.ToolResponseEvent {
+        type: "tool.response";
+    }
+
+    export interface ThreadCreated extends TrueFoundryGateway.ThreadCreatedEvent {
+        type: "thread.created";
+    }
+
+    export interface ThreadDone extends TrueFoundryGateway.ThreadDoneEvent {
+        type: "thread.done";
+    }
+
+    export interface McpAuthRequired extends TrueFoundryGateway.McpAuthRequiredEvent {
+        type: "mcp.auth_required";
+    }
+
+    export interface McpInitialize extends TrueFoundryGateway.McpInitializeEvent {
+        type: "mcp.initialize";
+    }
+
+    export interface SandboxCreated extends TrueFoundryGateway.SandboxCreatedEvent {
+        type: "sandbox.created";
+    }
+
+    export interface ToolApprovalRequired extends TrueFoundryGateway.ToolApprovalRequiredEvent {
+        type: "tool.approval_required";
+    }
+
+    export interface ToolResponseRequired extends TrueFoundryGateway.ToolResponseRequiredEvent {
+        type: "tool.response_required";
+    }
+
+    export interface TurnCreated extends TrueFoundryGateway.TurnCreatedEvent {
+        type: "turn.created";
+    }
+
+    export interface TurnDone extends TrueFoundryGateway.TurnDoneEvent {
+        type: "turn.done";
+    }
+}

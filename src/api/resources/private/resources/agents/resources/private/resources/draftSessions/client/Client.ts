@@ -40,14 +40,7 @@ export class DraftSessionsClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.private.draftSessions.list({
-     *         agentName: "agent_name",
-     *         limit: 1,
-     *         order: "asc",
-     *         pageToken: "page_token",
-     *         startTimestamp: "start_timestamp",
-     *         endTimestamp: "end_timestamp"
-     *     })
+     *     await client.private.agents.private.draftSessions.list()
      */
     public async list(
         request: TrueFoundryGateway.private_.agents.private_.ListDraftSessionsRequest = {},
@@ -62,7 +55,7 @@ export class DraftSessionsClient {
                     agent_name: agentName,
                     limit,
                     order:
-                        order !== undefined
+                        order != null
                             ? serializers.ListDraftSessionsOrder.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,
@@ -340,7 +333,7 @@ export class DraftSessionsClient {
     /**
      * Get a draft session by id. Owner-only.
      *
-     * @param {string} draftSessionId - Draft session identifier.
+     * @param {TrueFoundryGateway.private_.agents.private_.GetDraftSessionsRequest} request
      * @param {DraftSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link TrueFoundryGateway.UnauthorizedError}
@@ -349,19 +342,22 @@ export class DraftSessionsClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.private.draftSessions.get("draftSessionId")
+     *     await client.private.agents.private.draftSessions.get({
+     *         draftSessionId: "draftSessionId"
+     *     })
      */
     public get(
-        draftSessionId: string,
+        request: TrueFoundryGateway.private_.agents.private_.GetDraftSessionsRequest,
         requestOptions?: DraftSessionsClient.RequestOptions,
     ): core.HttpResponsePromise<TrueFoundryGateway.GetDraftSessionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__get(draftSessionId, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__get(request, requestOptions));
     }
 
     private async __get(
-        draftSessionId: string,
+        request: TrueFoundryGateway.private_.agents.private_.GetDraftSessionsRequest,
         requestOptions?: DraftSessionsClient.RequestOptions,
     ): Promise<core.WithRawResponse<TrueFoundryGateway.GetDraftSessionResponse>> {
+        const { draftSessionId } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -440,7 +436,6 @@ export class DraftSessionsClient {
     /**
      * Update a draft session's inline spec. Owner-only. An empty body is a valid no-op that refreshes `updated_at`.
      *
-     * @param {string} draftSessionId - Draft session identifier.
      * @param {TrueFoundryGateway.private_.agents.private_.UpdateDraftSessionRequest} request
      * @param {DraftSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -452,21 +447,22 @@ export class DraftSessionsClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.private.draftSessions.update("draftSessionId")
+     *     await client.private.agents.private.draftSessions.update({
+     *         draftSessionId: "draftSessionId"
+     *     })
      */
     public update(
-        draftSessionId: string,
-        request: TrueFoundryGateway.private_.agents.private_.UpdateDraftSessionRequest = {},
+        request: TrueFoundryGateway.private_.agents.private_.UpdateDraftSessionRequest,
         requestOptions?: DraftSessionsClient.RequestOptions,
     ): core.HttpResponsePromise<TrueFoundryGateway.GetDraftSessionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__update(draftSessionId, request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__update(request, requestOptions));
     }
 
     private async __update(
-        draftSessionId: string,
-        request: TrueFoundryGateway.private_.agents.private_.UpdateDraftSessionRequest = {},
+        request: TrueFoundryGateway.private_.agents.private_.UpdateDraftSessionRequest,
         requestOptions?: DraftSessionsClient.RequestOptions,
     ): Promise<core.WithRawResponse<TrueFoundryGateway.GetDraftSessionResponse>> {
+        const { draftSessionId, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -485,7 +481,7 @@ export class DraftSessionsClient {
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: mergeAdditionalBodyParameters(
-                serializers.private_.agents.private_.UpdateDraftSessionRequest.jsonOrThrow(request, {
+                serializers.private_.agents.private_.UpdateDraftSessionRequest.jsonOrThrow(_body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,

@@ -60,11 +60,6 @@ describe("SessionsClient", () => {
         };
         const page = await client.private.agents.sessions.list({
             agentName: "agent_name",
-            limit: 1,
-            order: "asc",
-            pageToken: "page_token",
-            startTimestamp: "start_timestamp",
-            endTimestamp: "end_timestamp",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -387,7 +382,9 @@ describe("SessionsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.private.agents.sessions.get("sessionId");
+        const response = await client.private.agents.sessions.get({
+            sessionId: "sessionId",
+        });
         expect(response).toEqual({
             data: {
                 type: "session",
@@ -420,7 +417,9 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.get("sessionId");
+            return await client.private.agents.sessions.get({
+                sessionId: "sessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.UnauthorizedError);
     });
 
@@ -439,7 +438,9 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.get("sessionId");
+            return await client.private.agents.sessions.get({
+                sessionId: "sessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.ForbiddenError);
     });
 
@@ -458,7 +459,9 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.get("sessionId");
+            return await client.private.agents.sessions.get({
+                sessionId: "sessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.NotFoundError);
     });
 
@@ -477,7 +480,9 @@ describe("SessionsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.private.agents.sessions.cancel("01arz3ndektsv4rrffq69g5fav.g");
+        const response = await client.private.agents.sessions.cancel({
+            sessionId: "01arz3ndektsv4rrffq69g5fav.g",
+        });
         expect(response).toEqual({});
     });
 
@@ -497,7 +502,9 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.cancel("sessionId");
+            return await client.private.agents.sessions.cancel({
+                sessionId: "sessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.BadRequestError);
     });
 
@@ -517,7 +524,9 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.cancel("sessionId");
+            return await client.private.agents.sessions.cancel({
+                sessionId: "sessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.PreconditionFailedError);
     });
 
@@ -537,7 +546,9 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.cancel("sessionId");
+            return await client.private.agents.sessions.cancel({
+                sessionId: "sessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.FailedDependencyError);
     });
 
@@ -601,9 +612,8 @@ describe("SessionsClient", () => {
                 limit: 1,
             },
         };
-        const page = await client.private.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g", {
-            pageToken: "page_token",
-            limit: 1,
+        const page = await client.private.agents.sessions.listTurns({
+            sessionId: "01arz3ndektsv4rrffq69g5fav.g",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -627,7 +637,9 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.listTurns("sessionId");
+            return await client.private.agents.sessions.listTurns({
+                sessionId: "sessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.BadRequestError);
     });
 
@@ -646,7 +658,9 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.listTurns("sessionId");
+            return await client.private.agents.sessions.listTurns({
+                sessionId: "sessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.NotFoundError);
     });
 
@@ -665,7 +679,9 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.listTurns("sessionId");
+            return await client.private.agents.sessions.listTurns({
+                sessionId: "sessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.PreconditionFailedError);
     });
 
@@ -674,7 +690,7 @@ describe("SessionsClient", () => {
         const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody =
-            'event: \ndata: {"content":"content","name":"name","refusal":"refusal","reasoning_content":"reasoning_content","tool_calls":[{"id":"id","type":"function","function":{"name":"name","arguments":"arguments"},"provider_specific_fields":{"key":"value"},"tool_info":{"type":"truefoundry-system","name":"name"}}],"type":"model.message","id":"id","thread_id":"thread_id","finish_reason":"stop","created_at":"created_at","usage":{"input_tokens":1,"output_tokens":1,"cache_read_tokens":1,"cache_write_tokens":1,"input_tokens_breakdown":{"harness":1,"skills":1,"instructions":1,"tool_definitions":1,"messages":1}}}\n\n';
+            'event: \ndata: {"content":"content","name":"name","refusal":"refusal","reasoning_content":"reasoning_content","tool_calls":[{"id":"id","type":"function","function":{"name":"name","arguments":"arguments"},"provider_specific_fields":{"key":"value"},"tool_info":{"name":"name","type":"truefoundry-system"}}],"type":"model.message","id":"id","thread_id":"thread_id","finish_reason":"stop","created_at":"created_at","usage":{"input_tokens":1,"output_tokens":1,"cache_read_tokens":1,"cache_write_tokens":1,"input_tokens_breakdown":{"harness":1,"skills":1,"instructions":1,"tool_definitions":1,"messages":1}}}\n\n';
 
         server
             .mockEndpoint()
@@ -685,7 +701,9 @@ describe("SessionsClient", () => {
             .sseBody(rawResponseBody)
             .build();
 
-        const response = await client.private.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
+        const response = await client.private.agents.sessions.createTurn({
+            sessionId: "01arz3ndektsv4rrffq69g5fav.g",
+        });
         const events: unknown[] = [];
         for await (const event of response) {
             events.push(event);
@@ -751,7 +769,9 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.createTurn("sessionId");
+            return await client.private.agents.sessions.createTurn({
+                sessionId: "sessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.BadRequestError);
     });
 
@@ -771,7 +791,9 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.createTurn("sessionId");
+            return await client.private.agents.sessions.createTurn({
+                sessionId: "sessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.ForbiddenError);
     });
 
@@ -791,7 +813,9 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.createTurn("sessionId");
+            return await client.private.agents.sessions.createTurn({
+                sessionId: "sessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.NotFoundError);
     });
 
@@ -811,7 +835,9 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.createTurn("sessionId");
+            return await client.private.agents.sessions.createTurn({
+                sessionId: "sessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.PreconditionFailedError);
     });
 
@@ -843,10 +869,10 @@ describe("SessionsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.private.agents.sessions.getTurn(
-            "01arz3ndektsv4rrffq69g5fav.g",
-            "01arz3ndektsv4rrffq69g5fav.g.ab12cd",
-        );
+        const response = await client.private.agents.sessions.getTurn({
+            sessionId: "01arz3ndektsv4rrffq69g5fav.g",
+            turnId: "01arz3ndektsv4rrffq69g5fav.g.ab12cd",
+        });
         expect(response).toEqual({
             data: {
                 id: "id",
@@ -886,7 +912,10 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.getTurn("sessionId", "turnId");
+            return await client.private.agents.sessions.getTurn({
+                sessionId: "sessionId",
+                turnId: "turnId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.BadRequestError);
     });
 
@@ -905,7 +934,10 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.getTurn("sessionId", "turnId");
+            return await client.private.agents.sessions.getTurn({
+                sessionId: "sessionId",
+                turnId: "turnId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.NotFoundError);
     });
 
@@ -914,7 +946,7 @@ describe("SessionsClient", () => {
         const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody =
-            'event: \ndata: {"content":"content","name":"name","refusal":"refusal","reasoning_content":"reasoning_content","tool_calls":[{"id":"id","type":"function","function":{"name":"name","arguments":"arguments"},"provider_specific_fields":{"key":"value"},"tool_info":{"type":"truefoundry-system","name":"name"}}],"type":"model.message","id":"id","thread_id":"thread_id","finish_reason":"stop","created_at":"created_at","usage":{"input_tokens":1,"output_tokens":1,"cache_read_tokens":1,"cache_write_tokens":1,"input_tokens_breakdown":{"harness":1,"skills":1,"instructions":1,"tool_definitions":1,"messages":1}}}\n\n';
+            'event: \ndata: {"content":"content","name":"name","refusal":"refusal","reasoning_content":"reasoning_content","tool_calls":[{"id":"id","type":"function","function":{"name":"name","arguments":"arguments"},"provider_specific_fields":{"key":"value"},"tool_info":{"name":"name","type":"truefoundry-system"}}],"type":"model.message","id":"id","thread_id":"thread_id","finish_reason":"stop","created_at":"created_at","usage":{"input_tokens":1,"output_tokens":1,"cache_read_tokens":1,"cache_write_tokens":1,"input_tokens_breakdown":{"harness":1,"skills":1,"instructions":1,"tool_definitions":1,"messages":1}}}\n\n';
 
         server
             .mockEndpoint()
@@ -927,10 +959,10 @@ describe("SessionsClient", () => {
             .sseBody(rawResponseBody)
             .build();
 
-        const response = await client.private.agents.sessions.subscribeToTurn(
-            "01arz3ndektsv4rrffq69g5fav.g",
-            "01arz3ndektsv4rrffq69g5fav.g.ab12cd",
-        );
+        const response = await client.private.agents.sessions.subscribeToTurn({
+            sessionId: "01arz3ndektsv4rrffq69g5fav.g",
+            turnId: "01arz3ndektsv4rrffq69g5fav.g.ab12cd",
+        });
         const events: unknown[] = [];
         for await (const event of response) {
             events.push(event);
@@ -996,7 +1028,10 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.subscribeToTurn("sessionId", "turnId");
+            return await client.private.agents.sessions.subscribeToTurn({
+                sessionId: "sessionId",
+                turnId: "turnId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.BadRequestError);
     });
 
@@ -1016,7 +1051,10 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.subscribeToTurn("sessionId", "turnId");
+            return await client.private.agents.sessions.subscribeToTurn({
+                sessionId: "sessionId",
+                turnId: "turnId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.NotFoundError);
     });
 
@@ -1036,7 +1074,10 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.subscribeToTurn("sessionId", "turnId");
+            return await client.private.agents.sessions.subscribeToTurn({
+                sessionId: "sessionId",
+                turnId: "turnId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.PreconditionFailedError);
     });
 
@@ -1056,7 +1097,10 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.subscribeToTurn("sessionId", "turnId");
+            return await client.private.agents.sessions.subscribeToTurn({
+                sessionId: "sessionId",
+                turnId: "turnId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.GatewayTimeoutError);
     });
 
@@ -1067,6 +1111,7 @@ describe("SessionsClient", () => {
         const rawResponseBody = {
             data: [
                 {
+                    type: "model.message",
                     content: "content",
                     name: "name",
                     refusal: "refusal",
@@ -1079,7 +1124,6 @@ describe("SessionsClient", () => {
                             tool_info: { type: "truefoundry-system", name: "name" },
                         },
                     ],
-                    type: "model.message",
                     id: "id",
                     thread_id: "thread_id",
                     finish_reason: "stop",
@@ -1153,15 +1197,10 @@ describe("SessionsClient", () => {
                 limit: 1,
             },
         };
-        const page = await client.private.agents.sessions.listTurnEvents(
-            "01arz3ndektsv4rrffq69g5fav.g",
-            "01arz3ndektsv4rrffq69g5fav.g.ab12cd",
-            {
-                pageToken: "page_token",
-                limit: 1,
-                order: "asc",
-            },
-        );
+        const page = await client.private.agents.sessions.listTurnEvents({
+            sessionId: "01arz3ndektsv4rrffq69g5fav.g",
+            turnId: "01arz3ndektsv4rrffq69g5fav.g.ab12cd",
+        });
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
@@ -1184,7 +1223,10 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.listTurnEvents("sessionId", "turnId");
+            return await client.private.agents.sessions.listTurnEvents({
+                sessionId: "sessionId",
+                turnId: "turnId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.BadRequestError);
     });
 
@@ -1203,7 +1245,10 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.listTurnEvents("sessionId", "turnId");
+            return await client.private.agents.sessions.listTurnEvents({
+                sessionId: "sessionId",
+                turnId: "turnId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.NotFoundError);
     });
 
@@ -1222,7 +1267,10 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.listTurnEvents("sessionId", "turnId");
+            return await client.private.agents.sessions.listTurnEvents({
+                sessionId: "sessionId",
+                turnId: "turnId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.ConflictError);
     });
 
@@ -1241,7 +1289,10 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.listTurnEvents("sessionId", "turnId");
+            return await client.private.agents.sessions.listTurnEvents({
+                sessionId: "sessionId",
+                turnId: "turnId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.PreconditionFailedError);
     });
 
@@ -1257,6 +1308,7 @@ describe("SessionsClient", () => {
                         type: "turn.created",
                         id: "id",
                         turn_id: "turn_id",
+                        previous_turn_id: null,
                         state: { status: "running" },
                         created_by: {
                             subject_id: "subject_id",
@@ -1264,6 +1316,7 @@ describe("SessionsClient", () => {
                             subject_slug: "subject_slug",
                         },
                         created_at: "created_at",
+                        thread_id: null,
                     },
                 },
             ],
@@ -1286,6 +1339,7 @@ describe("SessionsClient", () => {
                         type: "turn.created",
                         id: "id",
                         turnId: "turn_id",
+                        previousTurnId: null,
                         state: {
                             status: "running",
                         },
@@ -1295,6 +1349,7 @@ describe("SessionsClient", () => {
                             subjectSlug: "subject_slug",
                         },
                         createdAt: "created_at",
+                        threadId: null,
                     },
                 },
             ],
@@ -1304,10 +1359,8 @@ describe("SessionsClient", () => {
                 limit: 1,
             },
         };
-        const page = await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g", {
-            pageToken: "page_token",
-            lastTurnId: "last_turn_id",
-            limit: 1,
+        const page = await client.private.agents.sessions.listEvents({
+            sessionId: "01arz3ndektsv4rrffq69g5fav.g",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -1331,7 +1384,9 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.listEvents("sessionId");
+            return await client.private.agents.sessions.listEvents({
+                sessionId: "sessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.BadRequestError);
     });
 
@@ -1350,7 +1405,9 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.listEvents("sessionId");
+            return await client.private.agents.sessions.listEvents({
+                sessionId: "sessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.NotFoundError);
     });
 
@@ -1369,7 +1426,9 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.listEvents("sessionId");
+            return await client.private.agents.sessions.listEvents({
+                sessionId: "sessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.PreconditionFailedError);
     });
 });

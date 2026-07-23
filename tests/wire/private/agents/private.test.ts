@@ -58,14 +58,7 @@ describe("PrivateClient", () => {
                 limit: 1,
             },
         };
-        const page = await client.private.agents.private.listOwnedSessions({
-            agentName: "agent_name",
-            limit: 1,
-            order: "asc",
-            pageToken: "page_token",
-            startTimestamp: "start_timestamp",
-            endTimestamp: "end_timestamp",
-        });
+        const page = await client.private.agents.private.listOwnedSessions();
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);

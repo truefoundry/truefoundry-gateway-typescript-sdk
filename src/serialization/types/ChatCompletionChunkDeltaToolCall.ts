@@ -4,6 +4,7 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 import { ChatCompletionChunkDeltaToolCallFunction } from "./ChatCompletionChunkDeltaToolCallFunction.js";
+import { ChatCompletionChunkDeltaToolCallType } from "./ChatCompletionChunkDeltaToolCallType.js";
 
 export const ChatCompletionChunkDeltaToolCall: core.serialization.ObjectSchema<
     serializers.ChatCompletionChunkDeltaToolCall.Raw,
@@ -11,7 +12,7 @@ export const ChatCompletionChunkDeltaToolCall: core.serialization.ObjectSchema<
 > = core.serialization.object({
     index: core.serialization.number(),
     id: core.serialization.string().optional(),
-    type: core.serialization.stringLiteral("function").optional(),
+    type: ChatCompletionChunkDeltaToolCallType.optional(),
     function: ChatCompletionChunkDeltaToolCallFunction.optional(),
 });
 
@@ -19,7 +20,7 @@ export declare namespace ChatCompletionChunkDeltaToolCall {
     export interface Raw {
         index: number;
         id?: string | null;
-        type?: "function" | null;
+        type?: ChatCompletionChunkDeltaToolCallType.Raw | null;
         function?: ChatCompletionChunkDeltaToolCallFunction.Raw | null;
     }
 }

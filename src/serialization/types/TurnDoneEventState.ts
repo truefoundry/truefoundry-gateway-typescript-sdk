@@ -10,8 +10,29 @@ import { TurnStateError } from "./TurnStateError.js";
 export const TurnDoneEventState: core.serialization.Schema<
     serializers.TurnDoneEventState.Raw,
     TrueFoundryGateway.TurnDoneEventState
-> = core.serialization.undiscriminatedUnion([TurnStateDone, TurnStateCancelled, TurnStateError]);
+> = core.serialization
+    .union("status", {
+        done: TurnStateDone,
+        cancelled: TurnStateCancelled,
+        error: TurnStateError,
+    })
+    .transform<TrueFoundryGateway.TurnDoneEventState>({
+        transform: (value) => value,
+        untransform: (value) => value,
+    });
 
 export declare namespace TurnDoneEventState {
-    export type Raw = TurnStateDone.Raw | TurnStateCancelled.Raw | TurnStateError.Raw;
+    export type Raw = TurnDoneEventState.Done | TurnDoneEventState.Cancelled | TurnDoneEventState.Error;
+
+    export interface Done extends TurnStateDone.Raw {
+        status: "done";
+    }
+
+    export interface Cancelled extends TurnStateCancelled.Raw {
+        status: "cancelled";
+    }
+
+    export interface Error extends TurnStateError.Raw {
+        status: "error";
+    }
 }

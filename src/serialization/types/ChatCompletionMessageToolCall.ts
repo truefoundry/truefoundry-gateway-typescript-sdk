@@ -4,20 +4,21 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 import { ChatCompletionMessageToolCallFunction } from "./ChatCompletionMessageToolCallFunction.js";
+import { ChatCompletionMessageToolCallType } from "./ChatCompletionMessageToolCallType.js";
 
 export const ChatCompletionMessageToolCall: core.serialization.ObjectSchema<
     serializers.ChatCompletionMessageToolCall.Raw,
     TrueFoundryGateway.ChatCompletionMessageToolCall
 > = core.serialization.object({
     id: core.serialization.string(),
-    type: core.serialization.stringLiteral("function"),
+    type: ChatCompletionMessageToolCallType,
     function: ChatCompletionMessageToolCallFunction,
 });
 
 export declare namespace ChatCompletionMessageToolCall {
     export interface Raw {
         id: string;
-        type: "function";
+        type: ChatCompletionMessageToolCallType.Raw;
         function: ChatCompletionMessageToolCallFunction.Raw;
     }
 }

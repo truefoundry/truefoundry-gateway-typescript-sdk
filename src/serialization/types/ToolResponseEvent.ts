@@ -10,7 +10,6 @@ export const ToolResponseEvent: core.serialization.ObjectSchema<
 > = core.serialization.object({
     toolCallId: core.serialization.property("tool_call_id", core.serialization.string()),
     content: core.serialization.string(),
-    type: core.serialization.stringLiteral("tool.response"),
     id: core.serialization.string(),
     threadId: core.serialization.property("thread_id", core.serialization.string()),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
@@ -20,7 +19,6 @@ export declare namespace ToolResponseEvent {
     export interface Raw {
         tool_call_id: string;
         content: string;
-        type: "tool.response";
         id: string;
         thread_id: string;
         created_at: string;

@@ -3,12 +3,50 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export type TurnEvent =
-    | TrueFoundryGateway.ModelMessageEvent
-    | TrueFoundryGateway.ToolResponseEvent
-    | TrueFoundryGateway.ThreadCreatedEvent
-    | TrueFoundryGateway.ThreadDoneEvent
-    | TrueFoundryGateway.McpAuthRequiredEvent
-    | TrueFoundryGateway.McpInitializeEvent
-    | TrueFoundryGateway.SandboxCreatedEvent
-    | TrueFoundryGateway.ToolApprovalRequiredEvent
-    | TrueFoundryGateway.ToolResponseRequiredEvent;
+    | TrueFoundryGateway.TurnEvent.ModelMessage
+    | TrueFoundryGateway.TurnEvent.ToolResponse
+    | TrueFoundryGateway.TurnEvent.ThreadCreated
+    | TrueFoundryGateway.TurnEvent.ThreadDone
+    | TrueFoundryGateway.TurnEvent.McpAuthRequired
+    | TrueFoundryGateway.TurnEvent.McpInitialize
+    | TrueFoundryGateway.TurnEvent.SandboxCreated
+    | TrueFoundryGateway.TurnEvent.ToolApprovalRequired
+    | TrueFoundryGateway.TurnEvent.ToolResponseRequired;
+
+export namespace TurnEvent {
+    export interface ModelMessage extends TrueFoundryGateway.ModelMessageEvent {
+        type: "model.message";
+    }
+
+    export interface ToolResponse extends TrueFoundryGateway.ToolResponseEvent {
+        type: "tool.response";
+    }
+
+    export interface ThreadCreated extends TrueFoundryGateway.ThreadCreatedEvent {
+        type: "thread.created";
+    }
+
+    export interface ThreadDone extends TrueFoundryGateway.ThreadDoneEvent {
+        type: "thread.done";
+    }
+
+    export interface McpAuthRequired extends TrueFoundryGateway.McpAuthRequiredEvent {
+        type: "mcp.auth_required";
+    }
+
+    export interface McpInitialize extends TrueFoundryGateway.McpInitializeEvent {
+        type: "mcp.initialize";
+    }
+
+    export interface SandboxCreated extends TrueFoundryGateway.SandboxCreatedEvent {
+        type: "sandbox.created";
+    }
+
+    export interface ToolApprovalRequired extends TrueFoundryGateway.ToolApprovalRequiredEvent {
+        type: "tool.approval_required";
+    }
+
+    export interface ToolResponseRequired extends TrueFoundryGateway.ToolResponseRequiredEvent {
+        type: "tool.response_required";
+    }
+}

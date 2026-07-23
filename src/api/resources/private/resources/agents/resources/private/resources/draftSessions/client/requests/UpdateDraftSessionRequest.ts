@@ -4,8 +4,12 @@ import type * as TrueFoundryGateway from "../../../../../../../../../../index.js
 
 /**
  * @example
- *     {}
+ *     {
+ *         draftSessionId: "draftSessionId"
+ *     }
  */
 export interface UpdateDraftSessionRequest {
+    /** Draft session identifier. */
+    draftSessionId: string;
     agentSpec?: TrueFoundryGateway.AgentSpec;
 }

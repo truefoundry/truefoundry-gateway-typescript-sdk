@@ -6,14 +6,12 @@ import type * as serializers from "../index.js";
 
 export const FileContent: core.serialization.ObjectSchema<serializers.FileContent.Raw, TrueFoundryGateway.FileContent> =
     core.serialization.object({
-        type: core.serialization.stringLiteral("file"),
         name: core.serialization.string(),
         data: core.serialization.string(),
     });
 
 export declare namespace FileContent {
     export interface Raw {
-        type: "file";
         name: string;
         data: string;
     }

@@ -3,6 +3,20 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export type TurnInputItem =
-    | TrueFoundryGateway.UserMessage
-    | TrueFoundryGateway.UserToolApprovalEvent
-    | TrueFoundryGateway.UserToolResponseEvent;
+    | TrueFoundryGateway.TurnInputItem.UserMessage
+    | TrueFoundryGateway.TurnInputItem.UserToolApproval
+    | TrueFoundryGateway.TurnInputItem.UserToolResponse;
+
+export namespace TurnInputItem {
+    export interface UserMessage extends TrueFoundryGateway.UserMessage {
+        type: "user.message";
+    }
+
+    export interface UserToolApproval extends TrueFoundryGateway.UserToolApprovalEvent {
+        type: "user.tool_approval";
+    }
+
+    export interface UserToolResponse extends TrueFoundryGateway.UserToolResponseEvent {
+        type: "user.tool_response";
+    }
+}

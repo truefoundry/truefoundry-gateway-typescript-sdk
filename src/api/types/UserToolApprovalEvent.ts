@@ -3,7 +3,6 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface UserToolApprovalEvent {
-    type: "user.tool_approval";
     threadId: string;
     toolCallId: string;
     approval: TrueFoundryGateway.ApprovalDecision;

@@ -3,16 +3,17 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
+import { TurnStateRunningStatus } from "./TurnStateRunningStatus.js";
 
 export const TurnStateRunning: core.serialization.ObjectSchema<
     serializers.TurnStateRunning.Raw,
     TrueFoundryGateway.TurnStateRunning
 > = core.serialization.object({
-    status: core.serialization.stringLiteral("running"),
+    status: TurnStateRunningStatus,
 });
 
 export declare namespace TurnStateRunning {
     export interface Raw {
-        status: "running";
+        status: TurnStateRunningStatus.Raw;
     }
 }

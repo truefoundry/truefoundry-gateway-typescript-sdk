@@ -3,6 +3,20 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export type ActionRequiredEvent =
-    | TrueFoundryGateway.ToolApprovalRequiredEvent
-    | TrueFoundryGateway.ToolResponseRequiredEvent
-    | TrueFoundryGateway.McpAuthRequiredEvent;
+    | TrueFoundryGateway.ActionRequiredEvent.ToolApprovalRequired
+    | TrueFoundryGateway.ActionRequiredEvent.ToolResponseRequired
+    | TrueFoundryGateway.ActionRequiredEvent.McpAuthRequired;
+
+export namespace ActionRequiredEvent {
+    export interface ToolApprovalRequired extends TrueFoundryGateway.ToolApprovalRequiredEvent {
+        type: "tool.approval_required";
+    }
+
+    export interface ToolResponseRequired extends TrueFoundryGateway.ToolResponseRequiredEvent {
+        type: "tool.response_required";
+    }
+
+    export interface McpAuthRequired extends TrueFoundryGateway.McpAuthRequiredEvent {
+        type: "mcp.auth_required";
+    }
+}

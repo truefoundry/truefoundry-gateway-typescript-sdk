@@ -10,7 +10,6 @@ export const ThreadCreatedEvent: core.serialization.ObjectSchema<
     serializers.ThreadCreatedEvent.Raw,
     TrueFoundryGateway.ThreadCreatedEvent
 > = core.serialization.object({
-    type: core.serialization.stringLiteral("thread.created"),
     id: core.serialization.string(),
     agentInfo: core.serialization.property("agent_info", AgentInfo),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
@@ -21,7 +20,6 @@ export const ThreadCreatedEvent: core.serialization.ObjectSchema<
 
 export declare namespace ThreadCreatedEvent {
     export interface Raw {
-        type: "thread.created";
         id: string;
         agent_info: AgentInfo.Raw;
         created_at: string;

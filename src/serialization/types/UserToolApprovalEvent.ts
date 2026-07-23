@@ -9,7 +9,6 @@ export const UserToolApprovalEvent: core.serialization.ObjectSchema<
     serializers.UserToolApprovalEvent.Raw,
     TrueFoundryGateway.UserToolApprovalEvent
 > = core.serialization.object({
-    type: core.serialization.stringLiteral("user.tool_approval"),
     threadId: core.serialization.property("thread_id", core.serialization.string()),
     toolCallId: core.serialization.property("tool_call_id", core.serialization.string()),
     approval: ApprovalDecision,
@@ -17,7 +16,6 @@ export const UserToolApprovalEvent: core.serialization.ObjectSchema<
 
 export declare namespace UserToolApprovalEvent {
     export interface Raw {
-        type: "user.tool_approval";
         thread_id: string;
         tool_call_id: string;
         approval: ApprovalDecision.Raw;

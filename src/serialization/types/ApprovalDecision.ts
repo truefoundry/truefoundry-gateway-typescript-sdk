@@ -9,8 +9,24 @@ import { ApprovalDeny } from "./ApprovalDeny.js";
 export const ApprovalDecision: core.serialization.Schema<
     serializers.ApprovalDecision.Raw,
     TrueFoundryGateway.ApprovalDecision
-> = core.serialization.undiscriminatedUnion([ApprovalAllow, ApprovalDeny]);
+> = core.serialization
+    .union("status", {
+        allow: ApprovalAllow,
+        deny: ApprovalDeny,
+    })
+    .transform<TrueFoundryGateway.ApprovalDecision>({
+        transform: (value) => value,
+        untransform: (value) => value,
+    });
 
 export declare namespace ApprovalDecision {
-    export type Raw = ApprovalAllow.Raw | ApprovalDeny.Raw;
+    export type Raw = ApprovalDecision.Allow | ApprovalDecision.Deny;
+
+    export interface Allow extends ApprovalAllow.Raw {
+        status: "allow";
+    }
+
+    export interface Deny extends ApprovalDeny.Raw {
+        status: "deny";
+    }
 }

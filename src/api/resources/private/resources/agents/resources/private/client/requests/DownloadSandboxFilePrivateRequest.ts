@@ -3,10 +3,13 @@
 /**
  * @example
  *     {
+ *         sandboxId: "sandboxId",
  *         path: "x"
  *     }
  */
 export interface DownloadSandboxFilePrivateRequest {
+    /** The sandbox containing the file. */
+    sandboxId: string;
     /** Absolute path of the file inside the sandbox. */
     path: string;
 }

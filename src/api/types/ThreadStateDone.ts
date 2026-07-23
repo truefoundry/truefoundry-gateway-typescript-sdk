@@ -3,6 +3,5 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface ThreadStateDone {
-    status: "done";
     output: TrueFoundryGateway.ModelMessageEvent;
 }

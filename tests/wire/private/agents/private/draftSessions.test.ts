@@ -64,14 +64,7 @@ describe("DraftSessionsClient", () => {
                 limit: 1,
             },
         };
-        const page = await client.private.agents.private.draftSessions.list({
-            agentName: "agent_name",
-            limit: 1,
-            order: "asc",
-            pageToken: "page_token",
-            startTimestamp: "start_timestamp",
-            endTimestamp: "end_timestamp",
-        });
+        const page = await client.private.agents.private.draftSessions.list();
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
@@ -167,7 +160,7 @@ describe("DraftSessionsClient", () => {
                     model: { name: "name" },
                     instructions: "instructions",
                     messages: [{ type: "user.message", content: "content" }],
-                    mcp_servers: [{ name: "name", type: "truefoundry-mcp-registry" }],
+                    mcp_servers: [{ type: "truefoundry-mcp-registry", name: "name" }],
                     response_format: { type: "text" },
                     skills: [{ fqn: "fqn" }],
                     variables: { key: "value" },
@@ -217,8 +210,8 @@ describe("DraftSessionsClient", () => {
                     ],
                     mcpServers: [
                         {
-                            name: "name",
                             type: "truefoundry-mcp-registry",
+                            name: "name",
                         },
                     ],
                     responseFormat: {
@@ -388,7 +381,7 @@ describe("DraftSessionsClient", () => {
                     model: { name: "name" },
                     instructions: "instructions",
                     messages: [{ type: "user.message", content: "content" }],
-                    mcp_servers: [{ name: "name", type: "truefoundry-mcp-registry" }],
+                    mcp_servers: [{ type: "truefoundry-mcp-registry", name: "name" }],
                     response_format: { type: "text" },
                     skills: [{ fqn: "fqn" }],
                     variables: { key: "value" },
@@ -413,7 +406,9 @@ describe("DraftSessionsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.private.agents.private.draftSessions.get("draftSessionId");
+        const response = await client.private.agents.private.draftSessions.get({
+            draftSessionId: "draftSessionId",
+        });
         expect(response).toEqual({
             data: {
                 type: "session/draft",
@@ -431,8 +426,8 @@ describe("DraftSessionsClient", () => {
                     ],
                     mcpServers: [
                         {
-                            name: "name",
                             type: "truefoundry-mcp-registry",
+                            name: "name",
                         },
                     ],
                     responseFormat: {
@@ -475,7 +470,9 @@ describe("DraftSessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.draftSessions.get("draftSessionId");
+            return await client.private.agents.private.draftSessions.get({
+                draftSessionId: "draftSessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.UnauthorizedError);
     });
 
@@ -494,7 +491,9 @@ describe("DraftSessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.draftSessions.get("draftSessionId");
+            return await client.private.agents.private.draftSessions.get({
+                draftSessionId: "draftSessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.NotFoundError);
     });
 
@@ -510,7 +509,7 @@ describe("DraftSessionsClient", () => {
                     model: { name: "name" },
                     instructions: "instructions",
                     messages: [{ type: "user.message", content: "content" }],
-                    mcp_servers: [{ name: "name", type: "truefoundry-mcp-registry" }],
+                    mcp_servers: [{ type: "truefoundry-mcp-registry", name: "name" }],
                     response_format: { type: "text" },
                     skills: [{ fqn: "fqn" }],
                     variables: { key: "value" },
@@ -536,7 +535,9 @@ describe("DraftSessionsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.private.agents.private.draftSessions.update("draftSessionId");
+        const response = await client.private.agents.private.draftSessions.update({
+            draftSessionId: "draftSessionId",
+        });
         expect(response).toEqual({
             data: {
                 type: "session/draft",
@@ -554,8 +555,8 @@ describe("DraftSessionsClient", () => {
                     ],
                     mcpServers: [
                         {
-                            name: "name",
                             type: "truefoundry-mcp-registry",
+                            name: "name",
                         },
                     ],
                     responseFormat: {
@@ -599,7 +600,9 @@ describe("DraftSessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.draftSessions.update("draftSessionId");
+            return await client.private.agents.private.draftSessions.update({
+                draftSessionId: "draftSessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.BadRequestError);
     });
 
@@ -619,7 +622,9 @@ describe("DraftSessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.draftSessions.update("draftSessionId");
+            return await client.private.agents.private.draftSessions.update({
+                draftSessionId: "draftSessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.UnauthorizedError);
     });
 
@@ -639,7 +644,9 @@ describe("DraftSessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.draftSessions.update("draftSessionId");
+            return await client.private.agents.private.draftSessions.update({
+                draftSessionId: "draftSessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.NotFoundError);
     });
 
@@ -659,7 +666,9 @@ describe("DraftSessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.draftSessions.update("draftSessionId");
+            return await client.private.agents.private.draftSessions.update({
+                draftSessionId: "draftSessionId",
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.UnprocessableEntityError);
     });
 });

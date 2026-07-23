@@ -8,13 +8,11 @@ export const ApprovalDeny: core.serialization.ObjectSchema<
     serializers.ApprovalDeny.Raw,
     TrueFoundryGateway.ApprovalDeny
 > = core.serialization.object({
-    status: core.serialization.stringLiteral("deny"),
     reason: core.serialization.string().optional(),
 });
 
 export declare namespace ApprovalDeny {
     export interface Raw {
-        status: "deny";
         reason?: string | null;
     }
 }

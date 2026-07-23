@@ -5,15 +5,16 @@ import type * as TrueFoundryGateway from "../../../../../../../../index.js";
 /**
  * @example
  *     {
- *         pageToken: "page_token",
- *         limit: 1,
- *         order: "asc"
+ *         sessionId: "01arz3ndektsv4rrffq69g5fav.g",
+ *         turnId: "01arz3ndektsv4rrffq69g5fav.g.ab12cd"
  *     }
  */
 export interface ListTurnEventsSessionsRequest {
-    pageToken?: string | null;
+    sessionId: string;
+    turnId: string;
+    pageToken?: string;
     /** Page size. Defaults to 25, max 25. */
-    limit?: number | null;
+    limit?: number;
     /** Sort events by creation time. Defaults to "asc". */
-    order?: TrueFoundryGateway.ListEventsOrder | null;
+    order?: TrueFoundryGateway.ListEventsOrder;
 }

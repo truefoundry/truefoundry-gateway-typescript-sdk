@@ -7,8 +7,24 @@ import { McpToolInfo } from "./McpToolInfo.js";
 import { TrueFoundrySystemToolInfo } from "./TrueFoundrySystemToolInfo.js";
 
 export const ToolInfo: core.serialization.Schema<serializers.ToolInfo.Raw, TrueFoundryGateway.ToolInfo> =
-    core.serialization.undiscriminatedUnion([TrueFoundrySystemToolInfo, McpToolInfo]);
+    core.serialization
+        .union("type", {
+            "truefoundry-system": TrueFoundrySystemToolInfo,
+            mcp: McpToolInfo,
+        })
+        .transform<TrueFoundryGateway.ToolInfo>({
+            transform: (value) => value,
+            untransform: (value) => value,
+        });
 
 export declare namespace ToolInfo {
-    export type Raw = TrueFoundrySystemToolInfo.Raw | McpToolInfo.Raw;
+    export type Raw = ToolInfo.TruefoundrySystem | ToolInfo.Mcp;
+
+    export interface TruefoundrySystem extends TrueFoundrySystemToolInfo.Raw {
+        type: "truefoundry-system";
+    }
+
+    export interface Mcp extends McpToolInfo.Raw {
+        type: "mcp";
+    }
 }

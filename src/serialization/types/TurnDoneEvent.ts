@@ -9,19 +9,17 @@ export const TurnDoneEvent: core.serialization.ObjectSchema<
     serializers.TurnDoneEvent.Raw,
     TrueFoundryGateway.TurnDoneEvent
 > = core.serialization.object({
-    type: core.serialization.stringLiteral("turn.done"),
     id: core.serialization.string(),
     state: TurnDoneEventState,
     createdAt: core.serialization.property("created_at", core.serialization.string()),
-    threadId: core.serialization.property("thread_id", core.serialization.string().optionalNullable()),
+    threadId: core.serialization.property("thread_id", core.serialization.string().nullable()),
 });
 
 export declare namespace TurnDoneEvent {
     export interface Raw {
-        type: "turn.done";
         id: string;
         state: TurnDoneEventState.Raw;
         created_at: string;
-        thread_id?: (string | null | undefined) | null;
+        thread_id?: string | null;
     }
 }

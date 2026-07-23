@@ -3,7 +3,6 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface ThreadDoneEvent extends TrueFoundryGateway.BaseThreadDoneEvent {
-    type: "thread.done";
     /** Unique identifier for the event */
     id: string;
     createdAt: string;

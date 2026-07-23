@@ -10,14 +10,12 @@ export const InlineMcpServer: core.serialization.ObjectSchema<
     TrueFoundryGateway.InlineMcpServer
 > = core.serialization
     .object({
-        type: core.serialization.stringLiteral("inline"),
         url: core.serialization.string(),
     })
     .extend(BaseMcpServer);
 
 export declare namespace InlineMcpServer {
     export interface Raw extends BaseMcpServer.Raw {
-        type: "inline";
         url: string;
     }
 }

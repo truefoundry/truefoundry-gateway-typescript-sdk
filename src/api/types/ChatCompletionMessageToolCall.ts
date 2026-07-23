@@ -4,6 +4,6 @@ import type * as TrueFoundryGateway from "../index.js";
 
 export interface ChatCompletionMessageToolCall {
     id: string;
-    type: "function";
+    type: TrueFoundryGateway.ChatCompletionMessageToolCallType;
     function: TrueFoundryGateway.ChatCompletionMessageToolCallFunction;
 }

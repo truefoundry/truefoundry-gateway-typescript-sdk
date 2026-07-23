@@ -3,7 +3,6 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface McpInitializeEvent {
-    type: "mcp.initialize";
     /** Unique identifier for the event */
     id: string;
     createdAt: string;

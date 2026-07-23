@@ -3,7 +3,7 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface SandboxNetworkPolicyAuthInjectItem {
-    type: "git";
+    type: TrueFoundryGateway.SandboxNetworkPolicyAuthInjectItemType;
     match: TrueFoundryGateway.SandboxNetworkPolicyAuthInjectItemMatch;
     authData: TrueFoundryGateway.SandboxNetworkPolicyAuthInjectItemAuthData;
 }

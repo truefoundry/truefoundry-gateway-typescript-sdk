@@ -9,13 +9,11 @@ export const ThreadStateDone: core.serialization.ObjectSchema<
     serializers.ThreadStateDone.Raw,
     TrueFoundryGateway.ThreadStateDone
 > = core.serialization.object({
-    status: core.serialization.stringLiteral("done"),
     output: ModelMessageEvent,
 });
 
 export declare namespace ThreadStateDone {
     export interface Raw {
-        status: "done";
         output: ModelMessageEvent.Raw;
     }
 }

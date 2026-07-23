@@ -3,7 +3,6 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface ToolResponseRequiredEvent {
-    type: "tool.response_required";
     /** Unique identifier for the event */
     id: string;
     createdAt: string;

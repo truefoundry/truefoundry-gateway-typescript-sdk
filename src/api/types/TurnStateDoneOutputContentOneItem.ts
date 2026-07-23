@@ -3,5 +3,15 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export type TurnStateDoneOutputContentOneItem =
-    | TrueFoundryGateway.ChatCompletionContentPartText
-    | TrueFoundryGateway.ChatCompletionContentPartRefusal;
+    | TrueFoundryGateway.TurnStateDoneOutputContentOneItem.Text
+    | TrueFoundryGateway.TurnStateDoneOutputContentOneItem.Refusal;
+
+export namespace TurnStateDoneOutputContentOneItem {
+    export interface Text extends TrueFoundryGateway.ChatCompletionContentPartText {
+        type: "text";
+    }
+
+    export interface Refusal extends TrueFoundryGateway.ChatCompletionContentPartRefusal {
+        type: "refusal";
+    }
+}

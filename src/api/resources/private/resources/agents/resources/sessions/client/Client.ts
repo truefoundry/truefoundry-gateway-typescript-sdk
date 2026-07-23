@@ -42,12 +42,7 @@ export class SessionsClient {
      *
      * @example
      *     await client.private.agents.sessions.list({
-     *         agentName: "agent_name",
-     *         limit: 1,
-     *         order: "asc",
-     *         pageToken: "page_token",
-     *         startTimestamp: "start_timestamp",
-     *         endTimestamp: "end_timestamp"
+     *         agentName: "agent_name"
      *     })
      */
     public async list(
@@ -63,7 +58,7 @@ export class SessionsClient {
                     agent_name: agentName,
                     limit,
                     order:
-                        order !== undefined
+                        order != null
                             ? serializers.ListSessionsOrder.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,
@@ -355,7 +350,7 @@ export class SessionsClient {
     /**
      * Get a session by id. Visible to the session owner or a manager of the session agent.
      *
-     * @param {string} sessionId - Session identifier.
+     * @param {TrueFoundryGateway.private_.agents.GetSessionsRequest} request
      * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link TrueFoundryGateway.UnauthorizedError}
@@ -365,19 +360,22 @@ export class SessionsClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.sessions.get("sessionId")
+     *     await client.private.agents.sessions.get({
+     *         sessionId: "sessionId"
+     *     })
      */
     public get(
-        sessionId: string,
+        request: TrueFoundryGateway.private_.agents.GetSessionsRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): core.HttpResponsePromise<TrueFoundryGateway.GetSessionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__get(sessionId, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__get(request, requestOptions));
     }
 
     private async __get(
-        sessionId: string,
+        request: TrueFoundryGateway.private_.agents.GetSessionsRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.WithRawResponse<TrueFoundryGateway.GetSessionResponse>> {
+        const { sessionId } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -467,7 +465,6 @@ export class SessionsClient {
     /**
      * Cancel the running last turn for a session.
      *
-     * @param {string} sessionId
      * @param {TrueFoundryGateway.private_.agents.CancelSessionRequest} request
      * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -478,21 +475,22 @@ export class SessionsClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.sessions.cancel("01arz3ndektsv4rrffq69g5fav.g")
+     *     await client.private.agents.sessions.cancel({
+     *         sessionId: "01arz3ndektsv4rrffq69g5fav.g"
+     *     })
      */
     public cancel(
-        sessionId: string,
-        request: TrueFoundryGateway.private_.agents.CancelSessionRequest = {},
+        request: TrueFoundryGateway.private_.agents.CancelSessionRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): core.HttpResponsePromise<TrueFoundryGateway.CancelSessionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__cancel(sessionId, request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__cancel(request, requestOptions));
     }
 
     private async __cancel(
-        sessionId: string,
-        request: TrueFoundryGateway.private_.agents.CancelSessionRequest = {},
+        request: TrueFoundryGateway.private_.agents.CancelSessionRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.WithRawResponse<TrueFoundryGateway.CancelSessionResponse>> {
+        const { sessionId, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -511,7 +509,7 @@ export class SessionsClient {
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: mergeAdditionalBodyParameters(
-                serializers.private_.agents.CancelSessionRequest.jsonOrThrow(request, {
+                serializers.private_.agents.CancelSessionRequest.jsonOrThrow(_body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
@@ -593,7 +591,6 @@ export class SessionsClient {
     /**
      * List turns for a session (newest first). Pagination walks the ancestor chain from the session last turn, or from the turn in page_token when continuing.
      *
-     * @param {string} sessionId
      * @param {TrueFoundryGateway.private_.agents.ListTurnsSessionsRequest} request
      * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -604,21 +601,19 @@ export class SessionsClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g", {
-     *         pageToken: "page_token",
-     *         limit: 1
+     *     await client.private.agents.sessions.listTurns({
+     *         sessionId: "01arz3ndektsv4rrffq69g5fav.g"
      *     })
      */
     public async listTurns(
-        sessionId: string,
-        request: TrueFoundryGateway.private_.agents.ListTurnsSessionsRequest = {},
+        request: TrueFoundryGateway.private_.agents.ListTurnsSessionsRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.Page<TrueFoundryGateway.Turn, TrueFoundryGateway.ListTurnsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (
                 request: TrueFoundryGateway.private_.agents.ListTurnsSessionsRequest,
             ): Promise<core.WithRawResponse<TrueFoundryGateway.ListTurnsResponse>> => {
-                const { pageToken, limit = 10 } = request;
+                const { sessionId, pageToken, limit = 10 } = request;
                 const _queryParams: Record<string, unknown> = {
                     page_token: pageToken,
                     limit,
@@ -730,18 +725,17 @@ export class SessionsClient {
      * Use `previous_turn_id` to chain to the session's last turn (defaults to `auto`).
      */
     public createTurn(
-        sessionId: string,
-        request: TrueFoundryGateway.private_.agents.CreateTurnRequest = {},
+        request: TrueFoundryGateway.private_.agents.CreateTurnRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): core.HttpResponsePromise<core.Stream<TrueFoundryGateway.TurnStreamingEvent>> {
-        return core.HttpResponsePromise.fromPromise(this.__createTurn(sessionId, request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__createTurn(request, requestOptions));
     }
 
     private async __createTurn(
-        sessionId: string,
-        request: TrueFoundryGateway.private_.agents.CreateTurnRequest = {},
+        request: TrueFoundryGateway.private_.agents.CreateTurnRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.WithRawResponse<core.Stream<TrueFoundryGateway.TurnStreamingEvent>>> {
+        const { sessionId, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -760,7 +754,7 @@ export class SessionsClient {
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: mergeAdditionalBodyParameters(
-                serializers.private_.agents.CreateTurnRequest.jsonOrThrow(request, {
+                serializers.private_.agents.CreateTurnRequest.jsonOrThrow(_body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
@@ -863,8 +857,7 @@ export class SessionsClient {
     /**
      * Get a single turn by ID from Redis.
      *
-     * @param {string} sessionId
-     * @param {string} turnId
+     * @param {TrueFoundryGateway.private_.agents.GetTurnSessionsRequest} request
      * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link TrueFoundryGateway.BadRequestError}
@@ -873,21 +866,23 @@ export class SessionsClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.sessions.getTurn("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd")
+     *     await client.private.agents.sessions.getTurn({
+     *         sessionId: "01arz3ndektsv4rrffq69g5fav.g",
+     *         turnId: "01arz3ndektsv4rrffq69g5fav.g.ab12cd"
+     *     })
      */
     public getTurn(
-        sessionId: string,
-        turnId: string,
+        request: TrueFoundryGateway.private_.agents.GetTurnSessionsRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): core.HttpResponsePromise<TrueFoundryGateway.GetTurnResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__getTurn(sessionId, turnId, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__getTurn(request, requestOptions));
     }
 
     private async __getTurn(
-        sessionId: string,
-        turnId: string,
+        request: TrueFoundryGateway.private_.agents.GetTurnSessionsRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.WithRawResponse<TrueFoundryGateway.GetTurnResponse>> {
+        const { sessionId, turnId } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -967,20 +962,17 @@ export class SessionsClient {
      * Subscribe to the live SSE stream for a turn. Pass after_sequence_number to resume after disconnect or server timeout, or send Last-Event-Id when after_sequence_number is omitted.
      */
     public subscribeToTurn(
-        sessionId: string,
-        turnId: string,
-        request: TrueFoundryGateway.private_.agents.SubscribeTurnRequest = {},
+        request: TrueFoundryGateway.private_.agents.SubscribeTurnRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): core.HttpResponsePromise<core.Stream<TrueFoundryGateway.TurnStreamingEvent>> {
-        return core.HttpResponsePromise.fromPromise(this.__subscribeToTurn(sessionId, turnId, request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__subscribeToTurn(request, requestOptions));
     }
 
     private async __subscribeToTurn(
-        sessionId: string,
-        turnId: string,
-        request: TrueFoundryGateway.private_.agents.SubscribeTurnRequest = {},
+        request: TrueFoundryGateway.private_.agents.SubscribeTurnRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.WithRawResponse<core.Stream<TrueFoundryGateway.TurnStreamingEvent>>> {
+        const { sessionId, turnId, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -999,7 +991,7 @@ export class SessionsClient {
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: mergeAdditionalBodyParameters(
-                serializers.private_.agents.SubscribeTurnRequest.jsonOrThrow(request, {
+                serializers.private_.agents.SubscribeTurnRequest.jsonOrThrow(_body, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
@@ -1027,7 +1019,7 @@ export class SessionsClient {
                 queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
                 requestType: "json",
                 body: mergeAdditionalBodyParameters(
-                    serializers.private_.agents.SubscribeTurnRequest.jsonOrThrow(request, {
+                    serializers.private_.agents.SubscribeTurnRequest.jsonOrThrow(_body, {
                         unrecognizedObjectKeys: "passthrough",
                         allowUnrecognizedUnionMembers: true,
                         allowUnrecognizedEnumValues: true,
@@ -1145,8 +1137,6 @@ export class SessionsClient {
     /**
      * Paginated list of content turn events from the Redis events stream (model.message, tool.call, …). `turn.created` and `turn.done` are stored in the stream but excluded from this endpoint — use session list_events for lifecycle. Only available after the turn has reached a terminal state; use subscribe for running turns.
      *
-     * @param {string} sessionId
-     * @param {string} turnId
      * @param {TrueFoundryGateway.private_.agents.ListTurnEventsSessionsRequest} request
      * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1158,28 +1148,25 @@ export class SessionsClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
-     *         pageToken: "page_token",
-     *         limit: 1,
-     *         order: "asc"
+     *     await client.private.agents.sessions.listTurnEvents({
+     *         sessionId: "01arz3ndektsv4rrffq69g5fav.g",
+     *         turnId: "01arz3ndektsv4rrffq69g5fav.g.ab12cd"
      *     })
      */
     public async listTurnEvents(
-        sessionId: string,
-        turnId: string,
-        request: TrueFoundryGateway.private_.agents.ListTurnEventsSessionsRequest = {},
+        request: TrueFoundryGateway.private_.agents.ListTurnEventsSessionsRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.Page<TrueFoundryGateway.TurnEvent, TrueFoundryGateway.ListEventsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (
                 request: TrueFoundryGateway.private_.agents.ListTurnEventsSessionsRequest,
             ): Promise<core.WithRawResponse<TrueFoundryGateway.ListEventsResponse>> => {
-                const { pageToken, limit = 25, order } = request;
+                const { sessionId, turnId, pageToken, limit = 25, order } = request;
                 const _queryParams: Record<string, unknown> = {
                     page_token: pageToken,
                     limit,
                     order:
-                        order !== undefined
+                        order != null
                             ? serializers.ListEventsOrder.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,
@@ -1304,7 +1291,6 @@ export class SessionsClient {
     /**
      * List session events as `{ turn_id, event }` across a turn hierarchy (newest first). Each turn contributes turn.created, content events (model.message, tool.call, …), and turn.done; streaming deltas are not included. `last_turn_id` (initial load only) sets the newest turn in the window plus its ancestors; omit to use the session last turn. If that turn is still running, it is excluded — listing anchors on its parent so persisted events are returned without overlapping the live stream; subscribe to the running turn for live events. An empty `data` array is returned when the anchor is a running first turn with no parent. Use `page_token` to paginate backward toward older events; chains longer than the stored ancestor window are walked via spill to the session root.
      *
-     * @param {string} sessionId
      * @param {TrueFoundryGateway.private_.agents.ListEventsSessionsRequest} request
      * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -1315,22 +1301,19 @@ export class SessionsClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g", {
-     *         pageToken: "page_token",
-     *         lastTurnId: "last_turn_id",
-     *         limit: 1
+     *     await client.private.agents.sessions.listEvents({
+     *         sessionId: "01arz3ndektsv4rrffq69g5fav.g"
      *     })
      */
     public async listEvents(
-        sessionId: string,
-        request: TrueFoundryGateway.private_.agents.ListEventsSessionsRequest = {},
+        request: TrueFoundryGateway.private_.agents.ListEventsSessionsRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.Page<TrueFoundryGateway.SessionEventItem, TrueFoundryGateway.ListSessionEventsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (
                 request: TrueFoundryGateway.private_.agents.ListEventsSessionsRequest,
             ): Promise<core.WithRawResponse<TrueFoundryGateway.ListSessionEventsResponse>> => {
-                const { pageToken, lastTurnId, limit = 100 } = request;
+                const { sessionId, pageToken, lastTurnId, limit = 100 } = request;
                 const _queryParams: Record<string, unknown> = {
                     page_token: pageToken,
                     last_turn_id: lastTurnId,

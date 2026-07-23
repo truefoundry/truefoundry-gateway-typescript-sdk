@@ -6,13 +6,11 @@ import type * as serializers from "../index.js";
 
 export const TextContent: core.serialization.ObjectSchema<serializers.TextContent.Raw, TrueFoundryGateway.TextContent> =
     core.serialization.object({
-        type: core.serialization.stringLiteral("text"),
         text: core.serialization.string(),
     });
 
 export declare namespace TextContent {
     export interface Raw {
-        type: "text";
         text: string;
     }
 }

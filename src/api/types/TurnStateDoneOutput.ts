@@ -8,7 +8,7 @@ export interface TurnStateDoneOutput {
     refusal?: string | null;
     reasoningContent?: string;
     toolCalls?: TrueFoundryGateway.ToolCall[];
-    type: "model.message";
+    type: TrueFoundryGateway.TurnStateDoneOutputType;
     /** Unique identifier for the event */
     id: string;
     threadId: string;

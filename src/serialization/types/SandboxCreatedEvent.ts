@@ -8,19 +8,17 @@ export const SandboxCreatedEvent: core.serialization.ObjectSchema<
     serializers.SandboxCreatedEvent.Raw,
     TrueFoundryGateway.SandboxCreatedEvent
 > = core.serialization.object({
-    type: core.serialization.stringLiteral("sandbox.created"),
     id: core.serialization.string(),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
     sandboxId: core.serialization.property("sandbox_id", core.serialization.string()),
-    threadId: core.serialization.property("thread_id", core.serialization.string().optionalNullable()),
+    threadId: core.serialization.property("thread_id", core.serialization.string().nullable()),
 });
 
 export declare namespace SandboxCreatedEvent {
     export interface Raw {
-        type: "sandbox.created";
         id: string;
         created_at: string;
         sandbox_id: string;
-        thread_id?: (string | null | undefined) | null;
+        thread_id?: string | null;
     }
 }

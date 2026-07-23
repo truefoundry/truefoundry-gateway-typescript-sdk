@@ -3,12 +3,12 @@
 /**
  * @example
  *     {
- *         pageToken: "page_token",
- *         limit: 1
+ *         sessionId: "01arz3ndektsv4rrffq69g5fav.g"
  *     }
  */
 export interface ListTurnsSessionsRequest {
-    pageToken?: string | null;
+    sessionId: string;
+    pageToken?: string;
     /** Page size. Defaults to 10, max 25. */
-    limit?: number | null;
+    limit?: number;
 }

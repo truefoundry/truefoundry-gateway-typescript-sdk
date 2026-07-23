@@ -3,6 +3,5 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface McpAuthRequiredEvent extends TrueFoundryGateway.BaseMcpAuthRequiredEvent {
-    type: "mcp.auth_required";
     mcpServers: TrueFoundryGateway.McpServerAuthInfo[];
 }

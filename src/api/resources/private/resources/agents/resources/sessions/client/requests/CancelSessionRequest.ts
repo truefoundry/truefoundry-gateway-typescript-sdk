@@ -2,6 +2,10 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         sessionId: "01arz3ndektsv4rrffq69g5fav.g"
+ *     }
  */
-export type CancelSessionRequest = {};
+export interface CancelSessionRequest {
+    sessionId: string;
+}

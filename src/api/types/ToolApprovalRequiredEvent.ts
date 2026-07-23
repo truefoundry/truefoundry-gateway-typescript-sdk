@@ -3,7 +3,6 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface ToolApprovalRequiredEvent {
-    type: "tool.approval_required";
     /** Unique identifier for the event */
     id: string;
     createdAt: string;

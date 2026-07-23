@@ -8,13 +8,11 @@ export const ChatCompletionContentPartText: core.serialization.ObjectSchema<
     serializers.ChatCompletionContentPartText.Raw,
     TrueFoundryGateway.ChatCompletionContentPartText
 > = core.serialization.object({
-    type: core.serialization.stringLiteral("text"),
     text: core.serialization.string(),
 });
 
 export declare namespace ChatCompletionContentPartText {
     export interface Raw {
-        type: "text";
         text: string;
     }
 }

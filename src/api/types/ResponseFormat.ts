@@ -3,6 +3,20 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export type ResponseFormat =
-    | TrueFoundryGateway.ResponseFormatZero
-    | TrueFoundryGateway.ResponseFormatOne
-    | TrueFoundryGateway.ResponseFormatJsonSchema;
+    | TrueFoundryGateway.ResponseFormat.Text
+    | TrueFoundryGateway.ResponseFormat.JsonObject
+    | TrueFoundryGateway.ResponseFormat.JsonSchema;
+
+export namespace ResponseFormat {
+    export interface Text extends TrueFoundryGateway.ResponseFormatText {
+        type: "text";
+    }
+
+    export interface JsonObject extends TrueFoundryGateway.ResponseFormatJsonObject {
+        type: "json_object";
+    }
+
+    export interface JsonSchema extends TrueFoundryGateway.ResponseFormatJsonSchema {
+        type: "json_schema";
+    }
+}

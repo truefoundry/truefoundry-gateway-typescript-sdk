@@ -9,8 +9,24 @@ import { TextContent } from "./TextContent.js";
 export const UserMessageContentItem: core.serialization.Schema<
     serializers.UserMessageContentItem.Raw,
     TrueFoundryGateway.UserMessageContentItem
-> = core.serialization.undiscriminatedUnion([TextContent, FileContent]);
+> = core.serialization
+    .union("type", {
+        text: TextContent,
+        file: FileContent,
+    })
+    .transform<TrueFoundryGateway.UserMessageContentItem>({
+        transform: (value) => value,
+        untransform: (value) => value,
+    });
 
 export declare namespace UserMessageContentItem {
-    export type Raw = TextContent.Raw | FileContent.Raw;
+    export type Raw = UserMessageContentItem.Text | UserMessageContentItem.File;
+
+    export interface Text extends TextContent.Raw {
+        type: "text";
+    }
+
+    export interface File extends FileContent.Raw {
+        type: "file";
+    }
 }
