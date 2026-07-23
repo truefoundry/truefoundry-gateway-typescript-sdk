@@ -1,78 +1,4 @@
 # Reference
-## Private Agents
-<details><summary><code>client.private.agents.<a href="/src/api/resources/private/resources/agents/client/Client.ts">downloadSandboxFile</a>(sandboxId, { ...params }) -> core.BinaryResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Download a file produced by an agent inside a sandbox.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.private.agents.downloadSandboxFile("sandboxId", {
-    path: "x"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**sandboxId:** `string` — The sandbox containing the file.
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `TrueFoundryGateway.private_.AgentsDownloadSandboxFileRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AgentsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## Private Agents Sessions
 <details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;TrueFoundryGateway.Session, TrueFoundryGateway.ListSessionsResponse&gt;</code></summary>
 <dl>
@@ -940,6 +866,79 @@ const response = page.response;
 <dd>
 
 **request:** `TrueFoundryGateway.private_.agents.PrivateListOwnedSessionsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PrivateClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.private.agents.private.<a href="/src/api/resources/private/resources/agents/resources/private/client/Client.ts">downloadSandboxFile</a>(sandboxId, { ...params }) -> core.BinaryResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Download a file produced by an agent inside a sandbox.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.private.agents.private.downloadSandboxFile("sandboxId", {
+    path: "x"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sandboxId:** `string` — The sandbox containing the file.
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `TrueFoundryGateway.private_.agents.PrivateDownloadSandboxFileRequest` 
     
 </dd>
 </dl>
