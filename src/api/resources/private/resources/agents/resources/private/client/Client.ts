@@ -41,6 +41,8 @@ export class PrivateClient {
      * @throws {@link TrueFoundryGateway.UnauthorizedError}
      * @throws {@link TrueFoundryGateway.NotFoundError}
      * @throws {@link TrueFoundryGateway.UnprocessableEntityError}
+     * @throws {@link errors.TrueFoundryGatewayError}
+     * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
      *     await client.private.agents.private.listOwnedSessions({
