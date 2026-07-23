@@ -4,9 +4,9 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 
-export const McpServerRequireApprovalForToolsItem: core.serialization.Schema<
-    serializers.McpServerRequireApprovalForToolsItem.Raw,
-    TrueFoundryGateway.McpServerRequireApprovalForToolsItem
+export const RegisteredMcpServerRequireApprovalForToolsItem: core.serialization.Schema<
+    serializers.RegisteredMcpServerRequireApprovalForToolsItem.Raw,
+    TrueFoundryGateway.RegisteredMcpServerRequireApprovalForToolsItem
 > = core.serialization.undiscriminatedUnion([
     core.serialization.stringLiteral("@all"),
     core.serialization.stringLiteral("@write"),
@@ -14,6 +14,6 @@ export const McpServerRequireApprovalForToolsItem: core.serialization.Schema<
     core.serialization.string(),
 ]);
 
-export declare namespace McpServerRequireApprovalForToolsItem {
+export declare namespace RegisteredMcpServerRequireApprovalForToolsItem {
     export type Raw = "@all" | "@write" | "@destructive" | string;
 }

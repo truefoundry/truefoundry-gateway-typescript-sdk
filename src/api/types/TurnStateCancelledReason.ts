@@ -5,5 +5,6 @@ export const TurnStateCancelledReason = {
     ServerExecutionTimeout: "server-execution-timeout",
     ClientCancelled: "client-cancelled",
     CancelledForNextTurn: "cancelled-for-next-turn",
+    Abandoned: "abandoned",
 } as const;
 export type TurnStateCancelledReason = (typeof TurnStateCancelledReason)[keyof typeof TurnStateCancelledReason];
