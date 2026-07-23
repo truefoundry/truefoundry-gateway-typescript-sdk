@@ -2,4 +2,4 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export type McpServer = TrueFoundryGateway.RegisteredMcpServer | TrueFoundryGateway.InlineMcpServer;
+export type ToolsSelectorItem = TrueFoundryGateway.ToolsSelectorTag | string;

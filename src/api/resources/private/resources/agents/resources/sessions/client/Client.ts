@@ -37,6 +37,8 @@ export class SessionsClient {
      * @throws {@link TrueFoundryGateway.ForbiddenError}
      * @throws {@link TrueFoundryGateway.NotFoundError}
      * @throws {@link TrueFoundryGateway.UnprocessableEntityError}
+     * @throws {@link errors.TrueFoundryGatewayError}
+     * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
      *     await client.private.agents.sessions.list({
@@ -204,6 +206,8 @@ export class SessionsClient {
      * @throws {@link TrueFoundryGateway.NotFoundError}
      * @throws {@link TrueFoundryGateway.ConflictError}
      * @throws {@link TrueFoundryGateway.UnprocessableEntityError}
+     * @throws {@link errors.TrueFoundryGatewayError}
+     * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
      *     await client.private.agents.sessions.create({
@@ -357,6 +361,8 @@ export class SessionsClient {
      * @throws {@link TrueFoundryGateway.UnauthorizedError}
      * @throws {@link TrueFoundryGateway.ForbiddenError}
      * @throws {@link TrueFoundryGateway.NotFoundError}
+     * @throws {@link errors.TrueFoundryGatewayError}
+     * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
      *     await client.private.agents.sessions.get("sessionId")
@@ -468,6 +474,8 @@ export class SessionsClient {
      * @throws {@link TrueFoundryGateway.BadRequestError}
      * @throws {@link TrueFoundryGateway.PreconditionFailedError}
      * @throws {@link TrueFoundryGateway.FailedDependencyError}
+     * @throws {@link errors.TrueFoundryGatewayError}
+     * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
      *     await client.private.agents.sessions.cancel("01arz3ndektsv4rrffq69g5fav.g")
@@ -592,6 +600,8 @@ export class SessionsClient {
      * @throws {@link TrueFoundryGateway.BadRequestError}
      * @throws {@link TrueFoundryGateway.NotFoundError}
      * @throws {@link TrueFoundryGateway.PreconditionFailedError}
+     * @throws {@link errors.TrueFoundryGatewayError}
+     * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
      *     await client.private.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g", {
@@ -859,6 +869,8 @@ export class SessionsClient {
      *
      * @throws {@link TrueFoundryGateway.BadRequestError}
      * @throws {@link TrueFoundryGateway.NotFoundError}
+     * @throws {@link errors.TrueFoundryGatewayError}
+     * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
      *     await client.private.agents.sessions.getTurn("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd")
@@ -1142,6 +1154,8 @@ export class SessionsClient {
      * @throws {@link TrueFoundryGateway.NotFoundError}
      * @throws {@link TrueFoundryGateway.ConflictError}
      * @throws {@link TrueFoundryGateway.PreconditionFailedError}
+     * @throws {@link errors.TrueFoundryGatewayError}
+     * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
      *     await client.private.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
@@ -1297,6 +1311,8 @@ export class SessionsClient {
      * @throws {@link TrueFoundryGateway.BadRequestError}
      * @throws {@link TrueFoundryGateway.NotFoundError}
      * @throws {@link TrueFoundryGateway.PreconditionFailedError}
+     * @throws {@link errors.TrueFoundryGatewayError}
+     * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
      *     await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g", {
