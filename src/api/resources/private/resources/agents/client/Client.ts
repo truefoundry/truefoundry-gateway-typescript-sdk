@@ -44,6 +44,8 @@ export class AgentsClient {
      * @throws {@link TrueFoundryGateway.PreconditionFailedError}
      * @throws {@link TrueFoundryGateway.ContentTooLargeError}
      * @throws {@link TrueFoundryGateway.BadGatewayError}
+     * @throws {@link errors.TrueFoundryGatewayError}
+     * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      */
     public downloadSandboxFile(
         sandboxId: string,

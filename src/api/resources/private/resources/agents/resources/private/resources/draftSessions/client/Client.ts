@@ -36,6 +36,8 @@ export class DraftSessionsClient {
      * @throws {@link TrueFoundryGateway.UnauthorizedError}
      * @throws {@link TrueFoundryGateway.NotFoundError}
      * @throws {@link TrueFoundryGateway.UnprocessableEntityError}
+     * @throws {@link errors.TrueFoundryGatewayError}
+     * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
      *     await client.private.agents.private.draftSessions.list({
@@ -196,6 +198,8 @@ export class DraftSessionsClient {
      * @throws {@link TrueFoundryGateway.NotFoundError}
      * @throws {@link TrueFoundryGateway.UnprocessableEntityError}
      * @throws {@link TrueFoundryGateway.InternalServerError}
+     * @throws {@link errors.TrueFoundryGatewayError}
+     * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
      *     await client.private.agents.private.draftSessions.create({
@@ -341,6 +345,8 @@ export class DraftSessionsClient {
      *
      * @throws {@link TrueFoundryGateway.UnauthorizedError}
      * @throws {@link TrueFoundryGateway.NotFoundError}
+     * @throws {@link errors.TrueFoundryGatewayError}
+     * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
      *     await client.private.agents.private.draftSessions.get("draftSessionId")
@@ -442,6 +448,8 @@ export class DraftSessionsClient {
      * @throws {@link TrueFoundryGateway.UnauthorizedError}
      * @throws {@link TrueFoundryGateway.NotFoundError}
      * @throws {@link TrueFoundryGateway.UnprocessableEntityError}
+     * @throws {@link errors.TrueFoundryGatewayError}
+     * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
      *     await client.private.agents.private.draftSessions.update("draftSessionId")

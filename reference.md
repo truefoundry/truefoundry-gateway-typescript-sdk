@@ -869,6 +869,96 @@ const response = page.response;
 </dl>
 </details>
 
+## Private Agents Private
+<details><summary><code>client.private.agents.private.<a href="/src/api/resources/private/resources/agents/resources/private/client/Client.ts">listOwnedSessions</a>({ ...params }) -> core.Page&lt;TrueFoundryGateway.ListOwnedSessionsResponseDataItem, TrueFoundryGateway.ListOwnedSessionsResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List all sessions owned by the caller, spanning both saved sessions and drafts (newest first by default), keyset-paginated. Optionally filter by `agent_name`. Pass `page_token` to fetch the next page, keeping the other query params constant.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.private.agents.private.listOwnedSessions({
+    agentName: "agent_name",
+    limit: 1,
+    order: "asc",
+    pageToken: "page_token",
+    startTimestamp: "start_timestamp",
+    endTimestamp: "end_timestamp"
+});
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.private.agents.private.listOwnedSessions({
+    agentName: "agent_name",
+    limit: 1,
+    order: "asc",
+    pageToken: "page_token",
+    startTimestamp: "start_timestamp",
+    endTimestamp: "end_timestamp"
+});
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `TrueFoundryGateway.private_.agents.PrivateListOwnedSessionsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PrivateClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Private Agents Private DraftSessions
 <details><summary><code>client.private.agents.private.draftSessions.<a href="/src/api/resources/private/resources/agents/resources/private/resources/draftSessions/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;TrueFoundryGateway.DraftSession, TrueFoundryGateway.ListDraftSessionsResponse&gt;</code></summary>
 <dl>
@@ -1151,96 +1241,6 @@ await client.private.agents.private.draftSessions.update("draftSessionId");
 <dd>
 
 **requestOptions:** `DraftSessionsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## Private Agents Private Sessions
-<details><summary><code>client.private.agents.private.sessions.<a href="/src/api/resources/private/resources/agents/resources/private/resources/sessions/client/Client.ts">listOwnedSessions</a>({ ...params }) -> core.Page&lt;TrueFoundryGateway.ListOwnedSessionsResponseDataItem, TrueFoundryGateway.ListOwnedSessionsResponse&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-List all sessions owned by the caller, spanning both saved sessions and drafts (newest first by default), keyset-paginated. Optionally filter by `agent_name`. Pass `page_token` to fetch the next page, keeping the other query params constant.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-const pageableResponse = await client.private.agents.private.sessions.listOwnedSessions({
-    agentName: "agent_name",
-    limit: 1,
-    order: "asc",
-    pageToken: "page_token",
-    startTimestamp: "start_timestamp",
-    endTimestamp: "end_timestamp"
-});
-for await (const item of pageableResponse) {
-    console.log(item);
-}
-
-// Or you can manually iterate page-by-page
-let page = await client.private.agents.private.sessions.listOwnedSessions({
-    agentName: "agent_name",
-    limit: 1,
-    order: "asc",
-    pageToken: "page_token",
-    startTimestamp: "start_timestamp",
-    endTimestamp: "end_timestamp"
-});
-while (page.hasNextPage()) {
-    page = page.getNextPage();
-}
-
-// You can also access the underlying response
-const response = page.response;
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `TrueFoundryGateway.private_.agents.private_.SessionsListOwnedSessionsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `SessionsClient.RequestOptions` 
     
 </dd>
 </dl>

@@ -3,44 +3,19 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { RegisteredMcpServerDisableToolsItem } from "./RegisteredMcpServerDisableToolsItem.js";
-import { RegisteredMcpServerEnableToolsItem } from "./RegisteredMcpServerEnableToolsItem.js";
-import { RegisteredMcpServerPreloadToolsItem } from "./RegisteredMcpServerPreloadToolsItem.js";
-import { RegisteredMcpServerRequireApprovalForToolsItem } from "./RegisteredMcpServerRequireApprovalForToolsItem.js";
+import { BaseMcpServer } from "./BaseMcpServer.js";
 
 export const RegisteredMcpServer: core.serialization.ObjectSchema<
     serializers.RegisteredMcpServer.Raw,
     TrueFoundryGateway.RegisteredMcpServer
-> = core.serialization.object({
-    name: core.serialization.string(),
-    enableTools: core.serialization.property(
-        "enable_tools",
-        core.serialization.list(RegisteredMcpServerEnableToolsItem).optional(),
-    ),
-    disableTools: core.serialization.property(
-        "disable_tools",
-        core.serialization.list(RegisteredMcpServerDisableToolsItem).optional(),
-    ),
-    preloadTools: core.serialization.property(
-        "preload_tools",
-        core.serialization.list(RegisteredMcpServerPreloadToolsItem).optional(),
-    ),
-    requireApprovalForTools: core.serialization.property(
-        "require_approval_for_tools",
-        core.serialization.list(RegisteredMcpServerRequireApprovalForToolsItem).optional(),
-    ),
-    preload: core.serialization.boolean().optional(),
-    type: core.serialization.stringLiteral("truefoundry-mcp-registry"),
-});
+> = core.serialization
+    .object({
+        type: core.serialization.stringLiteral("truefoundry-mcp-registry"),
+    })
+    .extend(BaseMcpServer);
 
 export declare namespace RegisteredMcpServer {
-    export interface Raw {
-        name: string;
-        enable_tools?: RegisteredMcpServerEnableToolsItem.Raw[] | null;
-        disable_tools?: RegisteredMcpServerDisableToolsItem.Raw[] | null;
-        preload_tools?: RegisteredMcpServerPreloadToolsItem.Raw[] | null;
-        require_approval_for_tools?: RegisteredMcpServerRequireApprovalForToolsItem.Raw[] | null;
-        preload?: boolean | null;
+    export interface Raw extends BaseMcpServer.Raw {
         type: "truefoundry-mcp-registry";
     }
 }
