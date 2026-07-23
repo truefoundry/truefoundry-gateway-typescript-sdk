@@ -77,8 +77,8 @@ export class AgentSession implements TrueFoundryGatewayApi.Session {
      * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
      * @returns {Turn} Turn data.
      */
-    getTurn(opts: { turnId: string }, requestOptions?: RequestOptions): Promise<Turn> {
-        return this.#mixin.getTurn(this, opts, requestOptions);
+    getTurn(request: { turnId: string }, requestOptions?: RequestOptions): Promise<Turn> {
+        return this.#mixin.getTurn(this, request, requestOptions);
     }
 
     /**

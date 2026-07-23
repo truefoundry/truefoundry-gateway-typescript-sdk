@@ -41,12 +41,16 @@ export class SessionMixin {
      */
     prepareTurn(
         owner: AgentSession | AgentDraftSession,
-        opts?: {
+        request?: {
             input?: TrueFoundryGatewayApi.TurnInputItem[];
             previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput;
         },
     ): PreparedTurn {
-        return new PreparedTurn({ input: opts?.input, previousTurnId: opts?.previousTurnId }, owner, this.#client);
+        return new PreparedTurn(
+            { input: request?.input, previousTurnId: request?.previousTurnId },
+            owner,
+            this.#client,
+        );
     }
 
     /**
@@ -60,12 +64,12 @@ export class SessionMixin {
      */
     async listTurns(
         owner: AgentSession | AgentDraftSession,
-        opts?: TrueFoundryGatewayApi.agents.SessionsListTurnsRequest,
+        request?: TrueFoundryGatewayApi.agents.SessionsListTurnsRequest,
         requestOptions?: RequestOptions,
     ): Promise<core.Page<Turn, TrueFoundryGatewayApi.ListTurnsResponse>> {
         const client = this.#client;
         const sessionId = this.id;
-        const page = await client.agents.sessions.listTurns(sessionId, opts, requestOptions);
+        const page = await client.agents.sessions.listTurns(sessionId, request, requestOptions);
         return new core.Page({
             response: page.response,
             rawResponse: page.rawResponse,
@@ -94,10 +98,10 @@ export class SessionMixin {
      */
     async getTurn(
         owner: AgentSession | AgentDraftSession,
-        opts: { turnId: string },
+        request: { turnId: string },
         requestOptions?: RequestOptions,
     ): Promise<Turn> {
-        const response = await this.#client.agents.sessions.getTurn(this.id, opts.turnId, requestOptions);
+        const response = await this.#client.agents.sessions.getTurn(this.id, request.turnId, requestOptions);
         return new Turn(response.data, owner, this.#client);
     }
 
@@ -121,9 +125,9 @@ export class SessionMixin {
      * @returns {Promise<core.Page<TrueFoundryGatewayApi.SessionEventItem, TrueFoundryGatewayApi.ListSessionEventsResponse>>} Paginated session events.
      */
     listEvents(
-        opts?: TrueFoundryGatewayApi.agents.SessionsListEventsRequest,
+        request?: TrueFoundryGatewayApi.agents.SessionsListEventsRequest,
         requestOptions?: RequestOptions,
     ): Promise<core.Page<TrueFoundryGatewayApi.SessionEventItem, TrueFoundryGatewayApi.ListSessionEventsResponse>> {
-        return this.#client.agents.sessions.listEvents(this.id, opts, requestOptions);
+        return this.#client.agents.sessions.listEvents(this.id, request, requestOptions);
     }
 }

@@ -28,10 +28,10 @@ export class AgentSessionClient {
      * @returns {AgentSession} Session created.
      */
     async createSession(
-        opts: TrueFoundryGatewayApi.agents.CreateSessionRequest,
+        request: TrueFoundryGatewayApi.agents.CreateSessionRequest,
         requestOptions?: AgentSessionClient.RequestOptions,
     ): Promise<AgentSession> {
-        const response = await this.client.agents.sessions.create(opts, requestOptions);
+        const response = await this.client.agents.sessions.create(request, requestOptions);
         return new AgentSession(response.data, this.client);
     }
 
@@ -48,10 +48,10 @@ export class AgentSessionClient {
      * @returns {core.Page<AgentSession, TrueFoundryGatewayApi.ListSessionsResponse>} Paginated sessions.
      */
     async listSessions(
-        opts: TrueFoundryGatewayApi.agents.SessionsListRequest,
+        request: TrueFoundryGatewayApi.agents.SessionsListRequest,
         requestOptions?: AgentSessionClient.RequestOptions,
     ): Promise<core.Page<AgentSession, TrueFoundryGatewayApi.ListSessionsResponse>> {
-        const page = await this.client.agents.sessions.list(opts, requestOptions);
+        const page = await this.client.agents.sessions.list(request, requestOptions);
         const client = this.client;
         return new core.Page({
             response: page.response,
@@ -61,7 +61,7 @@ export class AgentSessionClient {
             loadPage: (response) =>
                 core.HttpResponsePromise.fromPromise(
                     client.agents.sessions
-                        .list({ ...opts, pageToken: response?.pagination.nextPageToken }, requestOptions)
+                        .list({ ...request, pageToken: response?.pagination.nextPageToken }, requestOptions)
                         .then((nextPage) => ({
                             data: nextPage.response,
                             rawResponse: nextPage.rawResponse,
@@ -78,10 +78,10 @@ export class AgentSessionClient {
      * @returns {AgentSession} Session data.
      */
     async getSession(
-        opts: { sessionId: string },
+        request: { sessionId: string },
         requestOptions?: AgentSessionClient.RequestOptions,
     ): Promise<AgentSession> {
-        const response = await this.client.agents.sessions.get(opts.sessionId, requestOptions);
+        const response = await this.client.agents.sessions.get(request.sessionId, requestOptions);
         return new AgentSession(response.data, this.client);
     }
 }

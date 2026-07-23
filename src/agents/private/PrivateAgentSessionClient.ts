@@ -32,10 +32,10 @@ export class PrivateAgentSessionClient {
      * @returns {AgentDraftSession} The created draft session.
      */
     async createDraftSession(
-        opts: TrueFoundryGatewayApi.agents.private_.CreateDraftSessionRequest,
+        request: TrueFoundryGatewayApi.agents.private_.CreateDraftSessionRequest,
         requestOptions?: PrivateAgentSessionClient.RequestOptions,
     ): Promise<AgentDraftSession> {
-        const response = await this.client.agents.private.draftSessions.create(opts, requestOptions);
+        const response = await this.client.agents.private.draftSessions.create(request, requestOptions);
         return new AgentDraftSession(response.data, this.client);
     }
 
@@ -47,10 +47,10 @@ export class PrivateAgentSessionClient {
      * @returns {AgentDraftSession} Draft session data.
      */
     async getDraftSession(
-        opts: { draftSessionId: string },
+        request: { draftSessionId: string },
         requestOptions?: PrivateAgentSessionClient.RequestOptions,
     ): Promise<AgentDraftSession> {
-        const response = await this.client.agents.private.draftSessions.get(opts.draftSessionId, requestOptions);
+        const response = await this.client.agents.private.draftSessions.get(request.draftSessionId, requestOptions);
         return new AgentDraftSession(response.data, this.client);
     }
 
@@ -67,11 +67,11 @@ export class PrivateAgentSessionClient {
      * @returns {core.Page<AgentDraftSession, TrueFoundryGatewayApi.ListDraftSessionsResponse>} Paginated draft sessions.
      */
     async listDraftSessions(
-        opts: TrueFoundryGatewayApi.agents.private_.DraftSessionsListRequest = {},
+        request: TrueFoundryGatewayApi.agents.private_.DraftSessionsListRequest = {},
         requestOptions?: PrivateAgentSessionClient.RequestOptions,
     ): Promise<core.Page<AgentDraftSession, TrueFoundryGatewayApi.ListDraftSessionsResponse>> {
         const client = this.client;
-        const page = await client.agents.private.draftSessions.list(opts, requestOptions);
+        const page = await client.agents.private.draftSessions.list(request, requestOptions);
         return new core.Page({
             response: page.response,
             rawResponse: page.rawResponse,
@@ -99,11 +99,11 @@ export class PrivateAgentSessionClient {
      * @returns {core.Page<AgentSession | AgentDraftSession, TrueFoundryGatewayApi.ListOwnedSessionsResponse>} Paginated owned sessions.
      */
     async listOwnedSessions(
-        opts: TrueFoundryGatewayApi.agents.private_.SessionsListOwnedSessionsRequest = {},
+        request: TrueFoundryGatewayApi.agents.private_.PrivateListOwnedSessionsRequest = {},
         requestOptions?: PrivateAgentSessionClient.RequestOptions,
     ): Promise<core.Page<AgentSession | AgentDraftSession, TrueFoundryGatewayApi.ListOwnedSessionsResponse>> {
         const client = this.client;
-        const page = await client.agents.private.sessions.listOwnedSessions(opts, requestOptions);
+        const page = await client.agents.private.listOwnedSessions(request, requestOptions);
         return new core.Page({
             response: page.response,
             rawResponse: page.rawResponse,
@@ -130,5 +130,20 @@ export class PrivateAgentSessionClient {
             default:
                 throw new Error(`Unknown owned session type`);
         }
+    }
+
+    /**
+     * Download a sandbox file by ID.
+     *
+     * @param opts.sandboxId - Unique identifier of the sandbox file to download.
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {core.BinaryResponse} The downloaded sandbox file.
+     */
+    downloadSandboxFile(
+        sandboxId: string,
+        request: TrueFoundryGatewayApi.agents.private_.PrivateDownloadSandboxFileRequest,
+        requestOptions?: PrivateAgentSessionClient.RequestOptions,
+    ): core.HttpResponsePromise<core.BinaryResponse> {
+        return this.client.agents.private.downloadSandboxFile(sandboxId, request, requestOptions);
     }
 }

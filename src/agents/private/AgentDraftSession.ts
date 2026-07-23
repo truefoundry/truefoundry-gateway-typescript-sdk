@@ -66,10 +66,10 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
      * @returns {void}
      */
     async update(
-        opts: TrueFoundryGatewayApi.agents.private_.UpdateDraftSessionRequest = {},
+        request: TrueFoundryGatewayApi.agents.private_.UpdateDraftSessionRequest = {},
         requestOptions?: RequestOptions,
     ): Promise<void> {
-        const response = await this.#client.agents.private.draftSessions.update(this.id, opts, requestOptions);
+        const response = await this.#client.agents.private.draftSessions.update(this.id, request, requestOptions);
         this.#agentSpec = response.data.agentSpec;
         this.#updatedAt = response.data.updatedAt;
     }
@@ -97,10 +97,10 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
      * @returns {core.Page<Turn, TrueFoundryGatewayApi.ListTurnsResponse>} Paginated turns.
      */
     listTurns(
-        opts?: TrueFoundryGatewayApi.agents.SessionsListTurnsRequest,
+        request?: TrueFoundryGatewayApi.agents.SessionsListTurnsRequest,
         requestOptions?: RequestOptions,
     ): Promise<core.Page<Turn, TrueFoundryGatewayApi.ListTurnsResponse>> {
-        return this.#mixin.listTurns(this, opts, requestOptions);
+        return this.#mixin.listTurns(this, request, requestOptions);
     }
 
     /**
@@ -134,9 +134,9 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
      * @returns {Promise<core.Page<TrueFoundryGatewayApi.SessionEventItem, TrueFoundryGatewayApi.ListSessionEventsResponse>>} Paginated session events.
      */
     listEvents(
-        opts?: TrueFoundryGatewayApi.agents.SessionsListEventsRequest,
+        request?: TrueFoundryGatewayApi.agents.SessionsListEventsRequest,
         requestOptions?: RequestOptions,
     ): Promise<core.Page<TrueFoundryGatewayApi.SessionEventItem, TrueFoundryGatewayApi.ListSessionEventsResponse>> {
-        return this.#mixin.listEvents(opts, requestOptions);
+        return this.#mixin.listEvents(request, requestOptions);
     }
 }

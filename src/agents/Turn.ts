@@ -35,7 +35,11 @@ export class Turn implements TrueFoundryGatewayApi.Turn {
     readonly #client: TrueFoundryGateway;
     #state: TrueFoundryGatewayApi.TurnState;
 
-    constructor(turn: TrueFoundryGatewayApi.Turn, session: AgentSession | AgentDraftSession, client: TrueFoundryGateway) {
+    constructor(
+        turn: TrueFoundryGatewayApi.Turn,
+        session: AgentSession | AgentDraftSession,
+        client: TrueFoundryGateway,
+    ) {
         this.id = turn.id;
         this.sessionId = turn.sessionId;
         this.previousTurnId = turn.previousTurnId;
