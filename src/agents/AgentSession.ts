@@ -73,12 +73,12 @@ export class AgentSession implements TrueFoundryGatewayApi.Session {
     /**
      * Fetch a turn by ID.
      *
-     * @param opts.turnId - Unique identifier of the turn to fetch.
+     * @param request.turnId - Unique identifier of the turn to fetch.
      * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
      * @returns {Turn} Turn data.
      */
-    getTurn(opts: { turnId: string }, requestOptions?: RequestOptions): Promise<Turn> {
-        return this.#mixin.getTurn(this, opts, requestOptions);
+    getTurn(request: { turnId: string }, requestOptions?: RequestOptions): Promise<Turn> {
+        return this.#mixin.getTurn(this, request, requestOptions);
     }
 
     /**
