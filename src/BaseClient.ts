@@ -65,8 +65,8 @@ export function normalizeClientOptions<T extends BaseClientOptions = BaseClientO
         {
             "X-Fern-Language": "JavaScript",
             "X-Fern-SDK-Name": "truefoundry-gateway-sdk",
-            "X-Fern-SDK-Version": "0.0.0",
-            "User-Agent": "truefoundry-gateway-sdk/0.0.0",
+            "X-Fern-SDK-Version": "0.4.0-rc.1",
+            "User-Agent": "truefoundry-gateway-sdk/0.4.0-rc.1",
             "X-Fern-Runtime": core.RUNTIME.type,
             "X-Fern-Runtime-Version": core.RUNTIME.version,
         },
