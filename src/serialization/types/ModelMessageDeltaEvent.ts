@@ -11,8 +11,8 @@ export const ModelMessageDeltaEvent: core.serialization.ObjectSchema<
     serializers.ModelMessageDeltaEvent.Raw,
     TrueFoundryGateway.ModelMessageDeltaEvent
 > = core.serialization.object({
-    content: core.serialization.string().optional(),
-    refusal: core.serialization.string().optional(),
+    content: core.serialization.string().optionalNullable(),
+    refusal: core.serialization.string().optionalNullable(),
     toolCalls: core.serialization.property(
         "tool_calls",
         core.serialization.list(ExtendedChunkDeltaToolCall).optional(),
@@ -22,21 +22,21 @@ export const ModelMessageDeltaEvent: core.serialization.ObjectSchema<
     id: core.serialization.string(),
     threadId: core.serialization.property("thread_id", core.serialization.string()),
     createdAt: core.serialization.property("created_at", core.serialization.string().optional()),
-    finishReason: core.serialization.property("finish_reason", FinishReason.optional()),
+    finishReason: core.serialization.property("finish_reason", FinishReason.optionalNullable()),
     usage: ModelMessageUsage.optional(),
 });
 
 export declare namespace ModelMessageDeltaEvent {
     export interface Raw {
-        content?: string | null;
-        refusal?: string | null;
+        content?: (string | null | undefined) | null;
+        refusal?: (string | null | undefined) | null;
         tool_calls?: ExtendedChunkDeltaToolCall.Raw[] | null;
         reasoning_content?: string | null;
         type: "model.message.delta";
         id: string;
         thread_id: string;
         created_at?: string | null;
-        finish_reason?: FinishReason.Raw | null;
+        finish_reason?: (FinishReason.Raw | null | undefined) | null;
         usage?: ModelMessageUsage.Raw | null;
     }
 }

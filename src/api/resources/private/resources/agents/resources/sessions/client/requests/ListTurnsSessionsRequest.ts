@@ -7,8 +7,8 @@
  *         limit: 1
  *     }
  */
-export interface SessionsListTurnsRequest {
-    pageToken?: string;
+export interface ListTurnsSessionsRequest {
+    pageToken?: string | null;
     /** Page size. Defaults to 10, max 25. */
-    limit?: number;
+    limit?: number | null;
 }

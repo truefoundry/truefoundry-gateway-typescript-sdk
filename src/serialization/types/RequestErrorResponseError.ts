@@ -10,15 +10,15 @@ export const RequestErrorResponseError: core.serialization.ObjectSchema<
 > = core.serialization.object({
     message: core.serialization.string(),
     type: core.serialization.string().optional(),
-    code: core.serialization.string().optional(),
-    param: core.serialization.string().optional(),
+    code: core.serialization.string().optionalNullable(),
+    param: core.serialization.string().optionalNullable(),
 });
 
 export declare namespace RequestErrorResponseError {
     export interface Raw {
         message: string;
         type?: string | null;
-        code?: string | null;
-        param?: string | null;
+        code?: (string | null | undefined) | null;
+        param?: (string | null | undefined) | null;
     }
 }

@@ -11,7 +11,7 @@ export const ResponseFormatJsonSchemaJsonSchema: core.serialization.ObjectSchema
     name: core.serialization.string(),
     description: core.serialization.string().optional(),
     schema: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
-    strict: core.serialization.boolean().optional(),
+    strict: core.serialization.boolean().optionalNullable(),
 });
 
 export declare namespace ResponseFormatJsonSchemaJsonSchema {
@@ -19,6 +19,6 @@ export declare namespace ResponseFormatJsonSchemaJsonSchema {
         name: string;
         description?: string | null;
         schema?: Record<string, unknown> | null;
-        strict?: boolean | null;
+        strict?: (boolean | null | undefined) | null;
     }
 }

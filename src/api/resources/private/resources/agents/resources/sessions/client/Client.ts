@@ -29,7 +29,7 @@ export class SessionsClient {
     /**
      * List sessions for an agent (newest first by default), keyset-paginated. Pass `page_token` to fetch the next page, keeping the other query params constant.
      *
-     * @param {TrueFoundryGateway.private_.agents.SessionsListRequest} request
+     * @param {TrueFoundryGateway.private_.agents.ListSessionsRequest} request
      * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link TrueFoundryGateway.BadRequestError}
@@ -51,19 +51,19 @@ export class SessionsClient {
      *     })
      */
     public async list(
-        request: TrueFoundryGateway.private_.agents.SessionsListRequest,
+        request: TrueFoundryGateway.private_.agents.ListSessionsRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.Page<TrueFoundryGateway.Session, TrueFoundryGateway.ListSessionsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (
-                request: TrueFoundryGateway.private_.agents.SessionsListRequest,
+                request: TrueFoundryGateway.private_.agents.ListSessionsRequest,
             ): Promise<core.WithRawResponse<TrueFoundryGateway.ListSessionsResponse>> => {
                 const { agentName, limit = 10, order, pageToken, startTimestamp, endTimestamp } = request;
                 const _queryParams: Record<string, unknown> = {
                     agent_name: agentName,
                     limit,
                     order:
-                        order != null
+                        order !== undefined
                             ? serializers.ListSessionsOrder.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,
@@ -594,7 +594,7 @@ export class SessionsClient {
      * List turns for a session (newest first). Pagination walks the ancestor chain from the session last turn, or from the turn in page_token when continuing.
      *
      * @param {string} sessionId
-     * @param {TrueFoundryGateway.private_.agents.SessionsListTurnsRequest} request
+     * @param {TrueFoundryGateway.private_.agents.ListTurnsSessionsRequest} request
      * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link TrueFoundryGateway.BadRequestError}
@@ -611,12 +611,12 @@ export class SessionsClient {
      */
     public async listTurns(
         sessionId: string,
-        request: TrueFoundryGateway.private_.agents.SessionsListTurnsRequest = {},
+        request: TrueFoundryGateway.private_.agents.ListTurnsSessionsRequest = {},
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.Page<TrueFoundryGateway.Turn, TrueFoundryGateway.ListTurnsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (
-                request: TrueFoundryGateway.private_.agents.SessionsListTurnsRequest,
+                request: TrueFoundryGateway.private_.agents.ListTurnsSessionsRequest,
             ): Promise<core.WithRawResponse<TrueFoundryGateway.ListTurnsResponse>> => {
                 const { pageToken, limit = 10 } = request;
                 const _queryParams: Record<string, unknown> = {
@@ -1147,7 +1147,7 @@ export class SessionsClient {
      *
      * @param {string} sessionId
      * @param {string} turnId
-     * @param {TrueFoundryGateway.private_.agents.SessionsListTurnEventsRequest} request
+     * @param {TrueFoundryGateway.private_.agents.ListTurnEventsSessionsRequest} request
      * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link TrueFoundryGateway.BadRequestError}
@@ -1167,19 +1167,19 @@ export class SessionsClient {
     public async listTurnEvents(
         sessionId: string,
         turnId: string,
-        request: TrueFoundryGateway.private_.agents.SessionsListTurnEventsRequest = {},
+        request: TrueFoundryGateway.private_.agents.ListTurnEventsSessionsRequest = {},
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.Page<TrueFoundryGateway.TurnEvent, TrueFoundryGateway.ListEventsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (
-                request: TrueFoundryGateway.private_.agents.SessionsListTurnEventsRequest,
+                request: TrueFoundryGateway.private_.agents.ListTurnEventsSessionsRequest,
             ): Promise<core.WithRawResponse<TrueFoundryGateway.ListEventsResponse>> => {
                 const { pageToken, limit = 25, order } = request;
                 const _queryParams: Record<string, unknown> = {
                     page_token: pageToken,
                     limit,
                     order:
-                        order != null
+                        order !== undefined
                             ? serializers.ListEventsOrder.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,
@@ -1305,7 +1305,7 @@ export class SessionsClient {
      * List session events as `{ turn_id, event }` across a turn hierarchy (newest first). Each turn contributes turn.created, content events (model.message, tool.call, …), and turn.done; streaming deltas are not included. `last_turn_id` (initial load only) sets the newest turn in the window plus its ancestors; omit to use the session last turn. If that turn is still running, it is excluded — listing anchors on its parent so persisted events are returned without overlapping the live stream; subscribe to the running turn for live events. An empty `data` array is returned when the anchor is a running first turn with no parent. Use `page_token` to paginate backward toward older events; chains longer than the stored ancestor window are walked via spill to the session root.
      *
      * @param {string} sessionId
-     * @param {TrueFoundryGateway.private_.agents.SessionsListEventsRequest} request
+     * @param {TrueFoundryGateway.private_.agents.ListEventsSessionsRequest} request
      * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link TrueFoundryGateway.BadRequestError}
@@ -1323,12 +1323,12 @@ export class SessionsClient {
      */
     public async listEvents(
         sessionId: string,
-        request: TrueFoundryGateway.private_.agents.SessionsListEventsRequest = {},
+        request: TrueFoundryGateway.private_.agents.ListEventsSessionsRequest = {},
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.Page<TrueFoundryGateway.SessionEventItem, TrueFoundryGateway.ListSessionEventsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (
-                request: TrueFoundryGateway.private_.agents.SessionsListEventsRequest,
+                request: TrueFoundryGateway.private_.agents.ListEventsSessionsRequest,
             ): Promise<core.WithRawResponse<TrueFoundryGateway.ListSessionEventsResponse>> => {
                 const { pageToken, lastTurnId, limit = 100 } = request;
                 const _queryParams: Record<string, unknown> = {

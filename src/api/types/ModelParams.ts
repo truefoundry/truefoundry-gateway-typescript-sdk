@@ -9,5 +9,5 @@ export interface ModelParams {
     topK?: number;
     parallelToolCalls?: boolean;
     reasoningEffort?: string;
-    cacheControl?: TrueFoundryGateway.ModelParamsCacheControl;
+    cacheControl?: TrueFoundryGateway.ModelParamsCacheControl | null;
 }

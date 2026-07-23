@@ -10,10 +10,10 @@ import type * as TrueFoundryGateway from "../../../../../../../../index.js";
  *         order: "asc"
  *     }
  */
-export interface SessionsListTurnEventsRequest {
-    pageToken?: string;
+export interface ListTurnEventsSessionsRequest {
+    pageToken?: string | null;
     /** Page size. Defaults to 25, max 25. */
-    limit?: number;
+    limit?: number | null;
     /** Sort events by creation time. Defaults to "asc". */
-    order?: TrueFoundryGateway.ListEventsOrder;
+    order?: TrueFoundryGateway.ListEventsOrder | null;
 }

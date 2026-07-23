@@ -7,10 +7,10 @@ export interface TurnCreatedEvent {
     /** Unique identifier for the event */
     id: string;
     turnId: string;
-    previousTurnId?: string;
+    previousTurnId?: string | null;
     input?: TrueFoundryGateway.TurnInputItem[];
     state: TrueFoundryGateway.TurnStateRunning;
     createdBy: TrueFoundryGateway.Subject;
     createdAt: string;
-    threadId?: string;
+    threadId?: string | null;
 }

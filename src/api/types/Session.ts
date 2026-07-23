@@ -6,7 +6,7 @@ export interface Session {
     type: "session";
     id: string;
     agentName: string;
-    title?: string;
+    title?: string | null;
     createdBySubject: TrueFoundryGateway.Subject;
     createdAt: string;
     updatedAt: string;

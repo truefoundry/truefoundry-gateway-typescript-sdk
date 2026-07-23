@@ -13,17 +13,17 @@ import type * as TrueFoundryGateway from "../../../../../../../../index.js";
  *         endTimestamp: "end_timestamp"
  *     }
  */
-export interface PrivateListOwnedSessionsRequest {
+export interface ListOwnedSessionsPrivateRequest {
     /** Filter to sessions linked to this saved agent. Omit to list all of the caller-owned sessions. */
-    agentName?: string;
+    agentName?: string | null;
     /** Page size. Defaults to 10, max 100. */
-    limit?: number;
+    limit?: number | null;
     /** Sort sessions by creation time. Defaults to "desc". */
-    order?: TrueFoundryGateway.ListOwnedSessionsOrder;
+    order?: TrueFoundryGateway.ListOwnedSessionsOrder | null;
     /** Opaque token from a previous response `next_page_token`. */
-    pageToken?: string;
+    pageToken?: string | null;
     /** Inclusive lower bound on `created_at` (ISO-8601). Defaults upstream to 30 min before `end_timestamp`. */
-    startTimestamp?: string;
+    startTimestamp?: string | null;
     /** Inclusive upper bound on `created_at` (ISO-8601). Defaults upstream to now. */
-    endTimestamp?: string;
+    endTimestamp?: string | null;
 }

@@ -1,2 +1,2 @@
-export type { PrivateDownloadSandboxFileRequest } from "./PrivateDownloadSandboxFileRequest.js";
-export type { PrivateListOwnedSessionsRequest } from "./PrivateListOwnedSessionsRequest.js";
+export type { DownloadSandboxFilePrivateRequest } from "./DownloadSandboxFilePrivateRequest.js";
+export type { ListOwnedSessionsPrivateRequest } from "./ListOwnedSessionsPrivateRequest.js";

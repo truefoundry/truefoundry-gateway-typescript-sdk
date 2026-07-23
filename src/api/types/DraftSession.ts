@@ -6,8 +6,8 @@ export interface DraftSession {
     type: "session/draft";
     id: string;
     agentSpec: TrueFoundryGateway.AgentSpec;
-    agentName?: string;
-    title?: string;
+    agentName?: string | null;
+    title?: string | null;
     createdBySubject: TrueFoundryGateway.Subject;
     createdAt: string;
     updatedAt: string;

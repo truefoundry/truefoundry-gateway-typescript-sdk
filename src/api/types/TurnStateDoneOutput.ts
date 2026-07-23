@@ -3,16 +3,16 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface TurnStateDoneOutput {
-    content?: TrueFoundryGateway.TurnStateDoneOutputContent;
+    content?: TrueFoundryGateway.TurnStateDoneOutputContent | null;
     name?: string;
-    refusal?: string;
+    refusal?: string | null;
     reasoningContent?: string;
     toolCalls?: TrueFoundryGateway.ToolCall[];
     type: "model.message";
     /** Unique identifier for the event */
     id: string;
     threadId: string;
-    finishReason?: TrueFoundryGateway.FinishReason;
+    finishReason?: TrueFoundryGateway.FinishReason | null;
     createdAt: string;
     usage?: TrueFoundryGateway.ModelMessageUsage;
 }

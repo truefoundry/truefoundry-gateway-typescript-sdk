@@ -12,30 +12,30 @@ export const TurnStateDoneOutput: core.serialization.ObjectSchema<
     serializers.TurnStateDoneOutput.Raw,
     TrueFoundryGateway.TurnStateDoneOutput
 > = core.serialization.object({
-    content: TurnStateDoneOutputContent.optional(),
+    content: TurnStateDoneOutputContent.optionalNullable(),
     name: core.serialization.string().optional(),
-    refusal: core.serialization.string().optional(),
+    refusal: core.serialization.string().optionalNullable(),
     reasoningContent: core.serialization.property("reasoning_content", core.serialization.string().optional()),
     toolCalls: core.serialization.property("tool_calls", core.serialization.list(ToolCall).optional()),
     type: core.serialization.stringLiteral("model.message"),
     id: core.serialization.string(),
     threadId: core.serialization.property("thread_id", core.serialization.string()),
-    finishReason: core.serialization.property("finish_reason", FinishReason.optional()),
+    finishReason: core.serialization.property("finish_reason", FinishReason.optionalNullable()),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
     usage: ModelMessageUsage.optional(),
 });
 
 export declare namespace TurnStateDoneOutput {
     export interface Raw {
-        content?: TurnStateDoneOutputContent.Raw | null;
+        content?: (TurnStateDoneOutputContent.Raw | null | undefined) | null;
         name?: string | null;
-        refusal?: string | null;
+        refusal?: (string | null | undefined) | null;
         reasoning_content?: string | null;
         tool_calls?: ToolCall.Raw[] | null;
         type: "model.message";
         id: string;
         thread_id: string;
-        finish_reason?: FinishReason.Raw | null;
+        finish_reason?: (FinishReason.Raw | null | undefined) | null;
         created_at: string;
         usage?: ModelMessageUsage.Raw | null;
     }

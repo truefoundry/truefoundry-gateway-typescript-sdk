@@ -6,7 +6,7 @@
  *         path: "x"
  *     }
  */
-export interface PrivateDownloadSandboxFileRequest {
+export interface DownloadSandboxFilePrivateRequest {
     /** Absolute path of the file inside the sandbox. */
     path: string;
 }

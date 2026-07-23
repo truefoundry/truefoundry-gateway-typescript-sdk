@@ -3,8 +3,8 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface ModelMessageDeltaEvent {
-    content?: string;
-    refusal?: string;
+    content?: string | null;
+    refusal?: string | null;
     toolCalls?: TrueFoundryGateway.ExtendedChunkDeltaToolCall[];
     reasoningContent?: string;
     type: "model.message.delta";
@@ -12,6 +12,6 @@ export interface ModelMessageDeltaEvent {
     id: string;
     threadId: string;
     createdAt?: string;
-    finishReason?: TrueFoundryGateway.FinishReason;
+    finishReason?: TrueFoundryGateway.FinishReason | null;
     usage?: TrueFoundryGateway.ModelMessageUsage;
 }

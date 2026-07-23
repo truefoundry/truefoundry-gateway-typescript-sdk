@@ -8,11 +8,11 @@
  *         limit: 1
  *     }
  */
-export interface SessionsListEventsRequest {
+export interface ListEventsSessionsRequest {
     /** Pagination cursor from `pagination.next_page_token`. Returns older events before the cursor (toward session start). Decoded JSON: `{ turn_id, sequence_number }`. */
-    pageToken?: string;
+    pageToken?: string | null;
     /** Newest turn in the listing window (initial load only; ignored when `page_token` is set). Lists that turn and its ancestors, newest events first. Omit to use the session last turn. If the resolved turn is still running, its events are excluded and listing starts from its parent instead — subscribe to the running turn for live events. Returns empty data when the anchor is a running first turn with no parent. */
-    lastTurnId?: string;
+    lastTurnId?: string | null;
     /** Max events per response. Default 100, max 100. */
-    limit?: number;
+    limit?: number | null;
 }
