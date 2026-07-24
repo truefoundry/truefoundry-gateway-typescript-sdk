@@ -3,16 +3,12 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
+import { GitSourceSkillMount } from "./GitSourceSkillMount.js";
+import { RegisteredSkillMount } from "./RegisteredSkillMount.js";
 
-export const SkillMount: core.serialization.ObjectSchema<serializers.SkillMount.Raw, TrueFoundryGateway.SkillMount> =
-    core.serialization.object({
-        fqn: core.serialization.string(),
-        preload: core.serialization.boolean().optional(),
-    });
+export const SkillMount: core.serialization.Schema<serializers.SkillMount.Raw, TrueFoundryGateway.SkillMount> =
+    core.serialization.undiscriminatedUnion([GitSourceSkillMount, RegisteredSkillMount]);
 
 export declare namespace SkillMount {
-    export interface Raw {
-        fqn: string;
-        preload?: boolean | null;
-    }
+    export type Raw = GitSourceSkillMount.Raw | RegisteredSkillMount.Raw;
 }

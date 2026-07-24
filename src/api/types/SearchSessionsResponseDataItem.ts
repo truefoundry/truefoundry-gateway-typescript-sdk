@@ -2,4 +2,4 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export type SkillMount = TrueFoundryGateway.GitSourceSkillMount | TrueFoundryGateway.RegisteredSkillMount;
+export type SearchSessionsResponseDataItem = TrueFoundryGateway.Session | TrueFoundryGateway.DraftSession;

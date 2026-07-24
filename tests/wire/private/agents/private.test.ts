@@ -148,4 +148,133 @@ describe("PrivateClient", () => {
             return await client.private.agents.private.listOwnedSessions();
         }).rejects.toThrow(TrueFoundryGatewayTypes.UnprocessableEntityError);
     });
+
+    test("search_sessions (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            data: [
+                {
+                    type: "session",
+                    id: "id",
+                    agent_name: "agent_name",
+                    title: "title",
+                    created_by_subject: {
+                        subject_id: "subject_id",
+                        subject_type: "subject_type",
+                        subject_slug: "subject_slug",
+                    },
+                    created_at: "created_at",
+                    updated_at: "updated_at",
+                },
+            ],
+            pagination: { next_page_token: "next_page_token", previous_page_token: "previous_page_token", limit: 1 },
+        };
+
+        server
+            .mockEndpoint({ once: false })
+            .get("/v1/x/agents/search-sessions")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const expected = {
+            data: [
+                {
+                    type: "session",
+                    id: "id",
+                    agentName: "agent_name",
+                    title: "title",
+                    createdBySubject: {
+                        subjectId: "subject_id",
+                        subjectType: "subject_type",
+                        subjectSlug: "subject_slug",
+                    },
+                    createdAt: "created_at",
+                    updatedAt: "updated_at",
+                },
+            ],
+            pagination: {
+                nextPageToken: "next_page_token",
+                previousPageToken: "previous_page_token",
+                limit: 1,
+            },
+        };
+        const page = await client.private.agents.private.searchSessions({
+            agentName: "agent_name",
+            createdBySubjectId: "created_by_subject_id",
+            createdBySubjectType: "user",
+            sessionType: "session",
+            sessionId: "session_id",
+            limit: 1,
+            order: "asc",
+            pageToken: "page_token",
+            startTimestamp: "start_timestamp",
+            endTimestamp: "end_timestamp",
+        });
+
+        expect(expected.data).toEqual(page.data);
+        expect(page.hasNextPage()).toBe(true);
+        const nextPage = await page.getNextPage();
+        expect(expected.data).toEqual(nextPage.data);
+    });
+
+    test("search_sessions (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { error: { message: "message" } };
+
+        server
+            .mockEndpoint()
+            .get("/v1/x/agents/search-sessions")
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.private.agents.private.searchSessions();
+        }).rejects.toThrow(TrueFoundryGatewayTypes.BadRequestError);
+    });
+
+    test("search_sessions (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { error: { message: "message" } };
+
+        server
+            .mockEndpoint()
+            .get("/v1/x/agents/search-sessions")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.private.agents.private.searchSessions();
+        }).rejects.toThrow(TrueFoundryGatewayTypes.UnauthorizedError);
+    });
+
+    test("search_sessions (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { error: { message: "message" } };
+
+        server
+            .mockEndpoint()
+            .get("/v1/x/agents/search-sessions")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.private.agents.private.searchSessions();
+        }).rejects.toThrow(TrueFoundryGatewayTypes.UnprocessableEntityError);
+    });
 });

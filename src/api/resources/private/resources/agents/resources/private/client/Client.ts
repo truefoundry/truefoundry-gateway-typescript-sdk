@@ -198,6 +198,195 @@ export class PrivateClient {
     }
 
     /**
+     * Search sessions visible to the caller across agents (newest first by default), keyset-paginated. Tenant admins see all tenant sessions; agent managers see sessions on agents they manage plus their own; other callers see only their own. Includes saved sessions and drafts (filter with `session_type`). Pass `page_token` to fetch the next page, keeping the other query params constant.
+     *
+     * @param {TrueFoundryGateway.private_.agents.SearchSessionsPrivateRequest} request
+     * @param {PrivateClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link TrueFoundryGateway.BadRequestError}
+     * @throws {@link TrueFoundryGateway.UnauthorizedError}
+     * @throws {@link TrueFoundryGateway.UnprocessableEntityError}
+     * @throws {@link errors.TrueFoundryGatewayError}
+     * @throws {@link errors.TrueFoundryGatewayTimeoutError}
+     *
+     * @example
+     *     await client.private.agents.private.searchSessions({
+     *         agentName: "agent_name",
+     *         createdBySubjectId: "created_by_subject_id",
+     *         createdBySubjectType: "user",
+     *         sessionType: "session",
+     *         sessionId: "session_id",
+     *         limit: 1,
+     *         order: "asc",
+     *         pageToken: "page_token",
+     *         startTimestamp: "start_timestamp",
+     *         endTimestamp: "end_timestamp"
+     *     })
+     */
+    public async searchSessions(
+        request: TrueFoundryGateway.private_.agents.SearchSessionsPrivateRequest = {},
+        requestOptions?: PrivateClient.RequestOptions,
+    ): Promise<
+        core.Page<TrueFoundryGateway.SearchSessionsResponseDataItem, TrueFoundryGateway.SearchSessionsResponse>
+    > {
+        const list = core.HttpResponsePromise.interceptFunction(
+            async (
+                request: TrueFoundryGateway.private_.agents.SearchSessionsPrivateRequest,
+            ): Promise<core.WithRawResponse<TrueFoundryGateway.SearchSessionsResponse>> => {
+                const {
+                    agentName,
+                    createdBySubjectId,
+                    createdBySubjectType,
+                    sessionType,
+                    sessionId,
+                    limit = 10,
+                    order,
+                    pageToken,
+                    startTimestamp,
+                    endTimestamp,
+                } = request;
+                const _queryParams: Record<string, unknown> = {
+                    agent_name: agentName,
+                    created_by_subject_id: createdBySubjectId,
+                    created_by_subject_type:
+                        createdBySubjectType !== undefined
+                            ? serializers.CreatedBySubjectType.jsonOrThrow(createdBySubjectType, {
+                                  unrecognizedObjectKeys: "passthrough",
+                                  allowUnrecognizedUnionMembers: true,
+                                  allowUnrecognizedEnumValues: true,
+                                  omitUndefined: true,
+                              })
+                            : undefined,
+                    session_type:
+                        sessionType !== undefined
+                            ? serializers.SessionType.jsonOrThrow(sessionType, {
+                                  unrecognizedObjectKeys: "passthrough",
+                                  allowUnrecognizedUnionMembers: true,
+                                  allowUnrecognizedEnumValues: true,
+                                  omitUndefined: true,
+                              })
+                            : undefined,
+                    session_id: sessionId,
+                    limit,
+                    order:
+                        order !== undefined
+                            ? serializers.SearchSessionsOrder.jsonOrThrow(order, {
+                                  unrecognizedObjectKeys: "passthrough",
+                                  allowUnrecognizedUnionMembers: true,
+                                  allowUnrecognizedEnumValues: true,
+                                  omitUndefined: true,
+                              })
+                            : undefined,
+                    page_token: pageToken,
+                    start_timestamp: startTimestamp,
+                    end_timestamp: endTimestamp,
+                };
+                const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+                const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+                    _authRequest.headers,
+                    this._options?.headers,
+                    requestOptions?.headers,
+                );
+                const _response = await (this._options.fetcher ?? core.fetcher)({
+                    url: core.url.join(
+                        (await core.Supplier.get(this._options.baseUrl)) ??
+                            (await core.Supplier.get(this._options.environment)),
+                        "v1/x/agents/search-sessions",
+                    ),
+                    method: "GET",
+                    headers: _headers,
+                    queryString: core.url
+                        .queryBuilder()
+                        .addMany(_queryParams)
+                        .mergeAdditional(requestOptions?.queryParams)
+                        .build(),
+                    timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+                    maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+                    abortSignal: requestOptions?.abortSignal,
+                    fetchFn: this._options?.fetch,
+                    logging: this._options.logging,
+                });
+                if (_response.ok) {
+                    return {
+                        data: serializers.SearchSessionsResponse.parseOrThrow(_response.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        rawResponse: _response.rawResponse,
+                    };
+                }
+                if (_response.error.reason === "status-code") {
+                    switch (_response.error.statusCode) {
+                        case 400:
+                            throw new TrueFoundryGateway.BadRequestError(
+                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                                    unrecognizedObjectKeys: "passthrough",
+                                    allowUnrecognizedUnionMembers: true,
+                                    allowUnrecognizedEnumValues: true,
+                                    skipValidation: true,
+                                    breadcrumbsPrefix: ["response"],
+                                }),
+                                _response.rawResponse,
+                            );
+                        case 401:
+                            throw new TrueFoundryGateway.UnauthorizedError(
+                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                                    unrecognizedObjectKeys: "passthrough",
+                                    allowUnrecognizedUnionMembers: true,
+                                    allowUnrecognizedEnumValues: true,
+                                    skipValidation: true,
+                                    breadcrumbsPrefix: ["response"],
+                                }),
+                                _response.rawResponse,
+                            );
+                        case 422:
+                            throw new TrueFoundryGateway.UnprocessableEntityError(
+                                serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                                    unrecognizedObjectKeys: "passthrough",
+                                    allowUnrecognizedUnionMembers: true,
+                                    allowUnrecognizedEnumValues: true,
+                                    skipValidation: true,
+                                    breadcrumbsPrefix: ["response"],
+                                }),
+                                _response.rawResponse,
+                            );
+                        default:
+                            throw new errors.TrueFoundryGatewayError({
+                                statusCode: _response.error.statusCode,
+                                body: _response.error.body,
+                                rawResponse: _response.rawResponse,
+                            });
+                    }
+                }
+                return handleNonStatusCodeError(
+                    _response.error,
+                    _response.rawResponse,
+                    "GET",
+                    "/v1/x/agents/search-sessions",
+                );
+            },
+        );
+        const dataWithRawResponse = await list(request).withRawResponse();
+        return new core.Page<
+            TrueFoundryGateway.SearchSessionsResponseDataItem,
+            TrueFoundryGateway.SearchSessionsResponse
+        >({
+            response: dataWithRawResponse.data,
+            rawResponse: dataWithRawResponse.rawResponse,
+            hasNextPage: (response) =>
+                response?.pagination.nextPageToken != null &&
+                !(typeof response?.pagination.nextPageToken === "string" && response?.pagination.nextPageToken === ""),
+            getItems: (response) => response?.data ?? [],
+            loadPage: (response) => {
+                return list(core.setObjectProperty(request, "pageToken", response?.pagination.nextPageToken));
+            },
+        });
+    }
+
+    /**
      * Download a file produced by an agent inside a sandbox.
      *
      * @throws {@link TrueFoundryGateway.BadRequestError}
