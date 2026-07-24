@@ -69,7 +69,7 @@ const response = page.response;
 <dl>
 <dd>
 
-**request:** `TrueFoundryGateway.private_.agents.SessionsListRequest` 
+**request:** `TrueFoundryGateway.private_.agents.ListSessionsRequest` 
     
 </dd>
 </dl>
@@ -357,7 +357,7 @@ const response = page.response;
 <dl>
 <dd>
 
-**request:** `TrueFoundryGateway.private_.agents.SessionsListTurnsRequest` 
+**request:** `TrueFoundryGateway.private_.agents.ListTurnsSessionsRequest` 
     
 </dd>
 </dl>
@@ -684,7 +684,7 @@ const response = page.response;
 <dl>
 <dd>
 
-**request:** `TrueFoundryGateway.private_.agents.SessionsListTurnEventsRequest` 
+**request:** `TrueFoundryGateway.private_.agents.ListTurnEventsSessionsRequest` 
     
 </dd>
 </dl>
@@ -775,7 +775,7 @@ const response = page.response;
 <dl>
 <dd>
 
-**request:** `TrueFoundryGateway.private_.agents.SessionsListEventsRequest` 
+**request:** `TrueFoundryGateway.private_.agents.ListEventsSessionsRequest` 
     
 </dd>
 </dl>
@@ -865,7 +865,7 @@ const response = page.response;
 <dl>
 <dd>
 
-**request:** `TrueFoundryGateway.private_.agents.PrivateListOwnedSessionsRequest` 
+**request:** `TrueFoundryGateway.private_.agents.ListOwnedSessionsPrivateRequest` 
     
 </dd>
 </dl>
@@ -938,7 +938,7 @@ await client.private.agents.private.downloadSandboxFile("sandboxId", {
 <dl>
 <dd>
 
-**request:** `TrueFoundryGateway.private_.agents.PrivateDownloadSandboxFileRequest` 
+**request:** `TrueFoundryGateway.private_.agents.DownloadSandboxFilePrivateRequest` 
     
 </dd>
 </dl>
@@ -1028,7 +1028,7 @@ const response = page.response;
 <dl>
 <dd>
 
-**request:** `TrueFoundryGateway.private_.agents.private_.DraftSessionsListRequest` 
+**request:** `TrueFoundryGateway.private_.agents.private_.ListDraftSessionsRequest` 
     
 </dd>
 </dl>

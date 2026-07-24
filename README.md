@@ -125,7 +125,7 @@ following namespace:
 ```typescript
 import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
-const request: TrueFoundryGateway.SessionsListRequest = {
+const request: TrueFoundryGateway.ListSessionsRequest = {
     ...
 };
 ```

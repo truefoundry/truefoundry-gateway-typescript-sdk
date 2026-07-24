@@ -4,5 +4,5 @@ export interface BaseMcpAuthRequiredEvent {
     /** Unique identifier for the event */
     id: string;
     createdAt: string;
-    threadId?: string;
+    threadId?: string | null;
 }

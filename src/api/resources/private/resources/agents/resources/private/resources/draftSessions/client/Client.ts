@@ -29,7 +29,7 @@ export class DraftSessionsClient {
     /**
      * List the caller-owned draft sessions (newest first by default), keyset-paginated. Optionally filter by `agent_name`. Pass `page_token` to fetch the next page, keeping the other query params constant.
      *
-     * @param {TrueFoundryGateway.private_.agents.private_.DraftSessionsListRequest} request
+     * @param {TrueFoundryGateway.private_.agents.private_.ListDraftSessionsRequest} request
      * @param {DraftSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link TrueFoundryGateway.BadRequestError}
@@ -50,19 +50,19 @@ export class DraftSessionsClient {
      *     })
      */
     public async list(
-        request: TrueFoundryGateway.private_.agents.private_.DraftSessionsListRequest = {},
+        request: TrueFoundryGateway.private_.agents.private_.ListDraftSessionsRequest = {},
         requestOptions?: DraftSessionsClient.RequestOptions,
     ): Promise<core.Page<TrueFoundryGateway.DraftSession, TrueFoundryGateway.ListDraftSessionsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (
-                request: TrueFoundryGateway.private_.agents.private_.DraftSessionsListRequest,
+                request: TrueFoundryGateway.private_.agents.private_.ListDraftSessionsRequest,
             ): Promise<core.WithRawResponse<TrueFoundryGateway.ListDraftSessionsResponse>> => {
                 const { agentName, limit = 10, order, pageToken, startTimestamp, endTimestamp } = request;
                 const _queryParams: Record<string, unknown> = {
                     agent_name: agentName,
                     limit,
                     order:
-                        order != null
+                        order !== undefined
                             ? serializers.ListDraftSessionsOrder.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,

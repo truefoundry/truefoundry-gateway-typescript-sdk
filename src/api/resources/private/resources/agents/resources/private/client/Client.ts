@@ -34,7 +34,7 @@ export class PrivateClient {
     /**
      * List all sessions owned by the caller, spanning both saved sessions and drafts (newest first by default), keyset-paginated. Optionally filter by `agent_name`. Pass `page_token` to fetch the next page, keeping the other query params constant.
      *
-     * @param {TrueFoundryGateway.private_.agents.PrivateListOwnedSessionsRequest} request
+     * @param {TrueFoundryGateway.private_.agents.ListOwnedSessionsPrivateRequest} request
      * @param {PrivateClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link TrueFoundryGateway.BadRequestError}
@@ -55,21 +55,21 @@ export class PrivateClient {
      *     })
      */
     public async listOwnedSessions(
-        request: TrueFoundryGateway.private_.agents.PrivateListOwnedSessionsRequest = {},
+        request: TrueFoundryGateway.private_.agents.ListOwnedSessionsPrivateRequest = {},
         requestOptions?: PrivateClient.RequestOptions,
     ): Promise<
         core.Page<TrueFoundryGateway.ListOwnedSessionsResponseDataItem, TrueFoundryGateway.ListOwnedSessionsResponse>
     > {
         const list = core.HttpResponsePromise.interceptFunction(
             async (
-                request: TrueFoundryGateway.private_.agents.PrivateListOwnedSessionsRequest,
+                request: TrueFoundryGateway.private_.agents.ListOwnedSessionsPrivateRequest,
             ): Promise<core.WithRawResponse<TrueFoundryGateway.ListOwnedSessionsResponse>> => {
                 const { agentName, limit = 10, order, pageToken, startTimestamp, endTimestamp } = request;
                 const _queryParams: Record<string, unknown> = {
                     agent_name: agentName,
                     limit,
                     order:
-                        order != null
+                        order !== undefined
                             ? serializers.ListOwnedSessionsOrder.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,
@@ -212,7 +212,7 @@ export class PrivateClient {
      */
     public downloadSandboxFile(
         sandboxId: string,
-        request: TrueFoundryGateway.private_.agents.PrivateDownloadSandboxFileRequest,
+        request: TrueFoundryGateway.private_.agents.DownloadSandboxFilePrivateRequest,
         requestOptions?: PrivateClient.RequestOptions,
     ): core.HttpResponsePromise<core.BinaryResponse> {
         return core.HttpResponsePromise.fromPromise(this.__downloadSandboxFile(sandboxId, request, requestOptions));
@@ -220,7 +220,7 @@ export class PrivateClient {
 
     private async __downloadSandboxFile(
         sandboxId: string,
-        request: TrueFoundryGateway.private_.agents.PrivateDownloadSandboxFileRequest,
+        request: TrueFoundryGateway.private_.agents.DownloadSandboxFilePrivateRequest,
         requestOptions?: PrivateClient.RequestOptions,
     ): Promise<core.WithRawResponse<core.BinaryResponse>> {
         const { path } = request;

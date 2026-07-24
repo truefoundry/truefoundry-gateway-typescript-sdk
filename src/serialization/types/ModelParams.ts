@@ -13,7 +13,7 @@ export const ModelParams: core.serialization.ObjectSchema<serializers.ModelParam
         topK: core.serialization.property("top_k", core.serialization.number().optional()),
         parallelToolCalls: core.serialization.property("parallel_tool_calls", core.serialization.boolean().optional()),
         reasoningEffort: core.serialization.property("reasoning_effort", core.serialization.string().optional()),
-        cacheControl: core.serialization.property("cache_control", ModelParamsCacheControl.optional()),
+        cacheControl: core.serialization.property("cache_control", ModelParamsCacheControl.optionalNullable()),
     });
 
 export declare namespace ModelParams {
@@ -24,6 +24,6 @@ export declare namespace ModelParams {
         top_k?: number | null;
         parallel_tool_calls?: boolean | null;
         reasoning_effort?: string | null;
-        cache_control?: ModelParamsCacheControl.Raw | null;
+        cache_control?: (ModelParamsCacheControl.Raw | null | undefined) | null;
     }
 }

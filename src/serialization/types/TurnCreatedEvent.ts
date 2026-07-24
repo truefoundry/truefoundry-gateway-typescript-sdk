@@ -14,12 +14,12 @@ export const TurnCreatedEvent: core.serialization.ObjectSchema<
     type: core.serialization.stringLiteral("turn.created"),
     id: core.serialization.string(),
     turnId: core.serialization.property("turn_id", core.serialization.string()),
-    previousTurnId: core.serialization.property("previous_turn_id", core.serialization.string().optional()),
+    previousTurnId: core.serialization.property("previous_turn_id", core.serialization.string().optionalNullable()),
     input: core.serialization.list(TurnInputItem).optional(),
     state: TurnStateRunning,
     createdBy: core.serialization.property("created_by", Subject),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
-    threadId: core.serialization.property("thread_id", core.serialization.string().optional()),
+    threadId: core.serialization.property("thread_id", core.serialization.string().optionalNullable()),
 });
 
 export declare namespace TurnCreatedEvent {
@@ -27,11 +27,11 @@ export declare namespace TurnCreatedEvent {
         type: "turn.created";
         id: string;
         turn_id: string;
-        previous_turn_id?: string | null;
+        previous_turn_id?: (string | null | undefined) | null;
         input?: TurnInputItem.Raw[] | null;
         state: TurnStateRunning.Raw;
         created_by: Subject.Raw;
         created_at: string;
-        thread_id?: string | null;
+        thread_id?: (string | null | undefined) | null;
     }
 }

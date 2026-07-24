@@ -10,7 +10,7 @@ export const Session: core.serialization.ObjectSchema<serializers.Session.Raw, T
         type: core.serialization.stringLiteral("session"),
         id: core.serialization.string(),
         agentName: core.serialization.property("agent_name", core.serialization.string()),
-        title: core.serialization.string().optional(),
+        title: core.serialization.string().optionalNullable(),
         createdBySubject: core.serialization.property("created_by_subject", Subject),
         createdAt: core.serialization.property("created_at", core.serialization.string()),
         updatedAt: core.serialization.property("updated_at", core.serialization.string()),
@@ -21,7 +21,7 @@ export declare namespace Session {
         type: "session";
         id: string;
         agent_name: string;
-        title?: string | null;
+        title?: (string | null | undefined) | null;
         created_by_subject: Subject.Raw;
         created_at: string;
         updated_at: string;

@@ -11,7 +11,7 @@ export const Turn: core.serialization.ObjectSchema<serializers.Turn.Raw, TrueFou
     core.serialization.object({
         id: core.serialization.string(),
         sessionId: core.serialization.property("session_id", core.serialization.string()),
-        previousTurnId: core.serialization.property("previous_turn_id", core.serialization.string().optional()),
+        previousTurnId: core.serialization.property("previous_turn_id", core.serialization.string().optionalNullable()),
         input: core.serialization.list(TurnInputItem).optional(),
         state: TurnState,
         createdBySubject: core.serialization.property("created_by_subject", Subject),
@@ -22,7 +22,7 @@ export declare namespace Turn {
     export interface Raw {
         id: string;
         session_id: string;
-        previous_turn_id?: string | null;
+        previous_turn_id?: (string | null | undefined) | null;
         input?: TurnInputItem.Raw[] | null;
         state: TurnState.Raw;
         created_by_subject: Subject.Raw;

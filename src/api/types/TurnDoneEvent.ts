@@ -8,5 +8,5 @@ export interface TurnDoneEvent {
     id: string;
     state: TrueFoundryGateway.TurnDoneEventState;
     createdAt: string;
-    threadId?: string;
+    threadId?: string | null;
 }

@@ -13,17 +13,17 @@ import type * as TrueFoundryGateway from "../../../../../../../../../../index.js
  *         endTimestamp: "end_timestamp"
  *     }
  */
-export interface DraftSessionsListRequest {
+export interface ListDraftSessionsRequest {
     /** Filter to drafts linked to this saved agent. Omit to list all of the caller-owned drafts. */
-    agentName?: string;
+    agentName?: string | null;
     /** Page size. Defaults to 10, max 100. */
-    limit?: number;
+    limit?: number | null;
     /** Sort draft sessions by creation time. Defaults to "desc". */
-    order?: TrueFoundryGateway.ListDraftSessionsOrder;
+    order?: TrueFoundryGateway.ListDraftSessionsOrder | null;
     /** Opaque token from a previous response `next_page_token`. */
-    pageToken?: string;
+    pageToken?: string | null;
     /** Inclusive lower bound on `created_at`. Defaults upstream to 30 min before `end_timestamp`. */
-    startTimestamp?: string;
+    startTimestamp?: string | null;
     /** Inclusive upper bound on `created_at`. Defaults upstream to now. */
-    endTimestamp?: string;
+    endTimestamp?: string | null;
 }
