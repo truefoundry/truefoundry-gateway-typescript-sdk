@@ -7,3 +7,6 @@ src/CustomClient.ts
 src/index.ts
 src/api/index.ts
 tests/unit/agents/
+# Subpath package.json entry points for classic node moduleResolution
+# (TypeScript moduleResolution: "node" ignores package.json "exports").
+agents/

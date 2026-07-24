@@ -114,6 +114,7 @@
     },
     "files": [
         "dist",
+        "agents",
         "reference.md",
         "README.md",
         "LICENSE"

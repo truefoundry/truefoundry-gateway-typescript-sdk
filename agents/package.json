@@ -1,0 +1,5 @@
+{
+    "main": "../dist/cjs/agents/index.js",
+    "module": "../dist/esm/agents/index.mjs",
+    "types": "../dist/cjs/agents/index.d.ts"
+}
