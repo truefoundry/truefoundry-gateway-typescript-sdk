@@ -2,4 +2,6 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export interface RegisteredMcpServer extends TrueFoundryGateway.BaseMcpServer {}
+export interface RegisteredMcpServer extends TrueFoundryGateway.BaseMcpServer {
+    type: "truefoundry-mcp-registry";
+}

@@ -3,6 +3,7 @@
 export interface ToolResponseEvent {
     toolCallId: string;
     content: string;
+    type: "tool.response";
     /** Unique identifier for the event */
     id: string;
     threadId: string;

@@ -9,24 +9,8 @@ import { Session } from "./Session.js";
 export const ListOwnedSessionsResponseDataItem: core.serialization.Schema<
     serializers.ListOwnedSessionsResponseDataItem.Raw,
     TrueFoundryGateway.ListOwnedSessionsResponseDataItem
-> = core.serialization
-    .union("type", {
-        session: Session,
-        "session/draft": DraftSession,
-    })
-    .transform<TrueFoundryGateway.ListOwnedSessionsResponseDataItem>({
-        transform: (value) => value,
-        untransform: (value) => value,
-    });
+> = core.serialization.undiscriminatedUnion([Session, DraftSession]);
 
 export declare namespace ListOwnedSessionsResponseDataItem {
-    export type Raw = ListOwnedSessionsResponseDataItem.Session | ListOwnedSessionsResponseDataItem.SessionDraft;
-
-    export interface Session extends Session.Raw {
-        type: "session";
-    }
-
-    export interface SessionDraft extends DraftSession.Raw {
-        type: "session/draft";
-    }
+    export type Raw = Session.Raw | DraftSession.Raw;
 }

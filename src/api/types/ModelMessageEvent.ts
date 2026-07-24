@@ -8,7 +8,7 @@ export interface ModelMessageEvent {
     refusal?: string | null;
     reasoningContent?: string;
     toolCalls?: TrueFoundryGateway.ToolCall[];
-    type: TrueFoundryGateway.ModelMessageEventType;
+    type: "model.message";
     /** Unique identifier for the event */
     id: string;
     threadId: string;

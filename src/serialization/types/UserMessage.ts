@@ -7,11 +7,13 @@ import { UserMessageContent } from "./UserMessageContent.js";
 
 export const UserMessage: core.serialization.ObjectSchema<serializers.UserMessage.Raw, TrueFoundryGateway.UserMessage> =
     core.serialization.object({
+        type: core.serialization.stringLiteral("user.message"),
         content: UserMessageContent,
     });
 
 export declare namespace UserMessage {
     export interface Raw {
+        type: "user.message";
         content: UserMessageContent.Raw;
     }
 }

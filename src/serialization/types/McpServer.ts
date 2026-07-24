@@ -7,24 +7,8 @@ import { InlineMcpServer } from "./InlineMcpServer.js";
 import { RegisteredMcpServer } from "./RegisteredMcpServer.js";
 
 export const McpServer: core.serialization.Schema<serializers.McpServer.Raw, TrueFoundryGateway.McpServer> =
-    core.serialization
-        .union("type", {
-            "truefoundry-mcp-registry": RegisteredMcpServer,
-            inline: InlineMcpServer,
-        })
-        .transform<TrueFoundryGateway.McpServer>({
-            transform: (value) => value,
-            untransform: (value) => value,
-        });
+    core.serialization.undiscriminatedUnion([RegisteredMcpServer, InlineMcpServer]);
 
 export declare namespace McpServer {
-    export type Raw = McpServer.TruefoundryMcpRegistry | McpServer.Inline;
-
-    export interface TruefoundryMcpRegistry extends RegisteredMcpServer.Raw {
-        type: "truefoundry-mcp-registry";
-    }
-
-    export interface Inline extends InlineMcpServer.Raw {
-        type: "inline";
-    }
+    export type Raw = RegisteredMcpServer.Raw | InlineMcpServer.Raw;
 }

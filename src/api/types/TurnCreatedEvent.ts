@@ -3,6 +3,7 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface TurnCreatedEvent {
+    type: "turn.created";
     /** Unique identifier for the event */
     id: string;
     turnId: string;

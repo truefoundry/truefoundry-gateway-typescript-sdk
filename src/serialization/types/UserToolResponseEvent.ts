@@ -8,6 +8,7 @@ export const UserToolResponseEvent: core.serialization.ObjectSchema<
     serializers.UserToolResponseEvent.Raw,
     TrueFoundryGateway.UserToolResponseEvent
 > = core.serialization.object({
+    type: core.serialization.stringLiteral("user.tool_response"),
     threadId: core.serialization.property("thread_id", core.serialization.string()),
     toolCallId: core.serialization.property("tool_call_id", core.serialization.string()),
     content: core.serialization.string(),
@@ -15,6 +16,7 @@ export const UserToolResponseEvent: core.serialization.ObjectSchema<
 
 export declare namespace UserToolResponseEvent {
     export interface Raw {
+        type: "user.tool_response";
         thread_id: string;
         tool_call_id: string;
         content: string;

@@ -19,86 +19,33 @@ import { TurnDoneEvent } from "./TurnDoneEvent.js";
 export const TurnStreamingEvent: core.serialization.Schema<
     serializers.TurnStreamingEvent.Raw,
     TrueFoundryGateway.TurnStreamingEvent
-> = core.serialization
-    .union("type", {
-        "model.message": ModelMessageEvent,
-        "model.message.delta": ModelMessageDeltaEvent,
-        "tool.response": ToolResponseEvent,
-        "thread.created": ThreadCreatedEvent,
-        "thread.done": ThreadDoneEvent,
-        "mcp.auth_required": McpAuthRequiredEvent,
-        "mcp.initialize": McpInitializeEvent,
-        "sandbox.created": SandboxCreatedEvent,
-        "tool.approval_required": ToolApprovalRequiredEvent,
-        "tool.response_required": ToolResponseRequiredEvent,
-        "turn.created": TurnCreatedEvent,
-        "turn.done": TurnDoneEvent,
-    })
-    .transform<TrueFoundryGateway.TurnStreamingEvent>({
-        transform: (value) => value,
-        untransform: (value) => value,
-    });
+> = core.serialization.undiscriminatedUnion([
+    ModelMessageEvent,
+    ModelMessageDeltaEvent,
+    ToolResponseEvent,
+    ThreadCreatedEvent,
+    ThreadDoneEvent,
+    McpAuthRequiredEvent,
+    McpInitializeEvent,
+    SandboxCreatedEvent,
+    ToolApprovalRequiredEvent,
+    ToolResponseRequiredEvent,
+    TurnCreatedEvent,
+    TurnDoneEvent,
+]);
 
 export declare namespace TurnStreamingEvent {
     export type Raw =
-        | TurnStreamingEvent.ModelMessage
-        | TurnStreamingEvent.ModelMessageDelta
-        | TurnStreamingEvent.ToolResponse
-        | TurnStreamingEvent.ThreadCreated
-        | TurnStreamingEvent.ThreadDone
-        | TurnStreamingEvent.McpAuthRequired
-        | TurnStreamingEvent.McpInitialize
-        | TurnStreamingEvent.SandboxCreated
-        | TurnStreamingEvent.ToolApprovalRequired
-        | TurnStreamingEvent.ToolResponseRequired
-        | TurnStreamingEvent.TurnCreated
-        | TurnStreamingEvent.TurnDone;
-
-    export interface ModelMessage extends ModelMessageEvent.Raw {
-        type: "model.message";
-    }
-
-    export interface ModelMessageDelta extends ModelMessageDeltaEvent.Raw {
-        type: "model.message.delta";
-    }
-
-    export interface ToolResponse extends ToolResponseEvent.Raw {
-        type: "tool.response";
-    }
-
-    export interface ThreadCreated extends ThreadCreatedEvent.Raw {
-        type: "thread.created";
-    }
-
-    export interface ThreadDone extends ThreadDoneEvent.Raw {
-        type: "thread.done";
-    }
-
-    export interface McpAuthRequired extends McpAuthRequiredEvent.Raw {
-        type: "mcp.auth_required";
-    }
-
-    export interface McpInitialize extends McpInitializeEvent.Raw {
-        type: "mcp.initialize";
-    }
-
-    export interface SandboxCreated extends SandboxCreatedEvent.Raw {
-        type: "sandbox.created";
-    }
-
-    export interface ToolApprovalRequired extends ToolApprovalRequiredEvent.Raw {
-        type: "tool.approval_required";
-    }
-
-    export interface ToolResponseRequired extends ToolResponseRequiredEvent.Raw {
-        type: "tool.response_required";
-    }
-
-    export interface TurnCreated extends TurnCreatedEvent.Raw {
-        type: "turn.created";
-    }
-
-    export interface TurnDone extends TurnDoneEvent.Raw {
-        type: "turn.done";
-    }
+        | ModelMessageEvent.Raw
+        | ModelMessageDeltaEvent.Raw
+        | ToolResponseEvent.Raw
+        | ThreadCreatedEvent.Raw
+        | ThreadDoneEvent.Raw
+        | McpAuthRequiredEvent.Raw
+        | McpInitializeEvent.Raw
+        | SandboxCreatedEvent.Raw
+        | ToolApprovalRequiredEvent.Raw
+        | ToolResponseRequiredEvent.Raw
+        | TurnCreatedEvent.Raw
+        | TurnDoneEvent.Raw;
 }

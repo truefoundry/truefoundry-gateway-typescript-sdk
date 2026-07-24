@@ -9,24 +9,8 @@ import { ChatCompletionContentPartText } from "./ChatCompletionContentPartText.j
 export const TurnStateDoneOutputContentOneItem: core.serialization.Schema<
     serializers.TurnStateDoneOutputContentOneItem.Raw,
     TrueFoundryGateway.TurnStateDoneOutputContentOneItem
-> = core.serialization
-    .union("type", {
-        text: ChatCompletionContentPartText,
-        refusal: ChatCompletionContentPartRefusal,
-    })
-    .transform<TrueFoundryGateway.TurnStateDoneOutputContentOneItem>({
-        transform: (value) => value,
-        untransform: (value) => value,
-    });
+> = core.serialization.undiscriminatedUnion([ChatCompletionContentPartText, ChatCompletionContentPartRefusal]);
 
 export declare namespace TurnStateDoneOutputContentOneItem {
-    export type Raw = TurnStateDoneOutputContentOneItem.Text | TurnStateDoneOutputContentOneItem.Refusal;
-
-    export interface Text extends ChatCompletionContentPartText.Raw {
-        type: "text";
-    }
-
-    export interface Refusal extends ChatCompletionContentPartRefusal.Raw {
-        type: "refusal";
-    }
+    export type Raw = ChatCompletionContentPartText.Raw | ChatCompletionContentPartRefusal.Raw;
 }

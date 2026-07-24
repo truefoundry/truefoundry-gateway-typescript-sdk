@@ -3,6 +3,7 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface ThreadCreatedEvent {
+    type: "thread.created";
     /** Unique identifier for the event */
     id: string;
     agentInfo: TrueFoundryGateway.AgentInfo;

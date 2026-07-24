@@ -3,36 +3,15 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { ResponseFormatJsonObject } from "./ResponseFormatJsonObject.js";
 import { ResponseFormatJsonSchema } from "./ResponseFormatJsonSchema.js";
-import { ResponseFormatText } from "./ResponseFormatText.js";
+import { ResponseFormatOne } from "./ResponseFormatOne.js";
+import { ResponseFormatZero } from "./ResponseFormatZero.js";
 
 export const ResponseFormat: core.serialization.Schema<
     serializers.ResponseFormat.Raw,
     TrueFoundryGateway.ResponseFormat
-> = core.serialization
-    .union("type", {
-        text: ResponseFormatText,
-        json_object: ResponseFormatJsonObject,
-        json_schema: ResponseFormatJsonSchema,
-    })
-    .transform<TrueFoundryGateway.ResponseFormat>({
-        transform: (value) => value,
-        untransform: (value) => value,
-    });
+> = core.serialization.undiscriminatedUnion([ResponseFormatZero, ResponseFormatOne, ResponseFormatJsonSchema]);
 
 export declare namespace ResponseFormat {
-    export type Raw = ResponseFormat.Text | ResponseFormat.JsonObject | ResponseFormat.JsonSchema;
-
-    export interface Text extends ResponseFormatText.Raw {
-        type: "text";
-    }
-
-    export interface JsonObject extends ResponseFormatJsonObject.Raw {
-        type: "json_object";
-    }
-
-    export interface JsonSchema extends ResponseFormatJsonSchema.Raw {
-        type: "json_schema";
-    }
+    export type Raw = ResponseFormatZero.Raw | ResponseFormatOne.Raw | ResponseFormatJsonSchema.Raw;
 }

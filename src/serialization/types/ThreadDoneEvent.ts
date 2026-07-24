@@ -11,6 +11,7 @@ export const ThreadDoneEvent: core.serialization.ObjectSchema<
     TrueFoundryGateway.ThreadDoneEvent
 > = core.serialization
     .object({
+        type: core.serialization.stringLiteral("thread.done"),
         id: core.serialization.string(),
         createdAt: core.serialization.property("created_at", core.serialization.string()),
         state: ThreadState,
@@ -19,6 +20,7 @@ export const ThreadDoneEvent: core.serialization.ObjectSchema<
 
 export declare namespace ThreadDoneEvent {
     export interface Raw extends BaseThreadDoneEvent.Raw {
+        type: "thread.done";
         id: string;
         created_at: string;
         state: ThreadState.Raw;

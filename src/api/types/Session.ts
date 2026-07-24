@@ -3,8 +3,7 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface Session {
-    /** Discriminates a saved session from a draft session. */
-    type: TrueFoundryGateway.SessionType;
+    type: "session";
     id: string;
     agentName: string;
     title: string | null;

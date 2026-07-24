@@ -4,14 +4,13 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 import { AgentSpec } from "./AgentSpec.js";
-import { DraftSessionType } from "./DraftSessionType.js";
 import { Subject } from "./Subject.js";
 
 export const DraftSession: core.serialization.ObjectSchema<
     serializers.DraftSession.Raw,
     TrueFoundryGateway.DraftSession
 > = core.serialization.object({
-    type: DraftSessionType,
+    type: core.serialization.stringLiteral("session/draft"),
     id: core.serialization.string(),
     agentSpec: core.serialization.property("agent_spec", AgentSpec),
     agentName: core.serialization.property("agent_name", core.serialization.string().nullable()),
@@ -23,7 +22,7 @@ export const DraftSession: core.serialization.ObjectSchema<
 
 export declare namespace DraftSession {
     export interface Raw {
-        type: DraftSessionType.Raw;
+        type: "session/draft";
         id: string;
         agent_spec: AgentSpec.Raw;
         agent_name?: string | null;

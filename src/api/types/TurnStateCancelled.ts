@@ -3,6 +3,7 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface TurnStateCancelled {
+    status: "cancelled";
     reason: TrueFoundryGateway.TurnStateCancelledReason;
     completedAt: string;
 }

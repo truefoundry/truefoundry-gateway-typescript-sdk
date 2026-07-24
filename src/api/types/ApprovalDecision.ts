@@ -2,14 +2,4 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export type ApprovalDecision = TrueFoundryGateway.ApprovalDecision.Allow | TrueFoundryGateway.ApprovalDecision.Deny;
-
-export namespace ApprovalDecision {
-    export interface Allow extends TrueFoundryGateway.ApprovalAllow {
-        status: "allow";
-    }
-
-    export interface Deny extends TrueFoundryGateway.ApprovalDeny {
-        status: "deny";
-    }
-}
+export type ApprovalDecision = TrueFoundryGateway.ApprovalAllow | TrueFoundryGateway.ApprovalDeny;

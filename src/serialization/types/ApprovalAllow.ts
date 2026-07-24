@@ -7,8 +7,12 @@ import type * as serializers from "../index.js";
 export const ApprovalAllow: core.serialization.ObjectSchema<
     serializers.ApprovalAllow.Raw,
     TrueFoundryGateway.ApprovalAllow
-> = core.serialization.object({});
+> = core.serialization.object({
+    status: core.serialization.stringLiteral("allow"),
+});
 
 export declare namespace ApprovalAllow {
-    export type Raw = {};
+    export interface Raw {
+        status: "allow";
+    }
 }

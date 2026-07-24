@@ -14,68 +14,27 @@ import { ToolResponseEvent } from "./ToolResponseEvent.js";
 import { ToolResponseRequiredEvent } from "./ToolResponseRequiredEvent.js";
 
 export const TurnEvent: core.serialization.Schema<serializers.TurnEvent.Raw, TrueFoundryGateway.TurnEvent> =
-    core.serialization
-        .union("type", {
-            "model.message": ModelMessageEvent,
-            "tool.response": ToolResponseEvent,
-            "thread.created": ThreadCreatedEvent,
-            "thread.done": ThreadDoneEvent,
-            "mcp.auth_required": McpAuthRequiredEvent,
-            "mcp.initialize": McpInitializeEvent,
-            "sandbox.created": SandboxCreatedEvent,
-            "tool.approval_required": ToolApprovalRequiredEvent,
-            "tool.response_required": ToolResponseRequiredEvent,
-        })
-        .transform<TrueFoundryGateway.TurnEvent>({
-            transform: (value) => value,
-            untransform: (value) => value,
-        });
+    core.serialization.undiscriminatedUnion([
+        ModelMessageEvent,
+        ToolResponseEvent,
+        ThreadCreatedEvent,
+        ThreadDoneEvent,
+        McpAuthRequiredEvent,
+        McpInitializeEvent,
+        SandboxCreatedEvent,
+        ToolApprovalRequiredEvent,
+        ToolResponseRequiredEvent,
+    ]);
 
 export declare namespace TurnEvent {
     export type Raw =
-        | TurnEvent.ModelMessage
-        | TurnEvent.ToolResponse
-        | TurnEvent.ThreadCreated
-        | TurnEvent.ThreadDone
-        | TurnEvent.McpAuthRequired
-        | TurnEvent.McpInitialize
-        | TurnEvent.SandboxCreated
-        | TurnEvent.ToolApprovalRequired
-        | TurnEvent.ToolResponseRequired;
-
-    export interface ModelMessage extends ModelMessageEvent.Raw {
-        type: "model.message";
-    }
-
-    export interface ToolResponse extends ToolResponseEvent.Raw {
-        type: "tool.response";
-    }
-
-    export interface ThreadCreated extends ThreadCreatedEvent.Raw {
-        type: "thread.created";
-    }
-
-    export interface ThreadDone extends ThreadDoneEvent.Raw {
-        type: "thread.done";
-    }
-
-    export interface McpAuthRequired extends McpAuthRequiredEvent.Raw {
-        type: "mcp.auth_required";
-    }
-
-    export interface McpInitialize extends McpInitializeEvent.Raw {
-        type: "mcp.initialize";
-    }
-
-    export interface SandboxCreated extends SandboxCreatedEvent.Raw {
-        type: "sandbox.created";
-    }
-
-    export interface ToolApprovalRequired extends ToolApprovalRequiredEvent.Raw {
-        type: "tool.approval_required";
-    }
-
-    export interface ToolResponseRequired extends ToolResponseRequiredEvent.Raw {
-        type: "tool.response_required";
-    }
+        | ModelMessageEvent.Raw
+        | ToolResponseEvent.Raw
+        | ThreadCreatedEvent.Raw
+        | ThreadDoneEvent.Raw
+        | McpAuthRequiredEvent.Raw
+        | McpInitializeEvent.Raw
+        | SandboxCreatedEvent.Raw
+        | ToolApprovalRequiredEvent.Raw
+        | ToolResponseRequiredEvent.Raw;
 }

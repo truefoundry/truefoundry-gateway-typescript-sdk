@@ -3,5 +3,6 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface UserMessage {
+    type: "user.message";
     content: TrueFoundryGateway.UserMessageContent;
 }

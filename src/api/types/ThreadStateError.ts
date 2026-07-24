@@ -3,6 +3,7 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface ThreadStateError {
+    status: "error";
     error: string;
     output?: TrueFoundryGateway.ModelMessageEvent;
 }

@@ -11,6 +11,7 @@ export const TurnCreatedEvent: core.serialization.ObjectSchema<
     serializers.TurnCreatedEvent.Raw,
     TrueFoundryGateway.TurnCreatedEvent
 > = core.serialization.object({
+    type: core.serialization.stringLiteral("turn.created"),
     id: core.serialization.string(),
     turnId: core.serialization.property("turn_id", core.serialization.string()),
     previousTurnId: core.serialization.property("previous_turn_id", core.serialization.string().nullable()),
@@ -23,6 +24,7 @@ export const TurnCreatedEvent: core.serialization.ObjectSchema<
 
 export declare namespace TurnCreatedEvent {
     export interface Raw {
+        type: "turn.created";
         id: string;
         turn_id: string;
         previous_turn_id?: string | null;

@@ -5,7 +5,6 @@ import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 import { FinishReason } from "./FinishReason.js";
 import { ModelMessageEventContent } from "./ModelMessageEventContent.js";
-import { ModelMessageEventType } from "./ModelMessageEventType.js";
 import { ModelMessageUsage } from "./ModelMessageUsage.js";
 import { ToolCall } from "./ToolCall.js";
 
@@ -18,7 +17,7 @@ export const ModelMessageEvent: core.serialization.ObjectSchema<
     refusal: core.serialization.string().optionalNullable(),
     reasoningContent: core.serialization.property("reasoning_content", core.serialization.string().optional()),
     toolCalls: core.serialization.property("tool_calls", core.serialization.list(ToolCall).optional()),
-    type: ModelMessageEventType,
+    type: core.serialization.stringLiteral("model.message"),
     id: core.serialization.string(),
     threadId: core.serialization.property("thread_id", core.serialization.string()),
     finishReason: core.serialization.property("finish_reason", FinishReason.optionalNullable()),
@@ -33,7 +32,7 @@ export declare namespace ModelMessageEvent {
         refusal?: (string | null | undefined) | null;
         reasoning_content?: string | null;
         tool_calls?: ToolCall.Raw[] | null;
-        type: ModelMessageEventType.Raw;
+        type: "model.message";
         id: string;
         thread_id: string;
         finish_reason?: (FinishReason.Raw | null | undefined) | null;

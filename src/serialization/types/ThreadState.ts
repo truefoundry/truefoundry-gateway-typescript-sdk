@@ -7,24 +7,8 @@ import { ThreadStateDone } from "./ThreadStateDone.js";
 import { ThreadStateError } from "./ThreadStateError.js";
 
 export const ThreadState: core.serialization.Schema<serializers.ThreadState.Raw, TrueFoundryGateway.ThreadState> =
-    core.serialization
-        .union("status", {
-            done: ThreadStateDone,
-            error: ThreadStateError,
-        })
-        .transform<TrueFoundryGateway.ThreadState>({
-            transform: (value) => value,
-            untransform: (value) => value,
-        });
+    core.serialization.undiscriminatedUnion([ThreadStateDone, ThreadStateError]);
 
 export declare namespace ThreadState {
-    export type Raw = ThreadState.Done | ThreadState.Error;
-
-    export interface Done extends ThreadStateDone.Raw {
-        status: "done";
-    }
-
-    export interface Error extends ThreadStateError.Raw {
-        status: "error";
-    }
+    export type Raw = ThreadStateDone.Raw | ThreadStateError.Raw;
 }

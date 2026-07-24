@@ -3,16 +3,19 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
+import { ChatCompletionContentPartTextType } from "./ChatCompletionContentPartTextType.js";
 
 export const ChatCompletionContentPartText: core.serialization.ObjectSchema<
     serializers.ChatCompletionContentPartText.Raw,
     TrueFoundryGateway.ChatCompletionContentPartText
 > = core.serialization.object({
+    type: ChatCompletionContentPartTextType,
     text: core.serialization.string(),
 });
 
 export declare namespace ChatCompletionContentPartText {
     export interface Raw {
+        type: ChatCompletionContentPartTextType.Raw;
         text: string;
     }
 }

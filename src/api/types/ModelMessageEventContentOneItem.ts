@@ -3,15 +3,5 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export type ModelMessageEventContentOneItem =
-    | TrueFoundryGateway.ModelMessageEventContentOneItem.Text
-    | TrueFoundryGateway.ModelMessageEventContentOneItem.Refusal;
-
-export namespace ModelMessageEventContentOneItem {
-    export interface Text extends TrueFoundryGateway.ChatCompletionContentPartText {
-        type: "text";
-    }
-
-    export interface Refusal extends TrueFoundryGateway.ChatCompletionContentPartRefusal {
-        type: "refusal";
-    }
-}
+    | TrueFoundryGateway.ChatCompletionContentPartText
+    | TrueFoundryGateway.ChatCompletionContentPartRefusal;

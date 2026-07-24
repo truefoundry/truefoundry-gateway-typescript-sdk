@@ -3,12 +3,11 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { SessionType } from "./SessionType.js";
 import { Subject } from "./Subject.js";
 
 export const Session: core.serialization.ObjectSchema<serializers.Session.Raw, TrueFoundryGateway.Session> =
     core.serialization.object({
-        type: SessionType,
+        type: core.serialization.stringLiteral("session"),
         id: core.serialization.string(),
         agentName: core.serialization.property("agent_name", core.serialization.string()),
         title: core.serialization.string().nullable(),
@@ -19,7 +18,7 @@ export const Session: core.serialization.ObjectSchema<serializers.Session.Raw, T
 
 export declare namespace Session {
     export interface Raw {
-        type: SessionType.Raw;
+        type: "session";
         id: string;
         agent_name: string;
         title?: string | null;

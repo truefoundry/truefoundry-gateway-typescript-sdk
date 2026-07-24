@@ -9,24 +9,8 @@ import { ChatCompletionContentPartText } from "./ChatCompletionContentPartText.j
 export const ModelMessageEventContentOneItem: core.serialization.Schema<
     serializers.ModelMessageEventContentOneItem.Raw,
     TrueFoundryGateway.ModelMessageEventContentOneItem
-> = core.serialization
-    .union("type", {
-        text: ChatCompletionContentPartText,
-        refusal: ChatCompletionContentPartRefusal,
-    })
-    .transform<TrueFoundryGateway.ModelMessageEventContentOneItem>({
-        transform: (value) => value,
-        untransform: (value) => value,
-    });
+> = core.serialization.undiscriminatedUnion([ChatCompletionContentPartText, ChatCompletionContentPartRefusal]);
 
 export declare namespace ModelMessageEventContentOneItem {
-    export type Raw = ModelMessageEventContentOneItem.Text | ModelMessageEventContentOneItem.Refusal;
-
-    export interface Text extends ChatCompletionContentPartText.Raw {
-        type: "text";
-    }
-
-    export interface Refusal extends ChatCompletionContentPartRefusal.Raw {
-        type: "refusal";
-    }
+    export type Raw = ChatCompletionContentPartText.Raw | ChatCompletionContentPartRefusal.Raw;
 }

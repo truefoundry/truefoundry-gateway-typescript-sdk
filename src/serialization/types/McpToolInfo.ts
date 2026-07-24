@@ -6,6 +6,7 @@ import type * as serializers from "../index.js";
 
 export const McpToolInfo: core.serialization.ObjectSchema<serializers.McpToolInfo.Raw, TrueFoundryGateway.McpToolInfo> =
     core.serialization.object({
+        type: core.serialization.stringLiteral("mcp"),
         serverId: core.serialization.property("server_id", core.serialization.string()),
         serverName: core.serialization.property("server_name", core.serialization.string()),
         name: core.serialization.string(),
@@ -13,6 +14,7 @@ export const McpToolInfo: core.serialization.ObjectSchema<serializers.McpToolInf
 
 export declare namespace McpToolInfo {
     export interface Raw {
+        type: "mcp";
         server_id: string;
         server_name: string;
         name: string;

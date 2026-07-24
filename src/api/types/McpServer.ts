@@ -2,14 +2,4 @@
 
 import type * as TrueFoundryGateway from "../index.js";
 
-export type McpServer = TrueFoundryGateway.McpServer.TruefoundryMcpRegistry | TrueFoundryGateway.McpServer.Inline;
-
-export namespace McpServer {
-    export interface TruefoundryMcpRegistry extends TrueFoundryGateway.RegisteredMcpServer {
-        type: "truefoundry-mcp-registry";
-    }
-
-    export interface Inline extends TrueFoundryGateway.InlineMcpServer {
-        type: "inline";
-    }
-}
+export type McpServer = TrueFoundryGateway.RegisteredMcpServer | TrueFoundryGateway.InlineMcpServer;

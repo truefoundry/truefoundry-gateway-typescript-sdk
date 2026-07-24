@@ -9,6 +9,7 @@ export const McpInitializeEvent: core.serialization.ObjectSchema<
     serializers.McpInitializeEvent.Raw,
     TrueFoundryGateway.McpInitializeEvent
 > = core.serialization.object({
+    type: core.serialization.stringLiteral("mcp.initialize"),
     id: core.serialization.string(),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
     threadId: core.serialization.property("thread_id", core.serialization.string()),
@@ -17,6 +18,7 @@ export const McpInitializeEvent: core.serialization.ObjectSchema<
 
 export declare namespace McpInitializeEvent {
     export interface Raw {
+        type: "mcp.initialize";
         id: string;
         created_at: string;
         thread_id: string;

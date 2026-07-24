@@ -18,6 +18,7 @@ export const ModelMessageDeltaEvent: core.serialization.ObjectSchema<
         core.serialization.list(ExtendedChunkDeltaToolCall).optional(),
     ),
     reasoningContent: core.serialization.property("reasoning_content", core.serialization.string().optional()),
+    type: core.serialization.stringLiteral("model.message.delta"),
     id: core.serialization.string(),
     threadId: core.serialization.property("thread_id", core.serialization.string()),
     createdAt: core.serialization.property("created_at", core.serialization.string().optional()),
@@ -31,6 +32,7 @@ export declare namespace ModelMessageDeltaEvent {
         refusal?: (string | null | undefined) | null;
         tool_calls?: ExtendedChunkDeltaToolCall.Raw[] | null;
         reasoning_content?: string | null;
+        type: "model.message.delta";
         id: string;
         thread_id: string;
         created_at?: string | null;

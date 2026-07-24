@@ -160,7 +160,7 @@ describe("DraftSessionsClient", () => {
                     model: { name: "name" },
                     instructions: "instructions",
                     messages: [{ type: "user.message", content: "content" }],
-                    mcp_servers: [{ type: "truefoundry-mcp-registry", name: "name" }],
+                    mcp_servers: [{ name: "name", type: "truefoundry-mcp-registry" }],
                     response_format: { type: "text" },
                     skills: [{ fqn: "fqn" }],
                     variables: { key: "value" },
@@ -210,8 +210,8 @@ describe("DraftSessionsClient", () => {
                     ],
                     mcpServers: [
                         {
-                            type: "truefoundry-mcp-registry",
                             name: "name",
+                            type: "truefoundry-mcp-registry",
                         },
                     ],
                     responseFormat: {
@@ -381,7 +381,7 @@ describe("DraftSessionsClient", () => {
                     model: { name: "name" },
                     instructions: "instructions",
                     messages: [{ type: "user.message", content: "content" }],
-                    mcp_servers: [{ type: "truefoundry-mcp-registry", name: "name" }],
+                    mcp_servers: [{ name: "name", type: "truefoundry-mcp-registry" }],
                     response_format: { type: "text" },
                     skills: [{ fqn: "fqn" }],
                     variables: { key: "value" },
@@ -426,8 +426,8 @@ describe("DraftSessionsClient", () => {
                     ],
                     mcpServers: [
                         {
-                            type: "truefoundry-mcp-registry",
                             name: "name",
+                            type: "truefoundry-mcp-registry",
                         },
                     ],
                     responseFormat: {
@@ -509,7 +509,7 @@ describe("DraftSessionsClient", () => {
                     model: { name: "name" },
                     instructions: "instructions",
                     messages: [{ type: "user.message", content: "content" }],
-                    mcp_servers: [{ type: "truefoundry-mcp-registry", name: "name" }],
+                    mcp_servers: [{ name: "name", type: "truefoundry-mcp-registry" }],
                     response_format: { type: "text" },
                     skills: [{ fqn: "fqn" }],
                     variables: { key: "value" },
@@ -555,8 +555,8 @@ describe("DraftSessionsClient", () => {
                     ],
                     mcpServers: [
                         {
-                            type: "truefoundry-mcp-registry",
                             name: "name",
+                            type: "truefoundry-mcp-registry",
                         },
                     ],
                     responseFormat: {

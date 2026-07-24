@@ -9,6 +9,7 @@ export const ToolApprovalRequiredEvent: core.serialization.ObjectSchema<
     serializers.ToolApprovalRequiredEvent.Raw,
     TrueFoundryGateway.ToolApprovalRequiredEvent
 > = core.serialization.object({
+    type: core.serialization.stringLiteral("tool.approval_required"),
     id: core.serialization.string(),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
     threadId: core.serialization.property("thread_id", core.serialization.string()),
@@ -17,6 +18,7 @@ export const ToolApprovalRequiredEvent: core.serialization.ObjectSchema<
 
 export declare namespace ToolApprovalRequiredEvent {
     export interface Raw {
+        type: "tool.approval_required";
         id: string;
         created_at: string;
         thread_id: string;
