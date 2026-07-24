@@ -154,7 +154,7 @@ export class PrivateAgentSessionClient {
      * @returns {core.Page<AgentSession | AgentDraftSession, TrueFoundryGatewayApi.SearchSessionsResponse>} Paginated matching sessions.
      */
     async searchSessions(
-        request: TrueFoundryGatewayApi.agents.private_.SearchSessionsPrivateRequest,
+        request: TrueFoundryGatewayApi.agents.private_.SearchSessionsPrivateRequest = {},
         requestOptions?: PrivateAgentSessionClient.RequestOptions,
     ): Promise<core.Page<AgentSession | AgentDraftSession, TrueFoundryGatewayApi.SearchSessionsResponse>> {
         const client = this.client;
