@@ -48,8 +48,8 @@ export class PreparedTurn implements Partial<TrueFoundryGatewayApi.Turn> {
     /**
      * @returns {string | undefined} Undefined until `execute()` starts the turn.
      */
-    get previousTurnId(): string | null {
-        return this.#turn?.previousTurnId ?? null;
+    get previousTurnId(): string | null | undefined {
+        return this.#turn?.previousTurnId;
     }
 
     /**
