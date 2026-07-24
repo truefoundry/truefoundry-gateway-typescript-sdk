@@ -49,7 +49,7 @@ export class AgentSessionClient {
      * @returns {core.Page<AgentSession, TrueFoundryGatewayApi.ListSessionsResponse>} Paginated sessions.
      */
     async listSessions(
-        request: TrueFoundryGatewayApi.agents.SessionsListRequest,
+        request: TrueFoundryGatewayApi.agents.ListSessionsRequest,
         requestOptions?: AgentSessionClient.RequestOptions,
     ): Promise<core.Page<AgentSession, TrueFoundryGatewayApi.ListSessionsResponse>> {
         const page = await this.client.agents.sessions.list(request, requestOptions);

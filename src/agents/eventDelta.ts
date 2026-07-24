@@ -34,7 +34,7 @@ function mergeModelMessageDelta(
     delta: TrueFoundryGatewayApi.ModelMessageDeltaEvent,
 ): void {
     if (delta.content) {
-        if (base.content === undefined || typeof base.content === "string") {
+        if (base.content === undefined || base.content === null || typeof base.content === "string") {
             base.content = (base.content ?? "") + delta.content;
         } else {
             const last = base.content[base.content.length - 1];

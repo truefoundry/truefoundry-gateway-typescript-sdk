@@ -64,7 +64,7 @@ export class SessionMixin {
      */
     async listTurns(
         owner: AgentSession | AgentDraftSession,
-        request?: TrueFoundryGatewayApi.agents.SessionsListTurnsRequest,
+        request?: TrueFoundryGatewayApi.agents.ListTurnsSessionsRequest,
         requestOptions?: RequestOptions,
     ): Promise<core.Page<Turn, TrueFoundryGatewayApi.ListTurnsResponse>> {
         const client = this.#client;
@@ -125,7 +125,7 @@ export class SessionMixin {
      * @returns {Promise<core.Page<TrueFoundryGatewayApi.SessionEventItem, TrueFoundryGatewayApi.ListSessionEventsResponse>>} Paginated session events.
      */
     listEvents(
-        request?: TrueFoundryGatewayApi.agents.SessionsListEventsRequest,
+        request?: TrueFoundryGatewayApi.agents.ListEventsSessionsRequest,
         requestOptions?: RequestOptions,
     ): Promise<core.Page<TrueFoundryGatewayApi.SessionEventItem, TrueFoundryGatewayApi.ListSessionEventsResponse>> {
         return this.#client.agents.sessions.listEvents(this.id, request, requestOptions);

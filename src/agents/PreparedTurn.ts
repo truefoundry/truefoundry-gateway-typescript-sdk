@@ -48,7 +48,7 @@ export class PreparedTurn implements Partial<TrueFoundryGatewayApi.Turn> {
     /**
      * @returns {string | undefined} Undefined until `execute()` starts the turn.
      */
-    get previousTurnId(): string | undefined {
+    get previousTurnId(): string | null | undefined {
         return this.#turn?.previousTurnId;
     }
 
@@ -169,7 +169,7 @@ export class PreparedTurn implements Partial<TrueFoundryGatewayApi.Turn> {
      * @returns {Promise<core.Page<TrueFoundryGatewayApi.TurnEvent, TrueFoundryGatewayApi.ListEventsResponse>>} Paginated turn events.
      */
     listEvents(
-        opts?: TrueFoundryGatewayApi.agents.SessionsListTurnEventsRequest,
+        opts?: TrueFoundryGatewayApi.agents.ListTurnEventsSessionsRequest,
         requestOptions?: RequestOptions,
     ): Promise<core.Page<TrueFoundryGatewayApi.TurnEvent, TrueFoundryGatewayApi.ListEventsResponse>> {
         return this.mustGetTurn().listEvents(opts, requestOptions);
