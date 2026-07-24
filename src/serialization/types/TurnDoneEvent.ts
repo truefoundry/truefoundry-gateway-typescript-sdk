@@ -13,7 +13,7 @@ export const TurnDoneEvent: core.serialization.ObjectSchema<
     id: core.serialization.string(),
     state: TurnDoneEventState,
     createdAt: core.serialization.property("created_at", core.serialization.string()),
-    threadId: core.serialization.property("thread_id", core.serialization.string().nullable()),
+    threadId: core.serialization.property("thread_id", core.serialization.string().optional()),
 });
 
 export declare namespace TurnDoneEvent {

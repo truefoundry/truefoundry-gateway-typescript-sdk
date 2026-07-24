@@ -4,7 +4,7 @@ import type * as TrueFoundryGateway from "../index.js";
 
 export interface TurnStateDone {
     status: "done";
-    output: TrueFoundryGateway.TurnStateDoneOutput | null;
+    output?: TrueFoundryGateway.TurnStateDoneOutput;
     requiredActions: TrueFoundryGateway.ActionRequiredEvent[];
     completedAt: string;
 }

@@ -3,9 +3,9 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface ModelMessageEvent {
-    content?: TrueFoundryGateway.ModelMessageEventContent | null;
+    content?: TrueFoundryGateway.ModelMessageEventContent;
     name?: string;
-    refusal?: string | null;
+    refusal?: string;
     reasoningContent?: string;
     toolCalls?: TrueFoundryGateway.ToolCall[];
     type: "model.message";

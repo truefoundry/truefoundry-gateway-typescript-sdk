@@ -3,9 +3,9 @@
 import type * as TrueFoundryGateway from "../index.js";
 
 export interface TurnStateDoneOutput {
-    content?: TrueFoundryGateway.TurnStateDoneOutputContent | null;
+    content?: TrueFoundryGateway.TurnStateDoneOutputContent;
     name?: string;
-    refusal?: string | null;
+    refusal?: string;
     reasoningContent?: string;
     toolCalls?: TrueFoundryGateway.ToolCall[];
     type: "model.message";

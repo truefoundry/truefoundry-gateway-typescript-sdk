@@ -12,9 +12,9 @@ export const TurnStateDoneOutput: core.serialization.ObjectSchema<
     serializers.TurnStateDoneOutput.Raw,
     TrueFoundryGateway.TurnStateDoneOutput
 > = core.serialization.object({
-    content: TurnStateDoneOutputContent.optionalNullable(),
+    content: TurnStateDoneOutputContent.optional(),
     name: core.serialization.string().optional(),
-    refusal: core.serialization.string().optionalNullable(),
+    refusal: core.serialization.string().optional(),
     reasoningContent: core.serialization.property("reasoning_content", core.serialization.string().optional()),
     toolCalls: core.serialization.property("tool_calls", core.serialization.list(ToolCall).optional()),
     type: core.serialization.stringLiteral("model.message"),
@@ -27,9 +27,9 @@ export const TurnStateDoneOutput: core.serialization.ObjectSchema<
 
 export declare namespace TurnStateDoneOutput {
     export interface Raw {
-        content?: (TurnStateDoneOutputContent.Raw | null | undefined) | null;
+        content?: TurnStateDoneOutputContent.Raw | null;
         name?: string | null;
-        refusal?: (string | null | undefined) | null;
+        refusal?: string | null;
         reasoning_content?: string | null;
         tool_calls?: ToolCall.Raw[] | null;
         type: "model.message";

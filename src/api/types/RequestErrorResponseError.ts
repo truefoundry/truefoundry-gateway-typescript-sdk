@@ -3,6 +3,6 @@
 export interface RequestErrorResponseError {
     message: string;
     type?: string;
-    code?: string | null;
-    param?: string | null;
+    code?: string;
+    param?: string;
 }
