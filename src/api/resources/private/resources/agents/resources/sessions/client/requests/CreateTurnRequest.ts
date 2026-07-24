@@ -8,5 +8,5 @@ import type * as TrueFoundryGateway from "../../../../../../../../index.js";
  */
 export interface CreateTurnRequest {
     input?: TrueFoundryGateway.TurnInputItem[];
-    previousTurnId?: TrueFoundryGateway.PreviousTurnIdInput | null;
+    previousTurnId?: TrueFoundryGateway.PreviousTurnIdInput;
 }

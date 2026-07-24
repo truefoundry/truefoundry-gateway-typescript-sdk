@@ -1244,7 +1244,6 @@ describe("SessionsClient", () => {
                         type: "turn.created",
                         id: "id",
                         turn_id: "turn_id",
-                        previous_turn_id: null,
                         state: { status: "running" },
                         created_by: {
                             subject_id: "subject_id",
@@ -1252,7 +1251,6 @@ describe("SessionsClient", () => {
                             subject_slug: "subject_slug",
                         },
                         created_at: "created_at",
-                        thread_id: null,
                     },
                 },
             ],
@@ -1275,7 +1273,6 @@ describe("SessionsClient", () => {
                         type: "turn.created",
                         id: "id",
                         turnId: "turn_id",
-                        previousTurnId: null,
                         state: {
                             status: "running",
                         },
@@ -1285,7 +1282,6 @@ describe("SessionsClient", () => {
                             subjectSlug: "subject_slug",
                         },
                         createdAt: "created_at",
-                        threadId: null,
                     },
                 },
             ],

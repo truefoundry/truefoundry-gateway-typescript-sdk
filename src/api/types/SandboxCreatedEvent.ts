@@ -6,5 +6,5 @@ export interface SandboxCreatedEvent {
     id: string;
     createdAt: string;
     sandboxId: string;
-    threadId: string | null;
+    threadId?: string | null;
 }
