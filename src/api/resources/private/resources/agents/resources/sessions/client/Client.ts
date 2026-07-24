@@ -5,7 +5,7 @@ import {
     type NormalizedClientOptionsWithAuth,
     normalizeClientOptionsWithAuth,
 } from "../../../../../../../../BaseClient.js";
-import { mergeHeaders, mergeOnlyDefinedHeaders } from "../../../../../../../../core/headers.js";
+import { mergeHeaders } from "../../../../../../../../core/headers.js";
 import * as core from "../../../../../../../../core/index.js";
 import { mergeAdditionalBodyParameters } from "../../../../../../../../core/requestBody.js";
 import { handleNonStatusCodeError } from "../../../../../../../../errors/handleNonStatusCodeError.js";
@@ -225,12 +225,10 @@ export class SessionsClient {
         request: TrueFoundryGateway.private_.agents.CreateSessionRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.WithRawResponse<TrueFoundryGateway.GetSessionResponse>> {
-        const { tfyMetadata, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
-            mergeOnlyDefinedHeaders({ "x-tfy-metadata": tfyMetadata }),
             requestOptions?.headers,
         );
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -245,7 +243,7 @@ export class SessionsClient {
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: mergeAdditionalBodyParameters(
-                serializers.private_.agents.CreateSessionRequest.jsonOrThrow(_body, {
+                serializers.private_.agents.CreateSessionRequest.jsonOrThrow(request, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,
