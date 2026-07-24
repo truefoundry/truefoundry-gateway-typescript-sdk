@@ -3,17 +3,16 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { ResponseFormatZeroType } from "./ResponseFormatZeroType.js";
 
 export const ResponseFormatZero: core.serialization.ObjectSchema<
     serializers.ResponseFormatZero.Raw,
     TrueFoundryGateway.ResponseFormatZero
 > = core.serialization.object({
-    type: ResponseFormatZeroType,
+    type: core.serialization.stringLiteral("text"),
 });
 
 export declare namespace ResponseFormatZero {
     export interface Raw {
-        type: ResponseFormatZeroType.Raw;
+        type: "text";
     }
 }

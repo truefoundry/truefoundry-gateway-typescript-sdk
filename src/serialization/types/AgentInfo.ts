@@ -3,11 +3,10 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { AgentInfoType } from "./AgentInfoType.js";
 
 export const AgentInfo: core.serialization.ObjectSchema<serializers.AgentInfo.Raw, TrueFoundryGateway.AgentInfo> =
     core.serialization.object({
-        type: AgentInfoType,
+        type: core.serialization.stringLiteral("dynamic"),
         name: core.serialization.string(),
         input: core.serialization.string(),
         model: core.serialization.string().optional(),
@@ -15,7 +14,7 @@ export const AgentInfo: core.serialization.ObjectSchema<serializers.AgentInfo.Ra
 
 export declare namespace AgentInfo {
     export interface Raw {
-        type: AgentInfoType.Raw;
+        type: "dynamic";
         name: string;
         input: string;
         model?: string | null;

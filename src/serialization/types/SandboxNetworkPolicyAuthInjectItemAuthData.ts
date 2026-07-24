@@ -3,20 +3,19 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { SandboxNetworkPolicyAuthInjectItemAuthDataType } from "./SandboxNetworkPolicyAuthInjectItemAuthDataType.js";
 
 export const SandboxNetworkPolicyAuthInjectItemAuthData: core.serialization.ObjectSchema<
     serializers.SandboxNetworkPolicyAuthInjectItemAuthData.Raw,
     TrueFoundryGateway.SandboxNetworkPolicyAuthInjectItemAuthData
 > = core.serialization.object({
-    type: SandboxNetworkPolicyAuthInjectItemAuthDataType,
+    type: core.serialization.stringLiteral("basic"),
     username: core.serialization.string(),
     password: core.serialization.string(),
 });
 
 export declare namespace SandboxNetworkPolicyAuthInjectItemAuthData {
     export interface Raw {
-        type: SandboxNetworkPolicyAuthInjectItemAuthDataType.Raw;
+        type: "basic";
         username: string;
         password: string;
     }

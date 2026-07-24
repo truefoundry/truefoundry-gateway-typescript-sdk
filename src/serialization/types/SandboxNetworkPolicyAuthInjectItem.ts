@@ -5,20 +5,19 @@ import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 import { SandboxNetworkPolicyAuthInjectItemAuthData } from "./SandboxNetworkPolicyAuthInjectItemAuthData.js";
 import { SandboxNetworkPolicyAuthInjectItemMatch } from "./SandboxNetworkPolicyAuthInjectItemMatch.js";
-import { SandboxNetworkPolicyAuthInjectItemType } from "./SandboxNetworkPolicyAuthInjectItemType.js";
 
 export const SandboxNetworkPolicyAuthInjectItem: core.serialization.ObjectSchema<
     serializers.SandboxNetworkPolicyAuthInjectItem.Raw,
     TrueFoundryGateway.SandboxNetworkPolicyAuthInjectItem
 > = core.serialization.object({
-    type: SandboxNetworkPolicyAuthInjectItemType,
+    type: core.serialization.stringLiteral("git"),
     match: SandboxNetworkPolicyAuthInjectItemMatch,
     authData: core.serialization.property("auth_data", SandboxNetworkPolicyAuthInjectItemAuthData),
 });
 
 export declare namespace SandboxNetworkPolicyAuthInjectItem {
     export interface Raw {
-        type: SandboxNetworkPolicyAuthInjectItemType.Raw;
+        type: "git";
         match: SandboxNetworkPolicyAuthInjectItemMatch.Raw;
         auth_data: SandboxNetworkPolicyAuthInjectItemAuthData.Raw;
     }

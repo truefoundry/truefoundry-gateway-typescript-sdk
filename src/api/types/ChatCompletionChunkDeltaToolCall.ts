@@ -5,6 +5,6 @@ import type * as TrueFoundryGateway from "../index.js";
 export interface ChatCompletionChunkDeltaToolCall {
     index: number;
     id?: string;
-    type?: TrueFoundryGateway.ChatCompletionChunkDeltaToolCallType;
+    type?: "function";
     function?: TrueFoundryGateway.ChatCompletionChunkDeltaToolCallFunction;
 }

@@ -3,17 +3,16 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { ResponseFormatOneType } from "./ResponseFormatOneType.js";
 
 export const ResponseFormatOne: core.serialization.ObjectSchema<
     serializers.ResponseFormatOne.Raw,
     TrueFoundryGateway.ResponseFormatOne
 > = core.serialization.object({
-    type: ResponseFormatOneType,
+    type: core.serialization.stringLiteral("json_object"),
 });
 
 export declare namespace ResponseFormatOne {
     export interface Raw {
-        type: ResponseFormatOneType.Raw;
+        type: "json_object";
     }
 }

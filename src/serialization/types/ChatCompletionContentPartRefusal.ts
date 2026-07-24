@@ -3,19 +3,18 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { ChatCompletionContentPartRefusalType } from "./ChatCompletionContentPartRefusalType.js";
 
 export const ChatCompletionContentPartRefusal: core.serialization.ObjectSchema<
     serializers.ChatCompletionContentPartRefusal.Raw,
     TrueFoundryGateway.ChatCompletionContentPartRefusal
 > = core.serialization.object({
-    type: ChatCompletionContentPartRefusalType,
+    type: core.serialization.stringLiteral("refusal"),
     refusal: core.serialization.string(),
 });
 
 export declare namespace ChatCompletionContentPartRefusal {
     export interface Raw {
-        type: ChatCompletionContentPartRefusalType.Raw;
+        type: "refusal";
         refusal: string;
     }
 }

@@ -3,13 +3,12 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
-import { PreviousTurnIdInputZero } from "./PreviousTurnIdInputZero.js";
 
 export const PreviousTurnIdInput: core.serialization.Schema<
     serializers.PreviousTurnIdInput.Raw,
     TrueFoundryGateway.PreviousTurnIdInput
-> = core.serialization.undiscriminatedUnion([PreviousTurnIdInputZero, core.serialization.string()]);
+> = core.serialization.undiscriminatedUnion([core.serialization.stringLiteral("auto"), core.serialization.string()]);
 
 export declare namespace PreviousTurnIdInput {
-    export type Raw = PreviousTurnIdInputZero.Raw | string;
+    export type Raw = "auto" | string;
 }
