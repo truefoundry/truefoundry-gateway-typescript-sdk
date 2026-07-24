@@ -7,7 +7,7 @@ import { AgentSpec } from "../../../../../../../../../../types/AgentSpec.js";
 
 export const CreateDraftSessionRequest: core.serialization.Schema<
     serializers.private_.agents.private_.CreateDraftSessionRequest.Raw,
-    TrueFoundryGateway.private_.agents.private_.CreateDraftSessionRequest
+    Omit<TrueFoundryGateway.private_.agents.private_.CreateDraftSessionRequest, "tfyMetadata">
 > = core.serialization.object({
     agentSpec: core.serialization.property("agent_spec", AgentSpec),
     agentName: core.serialization.property("agent_name", core.serialization.string().optional()),

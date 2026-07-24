@@ -169,7 +169,7 @@ describe("DraftSessionsClient", () => {
                     messages: [{ type: "user.message", content: "content" }],
                     mcp_servers: [{ name: "name", type: "truefoundry-mcp-registry" }],
                     response_format: { type: "text" },
-                    skills: [{ fqn: "fqn" }],
+                    skills: [{ type: "git", url: "url", name: "name", ref: "ref" }],
                     variables: { key: "value" },
                 },
                 agent_name: "agent_name",
@@ -226,7 +226,10 @@ describe("DraftSessionsClient", () => {
                     },
                     skills: [
                         {
-                            fqn: "fqn",
+                            type: "git",
+                            url: "url",
+                            name: "name",
+                            ref: "ref",
                         },
                     ],
                     variables: {
@@ -390,7 +393,7 @@ describe("DraftSessionsClient", () => {
                     messages: [{ type: "user.message", content: "content" }],
                     mcp_servers: [{ name: "name", type: "truefoundry-mcp-registry" }],
                     response_format: { type: "text" },
-                    skills: [{ fqn: "fqn" }],
+                    skills: [{ type: "git", url: "url", name: "name", ref: "ref" }],
                     variables: { key: "value" },
                 },
                 agent_name: "agent_name",
@@ -440,7 +443,10 @@ describe("DraftSessionsClient", () => {
                     },
                     skills: [
                         {
-                            fqn: "fqn",
+                            type: "git",
+                            url: "url",
+                            name: "name",
+                            ref: "ref",
                         },
                     ],
                     variables: {
@@ -512,7 +518,7 @@ describe("DraftSessionsClient", () => {
                     messages: [{ type: "user.message", content: "content" }],
                     mcp_servers: [{ name: "name", type: "truefoundry-mcp-registry" }],
                     response_format: { type: "text" },
-                    skills: [{ fqn: "fqn" }],
+                    skills: [{ type: "git", url: "url", name: "name", ref: "ref" }],
                     variables: { key: "value" },
                 },
                 agent_name: "agent_name",
@@ -563,7 +569,10 @@ describe("DraftSessionsClient", () => {
                     },
                     skills: [
                         {
-                            fqn: "fqn",
+                            type: "git",
+                            url: "url",
+                            name: "name",
+                            ref: "ref",
                         },
                     ],
                     variables: {

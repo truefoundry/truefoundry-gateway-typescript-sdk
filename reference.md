@@ -885,6 +885,103 @@ const response = page.response;
 </dl>
 </details>
 
+<details><summary><code>client.private.agents.private.<a href="/src/api/resources/private/resources/agents/resources/private/client/Client.ts">searchSessions</a>({ ...params }) -> core.Page&lt;TrueFoundryGateway.SearchSessionsResponseDataItem, TrueFoundryGateway.SearchSessionsResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Search sessions visible to the caller across agents (newest first by default), keyset-paginated. Tenant admins see all tenant sessions; agent managers see sessions on agents they manage plus their own; other callers see only their own. Includes saved sessions and drafts (filter with `session_type`). Pass `page_token` to fetch the next page, keeping the other query params constant.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.private.agents.private.searchSessions({
+    agentName: "agent_name",
+    createdBySubjectId: "created_by_subject_id",
+    createdBySubjectType: "user",
+    sessionType: "session",
+    sessionId: "session_id",
+    limit: 1,
+    order: "asc",
+    pageToken: "page_token",
+    startTimestamp: "start_timestamp",
+    endTimestamp: "end_timestamp"
+});
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.private.agents.private.searchSessions({
+    agentName: "agent_name",
+    createdBySubjectId: "created_by_subject_id",
+    createdBySubjectType: "user",
+    sessionType: "session",
+    sessionId: "session_id",
+    limit: 1,
+    order: "asc",
+    pageToken: "page_token",
+    startTimestamp: "start_timestamp",
+    endTimestamp: "end_timestamp"
+});
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `TrueFoundryGateway.private_.agents.SearchSessionsPrivateRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PrivateClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.private.agents.private.<a href="/src/api/resources/private/resources/agents/resources/private/client/Client.ts">downloadSandboxFile</a>(sandboxId, { ...params }) -> core.BinaryResponse</code></summary>
 <dl>
 <dd>
