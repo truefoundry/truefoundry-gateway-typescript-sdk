@@ -22,6 +22,20 @@ export class PrivateAgentSessionClient {
         this.client = new TrueFoundryGateway(options);
     }
 
+    // Wrap a raw session union member into its enriched wrapper, keyed off the `type` discriminant.
+    private wrapRawSession(
+        raw: TrueFoundryGatewayApi.Session | TrueFoundryGatewayApi.DraftSession,
+    ): AgentSession | AgentDraftSession {
+        switch (raw.type) {
+            case "session/draft":
+                return new AgentDraftSession(raw, this.client);
+            case "session":
+                return new AgentSession(raw, this.client);
+            default:
+                throw new Error(`Unknown session type`);
+        }
+    }
+
     /**
      * Create a draft session holding an inline agent spec, optionally linked to a saved agent.
      *
@@ -108,7 +122,7 @@ export class PrivateAgentSessionClient {
             response: page.response,
             rawResponse: page.rawResponse,
             hasNextPage: (response) => !!response?.pagination.nextPageToken,
-            getItems: (response) => (response?.data ?? []).map((raw) => this.wrapOwnedSession(raw)),
+            getItems: (response) => (response?.data ?? []).map((raw) => this.wrapRawSession(raw)),
             loadPage: (response) =>
                 core.HttpResponsePromise.fromPromise(
                     client.agents.private
@@ -121,18 +135,45 @@ export class PrivateAgentSessionClient {
         });
     }
 
-    // Wrap a raw owned-session union member into its enriched wrapper, keyed off the `type` discriminant.
-    private wrapOwnedSession(
-        raw: TrueFoundryGatewayApi.ListOwnedSessionsResponseDataItem,
-    ): AgentSession | AgentDraftSession {
-        switch (raw.type) {
-            case "session/draft":
-                return new AgentDraftSession(raw, this.client);
-            case "session":
-                return new AgentSession(raw, this.client);
-            default:
-                throw new Error(`Unknown owned session type`);
-        }
+    /**
+     * Search sessions visible to the caller across agents, spanning both saved sessions and drafts
+     * (newest first by default). Tenant admins see all tenant sessions; agent managers see sessions
+     * on agents they manage plus their own; other callers see only their own.
+     *
+     * @param request.agentName - Filter to sessions linked to this saved agent.
+     * @param request.createdBySubjectId - Filter to sessions created by this subject id.
+     * @param request.createdBySubjectType - Optional subject type used with createdBySubjectId.
+     * @param request.sessionType - Filter by session type. Omit to include both saved sessions and drafts.
+     * @param request.sessionId - Filter to a specific session id.
+     * @param request.limit - Page size. Default 10.
+     * @param request.order - Sort by creation time. Default `desc`.
+     * @param request.pageToken - Token from the previous response nextPageToken.
+     * @param request.startTimestamp - Inclusive lower bound on createdAt (ISO-8601).
+     * @param request.endTimestamp - Inclusive upper bound on createdAt (ISO-8601).
+     * @param requestOptions - Overrides client timeout, retries, abortSignal, headers, queryParams.
+     * @returns {core.Page<AgentSession | AgentDraftSession, TrueFoundryGatewayApi.SearchSessionsResponse>} Paginated matching sessions.
+     */
+    async searchSessions(
+        request: TrueFoundryGatewayApi.agents.private_.SearchSessionsPrivateRequest = {},
+        requestOptions?: PrivateAgentSessionClient.RequestOptions,
+    ): Promise<core.Page<AgentSession | AgentDraftSession, TrueFoundryGatewayApi.SearchSessionsResponse>> {
+        const client = this.client;
+        const page = await client.agents.private.searchSessions(request, requestOptions);
+        return new core.Page({
+            response: page.response,
+            rawResponse: page.rawResponse,
+            hasNextPage: (response) => !!response?.pagination.nextPageToken,
+            getItems: (response) => (response?.data ?? []).map((raw) => this.wrapRawSession(raw)),
+            loadPage: (response) =>
+                core.HttpResponsePromise.fromPromise(
+                    client.agents.private
+                        .searchSessions(
+                            { ...request, pageToken: response?.pagination.nextPageToken },
+                            requestOptions,
+                        )
+                        .then((nextPage) => ({ data: nextPage.response, rawResponse: nextPage.rawResponse })),
+                ),
+        });
     }
 
     /**
