@@ -67,7 +67,7 @@ export class PrivateAgentSessionClient {
      * @returns {core.Page<AgentDraftSession, TrueFoundryGatewayApi.ListDraftSessionsResponse>} Paginated draft sessions.
      */
     async listDraftSessions(
-        request: TrueFoundryGatewayApi.agents.private_.DraftSessionsListRequest = {},
+        request: TrueFoundryGatewayApi.agents.private_.ListDraftSessionsRequest = {},
         requestOptions?: PrivateAgentSessionClient.RequestOptions,
     ): Promise<core.Page<AgentDraftSession, TrueFoundryGatewayApi.ListDraftSessionsResponse>> {
         const client = this.client;
@@ -99,7 +99,7 @@ export class PrivateAgentSessionClient {
      * @returns {core.Page<AgentSession | AgentDraftSession, TrueFoundryGatewayApi.ListOwnedSessionsResponse>} Paginated owned sessions.
      */
     async listOwnedSessions(
-        request: TrueFoundryGatewayApi.agents.private_.PrivateListOwnedSessionsRequest = {},
+        request: TrueFoundryGatewayApi.agents.private_.ListOwnedSessionsPrivateRequest = {},
         requestOptions?: PrivateAgentSessionClient.RequestOptions,
     ): Promise<core.Page<AgentSession | AgentDraftSession, TrueFoundryGatewayApi.ListOwnedSessionsResponse>> {
         const client = this.client;
@@ -145,7 +145,7 @@ export class PrivateAgentSessionClient {
      */
     downloadSandboxFile(
         sandboxId: string,
-        request: TrueFoundryGatewayApi.agents.private_.PrivateDownloadSandboxFileRequest,
+        request: TrueFoundryGatewayApi.agents.private_.DownloadSandboxFilePrivateRequest,
         requestOptions?: PrivateAgentSessionClient.RequestOptions,
     ): core.HttpResponsePromise<core.BinaryResponse> {
         return this.client.agents.private.downloadSandboxFile(sandboxId, request, requestOptions);

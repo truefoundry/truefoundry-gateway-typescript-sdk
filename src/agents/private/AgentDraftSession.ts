@@ -22,9 +22,9 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
     /** Unique identifier of this draft session. */
     readonly id: string;
     /** Optional saved agent this draft is linked to. */
-    readonly agentName?: string;
+    readonly agentName?: string | null;
     /** Optional user-visible title for the draft session. */
-    readonly title?: string;
+    readonly title?: string | null;
     /** Subject that created this draft session. */
     readonly createdBySubject: TrueFoundryGatewayApi.Subject;
     /** ISO-8601 timestamp when the draft session was created. */
@@ -97,7 +97,7 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
      * @returns {core.Page<Turn, TrueFoundryGatewayApi.ListTurnsResponse>} Paginated turns.
      */
     listTurns(
-        request?: TrueFoundryGatewayApi.agents.SessionsListTurnsRequest,
+        request?: TrueFoundryGatewayApi.agents.ListTurnsSessionsRequest,
         requestOptions?: RequestOptions,
     ): Promise<core.Page<Turn, TrueFoundryGatewayApi.ListTurnsResponse>> {
         return this.#mixin.listTurns(this, request, requestOptions);
@@ -134,7 +134,7 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
      * @returns {Promise<core.Page<TrueFoundryGatewayApi.SessionEventItem, TrueFoundryGatewayApi.ListSessionEventsResponse>>} Paginated session events.
      */
     listEvents(
-        request?: TrueFoundryGatewayApi.agents.SessionsListEventsRequest,
+        request?: TrueFoundryGatewayApi.agents.ListEventsSessionsRequest,
         requestOptions?: RequestOptions,
     ): Promise<core.Page<TrueFoundryGatewayApi.SessionEventItem, TrueFoundryGatewayApi.ListSessionEventsResponse>> {
         return this.#mixin.listEvents(request, requestOptions);

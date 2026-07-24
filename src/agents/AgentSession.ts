@@ -22,7 +22,7 @@ export class AgentSession implements TrueFoundryGatewayApi.Session {
     /** Name of the agent for this session. */
     readonly agentName: string;
     /** Optional user-visible title for the session. */
-    readonly title?: string;
+    readonly title?: string | null;
     /** Subject that created this session. */
     readonly createdBySubject: TrueFoundryGatewayApi.Subject;
     /** ISO-8601 timestamp when the session was created. */
@@ -64,7 +64,7 @@ export class AgentSession implements TrueFoundryGatewayApi.Session {
      * @returns {core.Page<Turn, TrueFoundryGatewayApi.ListTurnsResponse>} Paginated turns.
      */
     listTurns(
-        opts?: TrueFoundryGatewayApi.agents.SessionsListTurnsRequest,
+        opts?: TrueFoundryGatewayApi.agents.ListTurnsSessionsRequest,
         requestOptions?: RequestOptions,
     ): Promise<core.Page<Turn, TrueFoundryGatewayApi.ListTurnsResponse>> {
         return this.#mixin.listTurns(this, opts, requestOptions);
@@ -101,7 +101,7 @@ export class AgentSession implements TrueFoundryGatewayApi.Session {
      * @returns {Promise<core.Page<TrueFoundryGatewayApi.SessionEventItem, TrueFoundryGatewayApi.ListSessionEventsResponse>>} Paginated session events.
      */
     listEvents(
-        opts?: TrueFoundryGatewayApi.agents.SessionsListEventsRequest,
+        opts?: TrueFoundryGatewayApi.agents.ListEventsSessionsRequest,
         requestOptions?: RequestOptions,
     ): Promise<core.Page<TrueFoundryGatewayApi.SessionEventItem, TrueFoundryGatewayApi.ListSessionEventsResponse>> {
         return this.#mixin.listEvents(opts, requestOptions);
