@@ -7,8 +7,6 @@
  *     }
  */
 export interface CreateSessionRequest {
-    /** Optional customer request metadata (x-tfy-metadata) persisted as request_metadata at session creation. */
-    tfyMetadata?: string;
     /** Name of an existing agent in the tenant. */
     agentName: string;
 }

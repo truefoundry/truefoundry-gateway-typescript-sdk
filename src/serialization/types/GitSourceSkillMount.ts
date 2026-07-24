@@ -4,9 +4,9 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 
-export const SkillMountGit: core.serialization.ObjectSchema<
-    serializers.SkillMountGit.Raw,
-    TrueFoundryGateway.SkillMountGit
+export const GitSourceSkillMount: core.serialization.ObjectSchema<
+    serializers.GitSourceSkillMount.Raw,
+    TrueFoundryGateway.GitSourceSkillMount
 > = core.serialization.object({
     type: core.serialization.stringLiteral("git"),
     url: core.serialization.string(),
@@ -15,7 +15,7 @@ export const SkillMountGit: core.serialization.ObjectSchema<
     ref: core.serialization.string(),
 });
 
-export declare namespace SkillMountGit {
+export declare namespace GitSourceSkillMount {
     export interface Raw {
         type: "git";
         url: string;

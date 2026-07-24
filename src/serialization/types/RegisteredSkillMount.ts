@@ -4,16 +4,16 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 
-export const SkillMountRegistry: core.serialization.ObjectSchema<
-    serializers.SkillMountRegistry.Raw,
-    TrueFoundryGateway.SkillMountRegistry
+export const RegisteredSkillMount: core.serialization.ObjectSchema<
+    serializers.RegisteredSkillMount.Raw,
+    TrueFoundryGateway.RegisteredSkillMount
 > = core.serialization.object({
     type: core.serialization.stringLiteral("truefoundry-skills-registry"),
     fqn: core.serialization.string(),
     preload: core.serialization.boolean().optional(),
 });
 
-export declare namespace SkillMountRegistry {
+export declare namespace RegisteredSkillMount {
     export interface Raw {
         type: "truefoundry-skills-registry";
         fqn: string;
