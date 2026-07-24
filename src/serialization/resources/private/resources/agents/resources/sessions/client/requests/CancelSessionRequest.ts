@@ -6,7 +6,7 @@ import type * as serializers from "../../../../../../../../index.js";
 
 export const CancelSessionRequest: core.serialization.Schema<
     serializers.private_.agents.CancelSessionRequest.Raw,
-    Omit<TrueFoundryGateway.private_.agents.CancelSessionRequest, "sessionId">
+    TrueFoundryGateway.private_.agents.CancelSessionRequest
 > = core.serialization.object({});
 
 export declare namespace CancelSessionRequest {

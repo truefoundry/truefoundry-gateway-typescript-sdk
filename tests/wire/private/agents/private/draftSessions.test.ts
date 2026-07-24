@@ -406,9 +406,7 @@ describe("DraftSessionsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.private.agents.private.draftSessions.get({
-            draftSessionId: "draftSessionId",
-        });
+        const response = await client.private.agents.private.draftSessions.get("draftSessionId");
         expect(response).toEqual({
             data: {
                 type: "session/draft",
@@ -470,9 +468,7 @@ describe("DraftSessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.draftSessions.get({
-                draftSessionId: "draftSessionId",
-            });
+            return await client.private.agents.private.draftSessions.get("draftSessionId");
         }).rejects.toThrow(TrueFoundryGatewayTypes.UnauthorizedError);
     });
 
@@ -491,9 +487,7 @@ describe("DraftSessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.draftSessions.get({
-                draftSessionId: "draftSessionId",
-            });
+            return await client.private.agents.private.draftSessions.get("draftSessionId");
         }).rejects.toThrow(TrueFoundryGatewayTypes.NotFoundError);
     });
 
@@ -535,9 +529,7 @@ describe("DraftSessionsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.private.agents.private.draftSessions.update({
-            draftSessionId: "draftSessionId",
-        });
+        const response = await client.private.agents.private.draftSessions.update("draftSessionId");
         expect(response).toEqual({
             data: {
                 type: "session/draft",
@@ -600,9 +592,7 @@ describe("DraftSessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.draftSessions.update({
-                draftSessionId: "draftSessionId",
-            });
+            return await client.private.agents.private.draftSessions.update("draftSessionId");
         }).rejects.toThrow(TrueFoundryGatewayTypes.BadRequestError);
     });
 
@@ -622,9 +612,7 @@ describe("DraftSessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.draftSessions.update({
-                draftSessionId: "draftSessionId",
-            });
+            return await client.private.agents.private.draftSessions.update("draftSessionId");
         }).rejects.toThrow(TrueFoundryGatewayTypes.UnauthorizedError);
     });
 
@@ -644,9 +632,7 @@ describe("DraftSessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.draftSessions.update({
-                draftSessionId: "draftSessionId",
-            });
+            return await client.private.agents.private.draftSessions.update("draftSessionId");
         }).rejects.toThrow(TrueFoundryGatewayTypes.NotFoundError);
     });
 
@@ -666,9 +652,7 @@ describe("DraftSessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.draftSessions.update({
-                draftSessionId: "draftSessionId",
-            });
+            return await client.private.agents.private.draftSessions.update("draftSessionId");
         }).rejects.toThrow(TrueFoundryGatewayTypes.UnprocessableEntityError);
     });
 });

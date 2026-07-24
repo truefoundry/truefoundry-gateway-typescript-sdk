@@ -333,7 +333,7 @@ export class DraftSessionsClient {
     /**
      * Get a draft session by id. Owner-only.
      *
-     * @param {TrueFoundryGateway.private_.agents.private_.GetDraftSessionsRequest} request
+     * @param {string} draftSessionId - Draft session identifier.
      * @param {DraftSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link TrueFoundryGateway.UnauthorizedError}
@@ -342,22 +342,19 @@ export class DraftSessionsClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.private.draftSessions.get({
-     *         draftSessionId: "draftSessionId"
-     *     })
+     *     await client.private.agents.private.draftSessions.get("draftSessionId")
      */
     public get(
-        request: TrueFoundryGateway.private_.agents.private_.GetDraftSessionsRequest,
+        draftSessionId: string,
         requestOptions?: DraftSessionsClient.RequestOptions,
     ): core.HttpResponsePromise<TrueFoundryGateway.GetDraftSessionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__get(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__get(draftSessionId, requestOptions));
     }
 
     private async __get(
-        request: TrueFoundryGateway.private_.agents.private_.GetDraftSessionsRequest,
+        draftSessionId: string,
         requestOptions?: DraftSessionsClient.RequestOptions,
     ): Promise<core.WithRawResponse<TrueFoundryGateway.GetDraftSessionResponse>> {
-        const { draftSessionId } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -436,6 +433,7 @@ export class DraftSessionsClient {
     /**
      * Update a draft session's inline spec. Owner-only. An empty body is a valid no-op that refreshes `updated_at`.
      *
+     * @param {string} draftSessionId - Draft session identifier.
      * @param {TrueFoundryGateway.private_.agents.private_.UpdateDraftSessionRequest} request
      * @param {DraftSessionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -447,22 +445,21 @@ export class DraftSessionsClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.private.draftSessions.update({
-     *         draftSessionId: "draftSessionId"
-     *     })
+     *     await client.private.agents.private.draftSessions.update("draftSessionId")
      */
     public update(
-        request: TrueFoundryGateway.private_.agents.private_.UpdateDraftSessionRequest,
+        draftSessionId: string,
+        request: TrueFoundryGateway.private_.agents.private_.UpdateDraftSessionRequest = {},
         requestOptions?: DraftSessionsClient.RequestOptions,
     ): core.HttpResponsePromise<TrueFoundryGateway.GetDraftSessionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__update(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__update(draftSessionId, request, requestOptions));
     }
 
     private async __update(
-        request: TrueFoundryGateway.private_.agents.private_.UpdateDraftSessionRequest,
+        draftSessionId: string,
+        request: TrueFoundryGateway.private_.agents.private_.UpdateDraftSessionRequest = {},
         requestOptions?: DraftSessionsClient.RequestOptions,
     ): Promise<core.WithRawResponse<TrueFoundryGateway.GetDraftSessionResponse>> {
-        const { draftSessionId, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -481,7 +478,7 @@ export class DraftSessionsClient {
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: mergeAdditionalBodyParameters(
-                serializers.private_.agents.private_.UpdateDraftSessionRequest.jsonOrThrow(_body, {
+                serializers.private_.agents.private_.UpdateDraftSessionRequest.jsonOrThrow(request, {
                     unrecognizedObjectKeys: "passthrough",
                     allowUnrecognizedUnionMembers: true,
                     allowUnrecognizedEnumValues: true,

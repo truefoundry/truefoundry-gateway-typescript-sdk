@@ -144,7 +144,7 @@ await client.private.agents.sessions.create({
 </dl>
 </details>
 
-<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">get</a>({ ...params }) -> TrueFoundryGateway.GetSessionResponse</code></summary>
+<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">get</a>(sessionId) -> TrueFoundryGateway.GetSessionResponse</code></summary>
 <dl>
 <dd>
 
@@ -171,9 +171,7 @@ Get a session by id. Visible to the session owner or a manager of the session ag
 <dd>
 
 ```typescript
-await client.private.agents.sessions.get({
-    sessionId: "sessionId"
-});
+await client.private.agents.sessions.get("sessionId");
 
 ```
 </dd>
@@ -189,7 +187,7 @@ await client.private.agents.sessions.get({
 <dl>
 <dd>
 
-**request:** `TrueFoundryGateway.private_.agents.GetSessionsRequest` 
+**sessionId:** `string` — Session identifier.
     
 </dd>
 </dl>
@@ -209,7 +207,7 @@ await client.private.agents.sessions.get({
 </dl>
 </details>
 
-<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">cancel</a>({ ...params }) -> TrueFoundryGateway.CancelSessionResponse</code></summary>
+<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">cancel</a>(sessionId, { ...params }) -> TrueFoundryGateway.CancelSessionResponse</code></summary>
 <dl>
 <dd>
 
@@ -236,9 +234,7 @@ Cancel the running last turn for a session.
 <dd>
 
 ```typescript
-await client.private.agents.sessions.cancel({
-    sessionId: "01arz3ndektsv4rrffq69g5fav.g"
-});
+await client.private.agents.sessions.cancel("01arz3ndektsv4rrffq69g5fav.g");
 
 ```
 </dd>
@@ -250,6 +246,14 @@ await client.private.agents.sessions.cancel({
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**sessionId:** `string` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -274,7 +278,7 @@ await client.private.agents.sessions.cancel({
 </dl>
 </details>
 
-<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">listTurns</a>({ ...params }) -> core.Page&lt;TrueFoundryGateway.Turn, TrueFoundryGateway.ListTurnsResponse&gt;</code></summary>
+<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">listTurns</a>(sessionId, { ...params }) -> core.Page&lt;TrueFoundryGateway.Turn, TrueFoundryGateway.ListTurnsResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -301,17 +305,13 @@ List turns for a session (newest first). Pagination walks the ancestor chain fro
 <dd>
 
 ```typescript
-const pageableResponse = await client.private.agents.sessions.listTurns({
-    sessionId: "01arz3ndektsv4rrffq69g5fav.g"
-});
+const pageableResponse = await client.private.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g");
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.private.agents.sessions.listTurns({
-    sessionId: "01arz3ndektsv4rrffq69g5fav.g"
-});
+let page = await client.private.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g");
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
@@ -329,6 +329,14 @@ const response = page.response;
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**sessionId:** `string` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -353,7 +361,7 @@ const response = page.response;
 </dl>
 </details>
 
-<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">createTurn</a>({ ...params }) -> core.Stream&lt;TrueFoundryGateway.TurnStreamingEvent&gt;</code></summary>
+<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">createTurn</a>(sessionId, { ...params }) -> core.Stream&lt;TrueFoundryGateway.TurnStreamingEvent&gt;</code></summary>
 <dl>
 <dd>
 
@@ -381,9 +389,7 @@ Use `previous_turn_id` to chain to the session's last turn (defaults to `auto`).
 <dd>
 
 ```typescript
-const response = await client.private.agents.sessions.createTurn({
-    sessionId: "01arz3ndektsv4rrffq69g5fav.g"
-});
+const response = await client.private.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
 for await (const item of response) {
     console.log(item);
 }
@@ -398,6 +404,14 @@ for await (const item of response) {
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**sessionId:** `string` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -422,7 +436,7 @@ for await (const item of response) {
 </dl>
 </details>
 
-<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">getTurn</a>({ ...params }) -> TrueFoundryGateway.GetTurnResponse</code></summary>
+<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">getTurn</a>(sessionId, turnId) -> TrueFoundryGateway.GetTurnResponse</code></summary>
 <dl>
 <dd>
 
@@ -449,10 +463,7 @@ Get a single turn by ID from Redis.
 <dd>
 
 ```typescript
-await client.private.agents.sessions.getTurn({
-    sessionId: "01arz3ndektsv4rrffq69g5fav.g",
-    turnId: "01arz3ndektsv4rrffq69g5fav.g.ab12cd"
-});
+await client.private.agents.sessions.getTurn("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd");
 
 ```
 </dd>
@@ -468,7 +479,15 @@ await client.private.agents.sessions.getTurn({
 <dl>
 <dd>
 
-**request:** `TrueFoundryGateway.private_.agents.GetTurnSessionsRequest` 
+**sessionId:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**turnId:** `string` 
     
 </dd>
 </dl>
@@ -488,7 +507,7 @@ await client.private.agents.sessions.getTurn({
 </dl>
 </details>
 
-<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">subscribeToTurn</a>({ ...params }) -> core.Stream&lt;TrueFoundryGateway.TurnStreamingEvent&gt;</code></summary>
+<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">subscribeToTurn</a>(sessionId, turnId, { ...params }) -> core.Stream&lt;TrueFoundryGateway.TurnStreamingEvent&gt;</code></summary>
 <dl>
 <dd>
 
@@ -515,10 +534,7 @@ Subscribe to the live SSE stream for a turn. Pass after_sequence_number to resum
 <dd>
 
 ```typescript
-const response = await client.private.agents.sessions.subscribeToTurn({
-    sessionId: "01arz3ndektsv4rrffq69g5fav.g",
-    turnId: "01arz3ndektsv4rrffq69g5fav.g.ab12cd"
-});
+const response = await client.private.agents.sessions.subscribeToTurn("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd");
 for await (const item of response) {
     console.log(item);
 }
@@ -533,6 +549,22 @@ for await (const item of response) {
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**sessionId:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**turnId:** `string` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -557,7 +589,7 @@ for await (const item of response) {
 </dl>
 </details>
 
-<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">listTurnEvents</a>({ ...params }) -> core.Page&lt;TrueFoundryGateway.TurnEvent, TrueFoundryGateway.ListEventsResponse&gt;</code></summary>
+<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">listTurnEvents</a>(sessionId, turnId, { ...params }) -> core.Page&lt;TrueFoundryGateway.TurnEvent, TrueFoundryGateway.ListEventsResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -584,19 +616,13 @@ Paginated list of content turn events from the Redis events stream (model.messag
 <dd>
 
 ```typescript
-const pageableResponse = await client.private.agents.sessions.listTurnEvents({
-    sessionId: "01arz3ndektsv4rrffq69g5fav.g",
-    turnId: "01arz3ndektsv4rrffq69g5fav.g.ab12cd"
-});
+const pageableResponse = await client.private.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd");
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.private.agents.sessions.listTurnEvents({
-    sessionId: "01arz3ndektsv4rrffq69g5fav.g",
-    turnId: "01arz3ndektsv4rrffq69g5fav.g.ab12cd"
-});
+let page = await client.private.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd");
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
@@ -614,6 +640,22 @@ const response = page.response;
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**sessionId:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**turnId:** `string` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -638,7 +680,7 @@ const response = page.response;
 </dl>
 </details>
 
-<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">listEvents</a>({ ...params }) -> core.Page&lt;TrueFoundryGateway.SessionEventItem, TrueFoundryGateway.ListSessionEventsResponse&gt;</code></summary>
+<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">listEvents</a>(sessionId, { ...params }) -> core.Page&lt;TrueFoundryGateway.SessionEventItem, TrueFoundryGateway.ListSessionEventsResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -665,17 +707,13 @@ List session events as `{ turn_id, event }` across a turn hierarchy (newest firs
 <dd>
 
 ```typescript
-const pageableResponse = await client.private.agents.sessions.listEvents({
-    sessionId: "01arz3ndektsv4rrffq69g5fav.g"
-});
+const pageableResponse = await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g");
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.private.agents.sessions.listEvents({
-    sessionId: "01arz3ndektsv4rrffq69g5fav.g"
-});
+let page = await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g");
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
@@ -693,6 +731,14 @@ const response = page.response;
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**sessionId:** `string` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -793,7 +839,7 @@ const response = page.response;
 </dl>
 </details>
 
-<details><summary><code>client.private.agents.private.<a href="/src/api/resources/private/resources/agents/resources/private/client/Client.ts">downloadSandboxFile</a>({ ...params }) -> core.BinaryResponse</code></summary>
+<details><summary><code>client.private.agents.private.<a href="/src/api/resources/private/resources/agents/resources/private/client/Client.ts">downloadSandboxFile</a>(sandboxId, { ...params }) -> core.BinaryResponse</code></summary>
 <dl>
 <dd>
 
@@ -820,8 +866,7 @@ Download a file produced by an agent inside a sandbox.
 <dd>
 
 ```typescript
-await client.private.agents.private.downloadSandboxFile({
-    sandboxId: "sandboxId",
+await client.private.agents.private.downloadSandboxFile("sandboxId", {
     path: "x"
 });
 
@@ -835,6 +880,14 @@ await client.private.agents.private.downloadSandboxFile({
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**sandboxId:** `string` — The sandbox containing the file.
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -1004,7 +1057,7 @@ await client.private.agents.private.draftSessions.create({
 </dl>
 </details>
 
-<details><summary><code>client.private.agents.private.draftSessions.<a href="/src/api/resources/private/resources/agents/resources/private/resources/draftSessions/client/Client.ts">get</a>({ ...params }) -> TrueFoundryGateway.GetDraftSessionResponse</code></summary>
+<details><summary><code>client.private.agents.private.draftSessions.<a href="/src/api/resources/private/resources/agents/resources/private/resources/draftSessions/client/Client.ts">get</a>(draftSessionId) -> TrueFoundryGateway.GetDraftSessionResponse</code></summary>
 <dl>
 <dd>
 
@@ -1031,9 +1084,7 @@ Get a draft session by id. Owner-only.
 <dd>
 
 ```typescript
-await client.private.agents.private.draftSessions.get({
-    draftSessionId: "draftSessionId"
-});
+await client.private.agents.private.draftSessions.get("draftSessionId");
 
 ```
 </dd>
@@ -1049,7 +1100,7 @@ await client.private.agents.private.draftSessions.get({
 <dl>
 <dd>
 
-**request:** `TrueFoundryGateway.private_.agents.private_.GetDraftSessionsRequest` 
+**draftSessionId:** `string` — Draft session identifier.
     
 </dd>
 </dl>
@@ -1069,7 +1120,7 @@ await client.private.agents.private.draftSessions.get({
 </dl>
 </details>
 
-<details><summary><code>client.private.agents.private.draftSessions.<a href="/src/api/resources/private/resources/agents/resources/private/resources/draftSessions/client/Client.ts">update</a>({ ...params }) -> TrueFoundryGateway.GetDraftSessionResponse</code></summary>
+<details><summary><code>client.private.agents.private.draftSessions.<a href="/src/api/resources/private/resources/agents/resources/private/resources/draftSessions/client/Client.ts">update</a>(draftSessionId, { ...params }) -> TrueFoundryGateway.GetDraftSessionResponse</code></summary>
 <dl>
 <dd>
 
@@ -1096,9 +1147,7 @@ Update a draft session's inline spec. Owner-only. An empty body is a valid no-op
 <dd>
 
 ```typescript
-await client.private.agents.private.draftSessions.update({
-    draftSessionId: "draftSessionId"
-});
+await client.private.agents.private.draftSessions.update("draftSessionId");
 
 ```
 </dd>
@@ -1110,6 +1159,14 @@ await client.private.agents.private.draftSessions.update({
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**draftSessionId:** `string` — Draft session identifier.
+    
+</dd>
+</dl>
 
 <dl>
 <dd>

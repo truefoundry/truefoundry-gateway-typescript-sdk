@@ -8,7 +8,7 @@ import { TurnInputItem } from "../../../../../../../../types/TurnInputItem.js";
 
 export const CreateTurnRequest: core.serialization.Schema<
     serializers.private_.agents.CreateTurnRequest.Raw,
-    Omit<TrueFoundryGateway.private_.agents.CreateTurnRequest, "sessionId">
+    TrueFoundryGateway.private_.agents.CreateTurnRequest
 > = core.serialization.object({
     input: core.serialization.list(TurnInputItem).optional(),
     previousTurnId: core.serialization.property("previous_turn_id", PreviousTurnIdInput.optionalNullable()),

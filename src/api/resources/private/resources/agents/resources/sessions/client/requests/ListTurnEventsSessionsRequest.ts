@@ -4,14 +4,9 @@ import type * as TrueFoundryGateway from "../../../../../../../../index.js";
 
 /**
  * @example
- *     {
- *         sessionId: "01arz3ndektsv4rrffq69g5fav.g",
- *         turnId: "01arz3ndektsv4rrffq69g5fav.g.ab12cd"
- *     }
+ *     {}
  */
 export interface ListTurnEventsSessionsRequest {
-    sessionId: string;
-    turnId: string;
     pageToken?: string;
     /** Page size. Defaults to 25, max 25. */
     limit?: number;

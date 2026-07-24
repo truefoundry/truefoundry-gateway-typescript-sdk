@@ -204,17 +204,19 @@ export class PrivateClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      */
     public downloadSandboxFile(
+        sandboxId: string,
         request: TrueFoundryGateway.private_.agents.DownloadSandboxFilePrivateRequest,
         requestOptions?: PrivateClient.RequestOptions,
     ): core.HttpResponsePromise<core.BinaryResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__downloadSandboxFile(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__downloadSandboxFile(sandboxId, request, requestOptions));
     }
 
     private async __downloadSandboxFile(
+        sandboxId: string,
         request: TrueFoundryGateway.private_.agents.DownloadSandboxFilePrivateRequest,
         requestOptions?: PrivateClient.RequestOptions,
     ): Promise<core.WithRawResponse<core.BinaryResponse>> {
-        const { sandboxId, path } = request;
+        const { path } = request;
         const _queryParams: Record<string, unknown> = {
             path,
         };

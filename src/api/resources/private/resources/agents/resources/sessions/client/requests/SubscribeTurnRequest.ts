@@ -2,13 +2,8 @@
 
 /**
  * @example
- *     {
- *         sessionId: "01arz3ndektsv4rrffq69g5fav.g",
- *         turnId: "01arz3ndektsv4rrffq69g5fav.g.ab12cd"
- *     }
+ *     {}
  */
 export interface SubscribeTurnRequest {
-    sessionId: string;
-    turnId: string;
     afterSequenceNumber?: number;
 }

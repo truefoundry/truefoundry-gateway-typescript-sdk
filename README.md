@@ -96,9 +96,7 @@ Instantiate and use the client with the following:
 import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
 const client = new TrueFoundryGateway({ baseUrl: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
-const response = await client.private.agents.sessions.createTurn({
-    sessionId: "01arz3ndektsv4rrffq69g5fav.g"
-});
+const response = await client.private.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
 for await (const item of response) {
     console.log(item);
 }
@@ -161,9 +159,7 @@ The SDK uses async iterators, so you can consume the responses using a `for awai
 import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
 const client = new TrueFoundryGateway({ baseUrl: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
-const response = await client.private.agents.sessions.createTurn({
-    sessionId: "01arz3ndektsv4rrffq69g5fav.g"
-});
+const response = await client.private.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
 for await (const item of response) {
     console.log(item);
 }

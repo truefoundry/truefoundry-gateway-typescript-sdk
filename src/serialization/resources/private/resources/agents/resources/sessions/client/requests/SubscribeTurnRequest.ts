@@ -6,7 +6,7 @@ import type * as serializers from "../../../../../../../../index.js";
 
 export const SubscribeTurnRequest: core.serialization.Schema<
     serializers.private_.agents.SubscribeTurnRequest.Raw,
-    Omit<TrueFoundryGateway.private_.agents.SubscribeTurnRequest, "sessionId" | "turnId">
+    TrueFoundryGateway.private_.agents.SubscribeTurnRequest
 > = core.serialization.object({
     afterSequenceNumber: core.serialization.property("after_sequence_number", core.serialization.number().optional()),
 });

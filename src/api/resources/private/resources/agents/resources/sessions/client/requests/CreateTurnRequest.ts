@@ -4,12 +4,9 @@ import type * as TrueFoundryGateway from "../../../../../../../../index.js";
 
 /**
  * @example
- *     {
- *         sessionId: "01arz3ndektsv4rrffq69g5fav.g"
- *     }
+ *     {}
  */
 export interface CreateTurnRequest {
-    sessionId: string;
     input?: TrueFoundryGateway.TurnInputItem[];
     previousTurnId?: TrueFoundryGateway.PreviousTurnIdInput | null;
 }
