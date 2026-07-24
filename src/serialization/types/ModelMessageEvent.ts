@@ -12,9 +12,9 @@ export const ModelMessageEvent: core.serialization.ObjectSchema<
     serializers.ModelMessageEvent.Raw,
     TrueFoundryGateway.ModelMessageEvent
 > = core.serialization.object({
-    content: ModelMessageEventContent.optional(),
+    content: ModelMessageEventContent.optionalNullable(),
     name: core.serialization.string().optional(),
-    refusal: core.serialization.string().optional(),
+    refusal: core.serialization.string().optionalNullable(),
     reasoningContent: core.serialization.property("reasoning_content", core.serialization.string().optional()),
     toolCalls: core.serialization.property("tool_calls", core.serialization.list(ToolCall).optional()),
     type: core.serialization.stringLiteral("model.message"),
@@ -27,9 +27,9 @@ export const ModelMessageEvent: core.serialization.ObjectSchema<
 
 export declare namespace ModelMessageEvent {
     export interface Raw {
-        content?: ModelMessageEventContent.Raw | null;
+        content?: (ModelMessageEventContent.Raw | null | undefined) | null;
         name?: string | null;
-        refusal?: string | null;
+        refusal?: (string | null | undefined) | null;
         reasoning_content?: string | null;
         tool_calls?: ToolCall.Raw[] | null;
         type: "model.message";

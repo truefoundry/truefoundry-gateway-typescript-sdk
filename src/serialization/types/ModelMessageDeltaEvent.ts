@@ -11,8 +11,8 @@ export const ModelMessageDeltaEvent: core.serialization.ObjectSchema<
     serializers.ModelMessageDeltaEvent.Raw,
     TrueFoundryGateway.ModelMessageDeltaEvent
 > = core.serialization.object({
-    content: core.serialization.string().optional(),
-    refusal: core.serialization.string().optional(),
+    content: core.serialization.string().optionalNullable(),
+    refusal: core.serialization.string().optionalNullable(),
     toolCalls: core.serialization.property(
         "tool_calls",
         core.serialization.list(ExtendedChunkDeltaToolCall).optional(),
@@ -28,8 +28,8 @@ export const ModelMessageDeltaEvent: core.serialization.ObjectSchema<
 
 export declare namespace ModelMessageDeltaEvent {
     export interface Raw {
-        content?: string | null;
-        refusal?: string | null;
+        content?: (string | null | undefined) | null;
+        refusal?: (string | null | undefined) | null;
         tool_calls?: ExtendedChunkDeltaToolCall.Raw[] | null;
         reasoning_content?: string | null;
         type: "model.message.delta";

@@ -14,12 +14,12 @@ export const TurnCreatedEvent: core.serialization.ObjectSchema<
     type: core.serialization.stringLiteral("turn.created"),
     id: core.serialization.string(),
     turnId: core.serialization.property("turn_id", core.serialization.string()),
-    previousTurnId: core.serialization.property("previous_turn_id", core.serialization.string().optional()),
+    previousTurnId: core.serialization.property("previous_turn_id", core.serialization.string().nullable()),
     input: core.serialization.list(TurnInputItem).optional(),
     state: TurnStateRunning,
     createdBy: core.serialization.property("created_by", Subject),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
-    threadId: core.serialization.property("thread_id", core.serialization.string().optional()),
+    threadId: core.serialization.property("thread_id", core.serialization.string().nullable()),
 });
 
 export declare namespace TurnCreatedEvent {

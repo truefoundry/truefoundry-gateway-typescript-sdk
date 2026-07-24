@@ -4,5 +4,5 @@ export interface ResponseFormatJsonSchemaJsonSchema {
     name: string;
     description?: string;
     schema?: Record<string, unknown>;
-    strict?: boolean;
+    strict?: boolean | null;
 }
