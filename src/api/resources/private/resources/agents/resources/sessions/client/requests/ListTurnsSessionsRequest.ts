@@ -2,10 +2,13 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         pageToken: "page_token",
+ *         limit: 1
+ *     }
  */
 export interface ListTurnsSessionsRequest {
-    pageToken?: string;
+    pageToken?: string | null;
     /** Page size. Defaults to 10, max 25. */
-    limit?: number;
+    limit?: number | null;
 }

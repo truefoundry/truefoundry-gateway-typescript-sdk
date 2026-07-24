@@ -64,7 +64,14 @@ describe("DraftSessionsClient", () => {
                 limit: 1,
             },
         };
-        const page = await client.private.agents.private.draftSessions.list();
+        const page = await client.private.agents.private.draftSessions.list({
+            agentName: "agent_name",
+            limit: 1,
+            order: "asc",
+            pageToken: "page_token",
+            startTimestamp: "start_timestamp",
+            endTimestamp: "end_timestamp",
+        });
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);

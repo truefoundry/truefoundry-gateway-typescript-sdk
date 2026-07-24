@@ -4,12 +4,16 @@ import type * as TrueFoundryGateway from "../../../../../../../../index.js";
 
 /**
  * @example
- *     {}
+ *     {
+ *         pageToken: "page_token",
+ *         limit: 1,
+ *         order: "asc"
+ *     }
  */
 export interface ListTurnEventsSessionsRequest {
-    pageToken?: string;
+    pageToken?: string | null;
     /** Page size. Defaults to 25, max 25. */
-    limit?: number;
+    limit?: number | null;
     /** Sort events by creation time. Defaults to "asc". */
-    order?: TrueFoundryGateway.ListEventsOrder;
+    order?: TrueFoundryGateway.ListEventsOrder | null;
 }

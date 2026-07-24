@@ -563,7 +563,12 @@ import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
 const client = new TrueFoundryGateway({ baseUrl: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
 const pageableResponse = await client.private.agents.sessions.list({
-    agentName: "agent_name"
+    agentName: "agent_name",
+    limit: 1,
+    order: "asc",
+    pageToken: "page_token",
+    startTimestamp: "start_timestamp",
+    endTimestamp: "end_timestamp"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -571,7 +576,12 @@ for await (const item of pageableResponse) {
 
 // Or you can manually iterate page-by-page
 let page = await client.private.agents.sessions.list({
-    agentName: "agent_name"
+    agentName: "agent_name",
+    limit: 1,
+    order: "asc",
+    pageToken: "page_token",
+    startTimestamp: "start_timestamp",
+    endTimestamp: "end_timestamp"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();

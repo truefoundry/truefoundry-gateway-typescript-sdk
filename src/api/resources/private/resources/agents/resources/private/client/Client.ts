@@ -45,7 +45,14 @@ export class PrivateClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.private.listOwnedSessions()
+     *     await client.private.agents.private.listOwnedSessions({
+     *         agentName: "agent_name",
+     *         limit: 1,
+     *         order: "asc",
+     *         pageToken: "page_token",
+     *         startTimestamp: "start_timestamp",
+     *         endTimestamp: "end_timestamp"
+     *     })
      */
     public async listOwnedSessions(
         request: TrueFoundryGateway.private_.agents.ListOwnedSessionsPrivateRequest = {},
@@ -62,7 +69,7 @@ export class PrivateClient {
                     agent_name: agentName,
                     limit,
                     order:
-                        order != null
+                        order !== undefined
                             ? serializers.ListOwnedSessionsOrder.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,

@@ -40,7 +40,14 @@ export class DraftSessionsClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.private.draftSessions.list()
+     *     await client.private.agents.private.draftSessions.list({
+     *         agentName: "agent_name",
+     *         limit: 1,
+     *         order: "asc",
+     *         pageToken: "page_token",
+     *         startTimestamp: "start_timestamp",
+     *         endTimestamp: "end_timestamp"
+     *     })
      */
     public async list(
         request: TrueFoundryGateway.private_.agents.private_.ListDraftSessionsRequest = {},
@@ -55,7 +62,7 @@ export class DraftSessionsClient {
                     agent_name: agentName,
                     limit,
                     order:
-                        order != null
+                        order !== undefined
                             ? serializers.ListDraftSessionsOrder.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,

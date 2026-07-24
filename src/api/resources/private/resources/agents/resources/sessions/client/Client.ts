@@ -42,7 +42,12 @@ export class SessionsClient {
      *
      * @example
      *     await client.private.agents.sessions.list({
-     *         agentName: "agent_name"
+     *         agentName: "agent_name",
+     *         limit: 1,
+     *         order: "asc",
+     *         pageToken: "page_token",
+     *         startTimestamp: "start_timestamp",
+     *         endTimestamp: "end_timestamp"
      *     })
      */
     public async list(
@@ -58,7 +63,7 @@ export class SessionsClient {
                     agent_name: agentName,
                     limit,
                     order:
-                        order != null
+                        order !== undefined
                             ? serializers.ListSessionsOrder.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,
@@ -599,7 +604,10 @@ export class SessionsClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g")
+     *     await client.private.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g", {
+     *         pageToken: "page_token",
+     *         limit: 1
+     *     })
      */
     public async listTurns(
         sessionId: string,
@@ -1150,7 +1158,11 @@ export class SessionsClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd")
+     *     await client.private.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
+     *         pageToken: "page_token",
+     *         limit: 1,
+     *         order: "asc"
+     *     })
      */
     public async listTurnEvents(
         sessionId: string,
@@ -1167,7 +1179,7 @@ export class SessionsClient {
                     page_token: pageToken,
                     limit,
                     order:
-                        order != null
+                        order !== undefined
                             ? serializers.ListEventsOrder.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,
@@ -1303,7 +1315,11 @@ export class SessionsClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g")
+     *     await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g", {
+     *         pageToken: "page_token",
+     *         lastTurnId: "last_turn_id",
+     *         limit: 1
+     *     })
      */
     public async listEvents(
         sessionId: string,

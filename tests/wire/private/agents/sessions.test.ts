@@ -60,6 +60,11 @@ describe("SessionsClient", () => {
         };
         const page = await client.private.agents.sessions.list({
             agentName: "agent_name",
+            limit: 1,
+            order: "asc",
+            pageToken: "page_token",
+            startTimestamp: "start_timestamp",
+            endTimestamp: "end_timestamp",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -596,7 +601,10 @@ describe("SessionsClient", () => {
                 limit: 1,
             },
         };
-        const page = await client.private.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g");
+        const page = await client.private.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g", {
+            pageToken: "page_token",
+            limit: 1,
+        });
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
@@ -1148,6 +1156,11 @@ describe("SessionsClient", () => {
         const page = await client.private.agents.sessions.listTurnEvents(
             "01arz3ndektsv4rrffq69g5fav.g",
             "01arz3ndektsv4rrffq69g5fav.g.ab12cd",
+            {
+                pageToken: "page_token",
+                limit: 1,
+                order: "asc",
+            },
         );
 
         expect(expected.data).toEqual(page.data);
@@ -1291,7 +1304,11 @@ describe("SessionsClient", () => {
                 limit: 1,
             },
         };
-        const page = await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g");
+        const page = await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g", {
+            pageToken: "page_token",
+            lastTurnId: "last_turn_id",
+            limit: 1,
+        });
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
