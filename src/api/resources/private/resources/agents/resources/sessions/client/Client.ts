@@ -42,12 +42,7 @@ export class SessionsClient {
      *
      * @example
      *     await client.private.agents.sessions.list({
-     *         agentName: "agent_name",
-     *         limit: 1,
-     *         order: "asc",
-     *         pageToken: "page_token",
-     *         startTimestamp: "start_timestamp",
-     *         endTimestamp: "end_timestamp"
+     *         agentName: "agent_name"
      *     })
      */
     public async list(
@@ -63,7 +58,7 @@ export class SessionsClient {
                     agent_name: agentName,
                     limit,
                     order:
-                        order !== undefined
+                        order != null
                             ? serializers.ListSessionsOrder.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,
@@ -602,14 +597,11 @@ export class SessionsClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g", {
-     *         pageToken: "page_token",
-     *         limit: 1
-     *     })
+     *     await client.private.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g")
      */
     public async listTurns(
         sessionId: string,
-        request: TrueFoundryGateway.private_.agents.ListTurnsSessionsRequest,
+        request: TrueFoundryGateway.private_.agents.ListTurnsSessionsRequest = {},
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.Page<TrueFoundryGateway.Turn, TrueFoundryGateway.ListTurnsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
@@ -1156,16 +1148,12 @@ export class SessionsClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
-     *         pageToken: "page_token",
-     *         limit: 1,
-     *         order: "asc"
-     *     })
+     *     await client.private.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd")
      */
     public async listTurnEvents(
         sessionId: string,
         turnId: string,
-        request: TrueFoundryGateway.private_.agents.ListTurnEventsSessionsRequest,
+        request: TrueFoundryGateway.private_.agents.ListTurnEventsSessionsRequest = {},
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.Page<TrueFoundryGateway.TurnEvent, TrueFoundryGateway.ListEventsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
@@ -1177,7 +1165,7 @@ export class SessionsClient {
                     page_token: pageToken,
                     limit,
                     order:
-                        order !== undefined
+                        order != null
                             ? serializers.ListEventsOrder.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,
@@ -1313,15 +1301,11 @@ export class SessionsClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g", {
-     *         pageToken: "page_token",
-     *         lastTurnId: "last_turn_id",
-     *         limit: 1
-     *     })
+     *     await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g")
      */
     public async listEvents(
         sessionId: string,
-        request: TrueFoundryGateway.private_.agents.ListEventsSessionsRequest,
+        request: TrueFoundryGateway.private_.agents.ListEventsSessionsRequest = {},
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.Page<TrueFoundryGateway.SessionEventItem, TrueFoundryGateway.ListSessionEventsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(

@@ -58,14 +58,7 @@ describe("PrivateClient", () => {
                 limit: 1,
             },
         };
-        const page = await client.private.agents.private.listOwnedSessions({
-            agentName: "agent_name",
-            limit: 1,
-            order: "asc",
-            pageToken: "page_token",
-            startTimestamp: "start_timestamp",
-            endTimestamp: "end_timestamp",
-        });
+        const page = await client.private.agents.private.listOwnedSessions();
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
@@ -88,14 +81,7 @@ describe("PrivateClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.listOwnedSessions({
-                agentName: null,
-                limit: null,
-                order: null,
-                pageToken: null,
-                startTimestamp: null,
-                endTimestamp: null,
-            });
+            return await client.private.agents.private.listOwnedSessions();
         }).rejects.toThrow(TrueFoundryGatewayTypes.BadRequestError);
     });
 
@@ -114,14 +100,7 @@ describe("PrivateClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.listOwnedSessions({
-                agentName: null,
-                limit: null,
-                order: null,
-                pageToken: null,
-                startTimestamp: null,
-                endTimestamp: null,
-            });
+            return await client.private.agents.private.listOwnedSessions();
         }).rejects.toThrow(TrueFoundryGatewayTypes.UnauthorizedError);
     });
 
@@ -140,14 +119,7 @@ describe("PrivateClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.listOwnedSessions({
-                agentName: null,
-                limit: null,
-                order: null,
-                pageToken: null,
-                startTimestamp: null,
-                endTimestamp: null,
-            });
+            return await client.private.agents.private.listOwnedSessions();
         }).rejects.toThrow(TrueFoundryGatewayTypes.NotFoundError);
     });
 
@@ -166,14 +138,7 @@ describe("PrivateClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.listOwnedSessions({
-                agentName: null,
-                limit: null,
-                order: null,
-                pageToken: null,
-                startTimestamp: null,
-                endTimestamp: null,
-            });
+            return await client.private.agents.private.listOwnedSessions();
         }).rejects.toThrow(TrueFoundryGatewayTypes.UnprocessableEntityError);
     });
 
@@ -230,18 +195,7 @@ describe("PrivateClient", () => {
                 limit: 1,
             },
         };
-        const page = await client.private.agents.private.searchSessions({
-            agentName: "agent_name",
-            createdBySubjectId: "created_by_subject_id",
-            createdBySubjectType: "user",
-            sessionType: "session",
-            sessionId: "session_id",
-            limit: 1,
-            order: "asc",
-            pageToken: "page_token",
-            startTimestamp: "start_timestamp",
-            endTimestamp: "end_timestamp",
-        });
+        const page = await client.private.agents.private.searchSessions();
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
@@ -264,18 +218,7 @@ describe("PrivateClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.searchSessions({
-                agentName: null,
-                createdBySubjectId: null,
-                createdBySubjectType: null,
-                sessionType: null,
-                sessionId: null,
-                limit: null,
-                order: null,
-                pageToken: null,
-                startTimestamp: null,
-                endTimestamp: null,
-            });
+            return await client.private.agents.private.searchSessions();
         }).rejects.toThrow(TrueFoundryGatewayTypes.BadRequestError);
     });
 
@@ -294,18 +237,7 @@ describe("PrivateClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.searchSessions({
-                agentName: null,
-                createdBySubjectId: null,
-                createdBySubjectType: null,
-                sessionType: null,
-                sessionId: null,
-                limit: null,
-                order: null,
-                pageToken: null,
-                startTimestamp: null,
-                endTimestamp: null,
-            });
+            return await client.private.agents.private.searchSessions();
         }).rejects.toThrow(TrueFoundryGatewayTypes.UnauthorizedError);
     });
 
@@ -324,18 +256,7 @@ describe("PrivateClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.searchSessions({
-                agentName: null,
-                createdBySubjectId: null,
-                createdBySubjectType: null,
-                sessionType: null,
-                sessionId: null,
-                limit: null,
-                order: null,
-                pageToken: null,
-                startTimestamp: null,
-                endTimestamp: null,
-            });
+            return await client.private.agents.private.searchSessions();
         }).rejects.toThrow(TrueFoundryGatewayTypes.UnprocessableEntityError);
     });
 });

@@ -45,17 +45,10 @@ export class PrivateClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.private.listOwnedSessions({
-     *         agentName: "agent_name",
-     *         limit: 1,
-     *         order: "asc",
-     *         pageToken: "page_token",
-     *         startTimestamp: "start_timestamp",
-     *         endTimestamp: "end_timestamp"
-     *     })
+     *     await client.private.agents.private.listOwnedSessions()
      */
     public async listOwnedSessions(
-        request: TrueFoundryGateway.private_.agents.ListOwnedSessionsPrivateRequest,
+        request: TrueFoundryGateway.private_.agents.ListOwnedSessionsPrivateRequest = {},
         requestOptions?: PrivateClient.RequestOptions,
     ): Promise<
         core.Page<TrueFoundryGateway.ListOwnedSessionsResponseDataItem, TrueFoundryGateway.ListOwnedSessionsResponse>
@@ -69,7 +62,7 @@ export class PrivateClient {
                     agent_name: agentName,
                     limit,
                     order:
-                        order !== undefined
+                        order != null
                             ? serializers.ListOwnedSessionsOrder.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,
@@ -210,21 +203,10 @@ export class PrivateClient {
      * @throws {@link errors.TrueFoundryGatewayTimeoutError}
      *
      * @example
-     *     await client.private.agents.private.searchSessions({
-     *         agentName: "agent_name",
-     *         createdBySubjectId: "created_by_subject_id",
-     *         createdBySubjectType: "user",
-     *         sessionType: "session",
-     *         sessionId: "session_id",
-     *         limit: 1,
-     *         order: "asc",
-     *         pageToken: "page_token",
-     *         startTimestamp: "start_timestamp",
-     *         endTimestamp: "end_timestamp"
-     *     })
+     *     await client.private.agents.private.searchSessions()
      */
     public async searchSessions(
-        request: TrueFoundryGateway.private_.agents.SearchSessionsPrivateRequest,
+        request: TrueFoundryGateway.private_.agents.SearchSessionsPrivateRequest = {},
         requestOptions?: PrivateClient.RequestOptions,
     ): Promise<
         core.Page<TrueFoundryGateway.SearchSessionsResponseDataItem, TrueFoundryGateway.SearchSessionsResponse>
@@ -249,7 +231,7 @@ export class PrivateClient {
                     agent_name: agentName,
                     created_by_subject_id: createdBySubjectId,
                     created_by_subject_type:
-                        createdBySubjectType !== undefined
+                        createdBySubjectType != null
                             ? serializers.CreatedBySubjectType.jsonOrThrow(createdBySubjectType, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,
@@ -258,7 +240,7 @@ export class PrivateClient {
                               })
                             : undefined,
                     session_type:
-                        sessionType !== undefined
+                        sessionType != null
                             ? serializers.SessionType.jsonOrThrow(sessionType, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,
@@ -269,7 +251,7 @@ export class PrivateClient {
                     session_id: sessionId,
                     limit,
                     order:
-                        order !== undefined
+                        order != null
                             ? serializers.SearchSessionsOrder.jsonOrThrow(order, {
                                   unrecognizedObjectKeys: "passthrough",
                                   allowUnrecognizedUnionMembers: true,

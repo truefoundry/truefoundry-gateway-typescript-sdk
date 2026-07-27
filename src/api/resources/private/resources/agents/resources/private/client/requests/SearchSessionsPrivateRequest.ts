@@ -4,38 +4,27 @@ import type * as TrueFoundryGateway from "../../../../../../../../index.js";
 
 /**
  * @example
- *     {
- *         agentName: "agent_name",
- *         createdBySubjectId: "created_by_subject_id",
- *         createdBySubjectType: "user",
- *         sessionType: "session",
- *         sessionId: "session_id",
- *         limit: 1,
- *         order: "asc",
- *         pageToken: "page_token",
- *         startTimestamp: "start_timestamp",
- *         endTimestamp: "end_timestamp"
- *     }
+ *     {}
  */
 export interface SearchSessionsPrivateRequest {
     /** Filter to sessions linked to this saved agent. */
-    agentName: string | null;
+    agentName?: string;
     /** Filter to sessions created by this subject id. */
-    createdBySubjectId: string | null;
+    createdBySubjectId?: string;
     /** Optional subject type used with created_by_subject_id. */
-    createdBySubjectType: TrueFoundryGateway.CreatedBySubjectType | null;
+    createdBySubjectType?: TrueFoundryGateway.CreatedBySubjectType;
     /** Filter by session type. Omit to include both saved sessions and drafts. */
-    sessionType: TrueFoundryGateway.SessionType | null;
+    sessionType?: TrueFoundryGateway.SessionType;
     /** Filter to a specific session id. */
-    sessionId: string | null;
+    sessionId?: string;
     /** Page size. Defaults to 10, max 100. */
-    limit?: number | null;
+    limit?: number;
     /** Sort sessions by creation time. Defaults to "desc". */
-    order: TrueFoundryGateway.SearchSessionsOrder | null;
+    order?: TrueFoundryGateway.SearchSessionsOrder;
     /** Opaque token from a previous response `next_page_token`. */
-    pageToken: string | null;
+    pageToken?: string;
     /** Inclusive lower bound on `created_at` (ISO-8601). If omitted, no lower bound is applied. */
-    startTimestamp: string | null;
+    startTimestamp?: string;
     /** Inclusive upper bound on `created_at` (ISO-8601). Defaults upstream to now. */
-    endTimestamp: string | null;
+    endTimestamp?: string;
 }

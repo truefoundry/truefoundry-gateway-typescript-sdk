@@ -64,14 +64,7 @@ describe("DraftSessionsClient", () => {
                 limit: 1,
             },
         };
-        const page = await client.private.agents.private.draftSessions.list({
-            agentName: "agent_name",
-            limit: 1,
-            order: "asc",
-            pageToken: "page_token",
-            startTimestamp: "start_timestamp",
-            endTimestamp: "end_timestamp",
-        });
+        const page = await client.private.agents.private.draftSessions.list();
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
@@ -94,14 +87,7 @@ describe("DraftSessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.draftSessions.list({
-                agentName: null,
-                limit: null,
-                order: null,
-                pageToken: null,
-                startTimestamp: null,
-                endTimestamp: null,
-            });
+            return await client.private.agents.private.draftSessions.list();
         }).rejects.toThrow(TrueFoundryGatewayTypes.BadRequestError);
     });
 
@@ -120,14 +106,7 @@ describe("DraftSessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.draftSessions.list({
-                agentName: null,
-                limit: null,
-                order: null,
-                pageToken: null,
-                startTimestamp: null,
-                endTimestamp: null,
-            });
+            return await client.private.agents.private.draftSessions.list();
         }).rejects.toThrow(TrueFoundryGatewayTypes.UnauthorizedError);
     });
 
@@ -146,14 +125,7 @@ describe("DraftSessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.draftSessions.list({
-                agentName: null,
-                limit: null,
-                order: null,
-                pageToken: null,
-                startTimestamp: null,
-                endTimestamp: null,
-            });
+            return await client.private.agents.private.draftSessions.list();
         }).rejects.toThrow(TrueFoundryGatewayTypes.NotFoundError);
     });
 
@@ -172,14 +144,7 @@ describe("DraftSessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.draftSessions.list({
-                agentName: null,
-                limit: null,
-                order: null,
-                pageToken: null,
-                startTimestamp: null,
-                endTimestamp: null,
-            });
+            return await client.private.agents.private.draftSessions.list();
         }).rejects.toThrow(TrueFoundryGatewayTypes.UnprocessableEntityError);
     });
 
