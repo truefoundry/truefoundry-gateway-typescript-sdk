@@ -13,7 +13,7 @@ type RequestOptions = SessionsClient.RequestOptions;
 
 export interface PreparedTurnInit {
     input?: TrueFoundryGatewayApi.TurnInputItem[];
-    previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput | null;
+    previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput;
 }
 
 // Output of prepareTurn: not yet started (no HTTP). execute() fires the createTurn POST and mints
@@ -25,7 +25,7 @@ export class PreparedTurn implements Partial<TrueFoundryGatewayApi.Turn> {
     readonly sessionId: string;
     readonly #client: TrueFoundryGateway;
     readonly #input?: TrueFoundryGatewayApi.TurnInputItem[];
-    readonly #previousTurnIdInput?: TrueFoundryGatewayApi.PreviousTurnIdInput | null; // server defaults to 'auto'
+    readonly #previousTurnIdInput?: TrueFoundryGatewayApi.PreviousTurnIdInput; // server defaults to 'auto'
     #start?: Promise<core.Stream<TrueFoundryGatewayApi.TurnStreamingEvent>>; // in-flight createTurn; also the one-shot latch
     #turn?: Turn; // the real Turn, created once started
 

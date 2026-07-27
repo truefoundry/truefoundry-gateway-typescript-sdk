@@ -45,12 +45,13 @@ export class AgentSession implements TrueFoundryGatewayApi.Session {
      * Stage a turn locally; call `execute()` to start `createTurn`.
      *
      * @param opts.input - Turn input items passed to createTurn.
-     * @param opts.previousTurnId - Previous turn to chain from. Default `auto`.
+     * @param opts.previousTurnId - Previous turn to chain from. `auto` (default) chains to the
+     * session's last turn; `none` starts the session's first turn.
      * @returns {PreparedTurn} Staged turn.
      */
     prepareTurn(opts?: {
         input?: TrueFoundryGatewayApi.TurnInputItem[];
-        previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput | null;
+        previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput;
     }): PreparedTurn {
         return this.#mixin.prepareTurn(this, opts);
     }

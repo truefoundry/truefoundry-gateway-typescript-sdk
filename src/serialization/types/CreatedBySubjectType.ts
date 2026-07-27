@@ -7,23 +7,8 @@ import type * as serializers from "../index.js";
 export const CreatedBySubjectType: core.serialization.Schema<
     serializers.CreatedBySubjectType.Raw,
     TrueFoundryGateway.CreatedBySubjectType
-> = core.serialization.enum_([
-    "user",
-    "team",
-    "serviceaccount",
-    "virtualaccount",
-    "external-identity",
-    "agent-identity",
-    "role",
-]);
+> = core.serialization.enum_(["user", "team", "serviceaccount", "virtualaccount", "agent-identity", "role"]);
 
 export declare namespace CreatedBySubjectType {
-    export type Raw =
-        | "user"
-        | "team"
-        | "serviceaccount"
-        | "virtualaccount"
-        | "external-identity"
-        | "agent-identity"
-        | "role";
+    export type Raw = "user" | "team" | "serviceaccount" | "virtualaccount" | "agent-identity" | "role";
 }

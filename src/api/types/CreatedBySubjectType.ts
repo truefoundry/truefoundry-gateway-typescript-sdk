@@ -6,7 +6,6 @@ export const CreatedBySubjectType = {
     Team: "team",
     Serviceaccount: "serviceaccount",
     Virtualaccount: "virtualaccount",
-    ExternalIdentity: "external-identity",
     AgentIdentity: "agent-identity",
     Role: "role",
 } as const;

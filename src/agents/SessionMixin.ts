@@ -36,14 +36,15 @@ export class SessionMixin {
      *
      * @param owner - Enriched wrapper surfaced as `turn.session` on the resulting turn.
      * @param request.input - Turn input items passed to createTurn.
-     * @param request.previousTurnId - Previous turn to chain from. Default `auto`.
+     * @param request.previousTurnId - Previous turn to chain from. `auto` (default) chains to the
+     * session's last turn; `none` starts the session's first turn.
      * @returns {PreparedTurn} Staged turn.
      */
     prepareTurn(
         owner: AgentSession | AgentDraftSession,
         request?: {
             input?: TrueFoundryGatewayApi.TurnInputItem[];
-            previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput | null;
+            previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput;
         },
     ): PreparedTurn {
         return new PreparedTurn(
