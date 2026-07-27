@@ -11,9 +11,9 @@ import type * as TrueFoundryGateway from "../../../../../../../../index.js";
  *     }
  */
 export interface ListTurnEventsSessionsRequest {
-    pageToken?: string | null;
+    pageToken: string | null;
     /** Page size. Defaults to 25, max 25. */
     limit?: number | null;
     /** Sort events by creation time. Defaults to "asc". */
-    order?: TrueFoundryGateway.ListEventsOrder | null;
+    order: TrueFoundryGateway.ListEventsOrder | null;
 }

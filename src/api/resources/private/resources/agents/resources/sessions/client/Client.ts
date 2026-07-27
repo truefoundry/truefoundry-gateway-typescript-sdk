@@ -609,7 +609,7 @@ export class SessionsClient {
      */
     public async listTurns(
         sessionId: string,
-        request: TrueFoundryGateway.private_.agents.ListTurnsSessionsRequest = {},
+        request: TrueFoundryGateway.private_.agents.ListTurnsSessionsRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.Page<TrueFoundryGateway.Turn, TrueFoundryGateway.ListTurnsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
@@ -1165,7 +1165,7 @@ export class SessionsClient {
     public async listTurnEvents(
         sessionId: string,
         turnId: string,
-        request: TrueFoundryGateway.private_.agents.ListTurnEventsSessionsRequest = {},
+        request: TrueFoundryGateway.private_.agents.ListTurnEventsSessionsRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.Page<TrueFoundryGateway.TurnEvent, TrueFoundryGateway.ListEventsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
@@ -1321,7 +1321,7 @@ export class SessionsClient {
      */
     public async listEvents(
         sessionId: string,
-        request: TrueFoundryGateway.private_.agents.ListEventsSessionsRequest = {},
+        request: TrueFoundryGateway.private_.agents.ListEventsSessionsRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.Page<TrueFoundryGateway.SessionEventItem, TrueFoundryGateway.ListSessionEventsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(

@@ -55,7 +55,7 @@ export class PrivateClient {
      *     })
      */
     public async listOwnedSessions(
-        request: TrueFoundryGateway.private_.agents.ListOwnedSessionsPrivateRequest = {},
+        request: TrueFoundryGateway.private_.agents.ListOwnedSessionsPrivateRequest,
         requestOptions?: PrivateClient.RequestOptions,
     ): Promise<
         core.Page<TrueFoundryGateway.ListOwnedSessionsResponseDataItem, TrueFoundryGateway.ListOwnedSessionsResponse>
@@ -224,7 +224,7 @@ export class PrivateClient {
      *     })
      */
     public async searchSessions(
-        request: TrueFoundryGateway.private_.agents.SearchSessionsPrivateRequest = {},
+        request: TrueFoundryGateway.private_.agents.SearchSessionsPrivateRequest,
         requestOptions?: PrivateClient.RequestOptions,
     ): Promise<
         core.Page<TrueFoundryGateway.SearchSessionsResponseDataItem, TrueFoundryGateway.SearchSessionsResponse>
