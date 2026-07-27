@@ -22,9 +22,9 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
     /** Unique identifier of this draft session. */
     readonly id: string;
     /** Optional saved agent this draft is linked to. */
-    readonly agentName?: string | null;
+    readonly agentName: string | null;
     /** Optional user-visible title for the draft session. */
-    readonly title?: string | null;
+    readonly title: string | null;
     /** Subject that created this draft session. */
     readonly createdBySubject: TrueFoundryGatewayApi.Subject;
     /** ISO-8601 timestamp when the draft session was created. */
@@ -83,7 +83,7 @@ export class AgentDraftSession implements TrueFoundryGatewayApi.DraftSession {
      */
     prepareTurn(opts?: {
         input?: TrueFoundryGatewayApi.TurnInputItem[];
-        previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput;
+        previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput | null;
     }): PreparedTurn {
         return this.#mixin.prepareTurn(this, opts);
     }

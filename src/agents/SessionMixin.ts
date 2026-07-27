@@ -43,7 +43,7 @@ export class SessionMixin {
         owner: AgentSession | AgentDraftSession,
         request?: {
             input?: TrueFoundryGatewayApi.TurnInputItem[];
-            previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput;
+            previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput | null;
         },
     ): PreparedTurn {
         return new PreparedTurn(

@@ -167,10 +167,7 @@ export class PrivateAgentSessionClient {
             loadPage: (response) =>
                 core.HttpResponsePromise.fromPromise(
                     client.agents.private
-                        .searchSessions(
-                            { ...request, pageToken: response?.pagination.nextPageToken },
-                            requestOptions,
-                        )
+                        .searchSessions({ ...request, pageToken: response?.pagination.nextPageToken }, requestOptions)
                         .then((nextPage) => ({ data: nextPage.response, rawResponse: nextPage.rawResponse })),
                 ),
         });
