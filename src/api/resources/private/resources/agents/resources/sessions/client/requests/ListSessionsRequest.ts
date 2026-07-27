@@ -5,25 +5,20 @@ import type * as TrueFoundryGateway from "../../../../../../../../index.js";
 /**
  * @example
  *     {
- *         agentName: "agent_name",
- *         limit: 1,
- *         order: "asc",
- *         pageToken: "page_token",
- *         startTimestamp: "start_timestamp",
- *         endTimestamp: "end_timestamp"
+ *         agentName: "agent_name"
  *     }
  */
 export interface ListSessionsRequest {
     /** Agent whose sessions to list. Must exist in the tenant. */
     agentName: string;
     /** Page size. Defaults to 10, max 100. */
-    limit?: number | null;
+    limit?: number;
     /** Sort sessions by creation time. Defaults to "desc". */
-    order?: TrueFoundryGateway.ListSessionsOrder | null;
+    order?: TrueFoundryGateway.ListSessionsOrder;
     /** Opaque token from a previous response `next_page_token`. */
-    pageToken?: string | null;
+    pageToken?: string;
     /** Inclusive lower bound on `created_at` (ISO-8601). Defaults upstream to 30 min before `end_timestamp`. */
-    startTimestamp?: string | null;
+    startTimestamp?: string;
     /** Inclusive upper bound on `created_at` (ISO-8601). Defaults upstream to now. */
-    endTimestamp?: string | null;
+    endTimestamp?: string;
 }

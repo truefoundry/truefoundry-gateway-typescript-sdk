@@ -10,13 +10,13 @@ export const BaseMcpAuthRequiredEvent: core.serialization.ObjectSchema<
 > = core.serialization.object({
     id: core.serialization.string(),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
-    threadId: core.serialization.property("thread_id", core.serialization.string().optionalNullable()),
+    threadId: core.serialization.property("thread_id", core.serialization.string().nullable()),
 });
 
 export declare namespace BaseMcpAuthRequiredEvent {
     export interface Raw {
         id: string;
         created_at: string;
-        thread_id?: (string | null | undefined) | null;
+        thread_id?: string | null;
     }
 }

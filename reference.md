@@ -28,12 +28,7 @@ List sessions for an agent (newest first by default), keyset-paginated. Pass `pa
 
 ```typescript
 const pageableResponse = await client.private.agents.sessions.list({
-    agentName: "agent_name",
-    limit: 1,
-    order: "asc",
-    pageToken: "page_token",
-    startTimestamp: "start_timestamp",
-    endTimestamp: "end_timestamp"
+    agentName: "agent_name"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -41,12 +36,7 @@ for await (const item of pageableResponse) {
 
 // Or you can manually iterate page-by-page
 let page = await client.private.agents.sessions.list({
-    agentName: "agent_name",
-    limit: 1,
-    order: "asc",
-    pageToken: "page_token",
-    startTimestamp: "start_timestamp",
-    endTimestamp: "end_timestamp"
+    agentName: "agent_name"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -315,19 +305,13 @@ List turns for a session (newest first). Pagination walks the ancestor chain fro
 <dd>
 
 ```typescript
-const pageableResponse = await client.private.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g", {
-    pageToken: "page_token",
-    limit: 1
-});
+const pageableResponse = await client.private.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g");
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.private.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g", {
-    pageToken: "page_token",
-    limit: 1
-});
+let page = await client.private.agents.sessions.listTurns("01arz3ndektsv4rrffq69g5fav.g");
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
@@ -632,21 +616,13 @@ Paginated list of content turn events from the Redis events stream (model.messag
 <dd>
 
 ```typescript
-const pageableResponse = await client.private.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
-    pageToken: "page_token",
-    limit: 1,
-    order: "asc"
-});
+const pageableResponse = await client.private.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd");
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.private.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd", {
-    pageToken: "page_token",
-    limit: 1,
-    order: "asc"
-});
+let page = await client.private.agents.sessions.listTurnEvents("01arz3ndektsv4rrffq69g5fav.g", "01arz3ndektsv4rrffq69g5fav.g.ab12cd");
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
@@ -731,21 +707,13 @@ List session events as `{ turn_id, event }` across a turn hierarchy (newest firs
 <dd>
 
 ```typescript
-const pageableResponse = await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g", {
-    pageToken: "page_token",
-    lastTurnId: "last_turn_id",
-    limit: 1
-});
+const pageableResponse = await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g");
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g", {
-    pageToken: "page_token",
-    lastTurnId: "last_turn_id",
-    limit: 1
-});
+let page = await client.private.agents.sessions.listEvents("01arz3ndektsv4rrffq69g5fav.g");
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
@@ -823,27 +791,13 @@ List all sessions owned by the caller, spanning both saved sessions and drafts (
 <dd>
 
 ```typescript
-const pageableResponse = await client.private.agents.private.listOwnedSessions({
-    agentName: "agent_name",
-    limit: 1,
-    order: "asc",
-    pageToken: "page_token",
-    startTimestamp: "start_timestamp",
-    endTimestamp: "end_timestamp"
-});
+const pageableResponse = await client.private.agents.private.listOwnedSessions();
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.private.agents.private.listOwnedSessions({
-    agentName: "agent_name",
-    limit: 1,
-    order: "asc",
-    pageToken: "page_token",
-    startTimestamp: "start_timestamp",
-    endTimestamp: "end_timestamp"
-});
+let page = await client.private.agents.private.listOwnedSessions();
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
@@ -912,35 +866,13 @@ Search sessions visible to the caller across agents (newest first by default), k
 <dd>
 
 ```typescript
-const pageableResponse = await client.private.agents.private.searchSessions({
-    agentName: "agent_name",
-    createdBySubjectId: "created_by_subject_id",
-    createdBySubjectType: "user",
-    sessionType: "session",
-    sessionId: "session_id",
-    limit: 1,
-    order: "asc",
-    pageToken: "page_token",
-    startTimestamp: "start_timestamp",
-    endTimestamp: "end_timestamp"
-});
+const pageableResponse = await client.private.agents.private.searchSessions();
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.private.agents.private.searchSessions({
-    agentName: "agent_name",
-    createdBySubjectId: "created_by_subject_id",
-    createdBySubjectType: "user",
-    sessionType: "session",
-    sessionId: "session_id",
-    limit: 1,
-    order: "asc",
-    pageToken: "page_token",
-    startTimestamp: "start_timestamp",
-    endTimestamp: "end_timestamp"
-});
+let page = await client.private.agents.private.searchSessions();
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
@@ -1083,27 +1015,13 @@ List the caller-owned draft sessions (newest first by default), keyset-paginated
 <dd>
 
 ```typescript
-const pageableResponse = await client.private.agents.private.draftSessions.list({
-    agentName: "agent_name",
-    limit: 1,
-    order: "asc",
-    pageToken: "page_token",
-    startTimestamp: "start_timestamp",
-    endTimestamp: "end_timestamp"
-});
+const pageableResponse = await client.private.agents.private.draftSessions.list();
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.private.agents.private.draftSessions.list({
-    agentName: "agent_name",
-    limit: 1,
-    order: "asc",
-    pageToken: "page_token",
-    startTimestamp: "start_timestamp",
-    endTimestamp: "end_timestamp"
-});
+let page = await client.private.agents.private.draftSessions.list();
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
