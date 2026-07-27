@@ -11,12 +11,12 @@ export const CreateTurnRequest: core.serialization.Schema<
     TrueFoundryGateway.private_.agents.CreateTurnRequest
 > = core.serialization.object({
     input: core.serialization.list(TurnInputItem).optional(),
-    previousTurnId: core.serialization.property("previous_turn_id", PreviousTurnIdInput.optionalNullable()),
+    previousTurnId: core.serialization.property("previous_turn_id", PreviousTurnIdInput.optional()),
 });
 
 export declare namespace CreateTurnRequest {
     export interface Raw {
         input?: TurnInputItem.Raw[] | null;
-        previous_turn_id?: (PreviousTurnIdInput.Raw | null | undefined) | null;
+        previous_turn_id?: PreviousTurnIdInput.Raw | null;
     }
 }
