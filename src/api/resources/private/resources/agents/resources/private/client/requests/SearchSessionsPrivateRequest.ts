@@ -19,23 +19,23 @@ import type * as TrueFoundryGateway from "../../../../../../../../index.js";
  */
 export interface SearchSessionsPrivateRequest {
     /** Filter to sessions linked to this saved agent. */
-    agentName?: string | null;
+    agentName: string | null;
     /** Filter to sessions created by this subject id. */
-    createdBySubjectId?: string | null;
+    createdBySubjectId: string | null;
     /** Optional subject type used with created_by_subject_id. */
-    createdBySubjectType?: TrueFoundryGateway.CreatedBySubjectType | null;
+    createdBySubjectType: TrueFoundryGateway.CreatedBySubjectType | null;
     /** Filter by session type. Omit to include both saved sessions and drafts. */
-    sessionType?: TrueFoundryGateway.SessionType | null;
+    sessionType: TrueFoundryGateway.SessionType | null;
     /** Filter to a specific session id. */
-    sessionId?: string | null;
+    sessionId: string | null;
     /** Page size. Defaults to 10, max 100. */
     limit?: number | null;
     /** Sort sessions by creation time. Defaults to "desc". */
-    order?: TrueFoundryGateway.SearchSessionsOrder | null;
+    order: TrueFoundryGateway.SearchSessionsOrder | null;
     /** Opaque token from a previous response `next_page_token`. */
-    pageToken?: string | null;
+    pageToken: string | null;
     /** Inclusive lower bound on `created_at` (ISO-8601). If omitted, no lower bound is applied. */
-    startTimestamp?: string | null;
+    startTimestamp: string | null;
     /** Inclusive upper bound on `created_at` (ISO-8601). Defaults upstream to now. */
-    endTimestamp?: string | null;
+    endTimestamp: string | null;
 }

@@ -50,7 +50,7 @@ export class DraftSessionsClient {
      *     })
      */
     public async list(
-        request: TrueFoundryGateway.private_.agents.private_.ListDraftSessionsRequest = {},
+        request: TrueFoundryGateway.private_.agents.private_.ListDraftSessionsRequest,
         requestOptions?: DraftSessionsClient.RequestOptions,
     ): Promise<core.Page<TrueFoundryGateway.DraftSession, TrueFoundryGateway.ListDraftSessionsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(

@@ -13,8 +13,8 @@ export const DraftSession: core.serialization.ObjectSchema<
     type: core.serialization.stringLiteral("session/draft"),
     id: core.serialization.string(),
     agentSpec: core.serialization.property("agent_spec", AgentSpec),
-    agentName: core.serialization.property("agent_name", core.serialization.string().optionalNullable()),
-    title: core.serialization.string().optionalNullable(),
+    agentName: core.serialization.property("agent_name", core.serialization.string().nullable()),
+    title: core.serialization.string().nullable(),
     createdBySubject: core.serialization.property("created_by_subject", Subject),
     createdAt: core.serialization.property("created_at", core.serialization.string()),
     updatedAt: core.serialization.property("updated_at", core.serialization.string()),
@@ -25,8 +25,8 @@ export declare namespace DraftSession {
         type: "session/draft";
         id: string;
         agent_spec: AgentSpec.Raw;
-        agent_name?: (string | null | undefined) | null;
-        title?: (string | null | undefined) | null;
+        agent_name?: string | null;
+        title?: string | null;
         created_by_subject: Subject.Raw;
         created_at: string;
         updated_at: string;

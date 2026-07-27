@@ -94,7 +94,14 @@ describe("DraftSessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.draftSessions.list();
+            return await client.private.agents.private.draftSessions.list({
+                agentName: null,
+                limit: null,
+                order: null,
+                pageToken: null,
+                startTimestamp: null,
+                endTimestamp: null,
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.BadRequestError);
     });
 
@@ -113,7 +120,14 @@ describe("DraftSessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.draftSessions.list();
+            return await client.private.agents.private.draftSessions.list({
+                agentName: null,
+                limit: null,
+                order: null,
+                pageToken: null,
+                startTimestamp: null,
+                endTimestamp: null,
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.UnauthorizedError);
     });
 
@@ -132,7 +146,14 @@ describe("DraftSessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.draftSessions.list();
+            return await client.private.agents.private.draftSessions.list({
+                agentName: null,
+                limit: null,
+                order: null,
+                pageToken: null,
+                startTimestamp: null,
+                endTimestamp: null,
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.NotFoundError);
     });
 
@@ -151,7 +172,14 @@ describe("DraftSessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.private.draftSessions.list();
+            return await client.private.agents.private.draftSessions.list({
+                agentName: null,
+                limit: null,
+                order: null,
+                pageToken: null,
+                startTimestamp: null,
+                endTimestamp: null,
+            });
         }).rejects.toThrow(TrueFoundryGatewayTypes.UnprocessableEntityError);
     });
 

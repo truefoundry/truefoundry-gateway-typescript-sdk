@@ -19,11 +19,11 @@ export interface ListSessionsRequest {
     /** Page size. Defaults to 10, max 100. */
     limit?: number | null;
     /** Sort sessions by creation time. Defaults to "desc". */
-    order?: TrueFoundryGateway.ListSessionsOrder | null;
+    order: TrueFoundryGateway.ListSessionsOrder | null;
     /** Opaque token from a previous response `next_page_token`. */
-    pageToken?: string | null;
+    pageToken: string | null;
     /** Inclusive lower bound on `created_at` (ISO-8601). Defaults upstream to 30 min before `end_timestamp`. */
-    startTimestamp?: string | null;
+    startTimestamp: string | null;
     /** Inclusive upper bound on `created_at` (ISO-8601). Defaults upstream to now. */
-    endTimestamp?: string | null;
+    endTimestamp: string | null;
 }

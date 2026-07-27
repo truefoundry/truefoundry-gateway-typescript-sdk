@@ -11,7 +11,7 @@ export const TurnStateDone: core.serialization.ObjectSchema<
     TrueFoundryGateway.TurnStateDone
 > = core.serialization.object({
     status: core.serialization.stringLiteral("done"),
-    output: TurnStateDoneOutput.optionalNullable(),
+    output: TurnStateDoneOutput.nullable(),
     requiredActions: core.serialization.property("required_actions", core.serialization.list(ActionRequiredEvent)),
     completedAt: core.serialization.property("completed_at", core.serialization.string()),
 });
@@ -19,7 +19,7 @@ export const TurnStateDone: core.serialization.ObjectSchema<
 export declare namespace TurnStateDone {
     export interface Raw {
         status: "done";
-        output?: (TurnStateDoneOutput.Raw | null | undefined) | null;
+        output?: TurnStateDoneOutput.Raw | null;
         required_actions: ActionRequiredEvent.Raw[];
         completed_at: string;
     }
