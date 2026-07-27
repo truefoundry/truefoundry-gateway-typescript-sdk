@@ -22,7 +22,7 @@ export class AgentSession implements TrueFoundryGatewayApi.Session {
     /** Name of the agent for this session. */
     readonly agentName: string;
     /** Optional user-visible title for the session. */
-    readonly title?: string | null;
+    readonly title: string | null;
     /** Subject that created this session. */
     readonly createdBySubject: TrueFoundryGatewayApi.Subject;
     /** ISO-8601 timestamp when the session was created. */
@@ -50,7 +50,7 @@ export class AgentSession implements TrueFoundryGatewayApi.Session {
      */
     prepareTurn(opts?: {
         input?: TrueFoundryGatewayApi.TurnInputItem[];
-        previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput;
+        previousTurnId?: TrueFoundryGatewayApi.PreviousTurnIdInput | null;
     }): PreparedTurn {
         return this.#mixin.prepareTurn(this, opts);
     }

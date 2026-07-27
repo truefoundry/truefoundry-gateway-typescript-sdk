@@ -23,7 +23,7 @@ export class Turn implements TrueFoundryGatewayApi.Turn {
     /** Identifier of the parent session. */
     readonly sessionId: string;
     /** Previous turn id in the chain, if any. */
-    readonly previousTurnId?: string | null;
+    readonly previousTurnId: string | null;
     /** Input items sent when the turn was created. */
     readonly input?: TrueFoundryGatewayApi.TurnInputItem[];
     /** Subject that started this turn. */
