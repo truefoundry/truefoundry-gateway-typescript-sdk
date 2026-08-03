@@ -5,6 +5,8 @@ import * as errors from "../../errors/index.js";
 import type * as TrueFoundryGateway from "../index.js";
 
 export class GoneError extends errors.TrueFoundryGatewayError {
+    public declare readonly body: TrueFoundryGateway.RequestErrorResponse;
+
     constructor(body: TrueFoundryGateway.RequestErrorResponse, rawResponse?: core.RawResponse) {
         super({
             message: "GoneError",
