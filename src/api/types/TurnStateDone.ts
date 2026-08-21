@@ -7,4 +7,5 @@ export interface TurnStateDone {
     output: TrueFoundryGateway.TurnStateDoneOutput | null;
     requiredActions: TrueFoundryGateway.ActionRequiredEvent[];
     completedAt: string;
+    metrics?: TrueFoundryGateway.TurnMetrics;
 }

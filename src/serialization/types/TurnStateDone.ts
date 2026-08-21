@@ -4,6 +4,7 @@ import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
 import { ActionRequiredEvent } from "./ActionRequiredEvent.js";
+import { TurnMetrics } from "./TurnMetrics.js";
 import { TurnStateDoneOutput } from "./TurnStateDoneOutput.js";
 
 export const TurnStateDone: core.serialization.ObjectSchema<
@@ -14,6 +15,7 @@ export const TurnStateDone: core.serialization.ObjectSchema<
     output: TurnStateDoneOutput.nullable(),
     requiredActions: core.serialization.property("required_actions", core.serialization.list(ActionRequiredEvent)),
     completedAt: core.serialization.property("completed_at", core.serialization.string()),
+    metrics: TurnMetrics.optional(),
 });
 
 export declare namespace TurnStateDone {
@@ -22,5 +24,6 @@ export declare namespace TurnStateDone {
         output?: TurnStateDoneOutput.Raw | null;
         required_actions: ActionRequiredEvent.Raw[];
         completed_at: string;
+        metrics?: TurnMetrics.Raw | null;
     }
 }

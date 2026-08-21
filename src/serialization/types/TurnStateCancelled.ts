@@ -3,6 +3,7 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
+import { TurnMetrics } from "./TurnMetrics.js";
 import { TurnStateCancelledReason } from "./TurnStateCancelledReason.js";
 
 export const TurnStateCancelled: core.serialization.ObjectSchema<
@@ -12,6 +13,7 @@ export const TurnStateCancelled: core.serialization.ObjectSchema<
     status: core.serialization.stringLiteral("cancelled"),
     reason: TurnStateCancelledReason,
     completedAt: core.serialization.property("completed_at", core.serialization.string()),
+    metrics: TurnMetrics.optional(),
 });
 
 export declare namespace TurnStateCancelled {
@@ -19,5 +21,6 @@ export declare namespace TurnStateCancelled {
         status: "cancelled";
         reason: TurnStateCancelledReason.Raw;
         completed_at: string;
+        metrics?: TurnMetrics.Raw | null;
     }
 }
