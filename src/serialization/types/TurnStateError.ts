@@ -3,6 +3,7 @@
 import type * as TrueFoundryGateway from "../../api/index.js";
 import * as core from "../../core/index.js";
 import type * as serializers from "../index.js";
+import { TurnMetrics } from "./TurnMetrics.js";
 
 export const TurnStateError: core.serialization.ObjectSchema<
     serializers.TurnStateError.Raw,
@@ -11,6 +12,7 @@ export const TurnStateError: core.serialization.ObjectSchema<
     status: core.serialization.stringLiteral("error"),
     message: core.serialization.string(),
     completedAt: core.serialization.property("completed_at", core.serialization.string()),
+    metrics: TurnMetrics.optional(),
 });
 
 export declare namespace TurnStateError {
@@ -18,5 +20,6 @@ export declare namespace TurnStateError {
         status: "error";
         message: string;
         completed_at: string;
+        metrics?: TurnMetrics.Raw | null;
     }
 }

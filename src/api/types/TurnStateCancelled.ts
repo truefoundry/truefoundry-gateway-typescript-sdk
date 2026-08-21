@@ -6,4 +6,5 @@ export interface TurnStateCancelled {
     status: "cancelled";
     reason: TrueFoundryGateway.TurnStateCancelledReason;
     completedAt: string;
+    metrics?: TrueFoundryGateway.TurnMetrics;
 }
