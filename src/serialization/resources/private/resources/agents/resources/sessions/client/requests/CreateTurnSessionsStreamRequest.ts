@@ -6,15 +6,15 @@ import type * as serializers from "../../../../../../../../index.js";
 import { PreviousTurnIdInput } from "../../../../../../../../types/PreviousTurnIdInput.js";
 import { TurnInputItem } from "../../../../../../../../types/TurnInputItem.js";
 
-export const CreateTurnRequest: core.serialization.Schema<
-    serializers.private_.agents.CreateTurnRequest.Raw,
-    TrueFoundryGateway.private_.agents.CreateTurnRequest
+export const CreateTurnSessionsStreamRequest: core.serialization.Schema<
+    serializers.private_.agents.CreateTurnSessionsStreamRequest.Raw,
+    TrueFoundryGateway.private_.agents.CreateTurnSessionsStreamRequest
 > = core.serialization.object({
     input: core.serialization.list(TurnInputItem).optional(),
     previousTurnId: core.serialization.property("previous_turn_id", PreviousTurnIdInput.optional()),
 });
 
-export declare namespace CreateTurnRequest {
+export declare namespace CreateTurnSessionsStreamRequest {
     export interface Raw {
         input?: TurnInputItem.Raw[] | null;
         previous_turn_id?: PreviousTurnIdInput.Raw | null;

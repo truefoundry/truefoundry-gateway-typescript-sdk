@@ -6,7 +6,7 @@ import type * as TrueFoundryGateway from "../../../../../../../../index.js";
  * @example
  *     {}
  */
-export interface CreateTurnRequest {
+export interface CreateTurnSessionsStreamRequest {
     input?: TrueFoundryGateway.TurnInputItem[];
     previousTurnId?: TrueFoundryGateway.PreviousTurnIdInput;
 }

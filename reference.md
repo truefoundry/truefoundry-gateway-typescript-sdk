@@ -361,7 +361,7 @@ const response = page.response;
 </dl>
 </details>
 
-<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">createTurn</a>(sessionId, { ...params }) -> core.Stream&lt;TrueFoundryGateway.TurnStreamingEvent&gt;</code></summary>
+<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">createTurnStream</a>(sessionId, { ...params }) -> core.Stream&lt;TrueFoundryGateway.TurnStreamingEvent&gt;</code></summary>
 <dl>
 <dd>
 
@@ -373,7 +373,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Start or continue a turn within a session. Responds with a Server-Sent Events stream.
+Start or continue a turn within a session.
 Use `previous_turn_id` to chain to the session's last turn (defaults to `auto`).
 </dd>
 </dl>
@@ -389,7 +389,7 @@ Use `previous_turn_id` to chain to the session's last turn (defaults to `auto`).
 <dd>
 
 ```typescript
-const response = await client.private.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
+const response = await client.private.agents.sessions.createTurnStream("01arz3ndektsv4rrffq69g5fav.g", {});
 for await (const item of response) {
     console.log(item);
 }
@@ -416,7 +416,79 @@ for await (const item of response) {
 <dl>
 <dd>
 
-**request:** `TrueFoundryGateway.private_.agents.CreateTurnRequest` 
+**request:** `TrueFoundryGateway.private_.agents.CreateTurnSessionsStreamRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SessionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.private.agents.sessions.<a href="/src/api/resources/private/resources/agents/resources/sessions/client/Client.ts">createTurn</a>(sessionId, { ...params }) -> TrueFoundryGateway.GetTurnResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Start or continue a turn within a session.
+Use `previous_turn_id` to chain to the session's last turn (defaults to `auto`).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.private.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g", {});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sessionId:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `TrueFoundryGateway.private_.agents.CreateTurnSessionsRequest` 
     
 </dd>
 </dl>

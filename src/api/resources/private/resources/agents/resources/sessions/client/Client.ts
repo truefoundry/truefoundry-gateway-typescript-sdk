@@ -716,20 +716,20 @@ export class SessionsClient {
     }
 
     /**
-     * Start or continue a turn within a session. Responds with a Server-Sent Events stream.
+     * Start or continue a turn within a session.
      * Use `previous_turn_id` to chain to the session's last turn (defaults to `auto`).
      */
-    public createTurn(
+    public createTurnStream(
         sessionId: string,
-        request: TrueFoundryGateway.private_.agents.CreateTurnRequest = {},
+        request: TrueFoundryGateway.private_.agents.CreateTurnSessionsStreamRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): core.HttpResponsePromise<core.Stream<TrueFoundryGateway.TurnStreamingEvent>> {
-        return core.HttpResponsePromise.fromPromise(this.__createTurn(sessionId, request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__createTurnStream(sessionId, request, requestOptions));
     }
 
-    private async __createTurn(
+    private async __createTurnStream(
         sessionId: string,
-        request: TrueFoundryGateway.private_.agents.CreateTurnRequest = {},
+        request: TrueFoundryGateway.private_.agents.CreateTurnSessionsStreamRequest,
         requestOptions?: SessionsClient.RequestOptions,
     ): Promise<core.WithRawResponse<core.Stream<TrueFoundryGateway.TurnStreamingEvent>>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
@@ -750,12 +750,15 @@ export class SessionsClient {
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: mergeAdditionalBodyParameters(
-                serializers.private_.agents.CreateTurnRequest.jsonOrThrow(request, {
-                    unrecognizedObjectKeys: "passthrough",
-                    allowUnrecognizedUnionMembers: true,
-                    allowUnrecognizedEnumValues: true,
-                    omitUndefined: true,
-                }),
+                {
+                    ...serializers.private_.agents.CreateTurnSessionsStreamRequest.jsonOrThrow(request, {
+                        unrecognizedObjectKeys: "passthrough",
+                        allowUnrecognizedUnionMembers: true,
+                        allowUnrecognizedEnumValues: true,
+                        omitUndefined: true,
+                    }),
+                    stream: true,
+                },
                 requestOptions?.additionalBodyParameters,
             ),
             responseType: "sse",
@@ -782,6 +785,148 @@ export class SessionsClient {
                     eventShape: {
                         type: "sse",
                     },
+                }),
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new TrueFoundryGateway.BadRequestError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                case 403:
+                    throw new TrueFoundryGateway.ForbiddenError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new TrueFoundryGateway.NotFoundError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                case 412:
+                    throw new TrueFoundryGateway.PreconditionFailedError(
+                        serializers.RequestErrorResponse.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.TrueFoundryGatewayError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/agents/sessions/{sessionId}/turns",
+        );
+    }
+
+    /**
+     * Start or continue a turn within a session.
+     * Use `previous_turn_id` to chain to the session's last turn (defaults to `auto`).
+     *
+     * @param {string} sessionId
+     * @param {TrueFoundryGateway.private_.agents.CreateTurnSessionsRequest} request
+     * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link TrueFoundryGateway.BadRequestError}
+     * @throws {@link TrueFoundryGateway.ForbiddenError}
+     * @throws {@link TrueFoundryGateway.NotFoundError}
+     * @throws {@link TrueFoundryGateway.PreconditionFailedError}
+     * @throws {@link errors.TrueFoundryGatewayError}
+     * @throws {@link errors.TrueFoundryGatewayTimeoutError}
+     *
+     * @example
+     *     await client.private.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g", {})
+     */
+    public createTurn(
+        sessionId: string,
+        request: TrueFoundryGateway.private_.agents.CreateTurnSessionsRequest,
+        requestOptions?: SessionsClient.RequestOptions,
+    ): core.HttpResponsePromise<TrueFoundryGateway.GetTurnResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__createTurn(sessionId, request, requestOptions));
+    }
+
+    private async __createTurn(
+        sessionId: string,
+        request: TrueFoundryGateway.private_.agents.CreateTurnSessionsRequest,
+        requestOptions?: SessionsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<TrueFoundryGateway.GetTurnResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)),
+                `v1/agents/sessions/${core.url.encodePathParam(sessionId)}/turns`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(
+                {
+                    ...serializers.private_.agents.CreateTurnSessionsRequest.jsonOrThrow(request, {
+                        unrecognizedObjectKeys: "passthrough",
+                        allowUnrecognizedUnionMembers: true,
+                        allowUnrecognizedEnumValues: true,
+                        omitUndefined: true,
+                    }),
+                    stream: false,
+                },
+                requestOptions?.additionalBodyParameters,
+            ),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: serializers.GetTurnResponse.parseOrThrow(_response.body, {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    skipValidation: true,
+                    breadcrumbsPrefix: ["response"],
                 }),
                 rawResponse: _response.rawResponse,
             };

@@ -661,10 +661,10 @@ describe("SessionsClient", () => {
         }).rejects.toThrow(TrueFoundryGatewayTypes.PreconditionFailedError);
     });
 
-    test("create_turn (1)", async () => {
+    test("create_turn_stream (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = { stream: true };
         const rawResponseBody =
             'event: \ndata: {"content":"content","name":"name","refusal":"refusal","reasoning_content":"reasoning_content","tool_calls":[{"id":"id","type":"function","function":{"name":"name","arguments":"arguments"},"provider_specific_fields":{"key":"value"},"tool_info":{"type":"truefoundry-system","name":"name"}}],"type":"model.message","id":"id","thread_id":"thread_id","finish_reason":"stop","created_at":"created_at","usage":{"input_tokens":1,"output_tokens":1,"cache_read_tokens":1,"cache_write_tokens":1,"input_tokens_breakdown":{"harness":1,"skills":1,"instructions":1,"tool_definitions":1,"messages":1}}}\n\n';
 
@@ -677,7 +677,7 @@ describe("SessionsClient", () => {
             .sseBody(rawResponseBody)
             .build();
 
-        const response = await client.private.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
+        const response = await client.private.agents.sessions.createTurnStream("01arz3ndektsv4rrffq69g5fav.g", {});
         const events: unknown[] = [];
         for await (const event of response) {
             events.push(event);
@@ -727,10 +727,10 @@ describe("SessionsClient", () => {
         ]);
     });
 
-    test("create_turn (2)", async () => {
+    test("create_turn_stream (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = { stream: true };
         const rawResponseBody = { error: { message: "message" } };
 
         server
@@ -743,14 +743,14 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.createTurn("sessionId");
+            return await client.private.agents.sessions.createTurnStream("sessionId", {});
         }).rejects.toThrow(TrueFoundryGatewayTypes.BadRequestError);
     });
 
-    test("create_turn (3)", async () => {
+    test("create_turn_stream (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = { stream: true };
         const rawResponseBody = { error: { message: "message" } };
 
         server
@@ -763,14 +763,14 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.createTurn("sessionId");
+            return await client.private.agents.sessions.createTurnStream("sessionId", {});
         }).rejects.toThrow(TrueFoundryGatewayTypes.ForbiddenError);
     });
 
-    test("create_turn (4)", async () => {
+    test("create_turn_stream (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = { stream: true };
         const rawResponseBody = { error: { message: "message" } };
 
         server
@@ -783,14 +783,14 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.createTurn("sessionId");
+            return await client.private.agents.sessions.createTurnStream("sessionId", {});
         }).rejects.toThrow(TrueFoundryGatewayTypes.NotFoundError);
     });
 
-    test("create_turn (5)", async () => {
+    test("create_turn_stream (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = { stream: true };
         const rawResponseBody = { error: { message: "message" } };
 
         server
@@ -803,7 +803,141 @@ describe("SessionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.private.agents.sessions.createTurn("sessionId");
+            return await client.private.agents.sessions.createTurnStream("sessionId", {});
+        }).rejects.toThrow(TrueFoundryGatewayTypes.PreconditionFailedError);
+    });
+
+    test("create_turn (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { stream: false };
+        const rawResponseBody = {
+            data: {
+                id: "id",
+                session_id: "session_id",
+                previous_turn_id: "previous_turn_id",
+                input: [{ type: "user.message", content: "content" }],
+                state: { status: "running" },
+                created_by_subject: {
+                    subject_id: "subject_id",
+                    subject_type: "subject_type",
+                    subject_slug: "subject_slug",
+                },
+                created_at: "created_at",
+            },
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/agents/sessions/01arz3ndektsv4rrffq69g5fav.g/turns")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.private.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g", {});
+        expect(response).toEqual({
+            data: {
+                id: "id",
+                sessionId: "session_id",
+                previousTurnId: "previous_turn_id",
+                input: [
+                    {
+                        type: "user.message",
+                        content: "content",
+                    },
+                ],
+                state: {
+                    status: "running",
+                },
+                createdBySubject: {
+                    subjectId: "subject_id",
+                    subjectType: "subject_type",
+                    subjectSlug: "subject_slug",
+                },
+                createdAt: "created_at",
+            },
+        });
+    });
+
+    test("create_turn (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { stream: false };
+        const rawResponseBody = { error: { message: "message" } };
+
+        server
+            .mockEndpoint()
+            .post("/v1/agents/sessions/sessionId/turns")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.private.agents.sessions.createTurn("sessionId", {});
+        }).rejects.toThrow(TrueFoundryGatewayTypes.BadRequestError);
+    });
+
+    test("create_turn (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { stream: false };
+        const rawResponseBody = { error: { message: "message" } };
+
+        server
+            .mockEndpoint()
+            .post("/v1/agents/sessions/sessionId/turns")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.private.agents.sessions.createTurn("sessionId", {});
+        }).rejects.toThrow(TrueFoundryGatewayTypes.ForbiddenError);
+    });
+
+    test("create_turn (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { stream: false };
+        const rawResponseBody = { error: { message: "message" } };
+
+        server
+            .mockEndpoint()
+            .post("/v1/agents/sessions/sessionId/turns")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.private.agents.sessions.createTurn("sessionId", {});
+        }).rejects.toThrow(TrueFoundryGatewayTypes.NotFoundError);
+    });
+
+    test("create_turn (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new TrueFoundryGateway({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { stream: false };
+        const rawResponseBody = { error: { message: "message" } };
+
+        server
+            .mockEndpoint()
+            .post("/v1/agents/sessions/sessionId/turns")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(412)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.private.agents.sessions.createTurn("sessionId", {});
         }).rejects.toThrow(TrueFoundryGatewayTypes.PreconditionFailedError);
     });
 

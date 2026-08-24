@@ -96,7 +96,7 @@ Instantiate and use the client with the following:
 import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
 const client = new TrueFoundryGateway({ baseUrl: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
-const response = await client.private.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
+const response = await client.private.agents.sessions.createTurnStream("01arz3ndektsv4rrffq69g5fav.g", {});
 for await (const item of response) {
     console.log(item);
 }
@@ -139,7 +139,7 @@ will be thrown.
 import { TrueFoundryGatewayError } from "truefoundry-gateway-sdk";
 
 try {
-    await client.private.agents.sessions.createTurn(...);
+    await client.private.agents.sessions.createTurnStream(...);
 } catch (err) {
     if (err instanceof TrueFoundryGatewayError) {
         console.log(err.statusCode);
@@ -159,7 +159,7 @@ The SDK uses async iterators, so you can consume the responses using a `for awai
 import { TrueFoundryGateway } from "truefoundry-gateway-sdk";
 
 const client = new TrueFoundryGateway({ baseUrl: "YOUR_BASE_URL", apiKey: "YOUR_API_KEY" });
-const response = await client.private.agents.sessions.createTurn("01arz3ndektsv4rrffq69g5fav.g");
+const response = await client.private.agents.sessions.createTurnStream("01arz3ndektsv4rrffq69g5fav.g", {});
 for await (const item of response) {
     console.log(item);
 }
@@ -607,7 +607,7 @@ const client = new TrueFoundryGateway({
     }
 });
 
-const response = await client.private.agents.sessions.createTurn(..., {
+const response = await client.private.agents.sessions.createTurnStream(..., {
     headers: {
         'X-Custom-Header': 'custom value'
     }
@@ -619,7 +619,7 @@ const response = await client.private.agents.sessions.createTurn(..., {
 If you would like to send additional query string parameters as part of the request, use the `queryParams` request option.
 
 ```typescript
-const response = await client.private.agents.sessions.createTurn(..., {
+const response = await client.private.agents.sessions.createTurnStream(..., {
     queryParams: {
         'customQueryParamKey': 'custom query param value'
     }
@@ -649,7 +649,7 @@ Which status codes are retried depends on the `retryStatusCodes` generator confi
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.private.agents.sessions.createTurn(..., {
+const response = await client.private.agents.sessions.createTurnStream(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -659,7 +659,7 @@ const response = await client.private.agents.sessions.createTurn(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.private.agents.sessions.createTurn(..., {
+const response = await client.private.agents.sessions.createTurnStream(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -670,7 +670,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.private.agents.sessions.createTurn(..., {
+const response = await client.private.agents.sessions.createTurnStream(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request
@@ -682,7 +682,7 @@ The SDK provides access to raw response data, including headers, through the `.w
 The `.withRawResponse()` method returns a promise that results to an object with a `data` and a `rawResponse` property.
 
 ```typescript
-const { data, rawResponse } = await client.private.agents.sessions.createTurn(...).withRawResponse();
+const { data, rawResponse } = await client.private.agents.sessions.createTurnStream(...).withRawResponse();
 
 console.log(data);
 console.log(rawResponse.headers['X-My-Header']);
