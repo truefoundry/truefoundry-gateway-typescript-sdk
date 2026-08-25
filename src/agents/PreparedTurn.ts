@@ -229,7 +229,7 @@ export class PreparedTurn implements Partial<TrueFoundryGatewayApi.Turn> {
     }
 
     private adoptTurnFromApi(turn: TrueFoundryGatewayApi.Turn): void {
-        this.#turn = new Turn({ ...turn, input: turn.input ?? this.#input }, this.session, this.#client);
+        this.#turn = new Turn(turn, this.session, this.#client);
     }
 
     // Build the inner Turn directly from the turn.created event (no extra getTurn round trip).
